@@ -1,0 +1,50 @@
+{
+  "name": "agent-usdc-task-network-backend",
+  "version": "1.0.0",
+  "description": "Backend for Agent-to-Agent USDC Task Network MVP",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "dev": "node --env-file-if-exists=.env --watch src/server.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.js\" \"tests/**/*.js\"",
+    "wallets:generate": "node --env-file-if-exists=.env scripts/generateWallets.js",
+    "wallets:balances": "node --env-file-if-exists=.env scripts/checkBalances.js"
+  },
+  "engines": {
+    "node": ">=20.12.0"
+  },
+  "keywords": [
+    "agents",
+    "usdc",
+    "payments",
+    "orchestrator"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.4.0",
+    "zod": "^3.23.0",
+    "pino": "^9.4.0",
+    "pino-http": "^10.3.0",
+    "prom-client": "^15.1.3",
+    "swagger-ui-express": "^5.0.1",
+    "yaml": "^2.5.0",
+    "uuid": "^9.0.0",
+    "ethers": "^6.13.0",
+    "firebase-admin": "^12.3.0"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0",
+    "supertest": "^7.0.0",
+    "eslint": "^9.10.0",
+    "prettier": "^3.3.0"
+  }
+}

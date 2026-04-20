@@ -1,0 +1,125 @@
+<template>
+  <header class="bg-white border-b border-gray-200">
+    <div class="container mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-6">
+        <router-link to="/" class="text-lg font-extrabold text-gray-900 flex items-center gap-2">
+          <img src="/logo.svg" alt="ArcAgent Hub" class="w-7 h-7" />
+          ArcAgent Hub
+        </router-link>
+
+        <!-- Desktop nav -->
+        <nav class="hidden md:flex gap-4 text-sm">
+          <router-link
+            to="/mission"
+            class="text-gray-600 hover:text-gray-900"
+            active-class="text-violet-600 font-semibold"
+          >Mission Control</router-link>
+          <router-link
+            to="/user"
+            class="text-gray-600 hover:text-gray-900"
+            active-class="text-violet-600 font-semibold"
+          >My missions</router-link>
+          <router-link
+            v-if="auth.role === 'provider' || auth.role === 'admin'"
+            to="/operator"
+            class="text-gray-600 hover:text-gray-900"
+            active-class="text-violet-600 font-semibold"
+          >Operator Console</router-link>
+          <router-link
+            v-if="auth.role === 'admin'"
+            to="/admin"
+            class="text-gray-600 hover:text-gray-900"
+            active-class="text-violet-600 font-semibold"
+          >Network Admin</router-link>
+          <span class="text-gray-300">|</span>
+  
+          <router-link
+            to="/about"
+            class="text-gray-500 hover:text-gray-700"
+          >About</router-link>
+   
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-3 text-sm">
+        <span
+          class="hidden md:block px-2 py-0.5 rounded-full text-xs font-semibold"
+          :class="roleTone"
+        >{{ roleLabel }}</span>
+        <span class="hidden md:block text-gray-700">{{ auth.firebaseUser?.email || '...' }}</span>
+        <button
+          @click="handleLogout"
+          class="hidden md:block text-gray-500 hover:text-red-600"
+        >Logout</button>
+        <button
+          @click="mobileMenuOpen = !mobileMenuOpen"
+          class="md:hidden p-2 text-gray-600 hover:text-gray-900"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div v-if="mobileMenuOpen" class="md:hidden border-t border-gray-100 bg-white">
+      <nav class="container mx-auto px-4 py-4 flex flex-col gap-3 text-sm">
+        <router-link to="/mission" @click="mobileMenuOpen = false" class="text-gray-600 hover:text-gray-900">Mission Control</router-link>
+        <router-link to="/user" @click="mobileMenuOpen = false" class="text-gray-600 hover:text-gray-900">My missions</router-link>
+        <router-link
+          v-if="auth.role === 'operator' || auth.role === 'admin'"
+          to="/operator"
+          @click="mobileMenuOpen = false"
+          class="text-gray-600 hover:text-gray-900"
+        >Operator Console</router-link>
+        <router-link
+          v-if="auth.role === 'admin'"
+          to="/admin"
+          @click="mobileMenuOpen = false"
+          class="text-gray-600 hover:text-gray-900"
+        >Network Admin</router-link>
+        <div class="border-t border-gray-100 my-2"></div>
+        <router-link to="/" @click="mobileMenuOpen = false" class="text-gray-500 hover:text-gray-700">Home</router-link>
+        <router-link to="/about" @click="mobileMenuOpen = false" class="text-gray-500 hover:text-gray-700">About</router-link>
+        <router-link to="/privacy" @click="mobileMenuOpen = false" class="text-gray-500 hover:text-gray-700">Privacy</router-link>
+        <router-link to="/terms" @click="mobileMenuOpen = false" class="text-gray-500 hover:text-gray-700">Terms</router-link>
+        <div class="border-t border-gray-100 my-2"></div>
+        <div class="flex items-center justify-between">
+          <span class="px-2 py-0.5 rounded-full text-xs font-semibold" :class="roleTone">{{ roleLabel }}</span>
+          <span class="text-gray-700">{{ auth.firebaseUser?.email || '...' }}</span>
+        </div>
+        <button @click="handleLogout" class="text-red-600 hover:text-red-700 text-left">Logout</button>
+      </nav>
+    </div>
+  </header>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue';
+import { auth, doLogout } from '../stores/authStore.js';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const mobileMenuOpen = ref(false);
+
+const roleTone = computed(() => {
+  switch (auth.role) {
+    case 'admin': return 'bg-red-100 text-red-700';
+    case 'operator': return 'bg-violet-100 text-violet-700';
+    case 'user': return 'bg-blue-100 text-blue-700';
+    default: return 'bg-gray-100 text-gray-600';
+  }
+});
+
+const roleLabel = computed(() => {
+  return auth.role;
+});
+
+async function handleLogout() {
+  mobileMenuOpen.value = false;
+  await doLogout();
+  router.push('/login');
+}
+</script>

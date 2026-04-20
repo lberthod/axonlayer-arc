@@ -1,0 +1,48 @@
+{
+  "network": "arc-testnet",
+  "chainId": 6699,
+  "label": "Circle Arc Testnet",
+  "generatedAt": "2026-04-19T06:30:02.745Z",
+  "wallets": {
+    "client_wallet": {
+      "address": "0x4bDC63a6ad211481f7Ff5B32238D0742D83c7BE8",
+      "privateKey": "0xc4dcbb218de12ecc746e4ea2ab1441e3262aea410d248a66a5b60545c6c4fb88"
+    },
+    "orchestrator_wallet": {
+      "address": "0xA89044f1d22e8CD292B3Db092C8De28eB1728d74",
+      "privateKey": "0x128e11b83b4c9f95a0a284966672f5b6377c670e6d02a4789044d0f9945bebfd"
+    },
+    "worker_wallet": {
+      "address": "0xe6D508d289061B67224A5c14632a92d8C8d6d914",
+      "privateKey": "0x15ce589a6535dd27ebaced7582c04e4b746d3e6b86c0a387ce3c83ec8e5883fd"
+    },
+    "validator_wallet": {
+      "address": "0x3862ebD4fd40bCc9f6B9f6b14c5C5AAd21357627",
+      "privateKey": "0x51d5f292a5135cfac0906e8581f07d5b83329ee3315933341cbf599a9bc9d281"
+    },
+    "worker_fast_wallet": {
+      "address": "0x46CDDeBCeeA5278972157DeEa3816c25d4002000",
+      "privateKey": "0xdcf7fa9f4b1e4ce130b6ea43b7d84ab513ae1a1dcc9dc84e8fab572208769a31"
+    },
+    "worker_premium_wallet": {
+      "address": "0xcDcccb668Fac82e2349172042461fD22C995CA99",
+      "privateKey": "0xba0bbf12e6c0d480bc893f1838864abb90177b2749fb158136e0d99d28f6809e"
+    },
+    "validator_strict_wallet": {
+      "address": "0xA94034cb500CD3B706c9154FCb0147155a3eB9E8",
+      "privateKey": "0x0971e432c44e349197e983fd77716d8879d659f9d3265489f13164d87096fd48"
+    },
+    "translator_wallet": {
+      "address": "0x3eB6d685eCe6DD99b9b791f4f57390dc943a7BdC",
+      "privateKey": "0x194240d2a61d80a90fb5f8f3a720f1667b41c18fc60b7d8970915c47742cc31b"
+    },
+    "classifier_wallet": {
+      "address": "0xAcDBA977038f2471C376Fdf76e3e66A0a6cb38b2",
+      "privateKey": "0x54d742cf6d2a8e3f9e2b9ebb42937dc8739465cf5ef29e0bab20c93caab50b66"
+    },
+    "sentiment_wallet": {
+      "address": "0xb90FFa29942FB38Bb83cfacAAAD693E295D8C996",
+      "privateKey": "0x8431669665a726cbd5e87f18d0a9c551a46fe07d033dae94be883d525808e7e8"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Backend (Node.js + Express)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3001,
+      "cwd": "backend",
+      "description": "Agent orchestration API on port 3001, auto-reload via --watch"
+    },
+    {
+      "name": "Frontend (Vue 3 + Vite)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "cwd": "frontend",
+      "description": "Web UI with HMR on port 3000"
+    }
+  ]
+}

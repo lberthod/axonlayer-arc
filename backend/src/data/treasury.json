@@ -1,0 +1,28 @@
+{
+  "address": "arc_treasury_wallet",
+  "balance": 99.998,
+  "feeRate": 0.2,
+  "reserved": -0.002,
+  "history": [
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.0012,
+      "fee": 0.00024,
+      "netAmount": 0.00096,
+      "reason": "Payment for worker_fast",
+      "taskId": "task_f88fafc0-ed09-4b76-b065-29d2f4bdb1f4",
+      "balanceAfter": 99.9988,
+      "timestamp": "2026-04-20T15:08:39.902Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.0008,
+      "fee": 0.00016,
+      "netAmount": 0.00064,
+      "reason": "Payment for validator_default",
+      "taskId": "task_f88fafc0-ed09-4b76-b065-29d2f4bdb1f4",
+      "balanceAfter": 99.998,
+      "timestamp": "2026-04-20T15:08:39.902Z"
+    }
+  ]
+}

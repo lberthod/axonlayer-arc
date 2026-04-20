@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(netstat -tln)",
+      "Bash(xargs kill *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3001/api/health)",
+      "Bash(killall -9 node)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(curl -s http://localhost:3001/api/config)",
+      "Bash(grep -E \"\\\\.js$\")",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}

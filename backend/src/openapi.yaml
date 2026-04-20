@@ -1,0 +1,340 @@
+openapi: 3.1.0
+info:
+  title: Agent-to-Agent USDC Task Network API
+  version: 1.0.0
+  description: |
+    Backend API for the A2A task network. All economic transactions move USDC
+    (simulated ledger or real on-chain). Responses are JSON; errors use the
+    structured `{ error: { code, message, requestId, details? } }` envelope.
+  license:
+    name: MIT
+
+servers:
+  - url: http://localhost:3001
+    description: Local dev
+
+security:
+  - bearerAuth: []
+  - apiKeyAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Firebase ID token
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      description: Optional unique key (8-128 chars, `[A-Za-z0-9_-]`) to make POST /api/tasks safe to retry.
+      schema:
+        type: string
+        pattern: '^[A-Za-z0-9_-]{8,128}$'
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code: { type: string, example: validation_failed }
+            message: { type: string }
+            requestId: { type: string, nullable: true }
+            details: {}
+
+    Pricing:
+      type: object
+      properties:
+        clientPayment: { type: number, example: 0.005 }
+        workerPayment: { type: number, example: 0.002 }
+        validatorPayment: { type: number, example: 0.001 }
+        orchestratorMargin: { type: number, example: 0.002 }
+        breakdown: { type: object }
+
+    Transaction:
+      type: object
+      properties:
+        id: { type: string }
+        from: { type: string }
+        to: { type: string }
+        amount: { type: number }
+        asset: { type: string, example: USDC }
+        reason: { type: string }
+        taskId: { type: string }
+        timestamp: { type: string, format: date-time }
+        status: { type: string, example: completed }
+        settlementType: { type: string, enum: [simulated, onchain, onchain-dryrun] }
+        chainTxHash: { type: string, nullable: true }
+
+    Validation:
+      type: object
+      properties:
+        valid: { type: boolean }
+        score: { type: number }
+        notes: { type: string }
+        checks: { type: object }
+
+    Task:
+      type: object
+      properties:
+        id: { type: string }
+        input: { type: string }
+        taskType: { type: string }
+        status: { type: string, enum: [pending, completed, failed] }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+        result: { type: string, nullable: true }
+        validation:
+          $ref: '#/components/schemas/Validation'
+          nullable: true
+        transactions:
+          type: array
+          items: { $ref: '#/components/schemas/Transaction' }
+        requesterUid: { type: string, nullable: true }
+
+    TaskCreateRequest:
+      type: object
+      required: [input]
+      properties:
+        input:
+          type: string
+          minLength: 1
+          maxLength: 5000
+        taskType:
+          type: string
+          enum: [summarize, keywords, rewrite, translate, classify, sentiment]
+          default: summarize
+        selectionStrategy:
+          type: string
+          enum: [price, score, score_price]
+        targetLang:
+          type: string
+          maxLength: 10
+
+    TaskCreateResponse:
+      type: object
+      properties:
+        taskId: { type: string }
+        status: { type: string }
+        result: { type: string, nullable: true }
+        validation: { $ref: '#/components/schemas/Validation' }
+        transactions:
+          type: array
+          items: { $ref: '#/components/schemas/Transaction' }
+        balances:
+          type: object
+          additionalProperties: { type: number }
+        executionSteps:
+          type: array
+          items: { type: object }
+        margin: { type: number }
+        pricing: { $ref: '#/components/schemas/Pricing' }
+        selectedAgents:
+          type: object
+          properties:
+            worker: { type: string }
+            validator: { type: string }
+        settlementType: { type: string }
+
+    SimulateRequest:
+      type: object
+      properties:
+        count: { type: integer, minimum: 1, maximum: 500, default: 50 }
+        taskType:
+          type: string
+          enum: [summarize, keywords, rewrite, translate, classify, sentiment]
+        selectionStrategy:
+          type: string
+          enum: [price, score, score_price]
+
+    SimulateResponse:
+      type: object
+      properties:
+        executed: { type: integer }
+        failed: { type: integer }
+        transactionsCreated: { type: integer }
+        summary:
+          type: object
+          properties:
+            grossVolume: { type: number }
+            workerRevenue: { type: number }
+            validatorRevenue: { type: number }
+            orchestratorMargin: { type: number }
+        perTaskType:
+          type: object
+
+paths:
+  /api/health:
+    get:
+      summary: Liveness probe
+      security: []
+      responses:
+        '200':
+          description: Service is alive
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: ok }
+                  timestamp: { type: string, format: date-time }
+                  uptimeSec: { type: integer }
+                  version: { type: string }
+
+  /api/ready:
+    get:
+      summary: Readiness probe (checks ledger + onchain + auth)
+      security: []
+      responses:
+        '200':
+          description: All dependencies healthy
+        '503':
+          description: One or more dependencies degraded
+
+  /api/config:
+    get:
+      summary: Public runtime configuration
+      security: []
+      responses:
+        '200': { description: OK }
+
+  /api/tasks:
+    post:
+      summary: Create and execute a task
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/TaskCreateRequest' }
+      responses:
+        '200':
+          description: Task executed (completed or failed with details)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TaskCreateResponse' }
+        '400':
+          description: Validation error or insufficient client balance
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401': { description: Auth required }
+        '429':
+          description: Rate-limited or over quota
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /api/tasks/mine:
+    get:
+      summary: List tasks owned by the caller
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Task' }
+
+  /api/tasks/{id}:
+    get:
+      summary: Get a task by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Task' }
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /api/balances:
+    get:
+      summary: All wallet balances
+      security: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: { type: number }
+
+  /api/transactions:
+    get:
+      summary: Ledger transaction history
+      security: []
+      parameters:
+        - { name: taskId, in: query, schema: { type: string } }
+        - { name: wallet, in: query, schema: { type: string } }
+        - { name: latest, in: query, schema: { type: integer } }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Transaction' }
+
+  /api/simulate:
+    post:
+      summary: Run a simulation batch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SimulateRequest' }
+      responses:
+        '200':
+          description: Simulation done
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SimulateResponse' }
+
+  /api/metrics:
+    get:
+      summary: Operational + economic metrics (JSON)
+      security: []
+      parameters:
+        - { name: windowMs, in: query, schema: { type: integer } }
+      responses:
+        '200': { description: OK }
+
+  /api/metrics/prometheus:
+    get:
+      summary: Prometheus scrape endpoint (text exposition format)
+      security: []
+      responses:
+        '200':
+          description: Prometheus metrics
+          content:
+            text/plain: {}
+
+  /api/agents:
+    get:
+      summary: List workers + validators with price / score / stats
+      security: []
+      responses:
+        '200': { description: OK }

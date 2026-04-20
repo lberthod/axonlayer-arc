@@ -1,0 +1,80 @@
+{
+  "tasks": [
+    {
+      "id": "task_cea8fbcc-5617-46a9-bbac-e477bbfdd5da",
+      "input": "The quick brown fox jumps over the lazy dog. It did it many times today.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-19T07:51:37.337Z",
+      "updatedAt": "2026-04-19T07:51:37.338Z",
+      "result": "The quick brown fox jumps over the lazy dog. It did it many times today.",
+      "validation": {
+        "valid": true,
+        "score": 1,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true
+        },
+        "notes": "Validation passed: result meets quality standards"
+      },
+      "transactions": [
+        {
+          "id": "tx_1776585097337_4484d8dd",
+          "from": "client_wallet",
+          "to": "orchestrator_wallet",
+          "amount": 0.00572,
+          "asset": "USDC",
+          "reason": "Client payment for task",
+          "taskId": "task_cea8fbcc-5617-46a9-bbac-e477bbfdd5da",
+          "timestamp": "2026-04-19T07:51:37.337Z",
+          "status": "completed",
+          "settlementType": "simulated"
+        },
+        {
+          "id": "tx_1776585097337_8a34c009",
+          "from": "orchestrator_wallet",
+          "to": "worker_fast_wallet",
+          "amount": 0.0015,
+          "asset": "USDC",
+          "reason": "Payment for worker_fast",
+          "taskId": "task_cea8fbcc-5617-46a9-bbac-e477bbfdd5da",
+          "timestamp": "2026-04-19T07:51:37.337Z",
+          "status": "completed",
+          "settlementType": "simulated"
+        },
+        {
+          "id": "tx_1776585097338_5c401a04",
+          "from": "orchestrator_wallet",
+          "to": "validator_wallet",
+          "amount": 0.001,
+          "asset": "USDC",
+          "reason": "Payment for validator_default",
+          "taskId": "task_cea8fbcc-5617-46a9-bbac-e477bbfdd5da",
+          "timestamp": "2026-04-19T07:51:37.338Z",
+          "status": "completed",
+          "settlementType": "simulated"
+        }
+      ],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.00572,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.00322,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 72,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default"
+    }
+  ]
+}

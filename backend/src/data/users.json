@@ -1,0 +1,30 @@
+{
+  "users": {
+    "FBL1A76M9lNRSftKFsrTPUgZwfB2": {
+      "uid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "email": "lberthod@gmail.com",
+      "displayName": "Loic Berthod",
+      "role": "admin",
+      "apiKey": "sk_725d0713c4dc862bea99ed66c497422e2b95519de44579f8",
+      "walletAddress": null,
+      "createdAt": "2026-04-19T07:38:00.679Z",
+      "lastLoginAt": "2026-04-20T14:59:13.429Z",
+      "usage": {
+        "tasks": 8,
+        "totalSpent": 0.008563,
+        "today": {
+          "date": "2026-04-19",
+          "tasks": 8,
+          "spent": 0.008563
+        }
+      },
+      "missionWallet": {
+        "address": "mission_FBL1A76M9lNRSftKFsrTPUgZwfB2_0c1176cb0876af51",
+        "balance": 0
+      }
+    }
+  },
+  "byApiKey": {
+    "sk_725d0713c4dc862bea99ed66c497422e2b95519de44579f8": "FBL1A76M9lNRSftKFsrTPUgZwfB2"
+  }
+}

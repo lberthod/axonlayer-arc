@@ -1,0 +1,34 @@
+{
+  "tasks": [
+    {
+      "id": "task_c7309ab6-0952-40dc-b830-30a3bd07f7fd",
+      "input": "This is a long enough input text for a quick summarization job.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-20T15:08:40.413Z",
+      "updatedAt": "2026-04-20T15:08:40.413Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.00563,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.00313,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 63,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.005
+    }
+  ]
+}

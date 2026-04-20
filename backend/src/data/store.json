@@ -1,0 +1,15 @@
+{
+  "transactions": [],
+  "balances": {
+    "client_wallet": 10,
+    "orchestrator_wallet": 5,
+    "worker_wallet": 1,
+    "validator_wallet": 1,
+    "worker_fast_wallet": 1,
+    "worker_premium_wallet": 1,
+    "validator_strict_wallet": 1,
+    "translator_wallet": 1,
+    "classifier_wallet": 1,
+    "sentiment_wallet": 1
+  }
+}

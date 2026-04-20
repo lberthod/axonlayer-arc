@@ -1,0 +1,45 @@
+import { z } from 'zod';
+
+export const taskTypeSchema = z.enum([
+  'summarize',
+  'keywords',
+  'rewrite',
+  'translate',
+  'classify',
+  'sentiment'
+]);
+
+export const selectionStrategySchema = z.enum(['price', 'score', 'score_price']);
+
+export const createTaskSchema = z.object({
+  input: z
+    .string({ required_error: 'input is required' })
+    .trim()
+    .min(1, 'input must not be empty')
+    .max(5000, 'input is too long (max 5000 chars)'),
+  taskType: taskTypeSchema.default('summarize'),
+  selectionStrategy: selectionStrategySchema.optional(),
+  targetLang: z.string().max(10).optional()
+});
+
+export const simulateSchema = z.object({
+  count: z.number().int().min(1).max(500).default(50),
+  taskType: taskTypeSchema.optional(),
+  selectionStrategy: selectionStrategySchema.optional()
+});
+
+/**
+ * Express middleware: parses req.body through the given zod schema.
+ * On success mutates req.body with the parsed (typed) value; on failure
+ * forwards a ZodError which the global error handler converts to a 400.
+ */
+export function validateBody(schema) {
+  return (req, _res, next) => {
+    try {
+      req.body = schema.parse(req.body ?? {});
+      next();
+    } catch (err) {
+      next(err);
+    }
+  };
+}

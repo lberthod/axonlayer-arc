@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log
+.env
+.env.*
+!.env.example
+tests
+coverage
+.nyc_output
+*.log
+src/data/wallets.json
+src/data/users.json
+src/data/providers.json
+src/data/store.json
+src/data/tasks.json
+firebase-service-account*.json
+.DS_Store
