@@ -7,6 +7,7 @@ import TermsView from './views/TermsView.vue';
 import MissionControlView from './views/MissionControlView.vue';
 import LoginView from './views/LoginView.vue';
 import UserDashboardView from './views/UserDashboardView.vue';
+import ProfileView from './views/ProfileView.vue';
 import AgentOperatorConsoleView from './views/AgentOperatorConsoleView.vue';
 import NetworkAdminView from './views/NetworkAdminView.vue';
 
@@ -23,6 +24,7 @@ const routes = [
   // App
   { path: '/mission', component: MissionControlView, meta: { requiresAuth: true } },
   { path: '/user', component: UserDashboardView, meta: { requiresAuth: true } },
+  { path: '/profile', component: ProfileView, meta: { requiresAuth: true } },
   { path: '/operator', component: AgentOperatorConsoleView, meta: { requiresAuth: true, roles: ['provider', 'admin'] } },
   { path: '/provider', redirect: '/operator' },
   { path: '/admin', component: NetworkAdminView, meta: { requiresAuth: true, roles: ['admin'] } },

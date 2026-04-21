@@ -20,6 +20,11 @@
             active-class="text-violet-600 font-semibold bg-violet-50"
           >My missions</router-link>
           <router-link
+            to="/profile"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition duration-200 hover:bg-gray-100"
+            active-class="text-violet-600 font-semibold bg-violet-50"
+          >Profile</router-link>
+          <router-link
             v-if="auth.role === 'provider' || auth.role === 'admin'"
             to="/operator"
             class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition duration-200 hover:bg-gray-100"
@@ -68,6 +73,7 @@
       <nav class="container mx-auto px-4 py-4 flex flex-col gap-3 text-sm">
         <router-link to="/mission" @click="mobileMenuOpen = false" class="text-gray-600 hover:text-gray-900">Mission Control</router-link>
         <router-link to="/user" @click="mobileMenuOpen = false" class="text-gray-600 hover:text-gray-900">My missions</router-link>
+        <router-link to="/profile" @click="mobileMenuOpen = false" class="text-gray-600 hover:text-gray-900">Profile</router-link>
         <router-link
           v-if="auth.role === 'operator' || auth.role === 'admin'"
           to="/operator"

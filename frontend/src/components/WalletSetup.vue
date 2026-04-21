@@ -141,48 +141,18 @@
                 </ol>
               </div>
 
-              <!-- Quick Add Funds -->
-              <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-4 border border-blue-200">
-                <p class="text-sm font-semibold text-gray-900 mb-3">💧 Quick Add Funds (Demo)</p>
-                <div class="grid grid-cols-3 gap-2 mb-3">
-                  <button
-                    v-for="amount in [0.01, 0.05, 0.10, 0.25, 0.50, 1.00]"
-                    :key="amount"
-                    @click="quickAddFunds(amount)"
-                    :disabled="simulatingDeposit"
-                    class="px-2 py-2 rounded-lg bg-white border-2 border-blue-200 hover:border-blue-400 text-blue-700 font-semibold transition disabled:opacity-50 text-xs"
-                  >
-                    +${{ amount.toFixed(2) }}
-                  </button>
-                </div>
-                <p class="text-xs text-gray-600">Or use the button below:</p>
-              </div>
-
-              <!-- Fund Check -->
-              <div class="flex gap-2">
-                <button
-                  @click="checkBalance"
-                  :disabled="checkingBalance"
-                  class="flex-1 px-4 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition disabled:opacity-50"
-                >
-                  <span v-if="checkingBalance" class="flex items-center justify-center gap-2">
-                    <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                    Checking balance...
-                  </span>
-                  <span v-else>✅ Check Balance</span>
-                </button>
-                <button
-                  @click="simulateDeposit"
-                  :disabled="simulatingDeposit"
-                  class="flex-1 px-4 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:opacity-50"
-                >
-                  <span v-if="simulatingDeposit" class="flex items-center justify-center gap-2">
-                    <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                    Simulating...
-                  </span>
-                  <span v-else>💧 Demo: Add 1 USDC</span>
-                </button>
-              </div>
+              <!-- Check Balance Button -->
+              <button
+                @click="checkBalance"
+                :disabled="checkingBalance"
+                class="w-full px-4 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition disabled:opacity-50"
+              >
+                <span v-if="checkingBalance" class="flex items-center justify-center gap-2">
+                  <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                  Checking balance...
+                </span>
+                <span v-else>✅ Check Balance</span>
+              </button>
 
               <!-- Balance Display -->
               <div v-if="currentBalance !== null" class="p-4 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg border border-emerald-100">
@@ -233,7 +203,6 @@ const walletData = ref(null);
 const currentBalance = ref(null);
 const creatingWallet = ref(false);
 const checkingBalance = ref(false);
-const simulatingDeposit = ref(false);
 const showPrivateKey = ref(false);
 const addressCopied = ref(false);
 const privKeyChopied = ref(false);
@@ -278,37 +247,6 @@ async function checkBalance() {
   }
 }
 
-async function simulateDeposit() {
-  simulatingDeposit.value = true;
-  try {
-    const result = await api.simulateDeposit(1.0);
-    currentBalance.value = result.balance || 0;
-    if (currentBalance.value > 0) {
-      step.value = 2;
-      toastSuccess('✨ Demo: Simulated 1 USDC deposit! Wallet is now funded.');
-    }
-  } catch (err) {
-    toastError(err, 'Failed to simulate deposit');
-  } finally {
-    simulatingDeposit.value = false;
-  }
-}
-
-async function quickAddFunds(amount) {
-  simulatingDeposit.value = true;
-  try {
-    const result = await api.simulateDeposit(amount);
-    currentBalance.value = result.balance || 0;
-    if (currentBalance.value > 0) {
-      step.value = 2;
-      toastSuccess(`✨ Demo: Simulated +$${amount.toFixed(2)} deposit! Balance: $${currentBalance.value.toFixed(4)} USDC`);
-    }
-  } catch (err) {
-    toastError(err, 'Failed to add funds');
-  } finally {
-    simulatingDeposit.value = false;
-  }
-}
 
 function togglePrivateKey() {
   showPrivateKey.value = !showPrivateKey.value;
