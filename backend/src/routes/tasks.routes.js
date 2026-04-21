@@ -27,20 +27,8 @@ router.post('/', validateBody(createTaskSchema), async (req, res, next) => {
     const quote = pricingEngine.price({ input, taskType });
 
     if (req.user) {
-      // Check user's on-chain balance (Arc testnet USDC)
-      // Fetch real balance from Arc blockchain before validating
-      let userBalance = 0;
-      if (req.user.wallet?.address) {
-        try {
-          userBalance = await arcBlockchain.getBalance(req.user.wallet.address);
-        } catch (err) {
-          console.warn('[tasks] Failed to fetch on-chain balance:', err.message);
-          // Fallback to stored balance if blockchain call fails
-          userBalance = req.user.balance || 0;
-        }
-      } else {
-        userBalance = req.user.balance || 0;
-      }
+      // Check user's mission wallet balance (used to fund treasury for task execution)
+      const userBalance = req.user.missionWallet?.balance || 0;
 
       if (userBalance < quote.clientPayment) {
         throw badRequest('insufficient_balance', 'mission wallet cannot afford this task', {

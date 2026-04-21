@@ -170,17 +170,6 @@ class TaskEngine {
     // Add to treasury balance
     await treasuryStore.addFunds(amount, 'Mission funding', taskId);
 
-    // Record the funding transaction in ledger
-    await walletProvider.transfer(
-      user.missionWallet.address,
-      treasuryStore.getAddress(),
-      amount,
-      config.asset,
-      'Mission funding',
-      taskId,
-      'fund'
-    );
-
     return {
       status: 'funded',
       amount,
@@ -206,17 +195,6 @@ class TaskEngine {
     // Add back to user mission wallet
     user.missionWallet.balance = this.normalizeAmount(user.missionWallet.balance + unused);
     await userStore.store.flush();
-
-    // Record the refund transaction in ledger
-    await walletProvider.transfer(
-      treasuryStore.getAddress(),
-      user.missionWallet.address,
-      unused,
-      config.asset,
-      'Mission refund',
-      taskId,
-      'refund'
-    );
 
     return {
       refunded: unused,
