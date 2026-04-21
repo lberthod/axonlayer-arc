@@ -21,7 +21,7 @@
 
       <div class="relative">
         <div class="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-600 opacity-0 rounded-lg blur transition-opacity duration-300 group-hover:opacity-20"></div>
-        <div class="flex items-center justify-between p-4 bg-emerald-50 rounded-lg border border-emerald-200 border-2 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-102 relative">
+        <div class="flex items-center justify-between p-4 bg-emerald-50 rounded-lg border border-emerald-200 border-2 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 relative">
           <div>
             <p class="text-sm font-semibold text-gray-900">Arc USDC</p>
             <p class="text-xs text-gray-600">Circle Arc (native gas)</p>

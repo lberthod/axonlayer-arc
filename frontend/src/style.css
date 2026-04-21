@@ -86,7 +86,7 @@ select:focus {
 
 /* Card hover effects */
 .card-hover {
-  @apply transition-all duration-300 hover:shadow-lg hover:scale-102 hover:border-violet-200;
+  @apply transition-all duration-300 hover:shadow-lg hover:scale-105 hover:border-violet-200;
 }
 
 /* Badge styling */
