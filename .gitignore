@@ -8,6 +8,7 @@ build/
 .DS_Store
 node_modules/
 
+
 # Credentials & Secrets
 firebase-service-account.json
 *-service-account.json

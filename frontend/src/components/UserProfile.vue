@@ -47,16 +47,22 @@
           </div>
         </div>
 
-        <!-- Current Balance -->
-        <div class="mb-4 p-4 bg-emerald-50 rounded-lg border border-emerald-200">
-          <p class="text-xs text-emerald-700 uppercase mb-1 font-semibold">Current Balance</p>
+        <!-- Current On-Chain Balance -->
+        <div class="mb-4 p-4 bg-emerald-50 rounded-lg border-2 border-emerald-200">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <p class="text-xs text-emerald-700 uppercase mb-1 font-bold">🔗 Arc Testnet Balance</p>
+              <p class="text-xs text-emerald-600">Real-time balance from blockchain</p>
+            </div>
+            <span class="text-sm text-emerald-600 bg-emerald-100 px-2 py-1 rounded-full font-semibold">On-Chain</span>
+          </div>
           <p class="text-3xl font-bold text-emerald-700 mb-2">{{ (user.balance || 0).toFixed(4) }} USDC</p>
           <button
             @click="refreshBalance"
             :disabled="checkingBalance"
-            class="text-sm text-emerald-600 hover:text-emerald-700 font-semibold transition disabled:opacity-50"
+            class="text-sm text-emerald-600 hover:text-emerald-700 font-semibold transition disabled:opacity-50 flex items-center gap-1"
           >
-            {{ checkingBalance ? 'Checking...' : '🔄 Refresh Balance' }}
+            {{ checkingBalance ? '⏳ Checking blockchain...' : '🔄 Refresh Balance' }}
           </button>
         </div>
 
@@ -172,10 +178,17 @@ async function loadUser() {
 async function refreshBalance() {
   checkingBalance.value = true;
   try {
-    user.value = await api.getMe();
-    toastSuccess(`Balance: ${(user.value.balance || 0).toFixed(4)} USDC`);
+    if (!user.value?.wallet?.address) {
+      toastError(new Error('No wallet address'), 'Cannot refresh balance');
+      return;
+    }
+
+    // Get real on-chain balance from Arc testnet
+    const result = await api.getBlockchainBalance(user.value.wallet.address);
+    user.value.balance = result.balance || 0;
+    toastSuccess(`✅ Updated: ${(user.value.balance || 0).toFixed(4)} USDC on Arc testnet`);
   } catch (err) {
-    toastError(err, 'Failed to refresh balance');
+    toastError(err, 'Failed to refresh balance from blockchain');
   } finally {
     checkingBalance.value = false;
   }

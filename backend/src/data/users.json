@@ -5,10 +5,10 @@
       "email": "lberthod@gmail.com",
       "displayName": "Loic Berthod",
       "role": "admin",
-      "apiKey": "sk_725d0713c4dc862bea99ed66c497422e2b95519de44579f8",
+      "apiKey": "sk_583fcd6db2fcf4d7f966ae53620c4301485165d1d0ade138",
       "walletAddress": null,
       "createdAt": "2026-04-19T07:38:00.679Z",
-      "lastLoginAt": "2026-04-20T15:28:56.612Z",
+      "lastLoginAt": "2026-04-21T07:07:19.062Z",
       "usage": {
         "tasks": 8,
         "totalSpent": 0.008563,
@@ -21,10 +21,21 @@
       "missionWallet": {
         "address": "mission_FBL1A76M9lNRSftKFsrTPUgZwfB2_0c1176cb0876af51",
         "balance": 0
-      }
+      },
+      "wallet": {
+        "address": "0xb57d96cc5b17a049ed8b5a8571b58dcd9bada5de",
+        "privateKey": "c65ffb0761a2f9d26898bf251d40dcd26a81bd23c2b5a9a21ecca097af4638e3",
+        "publicKey": "0xb57d96cc5b17a049ed8b5a8571b58dcd9bada5de94a69b0a2fef164e19ed724c",
+        "mnemonic": "adapt abandon ability able about above absent absorb abstract abuse access accident",
+        "chain": "arc",
+        "token": "USDC",
+        "createdAt": "2026-04-21T07:04:33.378Z",
+        "balance": 0
+      },
+      "balance": 0
     }
   },
   "byApiKey": {
-    "sk_725d0713c4dc862bea99ed66c497422e2b95519de44579f8": "FBL1A76M9lNRSftKFsrTPUgZwfB2"
+    "sk_583fcd6db2fcf4d7f966ae53620c4301485165d1d0ade138": "FBL1A76M9lNRSftKFsrTPUgZwfB2"
   }
 }

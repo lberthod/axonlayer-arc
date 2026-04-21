@@ -2,6 +2,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
+    globals: true,
     environment: 'node',
     include: ['tests/**/*.test.js'],
     // Integration tests share the on-disk ledger/task stores → run them

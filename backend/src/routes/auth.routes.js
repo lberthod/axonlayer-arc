@@ -2,6 +2,7 @@ import { Router } from 'express';
 import userStore from '../core/userStore.js';
 import { requireAuth } from '../core/auth.js';
 import ArcWalletService from '../core/arcWalletService.js';
+import arcBlockchain from '../core/arcBlockchainService.js';
 
 const router = Router();
 
@@ -21,8 +22,23 @@ function sanitize(user) {
   };
 }
 
-router.get('/me', requireAuth, (req, res) => {
-  res.json(sanitize(req.user));
+router.get('/me', requireAuth, async (req, res) => {
+  try {
+    const user = sanitize(req.user);
+
+    // Get real on-chain balance if user has wallet
+    if (user.wallet?.address) {
+      const onChainBalance = await arcBlockchain.getBalance(user.wallet.address);
+      user.onChainBalance = onChainBalance;
+      // Update stored balance with on-chain balance
+      user.balance = onChainBalance;
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user balance:', error);
+    res.json(sanitize(req.user));
+  }
 });
 
 router.post('/apikey/rotate', requireAuth, async (req, res) => {
@@ -75,27 +91,34 @@ router.post('/wallet/create', requireAuth, async (req, res) => {
   }
 });
 
-// Simulate receiving funds (for testing/demo purposes)
-router.post('/wallet/simulate-deposit', requireAuth, async (req, res) => {
+// Get blockchain status
+router.get('/blockchain/status', async (req, res) => {
   try {
-    const { amount } = req.body;
-    if (!amount || amount <= 0) {
-      return res.status(400).json({ error: 'amount must be greater than 0' });
+    const status = await arcBlockchain.getNetworkStatus();
+    res.json({
+      rpc: arcBlockchain.rpcUrl,
+      usdcContract: arcBlockchain.usdcContractAddress,
+      ...status
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get on-chain balance for wallet
+router.get('/wallet/balance/:address', async (req, res) => {
+  try {
+    const { address } = req.params;
+    if (!arcBlockchain.isValidArcAddress(address)) {
+      return res.status(400).json({ error: 'Invalid Arc address format' });
     }
 
-    // Simulate receiving USDC to the wallet
-    const currentBalance = req.user.balance || 0;
-    const newBalance = currentBalance + amount;
-
-    const user = await userStore.setBalance(req.user.uid, newBalance);
-
+    const balance = await arcBlockchain.getBalance(address);
     res.json({
-      success: true,
-      amount: amount,
-      balance: newBalance,
-      transactionId: `sim-${Date.now()}`,
-      message: `Simulated deposit of ${amount} USDC received`,
-      user: sanitize(user)
+      address,
+      balance,
+      currency: 'USDC',
+      network: 'arc-testnet'
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

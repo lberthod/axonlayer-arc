@@ -37,7 +37,7 @@
             <div v-else class="space-y-4">
               <!-- Wallet Address -->
               <div class="bg-white rounded-lg p-4 border border-gray-200">
-                <p class="text-xs text-gray-500 uppercase mb-1 font-semibold">Wallet Address</p>
+                <p class="text-xs text-gray-500 uppercase mb-1 font-semibold">Wallet Address (Arc Testnet)</p>
                 <div class="flex items-center gap-2 mb-3">
                   <code class="flex-1 text-sm font-mono bg-gray-50 p-2 rounded break-all">{{ walletData.address }}</code>
                   <button
@@ -47,7 +47,7 @@
                     {{ addressCopied ? '✓ Copied' : 'Copy' }}
                   </button>
                 </div>
-                <p class="text-xs text-gray-500">Share this address to receive USDC funds</p>
+                <p class="text-xs text-gray-500">Send Arc USDC to this address on the Arc testnet</p>
               </div>
 
               <!-- Private Key (SECURE) -->
@@ -131,14 +131,21 @@
             <div v-if="walletData" class="space-y-4">
               <!-- Instructions -->
               <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
-                <p class="text-sm text-blue-900 font-semibold mb-2">📋 Instructions:</p>
-                <ol class="text-sm text-blue-800 space-y-1 list-decimal list-inside">
-                  <li>Copy your wallet address above</li>
-                  <li>Go to your Arc blockchain wallet (e.g., MetaMask, Argent)</li>
-                  <li>Send USDC tokens to the address</li>
-                  <li>Wait for confirmation (usually < 1 minute)</li>
-                  <li>Balance will update automatically</li>
+                <p class="text-sm text-blue-900 font-semibold mb-2">📋 How to Fund Your Wallet:</p>
+                <ol class="text-sm text-blue-800 space-y-2 list-decimal list-inside">
+                  <li>Copy your wallet address (shown above)</li>
+                  <li>Use your Arc testnet wallet (MetaMask, Coinbase Wallet, etc.)</li>
+                  <li>Send Arc USDC tokens to your address</li>
+                  <li>Wait for confirmation (typically < 1 minute)</li>
+                  <li>Click "Check Balance" to verify funds arrived</li>
                 </ol>
+              </div>
+
+              <!-- Arc Network Info -->
+              <div class="bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                <p class="text-xs text-indigo-700 font-semibold mb-1">🔗 Arc Testnet</p>
+                <p class="text-xs text-indigo-600">Network: Arc testnet | Token: USDC (6 decimals)</p>
+                <p class="text-xs text-indigo-600 mt-1">Get testnet USDC from the Arc testnet faucet</p>
               </div>
 
               <!-- Check Balance Button -->
@@ -149,19 +156,21 @@
               >
                 <span v-if="checkingBalance" class="flex items-center justify-center gap-2">
                   <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                  Checking balance...
+                  Checking on-chain balance...
                 </span>
-                <span v-else>✅ Check Balance</span>
+                <span v-else>🔗 Check On-Chain Balance</span>
               </button>
 
               <!-- Balance Display -->
-              <div v-if="currentBalance !== null" class="p-4 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg border border-emerald-100">
+              <div v-if="currentBalance !== null" class="p-4 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg border-2 border-emerald-200">
+                <p class="text-xs text-emerald-600 uppercase mb-2 font-bold">📊 Arc Testnet Balance</p>
                 <p class="text-sm text-gray-600 mb-2">
                   <span class="font-semibold">Current Balance:</span>
-                  <span class="text-2xl font-bold text-emerald-700 ml-2">{{ currentBalance.toFixed(4) }} USDC</span>
+                  <span class="text-3xl font-bold text-emerald-700 ml-2">{{ currentBalance.toFixed(4) }} USDC</span>
                 </p>
-                <p v-if="currentBalance > 0" class="text-xs text-emerald-600 font-semibold">✓ Ready to launch missions!</p>
-                <p v-else class="text-xs text-amber-600 font-semibold">⏳ Waiting for funds...</p>
+                <p v-if="currentBalance > 0" class="text-xs text-emerald-600 font-semibold">✅ Wallet funded! Ready to launch missions!</p>
+                <p v-else class="text-xs text-amber-600 font-semibold">⏳ Waiting for funds to arrive on-chain...</p>
+                <p class="text-xs text-gray-500 mt-2">Last checked: {{ lastBalanceCheck }}</p>
               </div>
             </div>
           </div>
@@ -201,6 +210,7 @@ const emit = defineEmits(['setup-complete']);
 const step = ref(0);
 const walletData = ref(null);
 const currentBalance = ref(null);
+const lastBalanceCheck = ref('Never');
 const creatingWallet = ref(false);
 const checkingBalance = ref(false);
 const showPrivateKey = ref(false);
@@ -232,16 +242,24 @@ async function regenerateWallet() {
 async function checkBalance() {
   checkingBalance.value = true;
   try {
-    const me = await api.getMe();
-    currentBalance.value = me.balance || 0;
+    if (!walletData.value?.address) {
+      toastError(new Error('No wallet address available'), 'Cannot check balance');
+      return;
+    }
+
+    // Check balance on Arc blockchain
+    const result = await api.getBlockchainBalance(walletData.value.address);
+    currentBalance.value = result.balance || 0;
+    lastBalanceCheck.value = new Date().toLocaleTimeString();
+
     if (currentBalance.value > 0) {
       step.value = 2;
-      toastSuccess('Wallet funded! You can now launch missions.');
+      toastSuccess(`✅ Balance confirmed: ${result.balance.toFixed(4)} USDC on Arc testnet!`);
     } else {
-      toastSuccess('Waiting for funds... Balance is still 0 USDC.');
+      toastSuccess('No funds detected yet. Check your transaction on Arc testnet explorer.');
     }
   } catch (err) {
-    toastError(err, 'Failed to check balance');
+    toastError(err, 'Failed to check on-chain balance');
   } finally {
     checkingBalance.value = false;
   }
