@@ -7,6 +7,7 @@ import { config } from '../config.js';
  * {
  *   id, ownerUid, name, description, role: 'worker'|'validator',
  *   taskTypes: [],
+ *   capabilities: [{ name, description, category, inputType, outputType, latencyMs, reliabilityScore }],
  *   basePrice, apiEndpoint, walletAddress,
  *   status: 'pending'|'approved'|'rejected'|'slashed',
  *   stake, score,
@@ -40,6 +41,18 @@ class ProviderStore {
   async register(ownerUid, payload) {
     const id = `prov_${uuid().slice(0, 8)}`;
     const now = new Date().toISOString();
+
+    // Parse capabilities from payload
+    const capabilities = Array.isArray(payload.capabilities) ? payload.capabilities.map(cap => ({
+      name: String(cap.name || '').slice(0, 100),
+      description: String(cap.description || '').slice(0, 500),
+      category: String(cap.category || 'general').slice(0, 50),
+      inputType: String(cap.inputType || 'string').slice(0, 50),
+      outputType: String(cap.outputType || 'string').slice(0, 50),
+      latencyMs: Math.max(100, Number(cap.latencyMs || 1000)),
+      reliabilityScore: Math.max(0, Math.min(1, Number(cap.reliabilityScore || 0.95)))
+    })) : [];
+
     const provider = {
       id,
       ownerUid,
@@ -49,6 +62,7 @@ class ProviderStore {
       taskTypes: Array.isArray(payload.taskTypes) && payload.taskTypes.length
         ? payload.taskTypes.map(String)
         : ['summarize'],
+      capabilities: capabilities,
       basePrice: Math.max(0, Number(payload.basePrice || 0.0002)),
       apiEndpoint: payload.apiEndpoint ? String(payload.apiEndpoint) : null,
       walletAddress: payload.walletAddress ? String(payload.walletAddress) : null,
@@ -68,9 +82,24 @@ class ProviderStore {
     const p = this.providers[id];
     if (!p) return null;
     if (ownerUid && p.ownerUid !== ownerUid) return null;
-    const allowed = ['name', 'description', 'taskTypes', 'basePrice', 'apiEndpoint', 'walletAddress'];
+    const allowed = ['name', 'description', 'taskTypes', 'basePrice', 'apiEndpoint', 'walletAddress', 'capabilities'];
     for (const key of allowed) {
-      if (patch[key] !== undefined) p[key] = patch[key];
+      if (patch[key] !== undefined) {
+        if (key === 'capabilities' && Array.isArray(patch[key])) {
+          // Validate capabilities structure
+          p[key] = patch[key].map(cap => ({
+            name: String(cap.name || '').slice(0, 100),
+            description: String(cap.description || '').slice(0, 500),
+            category: String(cap.category || 'general').slice(0, 50),
+            inputType: String(cap.inputType || 'string').slice(0, 50),
+            outputType: String(cap.outputType || 'string').slice(0, 50),
+            latencyMs: Math.max(100, Number(cap.latencyMs || 1000)),
+            reliabilityScore: Math.max(0, Math.min(1, Number(cap.reliabilityScore || 0.95)))
+          }));
+        } else {
+          p[key] = patch[key];
+        }
+      }
     }
     p.updatedAt = new Date().toISOString();
     await this.store.flush();
