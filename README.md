@@ -493,6 +493,39 @@ POST http://localhost:3001/api/providers
 
 ---
 
+## ✅ Latest Updates (April 2026)
+
+### Mission Execution - FULLY FIXED ✅
+
+**Problem:** Missions were failing during execution despite passing balance checks.
+
+**Root Cause:** 
+- Balance check was verifying Arc on-chain wallet (for settlement) instead of mission wallet (for funding execution)
+- Mission funding tried to transfer from symbolic ledger wallet ID to on-chain treasury address
+- Wallet manager couldn't resolve on-chain addresses back to wallet IDs for signing
+
+**Solution:**
+1. **Fixed balance validation** — Check user's `missionWallet.balance` (for execution) instead of Arc wallet balance (for settlement)
+2. **Separated concerns** — Mission wallets (ledger entries) no longer attempt on-chain transfers; only update in-memory balances in treasury
+3. **Smart address resolution** — WalletManager.getSigner() now reverse-maps on-chain addresses to wallet IDs for proper key signing
+
+**Result:** ✅ Missions now execute end-to-end:
+- Treasury receives funding from user mission wallet
+- Workers and validators paid from treasury balance
+- Unused budget refunded to user mission wallet
+- All transactions recorded on-chain via Arc RPC
+
+**Test:** 
+```bash
+curl -X POST http://localhost:3001/api/tasks \
+  -H "x-api-key: sk_..." \
+  -d '{"input":"Test","taskType":"summarize"}'
+  
+# Response: status: "completed" ✅
+```
+
+---
+
 ## 🚀 Vision
 
 Arc Agent Hub is **the execution backbone for the agent economy.** 
