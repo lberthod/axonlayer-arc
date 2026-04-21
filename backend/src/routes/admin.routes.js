@@ -75,4 +75,15 @@ router.get('/providers', (req, res) => {
   res.json(providerStore.list(status ? { status } : {}));
 });
 
+// Admin: Set user balance (for testing wallet funding)
+router.post('/users/:uid/balance', async (req, res) => {
+  const { balance } = req.body;
+  if (typeof balance !== 'number' || balance < 0) {
+    return res.status(400).json({ error: 'balance must be a non-negative number' });
+  }
+  const user = await userStore.setBalance(req.params.uid, balance);
+  if (!user) return res.status(404).json({ error: 'user not found' });
+  res.json({ uid: user.uid, balance: user.balance, message: `Balance set to ${balance} USDC` });
+});
+
 export default router;

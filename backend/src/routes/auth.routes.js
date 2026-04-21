@@ -75,15 +75,15 @@ router.post('/wallet/create', requireAuth, async (req, res) => {
   }
 });
 
-// Fund user's wallet (add USDC budget)
-router.post('/wallet/fund', requireAuth, async (req, res) => {
+// Simulate receiving funds (for testing/demo purposes)
+router.post('/wallet/simulate-deposit', requireAuth, async (req, res) => {
   try {
     const { amount } = req.body;
     if (!amount || amount <= 0) {
-      return res.status(400).json({ error: 'Invalid amount' });
+      return res.status(400).json({ error: 'amount must be greater than 0' });
     }
 
-    // Update user balance
+    // Simulate receiving USDC to the wallet
     const currentBalance = req.user.balance || 0;
     const newBalance = currentBalance + amount;
 
@@ -91,8 +91,10 @@ router.post('/wallet/fund', requireAuth, async (req, res) => {
 
     res.json({
       success: true,
+      amount: amount,
       balance: newBalance,
-      transactionId: `tx-${Date.now()}`,
+      transactionId: `sim-${Date.now()}`,
+      message: `Simulated deposit of ${amount} USDC received`,
       user: sanitize(user)
     });
   } catch (error) {

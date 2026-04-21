@@ -142,17 +142,30 @@
               </div>
 
               <!-- Fund Check -->
-              <button
-                @click="checkBalance"
-                :disabled="checkingBalance"
-                class="w-full px-4 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition disabled:opacity-50"
-              >
-                <span v-if="checkingBalance" class="flex items-center justify-center gap-2">
-                  <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                  Checking balance...
-                </span>
-                <span v-else>✅ Check Balance</span>
-              </button>
+              <div class="flex gap-2">
+                <button
+                  @click="checkBalance"
+                  :disabled="checkingBalance"
+                  class="flex-1 px-4 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition disabled:opacity-50"
+                >
+                  <span v-if="checkingBalance" class="flex items-center justify-center gap-2">
+                    <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    Checking balance...
+                  </span>
+                  <span v-else>✅ Check Balance</span>
+                </button>
+                <button
+                  @click="simulateDeposit"
+                  :disabled="simulatingDeposit"
+                  class="flex-1 px-4 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:opacity-50"
+                >
+                  <span v-if="simulatingDeposit" class="flex items-center justify-center gap-2">
+                    <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    Simulating...
+                  </span>
+                  <span v-else>💧 Demo: Add 1 USDC</span>
+                </button>
+              </div>
 
               <!-- Balance Display -->
               <div v-if="currentBalance !== null" class="p-4 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg border border-emerald-100">
@@ -203,6 +216,7 @@ const walletData = ref(null);
 const currentBalance = ref(null);
 const creatingWallet = ref(false);
 const checkingBalance = ref(false);
+const simulatingDeposit = ref(false);
 const showPrivateKey = ref(false);
 const addressCopied = ref(false);
 const privKeyChopied = ref(false);
@@ -244,6 +258,22 @@ async function checkBalance() {
     toastError(err, 'Failed to check balance');
   } finally {
     checkingBalance.value = false;
+  }
+}
+
+async function simulateDeposit() {
+  simulatingDeposit.value = true;
+  try {
+    const result = await api.simulateDeposit(1.0);
+    currentBalance.value = result.balance || 0;
+    if (currentBalance.value > 0) {
+      step.value = 2;
+      toastSuccess('✨ Demo: Simulated 1 USDC deposit! Wallet is now funded.');
+    }
+  } catch (err) {
+    toastError(err, 'Failed to simulate deposit');
+  } finally {
+    simulatingDeposit.value = false;
   }
 }
 

@@ -106,6 +106,7 @@ export const api = {
   // wallet management
   createWallet: () => request('/auth/wallet/create', { method: 'POST' }),
   fundWallet: (payload) => request('/auth/wallet/fund', { method: 'POST', body: payload }),
+  simulateDeposit: (amount) => request('/auth/wallet/simulate-deposit', { method: 'POST', body: { amount } }),
 
   // agent operators (private execution fabric)
   listProviders: (status) => request(status ? `/providers?status=${status}` : '/providers'),
