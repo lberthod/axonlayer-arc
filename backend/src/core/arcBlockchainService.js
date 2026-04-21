@@ -21,11 +21,13 @@ class ArcBlockchainService {
       this.provider = new ethers.JsonRpcProvider(this.rpcUrl);
 
       // USDC ABI (minimal for balanceOf)
+      // Arc USDC is native token with 6 decimals
       const usdcAbi = [
         'function balanceOf(address account) public view returns (uint256)',
         'function decimals() public view returns (uint8)',
         'function symbol() public view returns (string)',
-        'function name() public view returns (string)'
+        'function name() public view returns (string)',
+        'function totalSupply() public view returns (uint256)'
       ];
 
       this.usdcContract = new ethers.Contract(

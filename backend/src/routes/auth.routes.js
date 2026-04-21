@@ -158,4 +158,53 @@ router.get('/wallet/balance/:address', async (req, res) => {
   }
 });
 
+// Debug: Test contract call directly
+router.get('/wallet/balance-debug/:address', async (req, res) => {
+  try {
+    const { address } = req.params;
+    if (!arcBlockchain.isValidArcAddress(address)) {
+      return res.status(400).json({ error: 'Invalid Arc address format' });
+    }
+
+    const debugInfo = {
+      address,
+      rpc: arcBlockchain.rpcUrl,
+      contract: arcBlockchain.usdcContractAddress,
+      timestamp: new Date().toISOString()
+    };
+
+    // Check provider
+    if (!arcBlockchain.provider) {
+      debugInfo.providerStatus = 'NOT_INITIALIZED';
+      return res.json(debugInfo);
+    }
+
+    // Check network
+    try {
+      const network = await arcBlockchain.provider.getNetwork();
+      debugInfo.network = network;
+    } catch (e) {
+      debugInfo.networkError = e.message;
+    }
+
+    // Try to call balanceOf directly
+    try {
+      if (!arcBlockchain.usdcContract) {
+        debugInfo.contractStatus = 'NOT_INITIALIZED';
+      } else {
+        const rawBalance = await arcBlockchain.usdcContract.balanceOf(address);
+        debugInfo.rawBalance = rawBalance.toString();
+        debugInfo.balanceDecimal = Number(rawBalance.toString()) / 1e6;
+      }
+    } catch (e) {
+      debugInfo.contractError = e.message;
+      debugInfo.contractErrorCode = e.code;
+    }
+
+    res.json(debugInfo);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export default router;
