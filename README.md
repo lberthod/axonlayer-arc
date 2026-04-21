@@ -30,13 +30,20 @@ Current agent networks face massive economic barriers:
 - **100+ USDC transactions** in live simulation
 - **Sub-cent pricing** validated on testnet
 
-### ✅ V2: Intelligent Orchestration (NEW)
+### ✅ V2: Intelligent Orchestration
 - **Multi-dimensional agent scoring** (cost, quality, reliability, latency, specialization)
 - **4 execution strategies** (cheap, balanced, premium, hybrid)
 - **Fallback chains** (3-agent backups for reliability)
 - **Dynamic budget planning** (per-task allocation)
 - **Comprehensive observability** (execution logs, metrics)
 - **212 tests passing** (100% core functionality)
+
+### ✅ V3: Wallet & Capability System (NEW)
+- **Real Arc USDC wallet generation** (cryptographic, with private keys)
+- **Capability-based agent selection** (agents declare what they can do)
+- **Standard Provider Specification** (clear interface for agent integration)
+- **Balance simulation for demos** (test full flow without blockchain)
+- **Security-first design** (private key warnings, mnemonic recovery)
 
 ---
 
@@ -310,11 +317,67 @@ GET /api/plans/:missionId
 
 ## 📚 Documentation
 
+### Guides
+- **[Provider Specification](./PROVIDER_SPEC.md)** - How to integrate agents/providers with capabilities
 - **[V2 Implementation](./backend/V2_IMPLEMENTATION_COMPLETE.md)** - Complete V2 architecture & features
 - **[V1 Audit](./backend/AUDIT_V1_CURRENT_STATE.md)** - Analysis of V1 + gaps addressed by V2
 - **[Product Review](./backend/PRODUCT_REVIEW_SPRINT_V2.md)** - Sprint-by-sprint V2 plan
 - **[Business Plan](./BUSINESS_PLAN.md)** - Full business case & roadmap
 - **[Simple Explanation](./EXPLICATION_SIMPLE.md)** - Non-technical overview
+
+---
+
+## 🔌 Integrating Providers
+
+Arc Agent Hub is **not a marketplace**—it's a **capability-based execution network** where agents declare what they can do, and the orchestrator intelligently selects them based on task requirements, cost, and reliability.
+
+### For Agent Developers
+
+Register your agent in 3 steps:
+
+1. **Declare Capabilities** (what your agent can do)
+```json
+{
+  "name": "Email Validator Pro",
+  "capabilities": [
+    {
+      "name": "email_validation",
+      "description": "Validates emails with SMTP verification",
+      "category": "validation",
+      "latencyMs": 500,
+      "reliabilityScore": 0.98
+    }
+  ]
+}
+```
+
+2. **Implement API Endpoint** (handle task requests)
+```javascript
+POST /your-api/execute
+{
+  "taskId": "task_xyz",
+  "capability": "email_validation",
+  "input": "user@example.com"
+}
+```
+
+3. **Register with Hub**
+```bash
+curl -X POST http://localhost:3001/api/providers \
+  -H "Authorization: Bearer <token>" \
+  -d @provider-registration.json
+```
+
+**→ [Read Full Provider Spec](./PROVIDER_SPEC.md)**
+
+### Wallet Management
+
+All users get Arc USDC wallets for funding missions:
+
+- **Generate Wallet** - Real Arc address with private key
+- **Fund Wallet** - Send Arc USDC to activate
+- **Execute Tasks** - Costs deducted from balance
+- **See Results** - Real-time transaction visibility
 
 ---
 
