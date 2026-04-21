@@ -163,6 +163,7 @@ import HeroBanner from '../components/HeroBanner.vue';
 import CostComparison from '../components/CostComparison.vue';
 import MissionBudgetBar from '../components/MissionBudgetBar.vue';
 import MissionForm from '../components/MissionForm.vue';
+import MissionWallet from '../components/MissionWallet.vue';
 import MissionResult from '../components/MissionResult.vue';
 import MissionBudget from '../components/MissionBudget.vue';
 import MissionTimeline from '../components/MissionTimeline.vue';
