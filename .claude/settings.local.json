@@ -45,7 +45,11 @@
       "Bash(npm start *)",
       "Bash(node -e ' *)",
       "Bash(curl -s http://localhost:3001/api/tasks -X POST -H 'Content-Type: application/json' -d '{ *)",
-      "Bash(curl -s http://localhost:3001/api/tasks -X POST -H 'Content-Type: application/json' -H 'x-api-key: sk_583fcd6db2fcf4d7f966ae53620c4301485165d1d0ade138' -d '{ *)"
+      "Bash(curl -s http://localhost:3001/api/tasks -X POST -H 'Content-Type: application/json' -H 'x-api-key: sk_583fcd6db2fcf4d7f966ae53620c4301485165d1d0ade138' -d '{ *)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(npm install *)",
+      "Bash(git pull *)",
+      "Bash(git merge *)"
     ]
   }
 }

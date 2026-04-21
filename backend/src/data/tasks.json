@@ -1577,6 +1577,36 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_aa7d3b1c-f299-4593-8b9b-c14f33eb688c",
+      "input": "test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T11:27:02.126Z",
+      "updatedAt": "2026-04-21T11:27:02.127Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000504,
+        "workerPayment": 0.000212,
+        "validatorPayment": 0.000141,
+        "orchestratorMargin": 0.000151,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }
