@@ -1109,6 +1109,474 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_8a9b0c30-b44c-43fc-99a1-7b90d1c8d8a5",
+      "input": "resume cela cela cela",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T10:14:32.233Z",
+      "updatedAt": "2026-04-21T10:14:32.234Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000521,
+        "workerPayment": 0.000219,
+        "validatorPayment": 0.000146,
+        "orchestratorMargin": 0.000156,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 21,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_94bde0c5-d013-47c4-a2c2-79869c51e833",
+      "input": "resume cela ceal",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T10:14:39.354Z",
+      "updatedAt": "2026-04-21T10:14:39.354Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000516,
+        "workerPayment": 0.000217,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000155,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 16,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_1877c11c-a4ce-4e6a-82fe-55e867cc2738",
+      "input": "reaume resume resume",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T10:20:06.114Z",
+      "updatedAt": "2026-04-21T10:20:06.114Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.00052,
+        "workerPayment": 0.000218,
+        "validatorPayment": 0.000146,
+        "orchestratorMargin": 0.000156,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 20,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_1a0092ff-ecf6-4fa9-b9d0-c2f6329ae9e5",
+      "input": "testtest test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T10:21:55.756Z",
+      "updatedAt": "2026-04-21T10:21:55.757Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000513,
+        "workerPayment": 0.000215,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000154,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 13,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_5b0c65b1-1475-41bc-8db6-b3561e69c40b",
+      "input": "test test test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T10:22:56.233Z",
+      "updatedAt": "2026-04-21T10:22:56.234Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000514,
+        "workerPayment": 0.000216,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000154,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 14,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_2cb5432e-c511-4882-a669-1bc67f98d631",
+      "input": "test test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T10:23:27.422Z",
+      "updatedAt": "2026-04-21T10:23:27.423Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000509,
+        "workerPayment": 0.000214,
+        "validatorPayment": 0.000142,
+        "orchestratorMargin": 0.000153,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 9,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_2e408b17-daae-4646-a650-921919d45a06",
+      "input": "tes test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T10:25:02.091Z",
+      "updatedAt": "2026-04-21T10:25:02.092Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000508,
+        "workerPayment": 0.000214,
+        "validatorPayment": 0.000142,
+        "orchestratorMargin": 0.000152,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 8,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_5c7e42ef-8f56-4b01-954e-550ec43129a4",
+      "input": "test test test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T10:25:21.598Z",
+      "updatedAt": "2026-04-21T10:25:21.599Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000514,
+        "workerPayment": 0.000216,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000154,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 14,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_159970ac-f0c6-47d4-8b5c-883ee6e62a4f",
+      "input": "testtt",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T10:27:35.202Z",
+      "updatedAt": "2026-04-21T10:27:35.203Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000506,
+        "workerPayment": 0.000212,
+        "validatorPayment": 0.000142,
+        "orchestratorMargin": 0.000152,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 6,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_69081e93-9715-42a2-a310-9e54ad6d172f",
+      "input": "clear clear",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T10:27:50.913Z",
+      "updatedAt": "2026-04-21T10:27:50.913Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000511,
+        "workerPayment": 0.000215,
+        "validatorPayment": 0.000143,
+        "orchestratorMargin": 0.000153,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 11,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_d12a57c0-8118-49da-b02d-a73cdcfafba1",
+      "input": "Summarize this text: Hello world. This is a test.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T10:28:25.166Z",
+      "updatedAt": "2026-04-21T10:28:25.166Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000549,
+        "workerPayment": 0.00023,
+        "validatorPayment": 0.000154,
+        "orchestratorMargin": 0.000165,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 49,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_77a54751-f8fb-4740-a17e-056934c50664",
+      "input": "Summarize this text: Hello world. This is a test.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T10:31:25.611Z",
+      "updatedAt": "2026-04-21T10:31:25.624Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000549,
+        "workerPayment": 0.00023,
+        "validatorPayment": 0.000154,
+        "orchestratorMargin": 0.000165,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 49,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_8f1eef01-6cac-4add-9938-143cf6838485",
+      "input": "Summarize this text: Hello world. This is a test.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T11:07:39.561Z",
+      "updatedAt": "2026-04-21T11:07:39.567Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000549,
+        "workerPayment": 0.00023,
+        "validatorPayment": 0.000154,
+        "orchestratorMargin": 0.000165,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 49,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_f0a6a1ab-acfe-45be-863d-4509b6f0dc2d",
+      "input": "Summarize this text: Hello world. This is a test.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T11:07:56.651Z",
+      "updatedAt": "2026-04-21T11:07:56.655Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000549,
+        "workerPayment": 0.00023,
+        "validatorPayment": 0.000154,
+        "orchestratorMargin": 0.000165,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 49,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_81776374-56d8-4c02-900e-60d57e7ca3a7",
+      "input": "Summarize this text: Hello world. This is a test.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-21T11:09:23.459Z",
+      "updatedAt": "2026-04-21T11:09:30.773Z",
+      "result": "Summarize this text: Hello world. This is a test.",
+      "validation": {
+        "valid": true,
+        "score": 0.9,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": true
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000549,
+        "workerPayment": 0.00023,
+        "validatorPayment": 0.000154,
+        "orchestratorMargin": 0.000165,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 49,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }

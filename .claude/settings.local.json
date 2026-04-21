@@ -43,7 +43,9 @@
       "Bash(pkill -f \"node.*server.js\" pkill -f \"vite\" sleep 2)",
       "Bash(curl -s http://localhost:3001/api/auth/me)",
       "Bash(npm start *)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(curl -s http://localhost:3001/api/tasks -X POST -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(curl -s http://localhost:3001/api/tasks -X POST -H 'Content-Type: application/json' -H 'x-api-key: sk_583fcd6db2fcf4d7f966ae53620c4301485165d1d0ade138' -d '{ *)"
     ]
   }
 }

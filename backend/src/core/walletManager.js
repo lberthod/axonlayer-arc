@@ -89,16 +89,28 @@ class WalletManager {
     return this.provider;
   }
 
-  async getSigner(walletId) {
-    if (this.signers[walletId]) return this.signers[walletId];
+  async getSigner(walletIdOrAddress) {
+    // Handle cache by both wallet ID and address
+    if (this.signers[walletIdOrAddress]) return this.signers[walletIdOrAddress];
 
-    const entry = this.wallets[walletId];
+    let entry = this.wallets[walletIdOrAddress];
+
+    // If not found by ID, try to reverse-map address to wallet ID
+    if (!entry) {
+      for (const [id, wallet] of Object.entries(this.wallets)) {
+        if (wallet.address?.toLowerCase() === walletIdOrAddress?.toLowerCase()) {
+          entry = wallet;
+          break;
+        }
+      }
+    }
+
     if (!entry?.privateKey) return null;
 
     const ethers = await this.ensureEthers();
     const provider = await this.getProvider();
     const signer = new ethers.Wallet(entry.privateKey, provider);
-    this.signers[walletId] = signer;
+    this.signers[walletIdOrAddress] = signer;
     return signer;
   }
 
