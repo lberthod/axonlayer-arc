@@ -3,6 +3,7 @@ import userStore from '../core/userStore.js';
 import { requireAuth } from '../core/auth.js';
 import ArcWalletService from '../core/arcWalletService.js';
 import arcBlockchain from '../core/arcBlockchainService.js';
+import { config } from '../config.js';
 
 const router = Router();
 
@@ -22,51 +23,105 @@ function sanitize(user) {
   };
 }
 
-router.get('/me', requireAuth, async (req, res) => {
+router.get('/me', async (req, res) => {
   try {
-    const user = sanitize(req.user);
+    let user = req.user;
 
-    // Get real on-chain balance if user has wallet
-    if (user.wallet?.address) {
-      const onChainBalance = await arcBlockchain.getBalance(user.wallet.address);
-      user.onChainBalance = onChainBalance;
-      // Update stored balance with on-chain balance
-      user.balance = onChainBalance;
+    // In dev mode (auth disabled), get the first user from store
+    if (!config.auth.enabled && !user) {
+      const allUsers = Object.values(userStore.users);
+      if (allUsers.length > 0) {
+        user = allUsers[0];
+      }
     }
 
-    res.json(user);
+    if (!user) {
+      return res.status(401).json({ error: 'authentication required' });
+    }
+
+    const sanitized = sanitize(user);
+
+    // Get real on-chain balance if user has wallet
+    if (sanitized.wallet?.address) {
+      try {
+        const onChainBalance = await arcBlockchain.getBalance(sanitized.wallet.address);
+        sanitized.onChainBalance = onChainBalance;
+        sanitized.balance = onChainBalance;
+      } catch (err) {
+        console.warn('Could not fetch on-chain balance:', err.message);
+      }
+    }
+
+    res.json(sanitized);
   } catch (error) {
-    console.error('Error fetching user balance:', error);
-    res.json(sanitize(req.user));
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-router.post('/apikey/rotate', requireAuth, async (req, res) => {
+router.post('/apikey/rotate', async (req, res) => {
+  if (!config.auth.enabled) {
+    return res.json({ apiKey: 'dev-api-key-rotated' });
+  }
+  if (!req.user) return res.status(401).json({ error: 'authentication required' });
   const user = await userStore.rotateApiKey(req.user.uid);
   res.json(sanitize(user));
 });
 
-router.post('/wallet', requireAuth, async (req, res) => {
+router.post('/wallet', async (req, res) => {
   const address = req.body?.address;
   if (!address || typeof address !== 'string') {
     return res.status(400).json({ error: 'address required' });
   }
+  if (!config.auth.enabled) {
+    return res.json({ walletAddress: address });
+  }
+  if (!req.user) return res.status(401).json({ error: 'authentication required' });
   const user = await userStore.setWalletAddress(req.user.uid, address);
   res.json(sanitize(user));
 });
 
-router.post('/role/provider', requireAuth, async (req, res) => {
+router.post('/role/provider', async (req, res) => {
+  if (!config.auth.enabled) {
+    return res.json({ role: 'provider' });
+  }
+  if (!req.user) return res.status(401).json({ error: 'authentication required' });
   if (req.user.role === 'admin') return res.json(sanitize(req.user));
   const user = await userStore.setRole(req.user.uid, 'provider');
   res.json(sanitize(user));
 });
 
 // Create Arc USDC wallet for user
-router.post('/wallet/create', requireAuth, async (req, res) => {
+router.post('/wallet/create', async (req, res) => {
   try {
     // Generate a real Arc USDC wallet with private key
     const wallet = ArcWalletService.generateWallet();
     wallet.balance = 0;
+
+    if (!config.auth.enabled) {
+      // Dev mode: just return wallet
+      return res.json({
+        success: true,
+        wallet: {
+          address: wallet.address,
+          privateKey: wallet.privateKey,
+          mnemonic: wallet.mnemonic,
+          chain: wallet.chain,
+          token: wallet.token,
+          createdAt: wallet.createdAt,
+          instructions: 'Dev wallet. Save your private key in a secure location.'
+        },
+        user: {
+          uid: 'dev-user-000',
+          email: 'dev@localhost',
+          displayName: 'Dev User',
+          role: 'admin',
+          wallet: { address: wallet.address }
+        }
+      });
+    }
+
+    if (!req.user) return res.status(401).json({ error: 'authentication required' });
 
     // Store wallet for user (including private key for security)
     const user = await userStore.setWallet(req.user.uid, wallet);
@@ -81,7 +136,6 @@ router.post('/wallet/create', requireAuth, async (req, res) => {
         chain: wallet.chain,
         token: wallet.token,
         createdAt: wallet.createdAt,
-        // Instructions for user
         instructions: 'Save your private key and mnemonic in a secure location. You will need to send USDC to this address to fund your account.'
       },
       user: sanitize(user)

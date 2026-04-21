@@ -77,7 +77,7 @@ export function authMiddleware() {
 
     const authHeader = req.header('authorization') || '';
     const match = authHeader.match(/^Bearer\s+(.+)$/i);
-    if (match) {
+    if (match && config.auth.enabled) {
       const auth = await initFirebase();
       if (!auth) return res.status(503).json({ error: 'auth backend not configured' });
       try {
