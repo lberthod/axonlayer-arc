@@ -899,6 +899,216 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_0cb0918e-3245-4a79-9584-6d5383712cb8",
+      "input": "resume cela rapidement",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:41:30.278Z",
+      "updatedAt": "2026-04-21T08:41:30.283Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000522,
+        "workerPayment": 0.000219,
+        "validatorPayment": 0.000146,
+        "orchestratorMargin": 0.000157,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 22,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_b7ad3131-dfc7-49d3-8591-10180eba0e2f",
+      "input": "etst etste testt",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:43:41.483Z",
+      "updatedAt": "2026-04-21T08:43:41.500Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000516,
+        "workerPayment": 0.000217,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000155,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 16,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_a4c4f666-ec10-49fc-961b-e10ad419d8e6",
+      "input": "test test testt",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:44:17.820Z",
+      "updatedAt": "2026-04-21T08:44:17.823Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000515,
+        "workerPayment": 0.000217,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000154,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 15,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_d188cf46-2ebd-4fe1-80a4-4618a3414a1f",
+      "input": "test test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:44:32.371Z",
+      "updatedAt": "2026-04-21T08:44:32.374Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000509,
+        "workerPayment": 0.000214,
+        "validatorPayment": 0.000142,
+        "orchestratorMargin": 0.000153,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 9,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_1d3aa8a0-a8f6-42de-9384-9d46efa70036",
+      "input": "test test test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:46:00.021Z",
+      "updatedAt": "2026-04-21T08:46:00.026Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000514,
+        "workerPayment": 0.000216,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000154,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 14,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_6b37c5c3-96e7-4c25-ab11-834e44239afe",
+      "input": "erer",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:49:09.147Z",
+      "updatedAt": "2026-04-21T08:49:09.153Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000504,
+        "workerPayment": 0.000212,
+        "validatorPayment": 0.000141,
+        "orchestratorMargin": 0.000151,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_e72e3c9e-644c-43ba-9b02-ba66d6bbe49b",
+      "input": "testtt",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:49:38.035Z",
+      "updatedAt": "2026-04-21T08:49:38.042Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000506,
+        "workerPayment": 0.000212,
+        "validatorPayment": 0.000142,
+        "orchestratorMargin": 0.000152,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 6,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }

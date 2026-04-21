@@ -38,7 +38,12 @@
       "Bash(node -c src/agents/validatorAgent.js)",
       "Bash(node -c src/agents/translatorAgent.js)",
       "Bash(node -c src/agents/classifierAgent.js)",
-      "Bash(node -c src/agents/sentimentAgent.js)"
+      "Bash(node -c src/agents/sentimentAgent.js)",
+      "Bash(curl -v http://localhost:3001/api/auth/me)",
+      "Bash(pkill -f \"node.*server.js\" pkill -f \"vite\" sleep 2)",
+      "Bash(curl -s http://localhost:3001/api/auth/me)",
+      "Bash(npm start *)",
+      "Bash(node -e ' *)"
     ]
   }
 }
