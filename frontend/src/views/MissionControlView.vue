@@ -236,14 +236,18 @@ const developerCount = computed(() => {
 
 // Mission Wallet computed properties
 const missionWalletBalance = computed(() => {
-  // Get balance from the current user's mission wallet if available
-  // This would come from the user object in a real implementation
+  // Get real on-chain balance from Arc testnet
+  // Updated via /api/auth/me which queries blockchain
+  if (user.value?.balance !== undefined && user.value.balance !== null) {
+    return user.value.balance;
+  }
+  // Fallback to mission wallet if available
   const userMissionWallet = user.value?.missionWallet;
   if (userMissionWallet) {
     return userMissionWallet.balance || 0;
   }
-  // Fallback to treasury balance for now (simulated)
-  return balances.value['arc_treasury_wallet'] || 10.0;
+  // Fallback to treasury balance
+  return balances.value['arc_treasury_wallet'] || 0;
 });
 
 const reservedBalance = computed(() => {
