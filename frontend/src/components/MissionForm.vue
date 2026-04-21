@@ -72,24 +72,34 @@
         </div>
       </div>
 
-      <button
-        @click="handleSubmit"
-        :disabled="isLoading || !goal.trim() || !(budget > 0)"
-        class="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-3 px-4 rounded-lg font-semibold shadow-md hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 active:scale-95 relative overflow-hidden group"
-      >
-        <span v-if="!isLoading" class="relative z-10">Launch mission</span>
-        <span v-else class="relative z-10 flex items-center justify-center gap-2">
-          <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-          Orchestrating mission…
-        </span>
-        <div v-if="!isLoading" class="absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-0"></div>
-      </button>
+      <div class="space-y-2">
+        <button
+          @click="handleSubmit"
+          :disabled="isLoading || !goal.trim() || !(budget > 0) || insufficientBudget"
+          class="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-3 px-4 rounded-lg font-semibold shadow-md hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 active:scale-95 relative overflow-hidden group"
+        >
+          <span v-if="!isLoading" class="relative z-10">Launch mission</span>
+          <span v-else class="relative z-10 flex items-center justify-center gap-2">
+            <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+            Orchestrating mission…
+          </span>
+          <div v-if="!isLoading" class="absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-0"></div>
+        </button>
+
+        <!-- Budget warning -->
+        <div v-if="insufficientBudget" class="p-3 bg-red-50 border border-red-200 rounded-lg">
+          <p class="text-sm text-red-800">
+            <span class="font-semibold">⚠️ Insufficient budget:</span> Estimated cost {{ estimatedCost.toFixed(5) }} USDC exceeds your budget {{ budget.toFixed(5) }} USDC.
+            <router-link to="/user" class="underline font-semibold hover:no-underline">Add funds to your wallet</router-link>.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 
 const emit = defineEmits(['submit', 'budget-change']);
 
@@ -98,6 +108,7 @@ const missionType = ref('summarize');
 const optimize = ref('balanced');
 const budget = ref(0.01);
 const isLoading = ref(false);
+const estimatedCost = ref(0.0005); // Base estimated cost
 
 watch(budget, (v) => emit('budget-change', Number(v) || 0), { immediate: true });
 
@@ -109,8 +120,24 @@ const strategyFor = {
   cost: 'price'
 };
 
+// Estimated cost calculation (based on task type)
+const calculateEstimatedCost = () => {
+  let cost = 0.0005; // Base cost
+  if (goal.value.length > 1000) cost += 0.0001; // Additional for large input
+  if (missionType.value === 'translate' || missionType.value === 'rewrite') cost += 0.0002;
+  return cost;
+};
+
+watch([goal, missionType], () => {
+  estimatedCost.value = calculateEstimatedCost();
+});
+
+const insufficientBudget = computed(() => {
+  return budget.value > 0 && estimatedCost.value > budget.value;
+});
+
 function handleSubmit() {
-  if (!goal.value.trim() || !(budget.value > 0)) return;
+  if (!goal.value.trim() || !(budget.value > 0) || insufficientBudget.value) return;
   isLoading.value = true;
   emit('submit', {
     input: goal.value,

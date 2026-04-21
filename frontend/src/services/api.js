@@ -103,6 +103,10 @@ export const api = {
   setWalletAddress: (address) => request('/auth/wallet', { method: 'POST', body: { address } }),
   becomeProvider: () => request('/auth/role/provider', { method: 'POST' }),
 
+  // wallet management
+  createWallet: () => request('/auth/wallet/create', { method: 'POST' }),
+  fundWallet: (payload) => request('/auth/wallet/fund', { method: 'POST', body: payload }),
+
   // agent operators (private execution fabric)
   listProviders: (status) => request(status ? `/providers?status=${status}` : '/providers'),
   listMyProviders: () => request('/providers/mine'),

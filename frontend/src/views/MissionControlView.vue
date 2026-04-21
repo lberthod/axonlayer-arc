@@ -2,7 +2,16 @@
   <div class="p-6 bg-gradient-to-br from-gray-50 via-white to-violet-50 min-h-full">
     <div class="max-w-7xl mx-auto">
 
-      <HeroBanner />
+      <!-- Wallet Setup Required -->
+      <WalletSetup
+        v-if="!hasWallet || !hasBalance"
+        @setup-complete="refreshWallet"
+        class="mb-6"
+      />
+
+      <!-- Mission Control (Only after wallet setup) -->
+      <template v-if="hasWallet && hasBalance">
+        <HeroBanner />
 
       <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
 
@@ -137,6 +146,14 @@
           </details>
         </div>
       </div>
+      </template>
+
+      <!-- Empty State when wallet not ready -->
+      <div v-if="!hasWallet || !hasBalance" class="text-center py-20">
+        <div class="text-6xl mb-4">⏳</div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Setting up your wallet...</h2>
+        <p class="text-gray-600">Complete the setup above to launch missions</p>
+      </div>
     </div>
   </div>
 </template>
@@ -156,6 +173,7 @@ import TransactionsTable from '../components/TransactionsTable.vue';
 import MetricsPanel from '../components/MetricsPanel.vue';
 import MetricsCharts from '../components/MetricsCharts.vue';
 import AgentsPanel from '../components/AgentsPanel.vue';
+import WalletSetup from '../components/WalletSetup.vue';
 import { api } from '../services/api.js';
 import { toastError, toastSuccess, toastInfo } from '../stores/toastStore.js';
 
@@ -237,6 +255,28 @@ const reservedBalance = computed(() => {
 
 const availableBalance = computed(() => {
   return Math.max(0, missionWalletBalance.value - reservedBalance.value);
+});
+
+// Wallet setup checks
+const hasWallet = computed(() => {
+  return user.value?.wallet?.address || user.value?.missionWallet?.address;
+});
+
+const hasBalance = computed(() => {
+  const balance = user.value?.balance || missionWalletBalance.value;
+  return balance > 0;
+});
+
+async function refreshWallet() {
+  try {
+    user.value = await api.getMe();
+    if (user.value?.wallet) {
+      toastSuccess('Wallet setup complete!');
+    }
+  } catch (err) {
+    toastError(err, 'Failed to refresh wallet');
+  }
+}
 });
 
 const networkStats = computed(() => {

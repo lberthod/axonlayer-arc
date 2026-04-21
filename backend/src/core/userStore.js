@@ -100,6 +100,23 @@ class UserStore {
     return user;
   }
 
+  async setWallet(uid, wallet) {
+    const user = this.users[uid];
+    if (!user) return null;
+    user.wallet = wallet;
+    user.balance = wallet.balance || 0;
+    await this.store.flush();
+    return user;
+  }
+
+  async setBalance(uid, balance) {
+    const user = this.users[uid];
+    if (!user) return null;
+    user.balance = balance;
+    await this.store.flush();
+    return user;
+  }
+
   todayBucket() {
     return new Date().toISOString().slice(0, 10);
   }

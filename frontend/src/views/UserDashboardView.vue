@@ -12,6 +12,11 @@
       </div>
     </div>
 
+    <!-- Wallet Manager -->
+    <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+      <WalletManager />
+    </div>
+
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div class="bg-white rounded-lg shadow p-6">
         <h2 class="text-lg font-bold text-gray-800 mb-3">API access</h2>
@@ -71,6 +76,7 @@
 import { ref, onMounted } from 'vue';
 import { api } from '../services/api.js';
 import { h } from 'vue';
+import WalletManager from '../components/WalletManager.vue';
 
 const me = ref(null);
 const missions = ref([]);
