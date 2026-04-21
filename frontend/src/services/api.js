@@ -50,7 +50,21 @@ async function parseResponse(response) {
   return data;
 }
 
-async function request(path, { method = 'GET', body, headers, idempotencyKey } = {}) {
+// Simple cache for frequently-called endpoints (auth especially)
+const responseCache = new Map();
+const CACHE_TTL_MS = 30000; // 30 seconds for auth endpoints
+
+async function request(path, { method = 'GET', body, headers, idempotencyKey, skipCache = false } = {}) {
+  // Use cache for GET requests on auth endpoints (avoid rate limits)
+  const cacheKey = method === 'GET' ? path : null;
+  if (cacheKey && !skipCache && responseCache.has(cacheKey)) {
+    const { data, timestamp } = responseCache.get(cacheKey);
+    if (Date.now() - timestamp < CACHE_TTL_MS) {
+      return data;
+    }
+    responseCache.delete(cacheKey);
+  }
+
   const finalHeaders = await authHeaders({
     ...(body ? { 'Content-Type': 'application/json' } : {}),
     ...(idempotencyKey ? { 'Idempotency-Key': idempotencyKey } : {}),
@@ -61,7 +75,14 @@ async function request(path, { method = 'GET', body, headers, idempotencyKey } =
     headers: finalHeaders,
     body: body ? JSON.stringify(body) : undefined
   });
-  return parseResponse(response);
+  const data = await parseResponse(response);
+
+  // Cache GET responses
+  if (cacheKey && !skipCache) {
+    responseCache.set(cacheKey, { data, timestamp: Date.now() });
+  }
+
+  return data;
 }
 
 export const api = {
