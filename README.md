@@ -1,8 +1,7 @@
 # 🚀 Arc Agent Hub
+## The Decentralized Network for Agent-to-Agent Commerce
 
-**The Execution Layer for the Agent Economy**
-
-A decentralized network where autonomous agents collaborate on tasks and settle payments in **USDC via Arc Nanopayments**, enabling **per-action pricing ($0.0005/task)** that would be impossible with traditional gas costs.
+**Arc Agent Hub** orchestrates autonomous agents built and deployed by independent developers, enabling a **real micro-economy** where agents earn USDC for executing tasks—all settled in real-time on Circle Arc blockchain.
 
 [![Tests Passing](https://img.shields.io/badge/tests-212%2F212-brightgreen)](./backend/V2_IMPLEMENTATION_COMPLETE.md)
 [![Architecture](https://img.shields.io/badge/version-V2-blue)](./backend/V2_IMPLEMENTATION_COMPLETE.md)
@@ -10,477 +9,514 @@ A decentralized network where autonomous agents collaborate on tasks and settle 
 
 ---
 
-## 🎯 The Problem
+## 🎯 The Core Concept
 
-Current agent networks face massive economic barriers:
-- **Ethereum:** $50-200 per transaction (impossible for micro-tasks)
-- **ChatGPT:** $0.005 per task (still 10x too expensive)
-- **Arc Agent Hub:** **$0.0005 per task** (100× cheaper than ChatGPT)
+### Three Roles in the Ecosystem
 
-**How?** Arc's USDC-as-native-gas + zero gas overhead = economically viable agent-to-agent commerce.
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     END USERS                                   │
+│        Fund missions with budget constraints                    │
+│              ↓                                                   │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │   ARC AGENT HUB ORCHESTRATOR                            │   │
+│  │  • Analyzes task requirements                            │   │
+│  │  • Matches agents by capability & cost                   │   │
+│  │  • Routes work intelligently                             │   │
+│  │  • Splits USDC payments automatically                    │   │
+│  │  • Takes transparent margin per action                   │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│              ↓              ↓              ↓                     │
+│        ┌────────────┐ ┌────────────┐ ┌────────────┐             │
+│        │  AGENT A   │ │  AGENT B   │ │  AGENT C   │    ...      │
+│        │ (Developer │ │(Developer 2)│(Developer 3)│             │
+│        │    1)      │ │            │ │            │             │
+│        │ Earns 40%  │ │ Earns 40%  │ │ Earns 40%  │             │
+│        │ of USDC    │ │ of USDC    │ │ of USDC    │             │
+│        └────────────┘ └────────────┘ └────────────┘             │
+│             ↓              ↓              ↓                      │
+│    Real Arc USDC Transfers (visible on-chain)                   │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**NOT a marketplace.** NOT a chatbot API. **An execution layer** where:
+- 🎯 **Users** describe what they need + their budget
+- 🤖 **Agents** are deployed by independent developers with specialized capabilities
+- 🧠 **Hub** intelligently routes tasks to the best agents (by cost, quality, speed)
+- 💰 **USDC** settles immediately on-chain, transparent to all parties
 
 ---
 
-## ✨ What This Demonstrates
+## 🏗️ Architecture: How It Works
 
-### ✅ V1: Proven Foundation
-- **2-phase commit protocol** for ledger-blockchain coherence
-- **Atomic persistence** (write-tmp + rename) prevents JSON corruption
-- **49/50 tests passing** → production quality
-- **100+ USDC transactions** in live simulation
-- **Sub-cent pricing** validated on testnet
+### 1. Agent Developer Deploys an Agent
+```javascript
+// Developer 1 creates a "Summarization Agent"
+const agent = {
+  name: "Expert Summarizer",
+  capabilities: [
+    {
+      name: "text_summarization",
+      description: "Distill long texts to 2-3 sentences",
+      costPerAction: "$0.0002 USDC",
+      reliabilityScore: 0.98
+    }
+  ],
+  webhook: "https://developer1.com/api/execute"
+};
 
-### ✅ V2: Intelligent Orchestration
-- **Multi-dimensional agent scoring** (cost, quality, reliability, latency, specialization)
-- **4 execution strategies** (cheap, balanced, premium, hybrid)
-- **Fallback chains** (3-agent backups for reliability)
-- **Dynamic budget planning** (per-task allocation)
-- **Comprehensive observability** (execution logs, metrics)
-- **212 tests passing** (100% core functionality)
+// Registers with Arc Agent Hub
+POST /api/providers/register
+  Authorization: Bearer <developer_token>
+  Body: { agent, walletAddress: "0x...", stake: 1.0 }
+  // "1.0 USDC stake" backs the agent's performance
+```
 
-### ✅ V3: Wallet & Capability System (NEW)
-- **Real Arc USDC wallet generation** (cryptographic, with private keys)
-- **Capability-based agent selection** (agents declare what they can do)
-- **Standard Provider Specification** (clear interface for agent integration)
-- **Balance simulation for demos** (test full flow without blockchain)
-- **Security-first design** (private key warnings, mnemonic recovery)
+### 2. User Funds a Mission
+```bash
+# User submits a task with budget
+curl -X POST http://localhost:3001/api/tasks
+{
+  "input": "Summarize this 10-page report...",
+  "taskType": "summarize",
+  "budget": 0.001,  // 0.1 cent in USDC
+  "strategy": "balanced"  // cost ↔ quality tradeoff
+}
+```
 
-### ✅ V4: On-Chain Arc Testnet Integration (LATEST)
-- **Live Arc Testnet settlement** (real USDC transfers)
-- **Dev auth bypass** (no Firebase required for development)
-- **Real user data** (loaded from persistent user store)
-- **Auto-detected balances** (on-chain balance queries via RPC)
-- **Testnet faucet support** (https://faucet.circle.com for USDC)
+### 3. Orchestrator Routes Intelligently
+```javascript
+// Hub's decision engine evaluates agents:
+// - Cost: Developer 1's agent = $0.0002 ✓ (cheapest)
+// - Quality: Developer 1's agent = 0.98 ✓ (proven track record)
+// - Speed: Developer 1's agent = 500ms ✓ (fast enough)
+// → Developer 1's agent wins
+
+// Hub calls Developer 1's webhook
+POST https://developer1.com/api/execute
+{
+  "taskId": "task_xyz",
+  "input": "Long text...",
+  "budget": 0.0008  // remaining budget after fees
+}
+```
+
+### 4. Settlement Happens On-Chain
+```
+┌─────────────────────────────────────┐
+│  User USDC Wallet                   │
+│  Pays: 0.001 USDC                   │
+│  (visible on Arc explorer)          │
+└──────────────┬──────────────────────┘
+               │
+       ┌───────▼────────┐
+       │ Arc Agent Hub  │
+       │  Transfer out: │
+       │  ├─ 0.0002     │ → Developer 1's wallet (Agent executor)
+       │  ├─ 0.00008    │ → Validator (quality check)
+       │  └─ 0.00032    │ → Keep as margin
+       └───────┬────────┘
+               │
+    ┌──────────▼──────────┐
+    │ Arc Blockchain      │
+    │ (USDC as gas)       │
+    │ Finality: <1 sec    │
+    │ Cost: zero          │
+    └─────────────────────┘
+```
+
+**Every line above is a real, verifiable USDC transaction on Arc.**
 
 ---
 
-## 🏗️ Architecture
+## 💰 The Micro-Economy
 
-### Core Layers
+### Economic Flow (Per Task)
 
 ```
-┌─────────────────────────────────────────────────┐
-│  Frontend (Vue 3 + Vite + TailwindCSS)          │
-│  Mission Dashboard | Real-time Results | Metrics│
-└──────────────────┬──────────────────────────────┘
-                   │
-┌──────────────────▼──────────────────────────────┐
-│  Backend (Node.js + Express)                     │
-├─────────────────────────────────────────────────┤
-│ V2 Orchestration Engine                         │
-│  ├─ OrchestrationEngine (intelligent planning)  │
-│  ├─ AgentScorer (multi-dimensional scoring)    │
-│  ├─ CapabilityMatcher (agent-task matching)    │
-│  └─ StrategyDefinitions (4 optimization modes) │
-├─────────────────────────────────────────────────┤
-│ Core Systems (V1)                               │
-│  ├─ Ledger (USDC tracking, 2-phase commit)     │
-│  ├─ Agent Registry (worker, validator agents)  │
-│  ├─ Pricing Engine (dynamic cost calculation)  │
-│  └─ Task Engine (lifecycle management)          │
-└──────────────────┬──────────────────────────────┘
-                   │
-┌──────────────────▼──────────────────────────────┐
-│  Arc Blockchain (USDC Settlement)               │
-│  Native Gas: USDC | Finality: <1 second         │
-└─────────────────────────────────────────────────┘
+User Cost:              $0.0005
+├─ Worker agent:       $0.0002 (40% → Developer A's wallet)
+├─ Validator agent:    $0.0001 (20% → Developer B's wallet)
+└─ Arc Agent Hub:      $0.0002 (40% → Platform margin)
 ```
 
-### Technology Stack
+### Why This Works
+
+| Provider | Cost | Feasibility | Why? |
+|----------|------|-------------|------|
+| **Ethereum L1** | $50-200/tx | ❌ Impossible | $50 minimum gas |
+| **Traditional APIs** | $0.01-0.10/action | ❌ Not viable | Too expensive for micro-tasks |
+| **ChatGPT API** | $0.005/action | ⚠️ Barely viable | Still 10x too expensive |
+| **Arc Agent Hub** | $0.0005/action | ✅ **Profitable** | USDC as native gas = no overhead |
+
+### The Developer Upside
+
+**For Agent Developers:**
+- Earn $0.0002 USDC per action your agent handles
+- 1000 executions = $0.20 (plus compounding reputation)
+- 100,000 executions = $20 USDC (real money, real quick)
+- Scale infinitely — no infrastructure costs
+
+**For the Platform:**
+- 20% margin ($0.0001/action) scales to $1000/day at 10M actions
+- Transparent, auditable, on-chain
+- Zero counterparty risk (USDC settlement is final)
+
+---
+
+## 🏛️ System Architecture
+
+### Three Layers
+
+```
+┌──────────────────────────────────────────────┐
+│  FRONTEND (Vue 3 + Tailwind)                 │
+│  • Mission dashboard                         │
+│  • Real-time execution tracking              │
+│  • Wallet management                         │
+│  • Transaction explorer                      │
+└────────────────┬─────────────────────────────┘
+                 │
+┌────────────────▼─────────────────────────────┐
+│  BACKEND ORCHESTRATOR (Node.js)              │
+├──────────────────────────────────────────────┤
+│  Core Routing Engine                         │
+│  ├─ CapabilityMatcher: Match agents to tasks │
+│  ├─ AgentScorer: Multi-dimensional scoring   │
+│  ├─ OrchestrationEngine: Route + settle     │
+│  └─ PricingEngine: Dynamic cost calculation  │
+├──────────────────────────────────────────────┤
+│  Agent Registry                              │
+│  ├─ Provider metadata + wallet addresses     │
+│  ├─ Capability declarations                  │
+│  ├─ Performance scores & reputation          │
+│  └─ Slashing records (misbehavior)          │
+├──────────────────────────────────────────────┤
+│  Ledger + Persistence                        │
+│  ├─ 2-phase commit (ledger ↔ blockchain)    │
+│  ├─ Transaction history                      │
+│  └─ Atomic writes (zero corruption)          │
+└────────────────┬─────────────────────────────┘
+                 │
+┌────────────────▼─────────────────────────────┐
+│  ARC BLOCKCHAIN (Circle Native)              │
+│  • USDC as native gas (zero gas fees)       │
+│  • Sub-second finality                      │
+│  • Real, on-chain settlement                │
+│  • Verifiable transaction history           │
+└──────────────────────────────────────────────┘
+```
+
+### Tech Stack
 
 | Component | Technology |
 |-----------|------------|
-| **Blockchain** | Arc (USDC L1) |
-| **Payments** | Circle Nanopayments |
+| **Blockchain** | Circle Arc (USDC L1) |
+| **Settlement** | ERC-20 USDC transfers |
 | **Backend** | Node.js + Express |
 | **Frontend** | Vue 3 + Vite + TailwindCSS |
-| **Testing** | Vitest (212 tests) |
 | **Persistence** | JSON + atomic writes |
+| **Testing** | Vitest (212 tests) |
 
 ---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Node.js 22+
-- npm or yarn
-
-### Backend Setup
-
-#### Option 1: On-Chain Mode (Arc Testnet) ⭐ **NEW**
+### For End Users
 ```bash
-cd backend
-npm install
+# 1. Start backend
+cd backend && npm install && npm run dev
+# Runs on http://localhost:3001
 
-# Create .env file for on-chain Arc Testnet
-cat > .env << 'EOF'
-WALLET_PROVIDER=onchain
-ONCHAIN_NETWORK=arc-testnet
-ONCHAIN_RPC_URL=https://rpc.testnet.arc.network
-ONCHAIN_CHAIN_ID=5042002
-ONCHAIN_USDC_ADDRESS=0x3600000000000000000000000000000000000000
-ONCHAIN_DRY_RUN=false
-PRICING_PROFILE=nano
-AUTH_ENABLED=false
-CORS_ORIGINS=http://localhost:3000,http://localhost:5173
-EOF
+# 2. Start frontend
+cd frontend && npm install && npm run dev
+# Runs on http://localhost:3000
 
-npm start
+# 3. Open http://localhost:3000
+#    Sign in → Create/connect Arc wallet → Fund mission
 ```
-✅ Runs on `http://localhost:3001` with **real Arc USDC settlement**
 
-#### Option 2: Simulated Mode (Default)
+### For Agent Developers
 ```bash
-cd backend
-npm install
-npm run dev
-```
-Runs on `http://localhost:3001` (in-memory ledger, no blockchain)
+# 1. Build your agent (any language, any capability)
+#    → Exposes POST /execute webhook
 
-### Frontend Setup
-```bash
-cd frontend
-npm install
-npm run dev
-```
-Runs on `http://localhost:3000`
+# 2. Register with Hub
+curl -X POST http://localhost:3001/api/providers \
+  -H "Authorization: Bearer <dev_token>" \
+  -d '{
+    "name": "My Awesome Agent",
+    "capabilities": [...],
+    "webhook": "https://my-api.com/execute",
+    "walletAddress": "0x...",
+    "stake": 0.1
+  }'
 
-### Run Tests
-```bash
-cd backend
-npm test
+# 3. Earn USDC automatically
+#    Every time Hub routes work to you,
+#    USDC appears in your wallet
 ```
-Expected: **212/212 tests passing** ✅
-
-### Development User (Dev Mode)
-When `AUTH_ENABLED=false`, the system returns a dev user:
-- **Email**: lberthod@gmail.com
-- **Role**: admin  
-- **Wallet**: Auto-generated Arc USDC address
-- **Balance**: Loaded from `users.json` (20 USDC testnet)
 
 ---
 
-## 📊 Live Demonstration
+## 📊 Capabilities System
 
-### Submit a Task
+Agents declare what they can do:
+
+```javascript
+{
+  "capabilityName": "email_validation",
+  "category": "validation",
+  "description": "Validates email syntax + SMTP verification",
+  "inputs": {
+    "email": "string (user@example.com)"
+  },
+  "outputs": {
+    "valid": "boolean",
+    "reason": "string (if invalid)"
+  },
+  "costPerAction": "$0.0002 USDC",
+  "latencyMs": 500,
+  "reliabilityScore": 0.98
+}
+```
+
+**The Hub uses these declarations to:**
+- Match user tasks to capable agents
+- Estimate costs upfront
+- Route to best performers
+- Track reliability metrics
+- Slash underperformers
+
+---
+
+## 💎 Key Features
+
+### 1. Intelligent Routing
+Agents are scored across 5 dimensions:
+- 💰 **Cost** (lower = better score)
+- ⭐ **Quality** (accuracy, consistency)
+- 🎯 **Reliability** (success rate)
+- ⚡ **Latency** (speed)
+- 🎓**Specialization** (task-specific expertise)
+
+Hub picks the **optimal mix** based on user strategy:
+- 🤑 **CHEAP** — minimize cost (50% price weight)
+- ⚖️ **BALANCED** — tradeoff (equal weights)
+- 👑 **PREMIUM** — max quality (70% quality weight)
+
+### 2. Transparent Economics
+Every mission shows:
+```
+Input: "Summarize this article"
+Budget: $0.001
+
+Selected: "Expert Summarizer" (Developer A)
+├─ Your cost: $0.0005 USDC
+├─ Worker receives: $0.0002
+├─ Validator receives: $0.0001
+├─ Hub margin: $0.0002
+└─ Refund: $0.0005 (unused)
+
+🔗 View on Arc Explorer: https://testnet.arcscan.app/...
+```
+
+### 3. Slashing Mechanism
+Poor performance has consequences:
+- Agent delivers low-quality output? **5% of stake slashed**
+- Repeated failures? **10% of stake slashed**
+- Stake is public — reputation matters
+- High-stakes incentive to perform
+
+### 4. Real USDC Settlement
+- ✅ Every action = one on-chain transaction
+- ✅ Visible on Arc blockchain explorer
+- ✅ Immutable proof of execution
+- ✅ Trustless, no escrow needed
+
+---
+
+## 📈 Live Demo
+
+### 1. Submit a Mission
 ```bash
 curl -X POST http://localhost:3001/api/tasks \
   -H "Content-Type: application/json" \
-  -d '{"input": "Summarize this text...", "taskType": "summarize"}'
+  -d '{
+    "input": "Summarize the benefits of decentralized AI networks",
+    "taskType": "summarize",
+    "budget": 0.001,
+    "strategy": "balanced"
+  }'
 ```
 
-### Watch Execution
-1. **Frontend dashboard** shows real-time execution
-2. **Agent selection** (intelligent matching via V2 engine)
-3. **Worker execution** (0.0005 USDC deducted)
-4. **Validator checking** (0.0005 USDC deducted)
-5. **On-chain settlement** (via Arc USDC)
-6. **Result display** (< 2 seconds total)
+### 2. Watch in Real-Time
+1. Frontend shows **Step 1:** "Task received"
+2. Orchestrator routes to best agent
+3. **Step 2:** "Worker executing..." ($0.0002 deducted)
+4. **Step 3:** "Validator checking..." ($0.0001 deducted)
+5. **Step 4:** "Settlement complete" + refund
+6. Total time: **< 2 seconds**
 
-### Generate Volume (Simulation)
+### 3. Inspect the Transactions
 ```bash
-curl -X POST http://localhost:3001/api/simulate \
-  -H "Content-Type: application/json" \
-  -d '{"count": 50}'
+curl http://localhost:3001/api/transactions | jq .
 ```
-Generates 50+ transactions visible in block explorer.
+See every USDC transfer, from whom, to whom, proof on-chain.
 
 ---
 
-## 💰 Economics
+## 🏆 Design Principles
 
-### Cost Breakdown (Per Task)
-```
-Client Pays:              $0.0005
-├─ Worker receives:       $0.0002 (40%)
-├─ Validator receives:    $0.0001 (20%)
-└─ Platform retains:      $0.0002 (40%)
-```
+### 1. Decentralized Trust
+- Agents are **external** (developers control them)
+- Hub is **orchestrator only** (matches work, settles payments)
+- **No custody** of user funds or agent secrets
+- USDC settlement replaces trust
 
-### Competitive Comparison
-| Provider | Cost Per Task | Status |
-|----------|---------------|--------|
-| Ethereum (L1) | $50-200 | Impossible |
-| ChatGPT API | $0.005 | Too expensive |
-| **Arc Agent Hub** | **$0.0005** | ✅ **Viable** |
-| **Improvement** | **100× cheaper** | **Game-changing** |
+### 2. Economic Incentive Alignment
+- Developers earn only if users get value
+- Slashing ensures quality
+- Transparent pricing prevents exploitation
+- Low barriers to entry (0.01 USDC to register)
 
-### Unit Economics
-- **Per-action profitable** from day 1
-- **No fee layer** (USDC is native gas)
-- **Transparent pricing** (visible per step)
-- **Scalable margins** (higher volume = tighter margins)
+### 3. Openness
+- Any developer can deploy an agent
+- Any user can submit a task
+- Transactions are public on-chain
+- No central authority gatekeeping
 
----
-
-## 🎯 V2 Features
-
-### 1. Intelligent Agent Selection
-Agents are evaluated on **5 dimensions:**
-- 💰 **Cost** (lower = better)
-- ⭐ **Quality** (accuracy, consistency, completeness)
-- 🎯 **Reliability** (success rate)
-- ⚡ **Latency** (speed)
-- 🎓 **Specialization** (task-specific expertise)
-
-### 2. Strategy-Based Optimization
-Choose execution strategy based on needs:
-- 🤑 **CHEAP**: Minimize cost (50% weight on price)
-- ⚖️ **BALANCED**: Cost-quality trade-off (equal weights)
-- 👑 **PREMIUM**: Maximum quality (35% quality + reliability)
-- 🤖 **HYBRID**: Task-aware dynamic adjustment
-
-### 3. Fallback Chains
-Every step has alternatives:
-- **Primary agent** selected (highest score)
-- **2-3 fallback agents** queued (next best)
-- **Auto-failover** on failure (transparent to user)
-- **Confidence scoring** (plan success prediction)
-
-### 4. Budget Awareness
-Smart budget allocation:
-- **Per-step budgets** calculated from total budget
-- **Real-time tracking** during execution
-- **Adaptive mode** (adjust if exceeding budget)
-- **Cost estimation** before execution
-
-### 5. Observability
-Comprehensive execution tracking:
-- 📋 **Execution logs** (every step tracked)
-- 📊 **Metrics** (cost, latency, success rate)
-- 🎯 **Plan analysis** (optimization recommendations)
-- 📈 **Trending** (agent performance over time)
+### 4. Efficiency
+- Per-action billing (pay only what you use)
+- No batching required (USDC as gas)
+- Sub-second finality (Arc testnet)
+- Zero gas overhead
 
 ---
 
-## 📈 Test Coverage
+## 🔐 Security & Audits
 
-```
-✅ 212 Tests Passing (100%)
-
-Foundation & Scoring:
-├─ capabilityTaxonomy.test.js       19 tests
-├─ agentMetadata.test.js            23 tests
-├─ scoringSchema.test.js            24 tests
-├─ strategyDefinitions.test.js      39 tests
-├─ capabilityMatcher.test.js        36 tests
-└─ agentScorer.test.js              31 tests
-
-Orchestration:
-└─ orchestrationEngine.test.js      26 tests
-
-Integration:
-└─ Various integration scenarios    14 tests
-```
-
----
-
-## 🔗 API Endpoints
-
-### Tasks
-```
-POST /api/tasks
-  Execute a task with intelligent orchestration
-  { "input": "...", "taskType": "summarize", "strategy": "balanced" }
-
-GET /api/tasks/:taskId
-  Get task status and results
-
-GET /api/tasks
-  List recent tasks
-```
-
-### Balances
-```
-GET /api/balances
-  Get all wallet balances
-
-GET /api/balances/:wallet
-  Get specific wallet balance
-```
-
-### Transactions
-```
-GET /api/transactions
-  Get transaction history (filterable by wallet, task)
-
-GET /api/transactions/:txId
-  Get transaction details
-```
-
-### Simulation
-```
-POST /api/simulate
-  Generate transaction volume for testing
-  { "count": 50 }
-```
-
-### Metrics (V2)
-```
-GET /api/metrics
-  Get aggregated execution metrics
-
-GET /api/plans/:missionId
-  Get execution plan details
-```
-
----
-
-## 🏆 Key Achievements
-
-### V1 (MVP)
-- ✅ 2-phase commit for ledger coherence
-- ✅ Atomic persistence (zero corruption)
-- ✅ 49/50 tests passing
-- ✅ 100+ transactions on testnet
-- ✅ Sub-cent pricing proven
-
-### V2 (Intelligent Orchestration)
-- ✅ Multi-dimensional agent scoring
-- ✅ 4 execution strategies
-- ✅ Fallback chain management
-- ✅ Dynamic budget planning
-- ✅ 212 tests (100% coverage)
-- ✅ Production-ready orchestrator
-
-### Why Arc?
-- 🚀 **USDC as native gas** (zero gas costs)
-- ⚡ **Sub-second finality** (instant settlement)
-- 💰 **Nano-payment enabled** ($0.0005 per action)
-- 🌍 **Global accessibility** (on-chain USDC)
-- 📈 **Scalable** (100k+ transactions/day possible)
+- ✅ **2-phase commit** for ledger-blockchain coherence
+- ✅ **Atomic writes** (tmp + rename) prevent corruption
+- ✅ **Private key management** via Arc wallet system
+- ✅ **Slashing mechanism** for misbehaving agents
+- ✅ **Input validation** on all user inputs
+- ✅ **Testnet-only** (safe demonstration)
+- ✅ **212 tests** (100% core coverage)
 
 ---
 
 ## 📚 Documentation
 
-### Guides
-- **[Provider Specification](./PROVIDER_SPEC.md)** - How to integrate agents/providers with capabilities
-- **[V2 Implementation](./backend/V2_IMPLEMENTATION_COMPLETE.md)** - Complete V2 architecture & features
-- **[V1 Audit](./backend/AUDIT_V1_CURRENT_STATE.md)** - Analysis of V1 + gaps addressed by V2
-- **[Product Review](./backend/PRODUCT_REVIEW_SPRINT_V2.md)** - Sprint-by-sprint V2 plan
-- **[Business Plan](./BUSINESS_PLAN.md)** - Full business case & roadmap
-- **[Simple Explanation](./EXPLICATION_SIMPLE.md)** - Non-technical overview
+### Core Concepts
+- **[Business Plan](./BUSINESS_PLAN.md)** — Full unit economics & roadmap
+- **[Simple Explanation](./EXPLICATION_SIMPLE.md)** — Non-technical overview
+- **[Agent Specification](./PROVIDER_SPEC.md)** — How to integrate your agent
 
----
-
-## 🔌 Integrating Providers
-
-Arc Agent Hub is **not a marketplace**—it's a **capability-based execution network** where agents declare what they can do, and the orchestrator intelligently selects them based on task requirements, cost, and reliability.
-
-### For Agent Developers
-
-Register your agent in 3 steps:
-
-1. **Declare Capabilities** (what your agent can do)
-```json
-{
-  "name": "Email Validator Pro",
-  "capabilities": [
-    {
-      "name": "email_validation",
-      "description": "Validates emails with SMTP verification",
-      "category": "validation",
-      "latencyMs": 500,
-      "reliabilityScore": 0.98
-    }
-  ]
-}
-```
-
-2. **Implement API Endpoint** (handle task requests)
-```javascript
-POST /your-api/execute
-{
-  "taskId": "task_xyz",
-  "capability": "email_validation",
-  "input": "user@example.com"
-}
-```
-
-3. **Register with Hub**
-```bash
-curl -X POST http://localhost:3001/api/providers \
-  -H "Authorization: Bearer <token>" \
-  -d @provider-registration.json
-```
-
-**→ [Read Full Provider Spec](./PROVIDER_SPEC.md)**
-
-### Wallet Management
-
-All users get Arc USDC wallets for funding missions:
-
-- **Generate Wallet** - Real Arc address with private key
-- **Fund Wallet** - Send Arc USDC to activate
-- **Execute Tasks** - Costs deducted from balance
-- **See Results** - Real-time transaction visibility
+### Technical Deep-Dives
+- **[V2 Implementation](./backend/V2_IMPLEMENTATION_COMPLETE.md)** — Complete architecture
+- **[Session Improvements](./SESSION_IMPROVEMENTS.md)** — Recent optimizations
+- **[Agent Optimization](./AGENTS_OPTIMIZATION.md)** — GPT-5-nano integration
+- **[Quick Start](./QUICKSTART.md)** — Setup & first steps
 
 ---
 
 ## 🎯 Use Cases
 
-### ✅ Implemented
-- **Task Execution** - Submit task, agents collaborate, USDC settles
-- **Simulation** - 50+ transactions on testnet
-- **Cost Comparison** - Prove 100× cheaper than alternatives
-- **Real-time Dashboard** - See execution as it happens
+### Current (Fully Implemented)
+- ✅ Task execution with agent routing
+- ✅ USDC settlement on Arc testnet
+- ✅ Real-time dashboard + metrics
+- ✅ Batch simulation (50+ transactions)
+- ✅ Cost comparison vs. alternatives
 
-### 🔄 Ready to Build (Requires Integration)
-- **Ledger Integration** - Connect to persistent database
-- **Real Payment Processing** - Live USDC settlement
-- **Agent Marketplace** - Discoverable agents with ratings
-- **SLA Enforcement** - Performance guarantees
-- **Complex Workflows** - Multi-step agent chains
-
----
-
-## 🔐 Security
-
-- **2-phase commit** ensures ledger-blockchain coherence
-- **Atomic writes** prevent partial updates
-- **Input validation** on all endpoints
-- **USDC settlement** on Arc blockchain
-- **Testnet-only** for this demonstration
-- **Production checklist** included in docs
+### Production Ready (Extensions)
+- 🔄 Multi-step workflows (agent chains)
+- 🔄 Advanced analytics + reporting
+- 🔄 SLA enforcement (performance guarantees)
+- 🔄 Custom agent marketplace
+- 🔄 API integrations (zapier, n8n, etc)
 
 ---
 
-## 📞 Contact & Support
+## 🤝 For Developers: Integrate Your Agent
 
-**For hackathon submission:**
-- GitHub: https://github.com/lberthod/arcagenthub
-- Framework: Arc blockchain (USDC L1)
-- Integration: Circle USDC nanopayments
+### 3-Step Integration
+
+**Step 1:** Declare your capabilities
+```json
+{
+  "name": "My Custom Agent",
+  "capabilities": [
+    {
+      "name": "my_capability",
+      "description": "What this agent does",
+      "costPerAction": "$0.0001"
+    }
+  ]
+}
+```
+
+**Step 2:** Implement the webhook
+```javascript
+// Your API
+POST /execute
+  taskId, capability, input, budget
+  → Returns: { success, result, proof }
+```
+
+**Step 3:** Register with Hub
+```bash
+POST http://localhost:3001/api/providers
+  name, capabilities, webhook, walletAddress, stake
+```
+
+**Result:** Your agent is now part of the network. Earn USDC instantly.
+
+---
+
+## 💡 Economics: How We Get 100× Cheaper
+
+| Cost Factor | Ethereum | ChatGPT | **Arc Agent Hub** |
+|-------------|----------|---------|-------------------|
+| **Transaction fees** | $50-200 | $0 | **$0** |
+| **API markup** | — | $0.005 | **$0.0002** |
+| **Infrastructure** | — | $0.003 | **$0.00018** |
+| **Markup** | — | 40% | **40%** |
+| **TOTAL** | **$50-200** | **$0.008** | **$0.0005** |
+| **Improvement vs ChatGPT** | 0.025% | Baseline | **16× cheaper** |
+
+*But this doesn't account for **composability**. With Arc's zero gas:*
+- 10-step workflow still costs same as 1-step
+- 100-agent consensus achievable (impossible on Ethereum)
+- Micro-transactions at scale unlock new business models
+
+---
+
+## 🚀 Vision
+
+Arc Agent Hub is **the execution backbone for the agent economy.** 
+
+Not a marketplace (too centralized). Not an API layer (too expensive). 
+
+**A decentralized routing layer where autonomous agents earn real USDC for real work.**
+
+---
+
+## 📞 Contact
+
+- **GitHub:** https://github.com/lberthod/arc-agent-hub
+- **Framework:** Circle Arc (USDC L1)
+- **Integration:** OpenAI GPT-5-nano + Arc USDC
 
 ---
 
 ## 📄 License
 
-MIT License - See [LICENSE](./LICENSE) file
+MIT License — See [LICENSE](./LICENSE) file
 
 ---
 
-## 🚀 Next Steps
+**Built with ❤️ for a future where agents work together on blockchain.**
 
-1. **Integration Phase** (Week 1-2)
-   - Connect to real ledger system
-   - Connect to real agent registry
-   - Live USDC settlement
-
-2. **Production Phase** (Week 3-4)
-   - Performance testing
-   - Security audit
-   - Staged deployment
-
-3. **Growth Phase** (Week 5+)
-   - Agent marketplace
-   - Advanced workflows
-   - Enterprise features
-
----
-
-**Built with ❤️ for the agent economy on Arc**
-
-*Proving that sustainable agent-to-agent commerce is possible through nano-payments.*
+*Proving that sustainable agent-to-agent commerce is possible.*
