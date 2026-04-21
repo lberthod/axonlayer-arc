@@ -104,9 +104,7 @@
                 @click="runBatch(n)"
                 :disabled="batchRunning"
                 class="flex-1 px-3 py-2 rounded-md text-sm font-semibold transition"
-                :class="batchSize === n && batchRunning
-                  ? 'bg-gray-900 text-white opacity-60'
-                  : 'bg-gray-900 text-white hover:bg-gray-800 disabled:opacity-50'"
+                :class="[batchSize === n && batchRunning ? 'bg-gray-900 text-white opacity-60' : 'bg-gray-900 text-white hover:bg-gray-800 disabled:opacity-50']"
               >
                 {{ batchRunning && batchSize === n ? 'Running…' : `Batch ${n}` }}
               </button>
@@ -277,7 +275,6 @@ async function refreshWallet() {
     toastError(err, 'Failed to refresh wallet');
   }
 }
-});
 
 const networkStats = computed(() => {
   const m = metrics.value?.totals || {};
@@ -387,6 +384,7 @@ async function runBatch(n) {
 
 onMounted(async () => {
   try {
+    await refreshWallet();
     await loadData();
   } catch (err) {
     toastError(err, 'Failed to load Mission Control');
