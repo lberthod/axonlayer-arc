@@ -4,6 +4,7 @@ import paymentAdapter from './core/paymentAdapter.js';
 import agentRegistry from './core/agentRegistry.js';
 import providerStore from './core/providerStore.js';
 import taskEngine from './core/taskEngine.js';
+import treasuryStore from './core/treasuryStore.js';
 import { initializeAuth } from './core/auth.js';
 
 const PORT = process.env.PORT || 3001;
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 3001;
 async function startServer() {
   try {
     await ledger.load();
+    await treasuryStore.load();
     await paymentAdapter.initializeWallets();
     await providerStore.load();
     await taskEngine.load();

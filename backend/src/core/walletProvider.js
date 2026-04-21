@@ -1,4 +1,6 @@
 import ledger from './ledger.js';
+import walletManager from './walletManager.js';
+import treasuryStore from './treasuryStore.js';
 import { config } from '../config.js';
 
 /**
@@ -13,6 +15,40 @@ import { config } from '../config.js';
  *
  * Selection is driven by config.walletProvider.mode.
  */
+
+/**
+ * Helper: resolve a wallet ID or address to an actual Arc address
+ * Handles:
+ *   - Treasury wallet ID -> treasuryStore.getAddress()
+ *   - Wallet IDs from walletManager (wallets.json)
+ *   - Already-valid Arc addresses (0x...)
+ *   - Mission wallet IDs (not on-chain) -> returns as-is for ledger mode
+ */
+function resolveAddress(walletIdOrAddress) {
+  if (!walletIdOrAddress) return null;
+
+  // Check if it's already a valid Arc address
+  try {
+    if (typeof walletIdOrAddress === 'string' && walletIdOrAddress.match(/^0x[0-9a-fA-F]{40}$/)) {
+      return walletIdOrAddress;
+    }
+  } catch (e) {
+    // Not an address, try other resolution methods
+  }
+
+  // Check treasury
+  if (walletIdOrAddress === 'arc_treasury_wallet' || walletIdOrAddress === 'orchestrator_wallet') {
+    const treasuryAddr = treasuryStore.getAddress();
+    if (treasuryAddr) return treasuryAddr;
+  }
+
+  // Check walletManager
+  const managerAddr = walletManager.getAddress(walletIdOrAddress);
+  if (managerAddr) return managerAddr;
+
+  // Return as-is (may be symbolic ID for ledger mode)
+  return walletIdOrAddress;
+}
 
 class SimulatedWalletProvider {
   constructor() {
@@ -60,7 +96,6 @@ class SimulatedWalletProvider {
  * the provider labels the transaction as `onchain-dryrun` and only updates
  * the local ledger — nothing hits the chain.
  */
-import walletManager from './walletManager.js';
 
 class OnChainWalletProvider {
   constructor(options) {
@@ -116,14 +151,16 @@ class OnChainWalletProvider {
     //    If broadcast fails, we do NOT mutate the ledger.
     if (live && !this.dryRun) {
       try {
-        const toAddress = walletManager.getAddress(to) || to;
-        if (!this.ethers.isAddress(toAddress)) {
+        const toAddress = resolveAddress(to);
+        if (!toAddress || !this.ethers.isAddress(toAddress)) {
           throw new Error(`Recipient "${to}" has no on-chain address`);
         }
 
+        // Resolve sender - should be in walletManager
+        const fromAddress = resolveAddress(from);
         const signer = await walletManager.getSigner(from);
         if (!signer) {
-          throw new Error(`Sender "${from}" has no signer configured`);
+          throw new Error(`Sender "${from}" has no signer configured (resolved to: ${fromAddress})`);
         }
 
         let response;

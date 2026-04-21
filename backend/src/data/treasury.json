@@ -1,28 +1,56 @@
 {
   "address": "arc_treasury_wallet",
-  "balance": 99.998,
+  "balance": 0,
   "feeRate": 0.2,
-  "reserved": -0.002,
+  "reserved": 0.0015,
   "history": [
     {
-      "type": "agent_payment",
-      "grossAmount": 0.0012,
-      "fee": 0.00024,
-      "netAmount": 0.00096,
-      "reason": "Payment for worker_fast",
-      "taskId": "task_12fa7ba5-22c1-4ec4-b038-c4ac3bc155a9",
-      "balanceAfter": 99.9988,
-      "timestamp": "2026-04-20T15:21:47.514Z"
+      "type": "fund",
+      "amount": 0.0005,
+      "reason": "Mission funding",
+      "taskId": "task_727b7aee-dcd5-4694-b6fb-bc2fc6c968c3",
+      "balanceAfter": 0.0005,
+      "timestamp": "2026-04-21T08:17:40.183Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.0008,
-      "fee": 0.00016,
-      "netAmount": 0.00064,
-      "reason": "Payment for validator_default",
-      "taskId": "task_12fa7ba5-22c1-4ec4-b038-c4ac3bc155a9",
-      "balanceAfter": 99.998,
-      "timestamp": "2026-04-20T15:21:47.515Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund",
+      "taskId": "task_727b7aee-dcd5-4694-b6fb-bc2fc6c968c3",
+      "balanceAfter": 0,
+      "timestamp": "2026-04-21T08:17:40.189Z"
+    },
+    {
+      "type": "fund",
+      "amount": 0.0005,
+      "reason": "Mission funding",
+      "taskId": "task_2da68b91-f9c8-4901-b398-23f6f67aac72",
+      "balanceAfter": 0.0005,
+      "timestamp": "2026-04-21T08:24:11.684Z"
+    },
+    {
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund",
+      "taskId": "task_2da68b91-f9c8-4901-b398-23f6f67aac72",
+      "balanceAfter": 0,
+      "timestamp": "2026-04-21T08:24:11.685Z"
+    },
+    {
+      "type": "fund",
+      "amount": 0.0005,
+      "reason": "Mission funding",
+      "taskId": "task_ea940058-18b3-4cd5-8f98-6a5ca06a92a6",
+      "balanceAfter": 0.0005,
+      "timestamp": "2026-04-21T08:24:20.164Z"
+    },
+    {
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund",
+      "taskId": "task_ea940058-18b3-4cd5-8f98-6a5ca06a92a6",
+      "balanceAfter": 0,
+      "timestamp": "2026-04-21T08:24:20.164Z"
     }
   ]
 }

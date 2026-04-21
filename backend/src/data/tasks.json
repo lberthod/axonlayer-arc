@@ -29,6 +29,876 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.005
+    },
+    {
+      "id": "task_359e0901-a201-4293-968c-5e99bc66137a",
+      "input": "testte eratesf",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T07:37:23.499Z",
+      "updatedAt": "2026-04-21T07:37:23.500Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000514,
+        "workerPayment": 0.000216,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000154,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 14,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_a2c0543f-fb13-48e7-9248-9966c839cc41",
+      "input": "esarfewrvasdfsdfavsdfds",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T07:38:37.205Z",
+      "updatedAt": "2026-04-21T07:38:37.207Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000523,
+        "workerPayment": 0.00022,
+        "validatorPayment": 0.000146,
+        "orchestratorMargin": 0.000157,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 23,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_e9f314ef-44f3-48dc-837b-16311bfd7fc5",
+      "input": "fdsafsdfafa",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T07:38:50.746Z",
+      "updatedAt": "2026-04-21T07:38:50.748Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000511,
+        "workerPayment": 0.000215,
+        "validatorPayment": 0.000143,
+        "orchestratorMargin": 0.000153,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 11,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_61d0782d-f581-4f52-9000-84db70a6b1f0",
+      "input": "sdfffad",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T07:40:26.893Z",
+      "updatedAt": "2026-04-21T07:40:26.895Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000507,
+        "workerPayment": 0.000213,
+        "validatorPayment": 0.000142,
+        "orchestratorMargin": 0.000152,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 7,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_ab03a4a9-7c70-468a-a98a-3b737c694921",
+      "input": "testtt",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-21T07:42:54.643Z",
+      "updatedAt": "2026-04-21T07:42:58.124Z",
+      "result": "This is a test.",
+      "validation": {
+        "valid": true,
+        "score": 0.8,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": false
+        },
+        "notes": "Validation passed: result meets quality standards"
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000506,
+        "workerPayment": 0.000212,
+        "validatorPayment": 0.000142,
+        "orchestratorMargin": 0.000152,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 6,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_b24b3ec5-d145-4798-a3f1-a629a1b012ca",
+      "input": "testtt",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T07:44:32.338Z",
+      "updatedAt": "2026-04-21T07:44:32.338Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000506,
+        "workerPayment": 0.000212,
+        "validatorPayment": 0.000142,
+        "orchestratorMargin": 0.000152,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 6,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_7f19c74f-b051-4b8e-bd1d-c8e491275ab8",
+      "input": "test vtest",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T07:45:35.018Z",
+      "updatedAt": "2026-04-21T07:45:35.021Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.00051,
+        "workerPayment": 0.000214,
+        "validatorPayment": 0.000143,
+        "orchestratorMargin": 0.000153,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 10,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_52060b77-804f-4ac1-9ae7-c7b2920ab2b3",
+      "input": "tewrtew",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T07:47:05.336Z",
+      "updatedAt": "2026-04-21T07:47:05.340Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000507,
+        "workerPayment": 0.000213,
+        "validatorPayment": 0.000142,
+        "orchestratorMargin": 0.000152,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 7,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_1096cf4c-c629-473f-9b8a-3a0417faa0a0",
+      "input": "sdfasd afef",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T07:47:12.404Z",
+      "updatedAt": "2026-04-21T07:47:12.407Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000511,
+        "workerPayment": 0.000215,
+        "validatorPayment": 0.000143,
+        "orchestratorMargin": 0.000153,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 11,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_946389b5-c37f-4ac3-be6f-796d34564954",
+      "input": "fdsfafad",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T07:47:32.601Z",
+      "updatedAt": "2026-04-21T07:47:32.602Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000508,
+        "workerPayment": 0.000214,
+        "validatorPayment": 0.000142,
+        "orchestratorMargin": 0.000152,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 8,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_51e68774-f3c3-401b-aebb-ab78137c151f",
+      "input": "Mission failed \nMission failed\nMission failed\nMission failed\nMission failed\nMission failed",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T07:52:03.341Z",
+      "updatedAt": "2026-04-21T07:52:03.345Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.00059,
+        "workerPayment": 0.000248,
+        "validatorPayment": 0.000165,
+        "orchestratorMargin": 0.000177,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 90,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_55cd5226-8689-4a76-ab97-1da177504dcc",
+      "input": "est test te st",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-21T08:02:34.989Z",
+      "updatedAt": "2026-04-21T08:02:39.286Z",
+      "result": "It's a fragmented phrase containing the word \"test,\" effectively signaling a test.",
+      "validation": {
+        "valid": true,
+        "score": 0.8,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": false
+        },
+        "notes": "Validation passed: result meets quality standards"
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000514,
+        "workerPayment": 0.000216,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000154,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 14,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_a23b4200-d084-4039-92f8-3cd47b3a9af2",
+      "input": "Il était une fois un homme nommé Léo qui aimait grimper partout. Un matin, il vit une très haute montagne et dit avec confiance : « Aujourd’hui, je la clambdie ! » Personne ne comprit vraiment ce mot, mais tout le monde sentit qu’il voulait dire : grimper avec courage, maladresse et beaucoup d’énergie.\n\nLéo mit son sac sur le dos, prit une gourde, un morceau de pain et commença son ascension. Au début, tout allait bien. Il avançait entre les pierres, les fleurs et les petits arbustes. Mais plus il montait, plus le vent soufflait fort. Ses jambes tremblaient, ses mains glissaient, et il se demanda s’il allait réussir.\n\nAlors, il s’arrêta un instant. Il regarda la vallée en bas, respira profondément et continua, pas après pas. Un oiseau se posa près de lui, comme pour l’encourager. Un rayon de soleil traversa les nuages. Léo sourit.\n\nAprès un long effort, il atteignit enfin le sommet. Là-haut, le monde semblait immense et paisible. Il comprit que « clambdie » voulait peut-être dire cela : avancer même quand c’est difficile.\n\nEt ce jour-là, Léo redescendit fatigué, mais fier, avec une grande histoire à raconter.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:03:45.422Z",
+      "updatedAt": "2026-04-21T08:03:45.423Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.001626,
+        "workerPayment": 0.000683,
+        "validatorPayment": 0.000455,
+        "orchestratorMargin": 0.000488,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 1126,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_68d2d60b-47d8-447d-9d8f-aed527d08a47",
+      "input": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n’était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n’était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu’au sommet, on pouvait voir les champs, les routes, les temples, et jusqu’aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu’il allait enfin la gravir. Il prit un petit sac, une bouteille d’eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d’orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d’une étrange joie.\n\nLa montée commença doucement. D’abord un sentier de terre, puis des pierres, puis des racines d’arbres qui sortaient du sol comme les veines d’un vieux géant. La chaleur montait vite. Le soleil de l’Isan n’était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l’air d’une lumière blanche. Kiet transpirait, soufflait, s’arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s’assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s’ouvrit devant lui.\n\nIl vit l’Isan entier comme une mer de terre et de lumière. Les champs s’étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s’assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l’horizon. À cet instant, il comprit que grimper n’était pas seulement monter une colline. C’était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l’air, et quelque part, une musique d’Isan s’élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n’avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu’au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.\n\nSi tu veux, je peux maintenant t’en écrire une version encore plus littéraire, plus poétique, ou plus drôle.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:05:12.455Z",
+      "updatedAt": "2026-04-21T08:05:12.461Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004928,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.002428,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4428,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_12c83891-5d90-46af-bfe8-03b56519a7c1",
+      "input": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n’était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n’était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu’au sommet, on pouvait voir les champs, les routes, les temples, et jusqu’aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu’il allait enfin la gravir. Il prit un petit sac, une bouteille d’eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d’orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d’une étrange joie.\n\nLa montée commença doucement. D’abord un sentier de terre, puis des pierres, puis des racines d’arbres qui sortaient du sol comme les veines d’un vieux géant. La chaleur montait vite. Le soleil de l’Isan n’était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l’air d’une lumière blanche. Kiet transpirait, soufflait, s’arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s’assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s’ouvrit devant lui.\n\nIl vit l’Isan entier comme une mer de terre et de lumière. Les champs s’étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s’assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l’horizon. À cet instant, il comprit que grimper n’était pas seulement monter une colline. C’était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l’air, et quelque part, une musique d’Isan s’élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n’avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu’au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.\n\nSi tu veux, je peux maintenant t’en écrire une version encore plus littéraire, plus poétique, ou plus drôle.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:07:12.024Z",
+      "updatedAt": "2026-04-21T08:07:12.029Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004928,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.002428,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4428,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_5965c3c7-aa92-49a7-a7f5-4e44d86a9585",
+      "input": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n’était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n’était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu’au sommet, on pouvait voir les champs, les routes, les temples, et jusqu’aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu’il allait enfin la gravir. Il prit un petit sac, une bouteille d’eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d’orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d’une étrange joie.\n\nLa montée commença doucement. D’abord un sentier de terre, puis des pierres, puis des racines d’arbres qui sortaient du sol comme les veines d’un vieux géant. La chaleur montait vite. Le soleil de l’Isan n’était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l’air d’une lumière blanche. Kiet transpirait, soufflait, s’arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s’assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s’ouvrit devant lui.\n\nIl vit l’Isan entier comme une mer de terre et de lumière. Les champs s’étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s’assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l’horizon. À cet instant, il comprit que grimper n’était pas seulement monter une colline. C’était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l’air, et quelque part, une musique d’Isan s’élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n’avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu’au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.\n\nSi tu veux, je peux maintenant t’en écrire une version encore plus littéraire, plus poétique, ou plus drôle.",
+      "taskType": "keywords",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:09:17.669Z",
+      "updatedAt": "2026-04-21T08:09:17.672Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004042,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.001542,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4428,
+          "taskType": "keywords",
+          "multiplier": 0.8,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_991ddfdf-a971-422e-bde0-6ed5b2a027bf",
+      "input": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:09:36.714Z",
+      "updatedAt": "2026-04-21T08:09:41.320Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.001021,
+        "workerPayment": 0.000429,
+        "validatorPayment": 0.000286,
+        "orchestratorMargin": 0.000306,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 521,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_24bd97b4-4c7e-45be-9ebd-ffb79536d25d",
+      "input": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:09:55.321Z",
+      "updatedAt": "2026-04-21T08:09:55.321Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000604,
+        "workerPayment": 0.000254,
+        "validatorPayment": 0.000169,
+        "orchestratorMargin": 0.000181,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 104,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_2ab92fd6-55cc-4c5a-ada7-33988bf2f9b4",
+      "input": "Au cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:10:15.563Z",
+      "updatedAt": "2026-04-21T08:10:15.567Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000915,
+        "workerPayment": 0.000385,
+        "validatorPayment": 0.000256,
+        "orchestratorMargin": 0.000274,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 415,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_c9034954-12fa-4fa4-85ec-b5155a86fbfd",
+      "input": "Au cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.",
+      "taskType": "keywords",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:10:23.054Z",
+      "updatedAt": "2026-04-21T08:10:23.056Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000832,
+        "workerPayment": 0.000349,
+        "validatorPayment": 0.000233,
+        "orchestratorMargin": 0.00025,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 415,
+          "taskType": "keywords",
+          "multiplier": 0.8,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_47267ed3-1df9-4063-8679-e74840dccb88",
+      "input": "Au cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.",
+      "taskType": "keywords",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:10:33.706Z",
+      "updatedAt": "2026-04-21T08:10:33.708Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000832,
+        "workerPayment": 0.000349,
+        "validatorPayment": 0.000233,
+        "orchestratorMargin": 0.00025,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 415,
+          "taskType": "keywords",
+          "multiplier": 0.8,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_c3817b2b-5cc3-4466-b6e1-3c625562c6a3",
+      "input": "Au cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.",
+      "taskType": "keywords",
+      "status": "completed",
+      "createdAt": "2026-04-21T08:10:49.632Z",
+      "updatedAt": "2026-04-21T08:10:52.485Z",
+      "result": "Isan, Thaïlande, rizières, Buriram, Kiet",
+      "validation": {
+        "valid": true,
+        "score": 1,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true
+        },
+        "notes": "Validation passed: result meets quality standards"
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000832,
+        "workerPayment": 0.000349,
+        "validatorPayment": 0.000233,
+        "orchestratorMargin": 0.00025,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 415,
+          "taskType": "keywords",
+          "multiplier": 0.8,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_0c9679f0-c2ee-416b-9d9b-51af6f0ac0fe",
+      "input": "Mission completedMission completedMission completedMission completed",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:16:04.524Z",
+      "updatedAt": "2026-04-21T08:16:04.525Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000568,
+        "workerPayment": 0.000239,
+        "validatorPayment": 0.000159,
+        "orchestratorMargin": 0.00017,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 68,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_f5b2d3bd-b18f-4f25-95cf-4620f216aca7",
+      "input": "Mission completedMission completed",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:16:55.963Z",
+      "updatedAt": "2026-04-21T08:16:55.970Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000534,
+        "workerPayment": 0.000224,
+        "validatorPayment": 0.00015,
+        "orchestratorMargin": 0.00016,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 34,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_f3a297ef-bcc4-42c1-bb44-fc6c1c22e027",
+      "input": "Au cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.",
+      "taskType": "keywords",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:17:20.590Z",
+      "updatedAt": "2026-04-21T08:17:20.593Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000832,
+        "workerPayment": 0.000349,
+        "validatorPayment": 0.000233,
+        "orchestratorMargin": 0.00025,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 415,
+          "taskType": "keywords",
+          "multiplier": 0.8,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_727b7aee-dcd5-4694-b6fb-bc2fc6c968c3",
+      "input": "Au cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.",
+      "taskType": "keywords",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:17:40.182Z",
+      "updatedAt": "2026-04-21T08:17:40.188Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000832,
+        "workerPayment": 0.000349,
+        "validatorPayment": 0.000233,
+        "orchestratorMargin": 0.00025,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 415,
+          "taskType": "keywords",
+          "multiplier": 0.8,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_2da68b91-f9c8-4901-b398-23f6f67aac72",
+      "input": "test test je veux tester",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:24:11.682Z",
+      "updatedAt": "2026-04-21T08:24:11.685Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000524,
+        "workerPayment": 0.00022,
+        "validatorPayment": 0.000147,
+        "orchestratorMargin": 0.000157,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 24,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_ea940058-18b3-4cd5-8f98-6a5ca06a92a6",
+      "input": "test test je veux tester",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T08:24:20.163Z",
+      "updatedAt": "2026-04-21T08:24:20.164Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000524,
+        "workerPayment": 0.00022,
+        "validatorPayment": 0.000147,
+        "orchestratorMargin": 0.000157,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 24,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }

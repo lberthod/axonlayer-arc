@@ -25,7 +25,20 @@
       "Bash(git commit -m ' *)",
       "Bash(git commit *)",
       "Bash(grep -E \"\\\\.\\(js|ts\\)$\")",
-      "Bash(git checkout *)"
+      "Bash(git checkout *)",
+      "Bash(curl -s http://localhost:3001/api/auth/blockchain/status)",
+      "Bash(pkill -f \"node.*server.js\")",
+      "Bash(pkill -f \"vite\")",
+      "Read(//tmp/**)",
+      "Bash(git restore *)",
+      "Bash(curl -s http://localhost:3001/api/agents)",
+      "Bash(curl -v http://localhost:3001/api/health)",
+      "Bash(npm list *)",
+      "Bash(node -c src/agents/workerAgent.js)",
+      "Bash(node -c src/agents/validatorAgent.js)",
+      "Bash(node -c src/agents/translatorAgent.js)",
+      "Bash(node -c src/agents/classifierAgent.js)",
+      "Bash(node -c src/agents/sentimentAgent.js)"
     ]
   }
 }
