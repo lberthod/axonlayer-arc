@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import userStore from '../core/userStore.js';
-import { requireAuth } from '../core/auth.js';
 import ArcWalletService from '../core/arcWalletService.js';
 import arcBlockchain from '../core/arcBlockchainService.js';
 import { config } from '../config.js';
