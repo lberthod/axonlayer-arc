@@ -141,6 +141,23 @@
                 </ol>
               </div>
 
+              <!-- Quick Add Funds -->
+              <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-4 border border-blue-200">
+                <p class="text-sm font-semibold text-gray-900 mb-3">💧 Quick Add Funds (Demo)</p>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                  <button
+                    v-for="amount in [0.01, 0.05, 0.10, 0.25, 0.50, 1.00]"
+                    :key="amount"
+                    @click="quickAddFunds(amount)"
+                    :disabled="simulatingDeposit"
+                    class="px-2 py-2 rounded-lg bg-white border-2 border-blue-200 hover:border-blue-400 text-blue-700 font-semibold transition disabled:opacity-50 text-xs"
+                  >
+                    +${{ amount.toFixed(2) }}
+                  </button>
+                </div>
+                <p class="text-xs text-gray-600">Or use the button below:</p>
+              </div>
+
               <!-- Fund Check -->
               <div class="flex gap-2">
                 <button
@@ -272,6 +289,22 @@ async function simulateDeposit() {
     }
   } catch (err) {
     toastError(err, 'Failed to simulate deposit');
+  } finally {
+    simulatingDeposit.value = false;
+  }
+}
+
+async function quickAddFunds(amount) {
+  simulatingDeposit.value = true;
+  try {
+    const result = await api.simulateDeposit(amount);
+    currentBalance.value = result.balance || 0;
+    if (currentBalance.value > 0) {
+      step.value = 2;
+      toastSuccess(`✨ Demo: Simulated +$${amount.toFixed(2)} deposit! Balance: $${currentBalance.value.toFixed(4)} USDC`);
+    }
+  } catch (err) {
+    toastError(err, 'Failed to add funds');
   } finally {
     simulatingDeposit.value = false;
   }
