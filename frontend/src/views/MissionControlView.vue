@@ -19,6 +19,7 @@
         <div class="lg:col-span-3 space-y-6">
           <MissionForm
             ref="missionFormRef"
+            :available-balance="availableBalance"
             @submit="handleMissionSubmit"
             @budget-change="(v) => liveBudget = v"
           />
@@ -330,14 +331,26 @@ function refreshPanels() {
 }
 
 async function handleMissionSubmit({ input, taskType, selectionStrategy, budget }) {
-  currentBudget.value = Number(budget) || 0;
+  const submittedBudget = Number(budget) || 0;
+  currentBudget.value = submittedBudget;
+
   try {
+    // Check budget doesn't exceed available balance
+    if (submittedBudget > missionWalletBalance.value) {
+      toastError(
+        new Error(`Budget ${submittedBudget.toFixed(5)} USDC exceeds available balance ${missionWalletBalance.value.toFixed(5)} USDC`),
+        'Insufficient wallet balance'
+      );
+      missionFormRef.value?.setLoading(false);
+      return;
+    }
+
     try {
       const quote = await api.quoteTask(input, taskType, selectionStrategy);
       const est = Number(quote?.pricing?.clientPayment || quote?.clientPayment || 0);
-      if (est > 0 && est > currentBudget.value) {
+      if (est > 0 && est > submittedBudget) {
         toastError(
-          new Error(`Estimated cost ${est.toFixed(5)} USDC exceeds your budget ${currentBudget.value.toFixed(5)}.`),
+          new Error(`Estimated cost ${est.toFixed(5)} USDC exceeds your budget ${submittedBudget.toFixed(5)} USDC`),
           'Budget too low'
         );
         missionFormRef.value?.setLoading(false);

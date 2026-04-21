@@ -3,6 +3,7 @@ import orchestrator from '../agents/orchestratorAgent.js';
 import taskEngine from '../core/taskEngine.js';
 import userStore from '../core/userStore.js';
 import pricingEngine from '../core/pricingEngine.js';
+import arcBlockchain from '../core/arcBlockchainService.js';
 import { config } from '../config.js';
 import { createTaskSchema, validateBody } from '../core/validation.js';
 import { badRequest, unauthorized, notFound, tooMany } from '../core/errors.js';
@@ -26,15 +27,25 @@ router.post('/', validateBody(createTaskSchema), async (req, res, next) => {
     const quote = pricingEngine.price({ input, taskType });
 
     if (req.user) {
-      // Check user's mission wallet balance
-      if (!req.user.missionWallet) {
-        throw badRequest('no_mission_wallet', 'user has no mission wallet configured');
+      // Check user's on-chain balance (Arc testnet USDC)
+      // Fetch real balance from Arc blockchain before validating
+      let userBalance = 0;
+      if (req.user.wallet?.address) {
+        try {
+          userBalance = await arcBlockchain.getBalance(req.user.wallet.address);
+        } catch (err) {
+          console.warn('[tasks] Failed to fetch on-chain balance:', err.message);
+          // Fallback to stored balance if blockchain call fails
+          userBalance = req.user.balance || 0;
+        }
+      } else {
+        userBalance = req.user.balance || 0;
       }
-      const missionWalletBalance = req.user.missionWallet.balance || 0;
-      if (missionWalletBalance < quote.clientPayment) {
-        throw badRequest('insufficient_mission_balance', 'mission wallet cannot afford this task', {
+
+      if (userBalance < quote.clientPayment) {
+        throw badRequest('insufficient_balance', 'mission wallet cannot afford this task', {
           required: quote.clientPayment,
-          available: missionWalletBalance
+          available: userBalance
         });
       }
     } else if (config.auth.enabled) {

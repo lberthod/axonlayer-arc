@@ -54,17 +54,21 @@
         <label class="block text-sm font-medium text-gray-700 mb-2">
           Budget (USDC)
           <span class="text-xs text-gray-400 font-normal">— max you're willing to spend on this mission</span>
+          <span v-if="props.availableBalance > 0" class="block text-xs text-violet-600 mt-1">
+            Available: {{ props.availableBalance.toFixed(6) }} USDC
+          </span>
         </label>
         <div class="flex items-center gap-2">
           <input
             v-model.number="budget"
             type="number"
             min="0.0001"
+            :max="props.availableBalance || undefined"
             step="0.0001"
             class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
           />
           <button
-            v-for="b in presets"
+            v-for="b in presets.filter(p => p <= (props.availableBalance || Infinity))"
             :key="b"
             @click="budget = b"
             class="text-xs px-2 py-1 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -100,6 +104,13 @@
 
 <script setup>
 import { ref, watch, computed } from 'vue';
+
+const props = defineProps({
+  availableBalance: {
+    type: Number,
+    default: 0
+  }
+});
 
 const emit = defineEmits(['submit', 'budget-change']);
 
@@ -142,7 +153,8 @@ function handleSubmit() {
   emit('submit', {
     input: goal.value,
     taskType: missionType.value,
-    selectionStrategy: strategyFor[optimize.value]
+    selectionStrategy: strategyFor[optimize.value],
+    budget: budget.value
   });
 }
 
