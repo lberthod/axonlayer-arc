@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import userStore from '../core/userStore.js';
 import { requireAuth } from '../core/auth.js';
+import ArcWalletService from '../core/arcWalletService.js';
 
 const router = Router();
 
@@ -47,20 +48,26 @@ router.post('/role/provider', requireAuth, async (req, res) => {
 // Create Arc USDC wallet for user
 router.post('/wallet/create', requireAuth, async (req, res) => {
   try {
-    // Generate a simulated Arc wallet address
-    const walletAddress = `0xArc${Math.random().toString(16).substr(2, 40).toUpperCase()}`;
-    const wallet = {
-      address: walletAddress,
-      chain: 'arc',
-      token: 'USDC',
-      createdAt: new Date().toISOString()
-    };
+    // Generate a real Arc USDC wallet with private key
+    const wallet = ArcWalletService.generateWallet();
+    wallet.balance = 0;
 
-    // Store wallet for user
+    // Store wallet for user (including private key for security)
     const user = await userStore.setWallet(req.user.uid, wallet);
+
+    // Return wallet details INCLUDING private key (user must secure it)
     res.json({
       success: true,
-      address: wallet.address,
+      wallet: {
+        address: wallet.address,
+        privateKey: wallet.privateKey,
+        mnemonic: wallet.mnemonic,
+        chain: wallet.chain,
+        token: wallet.token,
+        createdAt: wallet.createdAt,
+        // Instructions for user
+        instructions: 'Save your private key and mnemonic in a secure location. You will need to send USDC to this address to fund your account.'
+      },
       user: sanitize(user)
     });
   } catch (error) {
