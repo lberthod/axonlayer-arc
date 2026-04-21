@@ -39,53 +39,16 @@
         </div>
       </div>
 
-      <!-- Add Funds Section -->
-      <div class="bg-gradient-to-br from-violet-50 to-fuchsia-50 rounded-lg p-4 border border-violet-200">
-        <h3 class="text-sm font-bold text-gray-900 mb-3">Add Funds</h3>
-        <div class="space-y-3">
-          <div>
-            <label class="block text-xs font-semibold text-gray-700 mb-2">Amount (USDC)</label>
-            <div class="flex items-center gap-2">
-              <div class="relative flex-1">
-                <span class="absolute left-3 top-2.5 text-gray-500 font-semibold">$</span>
-                <input
-                  v-model.number="addAmount"
-                  type="number"
-                  min="0.0001"
-                  step="0.0001"
-                  placeholder="0.05"
-                  class="w-full pl-7 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition"
-                />
-              </div>
-              <span class="text-gray-500 font-semibold">USDC</span>
-            </div>
-          </div>
-
-          <!-- Quick add buttons -->
-          <div class="flex gap-2 flex-wrap">
-            <button
-              v-for="amount in [0.01, 0.05, 0.10, 0.25, 0.50, 1.00]"
-              :key="amount"
-              @click="addAmount = amount"
-              :class="['px-3 py-1.5 rounded-lg text-xs font-semibold transition', addAmount === amount ? 'bg-violet-600 text-white' : 'bg-white border border-gray-300 text-gray-700 hover:border-violet-300']"
-            >
-              +${{ amount.toFixed(2) }}
-            </button>
-          </div>
-
-          <!-- Add funds button -->
-          <button
-            @click="addFunds"
-            :disabled="!addAmount || addAmount <= 0 || addingFunds"
-            class="w-full px-4 py-3 rounded-lg bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-semibold hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <span v-if="addingFunds" class="flex items-center justify-center gap-2">
-              <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-              Adding funds...
-            </span>
-            <span v-else>Add ${{ addAmount?.toFixed(4) || '0.0000' }} to Wallet</span>
-          </button>
-        </div>
+      <!-- Info Box -->
+      <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+        <p class="text-xs text-blue-900 font-semibold mb-1">💡 Fund Your Wallet</p>
+        <p class="text-xs text-blue-700">
+          Send Arc USDC directly to your wallet address from your Arc testnet wallet.
+          Your balance updates automatically when funds arrive on-chain.
+        </p>
+        <router-link to="/profile" class="text-xs text-blue-600 hover:text-blue-700 font-semibold mt-2 inline-block">
+          → Go to Profile to manage wallet
+        </router-link>
       </div>
 
       <!-- Recent Transactions -->
@@ -130,8 +93,6 @@ import { toastSuccess, toastError } from '../stores/toastStore.js';
 const wallet = ref(null);
 const balance = ref(0);
 const totalUsed = ref(0);
-const addAmount = ref(0.05);
-const addingFunds = ref(false);
 const copied = ref(false);
 const recentTransactions = ref([]);
 
@@ -152,21 +113,6 @@ async function loadWalletData() {
     }
   } catch (err) {
     toastError(err, 'Failed to load wallet data');
-  }
-}
-
-async function addFunds() {
-  addingFunds.value = true;
-  try {
-    const result = await api.fundWallet({ amount: addAmount.value });
-    balance.value = result.balance || (balance.value + addAmount.value);
-    toastSuccess(`Added $${addAmount.value.toFixed(4)} to your wallet!`);
-    addAmount.value = 0.05;
-    await loadWalletData();
-  } catch (err) {
-    toastError(err, 'Failed to add funds');
-  } finally {
-    addingFunds.value = false;
   }
 }
 
