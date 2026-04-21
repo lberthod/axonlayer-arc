@@ -16,13 +16,15 @@ class ArcBlockchainService {
 
   initializeProvider() {
     try {
+      console.log(`[Arc Blockchain] Initializing provider with RPC: ${this.rpcUrl}`);
       this.provider = new ethers.JsonRpcProvider(this.rpcUrl);
 
       // USDC ABI (minimal for balanceOf)
       const usdcAbi = [
         'function balanceOf(address account) public view returns (uint256)',
         'function decimals() public view returns (uint8)',
-        'function symbol() public view returns (string)'
+        'function symbol() public view returns (string)',
+        'function name() public view returns (string)'
       ];
 
       this.usdcContract = new ethers.Contract(
@@ -30,8 +32,10 @@ class ArcBlockchainService {
         usdcAbi,
         this.provider
       );
+      console.log(`[Arc Blockchain] Provider initialized successfully`);
+      console.log(`[Arc Blockchain] USDC Contract: ${this.usdcContractAddress}`);
     } catch (error) {
-      console.error('Failed to initialize Arc blockchain provider:', error);
+      console.error('[Arc Blockchain] Failed to initialize provider:', error);
       this.provider = null;
       this.usdcContract = null;
     }
@@ -55,25 +59,50 @@ class ArcBlockchainService {
    */
   async getBalance(walletAddress) {
     try {
+      console.log(`[Arc Blockchain] Querying balance for address: ${walletAddress}`);
+
       if (!this.isValidArcAddress(walletAddress)) {
+        console.error(`[Arc Blockchain] Invalid address format: ${walletAddress}`);
         throw new Error(`Invalid Arc address: ${walletAddress}`);
       }
 
+      if (!this.provider) {
+        console.warn('[Arc Blockchain] Provider not initialized, returning 0');
+        return 0;
+      }
+
       if (!this.usdcContract) {
-        console.warn('USDC contract not initialized, returning 0');
+        console.warn('[Arc Blockchain] USDC contract not initialized, attempting reconnect...');
+        this.initializeProvider();
+        if (!this.usdcContract) {
+          console.warn('[Arc Blockchain] Still no contract after reconnect, returning 0');
+          return 0;
+        }
+      }
+
+      // Test RPC connection first
+      try {
+        const blockNumber = await this.provider.getBlockNumber();
+        console.log(`[Arc Blockchain] Connected to chain, current block: ${blockNumber}`);
+      } catch (rpcError) {
+        console.error('[Arc Blockchain] RPC connection failed:', rpcError.message);
         return 0;
       }
 
       // Query balance from contract
+      console.log(`[Arc Blockchain] Querying USDC contract at ${this.usdcContractAddress}`);
       const balance = await this.usdcContract.balanceOf(walletAddress);
+      console.log(`[Arc Blockchain] Raw balance response: ${balance.toString()}`);
 
       // USDC has 6 decimals, convert to decimal
       const decimals = 6;
       const balanceInUsdc = Number(ethers.formatUnits(balance, decimals));
 
+      console.log(`[Arc Blockchain] Converted balance: ${balanceInUsdc} USDC`);
       return balanceInUsdc;
     } catch (error) {
-      console.error(`Failed to get balance for ${walletAddress}:`, error);
+      console.error(`[Arc Blockchain] Error querying balance for ${walletAddress}:`, error.message);
+      console.error('[Arc Blockchain] Full error:', error);
       return 0;
     }
   }

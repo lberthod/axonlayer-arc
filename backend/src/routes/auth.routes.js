@@ -91,15 +91,48 @@ router.post('/wallet/create', requireAuth, async (req, res) => {
   }
 });
 
-// Get blockchain status
+// Get blockchain status (debug info)
 router.get('/blockchain/status', async (req, res) => {
   try {
     const status = await arcBlockchain.getNetworkStatus();
     res.json({
       rpc: arcBlockchain.rpcUrl,
       usdcContract: arcBlockchain.usdcContractAddress,
+      providerInitialized: !!arcBlockchain.provider,
+      contractInitialized: !!arcBlockchain.usdcContract,
       ...status
     });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get blockchain debug info
+router.get('/blockchain/debug', async (req, res) => {
+  try {
+    const info = {
+      rpc: arcBlockchain.rpcUrl,
+      usdcContract: arcBlockchain.usdcContractAddress,
+      providerInitialized: !!arcBlockchain.provider,
+      contractInitialized: !!arcBlockchain.usdcContract,
+      timestamp: new Date().toISOString()
+    };
+
+    if (arcBlockchain.provider) {
+      try {
+        const network = await arcBlockchain.provider.getNetwork();
+        info.network = {
+          name: network.name,
+          chainId: network.chainId
+        };
+        const block = await arcBlockchain.provider.getBlockNumber();
+        info.latestBlock = block;
+      } catch (e) {
+        info.networkError = e.message;
+      }
+    }
+
+    res.json(info);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
