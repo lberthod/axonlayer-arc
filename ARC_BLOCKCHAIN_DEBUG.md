@@ -17,7 +17,7 @@ Look for these log lines:
 ```
 [Arc Blockchain] Initializing provider with RPC: https://testnet-rpc.arc.io
 [Arc Blockchain] Provider initialized successfully
-[Arc Blockchain] USDC Contract: 0x833589fcd6edb6e08f4c7c32d4f71b1566469c3d
+[Arc Blockchain] USDC Contract: 0x3600000000000000000000000000000000000000
 ```
 
 If you see errors, it means the RPC endpoint or contract address is wrong.
@@ -40,7 +40,7 @@ You should see:
   },
   "blockNumber": 12345678,
   "rpc": "https://testnet-rpc.arc.io",
-  "usdcContract": "0x833589fcd6edb6e08f4c7c32d4f71b1566469c3d",
+  "usdcContract": "0x3600000000000000000000000000000000000000",
   "providerInitialized": true,
   "contractInitialized": true
 }
@@ -69,7 +69,7 @@ Verify your `.env` file has:
 ```bash
 # In backend/.env
 ARC_TESTNET_RPC=https://testnet-rpc.arc.io
-ARC_USDC_CONTRACT=0x833589fcd6edb6e08f4c7c32d4f71b1566469c3d
+ARC_USDC_CONTRACT=0x3600000000000000000000000000000000000000
 ```
 
 If missing, add them and restart the backend:
@@ -163,7 +163,7 @@ If you see transactions but balance shows 0:
 - https://testnet-rpc.arc.io (primary)
 - https://rpc.testnet.arc.network (alternative)
 
-**USDC Contract Address**: 0x833589fcd6edb6e08f4c7c32d4f71b1566469c3d  
+**USDC Contract Address**: 0x3600000000000000000000000000000000000000  
 **Network Explorer**: https://testnet-explorer.arc.io  
 **Faucet**: https://testnet-faucet.arc.io
 
@@ -182,7 +182,7 @@ When checking balance, backend logs should show:
 ```
 [Arc Blockchain] Querying balance for address: 0x...
 [Arc Blockchain] Connected to chain, current block: 12345678
-[Arc Blockchain] Querying USDC contract at 0x833589fcd6edb6e08f4c7c32d4f71b1566469c3d
+[Arc Blockchain] Querying USDC contract at 0x3600000000000000000000000000000000000000
 [Arc Blockchain] Raw balance response: 1500000000
 [Arc Blockchain] Converted balance: 1.5 USDC
 ```

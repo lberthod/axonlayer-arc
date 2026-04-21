@@ -8,7 +8,8 @@ class ArcBlockchainService {
   constructor() {
     // Arc testnet RPC endpoint
     this.rpcUrl = process.env.ARC_TESTNET_RPC || 'https://testnet-rpc.arc.io';
-    this.usdcContractAddress = process.env.ARC_USDC_CONTRACT || '0x833589fcd6edb6e08f4c7c32d4f71b1566469c3d';
+    // Arc testnet USDC contract address
+    this.usdcContractAddress = process.env.ARC_USDC_CONTRACT || '0x3600000000000000000000000000000000000000';
     this.provider = null;
     this.usdcContract = null;
     this.initializeProvider();
