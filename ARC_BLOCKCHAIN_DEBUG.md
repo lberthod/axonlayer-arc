@@ -15,7 +15,7 @@ npm run dev
 
 Look for these log lines:
 ```
-[Arc Blockchain] Initializing provider with RPC: https://testnet-rpc.arc.io
+[Arc Blockchain] Initializing provider with RPC: https://rpc.testnet.arc.network
 [Arc Blockchain] Provider initialized successfully
 [Arc Blockchain] USDC Contract: 0x3600000000000000000000000000000000000000
 ```
@@ -39,7 +39,7 @@ You should see:
     "chainId": 6699
   },
   "blockNumber": 12345678,
-  "rpc": "https://testnet-rpc.arc.io",
+  "rpc": "https://rpc.testnet.arc.network",
   "usdcContract": "0x3600000000000000000000000000000000000000",
   "providerInitialized": true,
   "contractInitialized": true
@@ -68,7 +68,7 @@ Verify your `.env` file has:
 
 ```bash
 # In backend/.env
-ARC_TESTNET_RPC=https://testnet-rpc.arc.io
+ARC_TESTNET_RPC=https://rpc.testnet.arc.network
 ARC_USDC_CONTRACT=0x3600000000000000000000000000000000000000
 ```
 
@@ -130,7 +130,7 @@ If you see transactions but balance shows 0:
 **Cause**: RPC endpoint unreachable
 **Fix**: 
 - Check `ARC_TESTNET_RPC` in `.env`
-- Verify endpoint is accessible: `curl https://testnet-rpc.arc.io`
+- Verify endpoint is accessible: `curl https://rpc.testnet.arc.network`
 - Try alternative RPC: `https://rpc.testnet.arc.network`
 
 ### Issue 2: "USDC contract not initialized"
@@ -160,7 +160,7 @@ If you see transactions but balance shows 0:
 **Network Name**: Arc Testnet  
 **Chain ID**: 6699  
 **RPC Endpoints**:
-- https://testnet-rpc.arc.io (primary)
+- https://rpc.testnet.arc.network (primary)
 - https://rpc.testnet.arc.network (alternative)
 
 **USDC Contract Address**: 0x3600000000000000000000000000000000000000  

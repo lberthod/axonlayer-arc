@@ -7,7 +7,7 @@ import { ethers } from 'ethers';
 class ArcBlockchainService {
   constructor() {
     // Arc testnet RPC endpoint
-    this.rpcUrl = process.env.ARC_TESTNET_RPC || 'https://testnet-rpc.arc.io';
+    this.rpcUrl = process.env.ARC_TESTNET_RPC || 'https://rpc.testnet.arc.network';
     // Arc testnet USDC contract address
     this.usdcContractAddress = process.env.ARC_USDC_CONTRACT || '0x3600000000000000000000000000000000000000';
     this.provider = null;
