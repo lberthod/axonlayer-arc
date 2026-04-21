@@ -2,7 +2,16 @@ Node files
 .env
 .env.local
 *.log
+*.zip
 dist/
 build/
 .DS_Store
 node_modules/
+
+# Credentials & Secrets
+firebase-service-account.json
+*-service-account.json
+*.pem
+*.key
+.aws/
+credentials.json
