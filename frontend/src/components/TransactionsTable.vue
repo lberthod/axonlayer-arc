@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-white rounded-lg shadow-md p-6">
-    <h2 class="text-xl font-bold mb-4 text-gray-800">Execution Transactions</h2>
+  <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+    <h2 class="text-xl font-bold mb-4 text-gray-900">Execution Transactions</h2>
 
     <div v-if="reversedTransactions.length > 0" class="overflow-x-auto">
       <table class="w-full">
         <thead>
-          <tr class="border-b border-gray-200">
+          <tr class="border-b border-gray-200 bg-gray-50/50">
             <th class="text-left py-2 px-3 text-sm font-medium text-gray-600">Type</th>
             <th class="text-left py-2 px-3 text-sm font-medium text-gray-600">From</th>
             <th class="text-left py-2 px-3 text-sm font-medium text-gray-600">To</th>
@@ -20,7 +20,7 @@
           <tr
             v-for="tx in reversedTransactions"
             :key="tx.id"
-            class="border-b border-gray-100 hover:bg-gray-50"
+            class="border-b border-gray-100 hover:bg-violet-50/30 transition-colors duration-200"
           >
             <td class="py-2 px-3 text-sm">
               <span

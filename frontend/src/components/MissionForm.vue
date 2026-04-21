@@ -75,9 +75,14 @@
       <button
         @click="handleSubmit"
         :disabled="isLoading || !goal.trim() || !(budget > 0)"
-        class="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-2.5 px-4 rounded-lg font-semibold shadow hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
+        class="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-3 px-4 rounded-lg font-semibold shadow-md hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 active:scale-95 relative overflow-hidden group"
       >
-        {{ isLoading ? 'Orchestrating mission…' : 'Launch mission' }}
+        <span v-if="!isLoading" class="relative z-10">Launch mission</span>
+        <span v-else class="relative z-10 flex items-center justify-center gap-2">
+          <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+          Orchestrating mission…
+        </span>
+        <div v-if="!isLoading" class="absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-0"></div>
       </button>
     </div>
   </div>

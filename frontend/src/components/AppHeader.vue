@@ -1,6 +1,6 @@
 <template>
-  <header class="bg-white border-b border-gray-200">
-    <div class="container mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
+  <header class="bg-white/80 backdrop-blur border-b border-gray-200/50 sticky top-0 z-40">
+    <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
       <div class="flex items-center gap-6">
         <router-link to="/" class="text-lg font-extrabold text-gray-900 flex items-center gap-2">
           <img src="/logo.svg" alt="ArcAgent Hub" class="w-7 h-7" />
@@ -8,36 +8,36 @@
         </router-link>
 
         <!-- Desktop nav -->
-        <nav class="hidden md:flex gap-4 text-sm">
+        <nav class="hidden md:flex gap-1 text-sm">
           <router-link
             to="/mission"
-            class="text-gray-600 hover:text-gray-900"
-            active-class="text-violet-600 font-semibold"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition duration-200 hover:bg-gray-100"
+            active-class="text-violet-600 font-semibold bg-violet-50"
           >Mission Control</router-link>
           <router-link
             to="/user"
-            class="text-gray-600 hover:text-gray-900"
-            active-class="text-violet-600 font-semibold"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition duration-200 hover:bg-gray-100"
+            active-class="text-violet-600 font-semibold bg-violet-50"
           >My missions</router-link>
           <router-link
             v-if="auth.role === 'provider' || auth.role === 'admin'"
             to="/operator"
-            class="text-gray-600 hover:text-gray-900"
-            active-class="text-violet-600 font-semibold"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition duration-200 hover:bg-gray-100"
+            active-class="text-violet-600 font-semibold bg-violet-50"
           >Operator Console</router-link>
           <router-link
             v-if="auth.role === 'admin'"
             to="/admin"
-            class="text-gray-600 hover:text-gray-900"
-            active-class="text-violet-600 font-semibold"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition duration-200 hover:bg-gray-100"
+            active-class="text-violet-600 font-semibold bg-violet-50"
           >Network Admin</router-link>
-          <span class="text-gray-300">|</span>
-  
+          <span class="text-gray-200 mx-1">|</span>
+
           <router-link
             to="/about"
-            class="text-gray-500 hover:text-gray-700"
+            class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md transition duration-200 hover:bg-gray-100"
           >About</router-link>
-   
+
         </nav>
       </div>
 
@@ -49,7 +49,7 @@
         <span class="hidden md:block text-gray-700">{{ auth.firebaseUser?.email || '...' }}</span>
         <button
           @click="handleLogout"
-          class="hidden md:block text-gray-500 hover:text-red-600"
+          class="hidden md:block text-gray-500 hover:text-red-600 px-3 py-2 rounded-md transition duration-200 hover:bg-red-50"
         >Logout</button>
         <button
           @click="mobileMenuOpen = !mobileMenuOpen"

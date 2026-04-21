@@ -55,9 +55,9 @@
       </div>
     </div>
 
-    <div v-else class="text-gray-500 text-center py-10">
-      <div class="text-4xl mb-2">🎯</div>
-      <p class="text-sm">No mission yet. Define a goal and a budget to launch one.</p>
+    <div v-else class="text-gray-500 text-center py-12">
+      <div class="text-6xl mb-3 animate-bounce">🎯</div>
+      <p class="text-sm text-gray-600">No mission yet. Define a goal and a budget to launch one.</p>
     </div>
   </div>
 </template>

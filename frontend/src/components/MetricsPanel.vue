@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-white rounded-lg shadow-md p-6">
+  <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
     <div class="flex items-center justify-between mb-4">
-      <h2 class="text-xl font-bold text-gray-800">Network metrics</h2>
+      <h2 class="text-xl font-bold text-gray-900">Network metrics</h2>
       <div class="flex items-center gap-2">
         <select
           v-model="windowMs"
-          class="px-2 py-1 text-sm border border-gray-300 rounded-md"
+          class="px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition"
         >
           <option :value="0">All time</option>
           <option :value="60000">Last 1 min</option>
@@ -15,50 +15,46 @@
         <button
           @click="refresh"
           :disabled="loading"
-          class="text-sm px-3 py-1 rounded-md bg-blue-600 text-white disabled:bg-gray-400"
+          class="text-sm px-3 py-1.5 rounded-lg bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-md"
         >
-          {{ loading ? '...' : 'Refresh' }}
+          {{ loading ? 'Loading…' : 'Refresh' }}
         </button>
       </div>
     </div>
 
     <div v-if="metrics" class="space-y-4">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-500 uppercase mb-1">Missions</p>
-          <p class="text-lg font-bold text-gray-800">{{ metrics.totals.totalTasks }}</p>
+        <div class="rounded-lg p-4 border bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200 transition-all duration-300 hover:shadow-md">
+          <p class="text-[10px] font-semibold uppercase mb-1 opacity-70 tracking-wider">Missions</p>
+          <p class="text-lg font-bold">{{ metrics.totals.totalTasks }}</p>
         </div>
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-500 uppercase mb-1">Completed</p>
-          <p class="text-lg font-bold text-green-700">{{ metrics.totals.completedTasks }}</p>
+        <div class="rounded-lg p-4 border bg-gradient-to-br from-emerald-50 to-emerald-100 border-emerald-200 transition-all duration-300 hover:shadow-md">
+          <p class="text-[10px] font-semibold uppercase mb-1 opacity-70 tracking-wider">Completed</p>
+          <p class="text-lg font-bold text-emerald-800">{{ metrics.totals.completedTasks }}</p>
         </div>
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-500 uppercase mb-1">Failed</p>
-          <p class="text-lg font-bold text-red-600">{{ metrics.totals.failedTasks }}</p>
+        <div class="rounded-lg p-4 border bg-gradient-to-br from-red-50 to-red-100 border-red-200 transition-all duration-300 hover:shadow-md">
+          <p class="text-[10px] font-semibold uppercase mb-1 opacity-70 tracking-wider">Failed</p>
+          <p class="text-lg font-bold text-red-800">{{ metrics.totals.failedTasks }}</p>
         </div>
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-500 uppercase mb-1">Success Rate</p>
-          <p class="text-lg font-bold text-gray-800">{{ successRate }}</p>
+        <div class="rounded-lg p-4 border bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 transition-all duration-300 hover:shadow-md">
+          <p class="text-[10px] font-semibold uppercase mb-1 opacity-70 tracking-wider">Success Rate</p>
+          <p class="text-lg font-bold text-blue-800">{{ successRate }}</p>
         </div>
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-500 uppercase mb-1">Gross Volume</p>
-          <p class="text-lg font-bold text-gray-800">{{ formatAmount(metrics.totals.grossVolume) }} USDC</p>
+        <div class="rounded-lg p-4 border bg-gradient-to-br from-violet-50 to-violet-100 border-violet-200 transition-all duration-300 hover:shadow-md">
+          <p class="text-[10px] font-semibold uppercase mb-1 opacity-70 tracking-wider">Gross Volume</p>
+          <p class="text-lg font-bold text-violet-800">{{ formatAmount(metrics.totals.grossVolume) }} <span class="text-xs text-violet-600">USDC</span></p>
         </div>
-        <div class="bg-emerald-50 rounded-lg p-3">
-          <p class="text-xs text-emerald-600 uppercase mb-1">Platform Fees</p>
-          <p class="text-lg font-bold text-emerald-800">{{ formatAmount(metrics.totals.platformFees || 0) }} USDC</p>
+        <div class="rounded-lg p-4 border bg-gradient-to-br from-emerald-50 to-teal-100 border-emerald-200 transition-all duration-300 hover:shadow-md">
+          <p class="text-[10px] font-semibold uppercase mb-1 opacity-70 tracking-wider">Platform Fees</p>
+          <p class="text-lg font-bold text-emerald-800">{{ formatAmount(metrics.totals.platformFees || 0) }} <span class="text-xs text-emerald-600">USDC</span></p>
         </div>
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-500 uppercase mb-1">Transactions</p>
-          <p class="text-lg font-bold text-gray-800">{{ metrics.totals.transactions }}</p>
+        <div class="rounded-lg p-4 border bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200 transition-all duration-300 hover:shadow-md">
+          <p class="text-[10px] font-semibold uppercase mb-1 opacity-70 tracking-wider">Transactions</p>
+          <p class="text-lg font-bold">{{ metrics.totals.transactions }}</p>
         </div>
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-500 uppercase mb-1">Avg Duration</p>
-          <p class="text-lg font-bold text-gray-800">{{ metrics.totals.avgDurationMs }} ms</p>
-        </div>
-        <div class="bg-gray-50 rounded-lg p-3">
-          <p class="text-xs text-gray-500 uppercase mb-1">Settlement</p>
-          <p class="text-lg font-bold text-gray-800">{{ metrics.settlement.mode }}</p>
+        <div class="rounded-lg p-4 border bg-gradient-to-br from-amber-50 to-amber-100 border-amber-200 transition-all duration-300 hover:shadow-md">
+          <p class="text-[10px] font-semibold uppercase mb-1 opacity-70 tracking-wider">Avg Duration</p>
+          <p class="text-lg font-bold text-amber-800">{{ metrics.totals.avgDurationMs }} <span class="text-xs text-amber-600">ms</span></p>
         </div>
       </div>
 

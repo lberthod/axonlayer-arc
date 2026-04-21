@@ -7,11 +7,11 @@
       </router-link>
 
       <!-- Desktop nav -->
-      <nav class="hidden md:flex items-center gap-6 text-sm">
-        <router-link to="/" exact-active-class="text-violet-600 font-semibold" class="text-gray-600 hover:text-gray-900">Home</router-link>
-        <router-link to="/about" active-class="text-violet-600 font-semibold" class="text-gray-600 hover:text-gray-900">About</router-link>
-        <a href="#how" class="text-gray-600 hover:text-gray-900">How it works</a>
-        <a href="#economics" class="text-gray-600 hover:text-gray-900">Economics</a>
+      <nav class="hidden md:flex items-center gap-1 text-sm">
+        <router-link to="/" exact-active-class="text-violet-600 font-semibold bg-violet-50" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition duration-200 hover:bg-gray-100">Home</router-link>
+        <router-link to="/about" active-class="text-violet-600 font-semibold bg-violet-50" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition duration-200 hover:bg-gray-100">About</router-link>
+        <a href="#how" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition duration-200 hover:bg-gray-100">How it works</a>
+        <a href="#economics" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition duration-200 hover:bg-gray-100">Economics</a>
       </nav>
 
       <div class="flex items-center gap-3">
@@ -22,7 +22,7 @@
         >Sign in</router-link>
         <router-link
           :to="auth.firebaseUser ? '/mission' : '/login'"
-          class="text-sm font-semibold px-4 py-2 rounded-lg bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow hover:shadow-lg transition"
+          class="text-sm font-semibold px-4 py-2 rounded-lg bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow hover:shadow-xl transition-all duration-200 transform hover:scale-105 active:scale-95"
         >
           {{ auth.firebaseUser ? 'Open Mission Control' : 'Launch a mission' }}
         </router-link>
