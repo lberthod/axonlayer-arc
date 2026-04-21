@@ -45,6 +45,13 @@ Current agent networks face massive economic barriers:
 - **Balance simulation for demos** (test full flow without blockchain)
 - **Security-first design** (private key warnings, mnemonic recovery)
 
+### ✅ V4: On-Chain Arc Testnet Integration (LATEST)
+- **Live Arc Testnet settlement** (real USDC transfers)
+- **Dev auth bypass** (no Firebase required for development)
+- **Real user data** (loaded from persistent user store)
+- **Auto-detected balances** (on-chain balance queries via RPC)
+- **Testnet faucet support** (https://faucet.circle.com for USDC)
+
 ---
 
 ## 🏗️ Architecture
@@ -95,16 +102,40 @@ Current agent networks face massive economic barriers:
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+
+- Node.js 22+
 - npm or yarn
 
 ### Backend Setup
+
+#### Option 1: On-Chain Mode (Arc Testnet) ⭐ **NEW**
+```bash
+cd backend
+npm install
+
+# Create .env file for on-chain Arc Testnet
+cat > .env << 'EOF'
+WALLET_PROVIDER=onchain
+ONCHAIN_NETWORK=arc-testnet
+ONCHAIN_RPC_URL=https://rpc.testnet.arc.network
+ONCHAIN_CHAIN_ID=5042002
+ONCHAIN_USDC_ADDRESS=0x3600000000000000000000000000000000000000
+ONCHAIN_DRY_RUN=false
+PRICING_PROFILE=nano
+AUTH_ENABLED=false
+CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+EOF
+
+npm start
+```
+✅ Runs on `http://localhost:3001` with **real Arc USDC settlement**
+
+#### Option 2: Simulated Mode (Default)
 ```bash
 cd backend
 npm install
 npm run dev
 ```
-Runs on `http://localhost:3001`
+Runs on `http://localhost:3001` (in-memory ledger, no blockchain)
 
 ### Frontend Setup
 ```bash
@@ -120,6 +151,13 @@ cd backend
 npm test
 ```
 Expected: **212/212 tests passing** ✅
+
+### Development User (Dev Mode)
+When `AUTH_ENABLED=false`, the system returns a dev user:
+- **Email**: lberthod@gmail.com
+- **Role**: admin  
+- **Wallet**: Auto-generated Arc USDC address
+- **Balance**: Loaded from `users.json` (20 USDC testnet)
 
 ---
 
