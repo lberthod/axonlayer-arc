@@ -4,7 +4,6 @@ import { fileURLToPath } from 'url';
 import { v4 as uuidv4 } from 'uuid';
 import { config } from '../config.js';
 import userStore from './userStore.js';
-import walletProvider from './walletProvider.js';
 import treasuryStore from './treasuryStore.js';
 
 const __filename = fileURLToPath(import.meta.url);

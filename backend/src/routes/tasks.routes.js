@@ -3,7 +3,6 @@ import orchestrator from '../agents/orchestratorAgent.js';
 import taskEngine from '../core/taskEngine.js';
 import userStore from '../core/userStore.js';
 import pricingEngine from '../core/pricingEngine.js';
-import arcBlockchain from '../core/arcBlockchainService.js';
 import { config } from '../config.js';
 import { createTaskSchema, validateBody } from '../core/validation.js';
 import { badRequest, unauthorized, notFound, tooMany } from '../core/errors.js';
