@@ -72,7 +72,23 @@
       "Bash(curl -s -X POST http://localhost:3001/api/tasks -H 'Content-Type: application/json' -d '{\"input\":\"Apple released new AI chips\",\"taskType\":\"classify\"}')",
       "Bash(gh repo *)",
       "Bash(curl -s -X POST https://api.openai.com/v1/responses -H 'Content-Type: application/json' -H 'Authorization: Bearer sk-proj-YOUR-KEY-HERE' -d '{ *)",
-      "Bash(pkill -f \"node --env-file\")"
+      "Bash(pkill -f \"node --env-file\")",
+      "Bash(git fetch *)",
+      "Bash(grep -E \"\\\\.\\(js|vue\\)$\")",
+      "Bash(grep -E \"\\\\.\\(vue|js\\)$\")",
+      "Bash(npm cache *)",
+      "Bash(sudo chown *)",
+      "Bash(npm config *)",
+      "Bash(npm --prefix backend run contract:compile)",
+      "Bash(kill 89273)",
+      "Bash(node scripts/deployTaskManager.js)",
+      "Bash(node --env-file-if-exists=.env scripts/deployTaskManager.js)",
+      "Bash(lsof -ti:3001)",
+      "Bash(curl -s http://localhost:3001/api/tasks/stats/count)",
+      "Bash(kill 6512)",
+      "Bash(timeout 10 node --env-file-if-exists=.env src/server.js)",
+      "Bash(curl -v http://localhost:3001/api/tasks/stats/count)",
+      "Bash(node --env-file-if-exists=.env src/server.js)"
     ]
   }
 }

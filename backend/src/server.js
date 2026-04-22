@@ -1,4 +1,5 @@
 import app from './app.js';
+import contractManager from './core/contractManager.js';
 import ledger from './core/ledger.js';
 import paymentAdapter from './core/paymentAdapter.js';
 import agentRegistry from './core/agentRegistry.js';
@@ -11,6 +12,15 @@ const PORT = process.env.PORT || 3001;
 
 async function startServer() {
   try {
+    // Initialize smart contract manager (Arc Testnet)
+    try {
+      await contractManager.initialize();
+      console.log('[Server] ✅ Smart contract initialized for on-chain task execution');
+    } catch (error) {
+      console.warn(`[Server] ⚠️  Smart contract not available: ${error.message}`);
+      console.warn('[Server]    Set TASK_MANAGER_ADDRESS and ORCHESTRATOR_PRIVATE_KEY to enable on-chain mode');
+    }
+
     await ledger.load();
     await treasuryStore.load();
     await paymentAdapter.initializeWallets();
@@ -42,6 +52,13 @@ async function startServer() {
       console.log(`  POST /api/agents/quote    - Quote a task (price + selected agents)`);
       console.log(`  GET  /api/health          - Health check`);
       console.log(`  GET  /api/config          - Get configuration`);
+
+      if (contractManager.isInitialized()) {
+        console.log(`\n[On-Chain Mode] Arc Testnet Smart Contract`);
+        console.log(`  Contract: ${contractManager.getContractAddress()}`);
+        console.log(`  Orchestrator: ${contractManager.getOrchestratorAddress()}`);
+        console.log(`  Explorer: https://explorer.testnet.arc.network`);
+      }
     });
   } catch (error) {
     console.error('Failed to start server:', error);
