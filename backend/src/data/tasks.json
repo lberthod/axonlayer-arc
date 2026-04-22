@@ -1775,6 +1775,102 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_33478227-39dc-443b-9520-ded855ac6829",
+      "input": "test test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-22T04:29:21.703Z",
+      "updatedAt": "2026-04-22T04:29:30.670Z",
+      "result": "test test",
+      "validation": {
+        "valid": false,
+        "score": 0.4,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": false,
+          "hasContent": false,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": false
+        },
+        "notes": "Validation failed: result length is invalid, result lacks sufficient content, result length delta is unreasonable, result has excessive word repetition",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000509,
+        "workerPayment": 0.000214,
+        "validatorPayment": 0.000142,
+        "orchestratorMargin": 0.000153,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 9,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_f208a1c5-f7a5-4967-bb24-46ebd4236bf4",
+      "input": "test test test",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T04:30:40.824Z",
+      "updatedAt": "2026-04-22T04:30:47.776Z",
+      "result": "test test test",
+      "validation": {
+        "valid": true,
+        "score": 0.8,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": false
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000514,
+        "workerPayment": 0.000216,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000154,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 14,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
   "address": "0xA89044f1d22e8CD292B3Db092C8De28eB1728d74",
-  "balance": 99.999648,
+  "balance": 99.999075,
   "feeRate": 0.2,
-  "reserved": -0.000352,
+  "reserved": -0.000925,
   "history": [
     {
       "type": "init",
@@ -31,6 +31,46 @@
       "taskId": "task_36b699bc-541e-4614-bfc4-7985bfaedca8",
       "balanceAfter": 99.999648,
       "timestamp": "2026-04-22T04:22:57.892Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.000171,
+      "fee": 0.000034,
+      "netAmount": 0.000137,
+      "reason": "Payment for worker_fast",
+      "taskId": "task_33478227-39dc-443b-9520-ded855ac6829",
+      "balanceAfter": 99.999477,
+      "timestamp": "2026-04-22T04:29:21.704Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.000114,
+      "fee": 0.000023,
+      "netAmount": 0.000091,
+      "reason": "Payment for validator_default",
+      "taskId": "task_33478227-39dc-443b-9520-ded855ac6829",
+      "balanceAfter": 99.999363,
+      "timestamp": "2026-04-22T04:29:26.937Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.000173,
+      "fee": 0.000035,
+      "netAmount": 0.000138,
+      "reason": "Payment for worker_fast",
+      "taskId": "task_f208a1c5-f7a5-4967-bb24-46ebd4236bf4",
+      "balanceAfter": 99.99919,
+      "timestamp": "2026-04-22T04:30:40.825Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.000115,
+      "fee": 0.000023,
+      "netAmount": 0.000092,
+      "reason": "Payment for validator_default",
+      "taskId": "task_f208a1c5-f7a5-4967-bb24-46ebd4236bf4",
+      "balanceAfter": 99.999075,
+      "timestamp": "2026-04-22T04:30:44.926Z"
     }
   ]
 }
