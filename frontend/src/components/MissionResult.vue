@@ -17,6 +17,23 @@
         <p class="text-xs text-gray-700 font-mono">{{ result.taskId }}</p>
       </div>
 
+      <!-- Error details for failed missions -->
+      <div v-if="result.status === 'failed' && result.error" class="bg-red-50 border border-red-200 rounded-lg p-3">
+        <p class="text-[10px] uppercase tracking-wider text-red-700 font-semibold mb-2">Error Details</p>
+        <div class="space-y-1 text-xs">
+          <p class="text-red-800">
+            <span class="font-semibold">Error:</span> {{ result.error }}
+          </p>
+          <p v-if="result.errorLocation" class="text-red-700 font-mono">
+            <span class="font-semibold">Location:</span> {{ result.errorLocation }}
+          </p>
+          <details v-if="result.errorStack" class="mt-2">
+            <summary class="cursor-pointer text-red-700 font-semibold hover:text-red-800">Stack trace</summary>
+            <pre class="mt-2 text-[10px] bg-red-100 p-2 rounded overflow-auto max-h-40 text-red-900">{{ result.errorStack }}</pre>
+          </details>
+        </div>
+      </div>
+
       <div v-if="result.result">
         <p class="text-[10px] uppercase tracking-wider text-gray-500 mb-1">Final result</p>
         <p class="text-gray-900 bg-gradient-to-br from-violet-50 to-fuchsia-50 p-3 rounded-lg border border-violet-100">

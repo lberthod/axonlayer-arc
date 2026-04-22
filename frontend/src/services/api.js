@@ -95,6 +95,8 @@ export const api = {
     });
   },
 
+  getTask: (taskId) => request(`/tasks/${taskId}`, { skipCache: true }),
+
   getMyTasks: () => request('/tasks/mine'),
 
   getAgents: () => request('/agents'),
@@ -119,10 +121,11 @@ export const api = {
   getConfig: () => request('/config'),
 
   // auth
-  getMe: () => request('/auth/me'),
+  getMe: () => request('/auth/me', { skipCache: true }),
   rotateApiKey: () => request('/auth/apikey/rotate', { method: 'POST' }),
   setWalletAddress: (address) => request('/auth/wallet', { method: 'POST', body: { address } }),
   becomeProvider: () => request('/auth/role/provider', { method: 'POST' }),
+  syncMissionWallet: () => request('/auth/mission-wallet/sync', { method: 'POST' }),
 
   // wallet management
   createWallet: () => request('/auth/wallet/create', { method: 'POST' }),

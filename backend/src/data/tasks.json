@@ -1577,6 +1577,348 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_aa7d3b1c-f299-4593-8b9b-c14f33eb688c",
+      "input": "test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-21T11:27:02.126Z",
+      "updatedAt": "2026-04-21T11:27:02.127Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000504,
+        "workerPayment": 0.000212,
+        "validatorPayment": 0.000141,
+        "orchestratorMargin": 0.000151,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_0ac772f5-2532-42ee-833b-be80626a6a23",
+      "input": "test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-22T04:05:03.692Z",
+      "updatedAt": "2026-04-22T04:05:03.693Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000504,
+        "workerPayment": 0.000212,
+        "validatorPayment": 0.000141,
+        "orchestratorMargin": 0.000151,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_308e0cb6-d79c-4503-bf54-f8ec4c44097a",
+      "input": "test test test test test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-22T04:05:28.839Z",
+      "updatedAt": "2026-04-22T04:05:28.840Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000524,
+        "workerPayment": 0.00022,
+        "validatorPayment": 0.000147,
+        "orchestratorMargin": 0.000157,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 24,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_1b92e94a-a341-4b52-bae3-9d767c8a8b99",
+      "input": "test testt teste",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-22T04:10:59.725Z",
+      "updatedAt": "2026-04-22T04:10:59.726Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000516,
+        "workerPayment": 0.000217,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000155,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 16,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_62a1f544-bdbf-4d79-bca2-efe5c1436497",
+      "input": "The Arc ecosystem is revolutionizing how agents can coordinate work across blockchains using USDC for secure, instant settlement.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-22T04:20:35.367Z",
+      "updatedAt": "2026-04-22T04:20:35.368Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000629,
+        "workerPayment": 0.000264,
+        "validatorPayment": 0.000176,
+        "orchestratorMargin": 0.000189,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 129,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_36b699bc-541e-4614-bfc4-7985bfaedca8",
+      "input": "The Arc ecosystem is revolutionizing how agents can coordinate work across blockchains using USDC for secure, instant settlement.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T04:22:53.399Z",
+      "updatedAt": "2026-04-22T04:23:01.242Z",
+      "result": "The Arc ecosystem is revolutionizing how agents can coordinate work across blockchains using USDC for secure, instant settlement.",
+      "validation": {
+        "valid": true,
+        "score": 0.9,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": true
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000629,
+        "workerPayment": 0.000264,
+        "validatorPayment": 0.000176,
+        "orchestratorMargin": 0.000189,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 129,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_33478227-39dc-443b-9520-ded855ac6829",
+      "input": "test test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-22T04:29:21.703Z",
+      "updatedAt": "2026-04-22T04:29:30.670Z",
+      "result": "test test",
+      "validation": {
+        "valid": false,
+        "score": 0.4,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": false,
+          "hasContent": false,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": false
+        },
+        "notes": "Validation failed: result length is invalid, result lacks sufficient content, result length delta is unreasonable, result has excessive word repetition",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000509,
+        "workerPayment": 0.000214,
+        "validatorPayment": 0.000142,
+        "orchestratorMargin": 0.000153,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 9,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_f208a1c5-f7a5-4967-bb24-46ebd4236bf4",
+      "input": "test test test",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T04:30:40.824Z",
+      "updatedAt": "2026-04-22T04:30:47.776Z",
+      "result": "test test test",
+      "validation": {
+        "valid": true,
+        "score": 0.8,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": false
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000514,
+        "workerPayment": 0.000216,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000154,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 14,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_eaf5c404-2b11-4905-ac71-3cc2abeb925d",
+      "input": "Test mission with synced wallet",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T04:43:07.860Z",
+      "updatedAt": "2026-04-22T04:43:15.537Z",
+      "result": "Test mission with synced wallet",
+      "validation": {
+        "valid": true,
+        "score": 0.9,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": true
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000531,
+        "workerPayment": 0.000223,
+        "validatorPayment": 0.000149,
+        "orchestratorMargin": 0.000159,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 31,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }

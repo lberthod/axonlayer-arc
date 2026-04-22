@@ -16,6 +16,7 @@ import authRoutes from './routes/auth.routes.js';
 import providersRoutes from './routes/providers.routes.js';
 import adminRoutes from './routes/admin.routes.js';
 import { authMiddleware } from './core/auth.js';
+import userStore from './core/userStore.js';
 import { config } from './config.js';
 import { httpLogger, logger } from './core/logger.js';
 import {
@@ -57,6 +58,22 @@ app.use(
 
 app.use(express.json({ limit: '256kb' }));
 app.use(authMiddleware());
+
+// Dev mode: auto-populate req.user with first user if not authenticated
+// This allows testing without Firebase authentication
+if (!config.auth.enabled) {
+  app.use((req, res, next) => {
+    if (!req.user) {
+      const users = Object.values(userStore.users);
+      const firstUser = users[0];
+      if (firstUser) {
+        req.user = firstUser;
+        req.role = firstUser.role || 'user';
+      }
+    }
+    next();
+  });
+}
 
 // Global rate limit protects every endpoint.
 app.use(globalLimiter);

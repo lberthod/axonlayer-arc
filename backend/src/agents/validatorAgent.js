@@ -69,25 +69,32 @@ class ValidatorAgent extends BaseAgent {
     const originalText = input.originalText;
     const taskType = input.taskType || 'summarize';
 
+    console.log(`[${this.name}:execute] Starting validation: taskType=${taskType}, resultLength=${result?.length || 0}`);
+
     let validation;
     let usedLlm = false;
 
     // Try LLM validation first
     if (llmClient.isEnabled()) {
       try {
+        console.log(`[${this.name}:execute] Trying LLM validation...`);
         validation = await this.validateWithLlm(result, originalText, taskType);
         usedLlm = true;
         this.llmSuccesses++;
+        console.log(`[${this.name}:execute] ✓ LLM validation succeeded: valid=${validation.valid}, score=${validation.score}`);
       } catch (error) {
-        console.warn(`[${this.name}] LLM validation failed:`, error.message);
+        console.warn(`[${this.name}:execute] LLM validation failed: ${error.message}`);
+        console.error(`[${this.name}:execute] Stack: ${error.stack}`);
       }
       this.llmValidations++;
     }
 
     // Fallback to local validation if LLM fails
     if (!validation) {
+      console.log(`[${this.name}:execute] Using fallback local validation`);
       validation = this.validateLocal(result, originalText);
       usedLlm = false;
+      console.log(`[${this.name}:execute] ✓ Local validation completed: valid=${validation.valid}, score=${validation.score}`);
     }
 
     return {

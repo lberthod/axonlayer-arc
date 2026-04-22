@@ -36,7 +36,10 @@ class WorkerAgent extends BaseAgent {
     const taskType = input.taskType || 'summarize';
     const text = typeof input.text === 'string' ? input.text.trim() : '';
 
+    console.log(`[${this.name}:execute] Starting task: taskType=${taskType}, textLength=${text.length}`);
+
     if (!text) {
+      console.error(`[${this.name}:execute] ERROR: Input text required`);
       throw new Error('Input text required');
     }
 
@@ -47,22 +50,26 @@ class WorkerAgent extends BaseAgent {
     // Try LLM first for quality
     if (llmClient.isEnabled()) {
       try {
+        console.log(`[${this.name}:execute] Trying LLM backend...`);
         result = await this.executeWithLlm(taskType, text, input.targetLang);
         backend = 'llm:gpt-5-nano';
         confidence = 0.95; // High confidence from LLM
         this.llmSuccesses++;
+        console.log(`[${this.name}:execute] ✓ LLM succeeded, result length=${result.length}`);
       } catch (error) {
-        console.warn(`[${this.name}] LLM failed (${this.llmAttempts}/${this.llmSuccesses}):`, error.message);
+        console.warn(`[${this.name}:execute] LLM failed (${this.llmAttempts}/${this.llmSuccesses}): ${error.message}`);
       }
       this.llmAttempts++;
     }
 
     // Fallback to local algorithm if LLM fails
     if (!result) {
+      console.log(`[${this.name}:execute] Using fallback local algorithm`);
       const fallback = this.executeLocal(taskType, text);
       result = fallback.result;
       backend = `local:${taskType}`;
       confidence = fallback.confidence;
+      console.log(`[${this.name}:execute] ✓ Local fallback succeeded, result length=${result.length}`);
     }
 
     return {
