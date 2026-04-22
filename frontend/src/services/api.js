@@ -95,6 +95,8 @@ export const api = {
     });
   },
 
+  getTask: (taskId) => request(`/tasks/${taskId}`, { skipCache: true }),
+
   getMyTasks: () => request('/tasks/mine'),
 
   getAgents: () => request('/agents'),

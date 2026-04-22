@@ -53,7 +53,8 @@
           <div
             v-for="t in missions"
             :key="t.id"
-            class="border border-gray-100 rounded p-3 text-sm"
+            @click="openTaskDetails(t.id)"
+            class="border border-gray-100 rounded p-3 text-sm cursor-pointer hover:bg-gray-50 hover:border-gray-300 transition"
           >
             <div class="flex items-center justify-between">
               <span class="font-mono text-xs text-gray-500">{{ t.id.slice(0, 18) }}...</span>
@@ -69,6 +70,109 @@
         <p v-else class="text-sm text-gray-500">No missions yet. Head to Mission Control.</p>
       </div>
     </div>
+
+    <!-- Task Details Modal -->
+    <div
+      v-if="selectedTask"
+      @click="selectedTask = null"
+      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+    >
+      <div
+        @click.stop
+        class="bg-white rounded-xl shadow-lg max-w-2xl max-h-96 overflow-y-auto"
+      >
+        <div class="p-6 space-y-4">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-2xl font-bold text-gray-900">Mission Details</h2>
+            <button
+              @click="selectedTask = null"
+              class="text-gray-500 hover:text-gray-700 text-2xl"
+            >×</button>
+          </div>
+
+          <div v-if="selectedTask" class="space-y-4">
+            <!-- Task ID and Status -->
+            <div class="bg-gray-50 rounded p-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Task ID</p>
+              <p class="font-mono text-sm text-gray-700 break-all">{{ selectedTask.id }}</p>
+              <span
+                class="inline-block text-xs px-3 py-1 rounded mt-3"
+                :class="selectedTask.status === 'completed'
+                  ? 'bg-green-100 text-green-800'
+                  : selectedTask.status === 'failed'
+                  ? 'bg-red-100 text-red-800'
+                  : 'bg-yellow-100 text-yellow-800'"
+              >{{ selectedTask.status }}</span>
+            </div>
+
+            <!-- Input and Result -->
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Input</p>
+                <p class="text-sm text-gray-700 bg-gray-50 p-3 rounded break-words">{{ selectedTask.input }}</p>
+              </div>
+              <div v-if="selectedTask.result">
+                <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Result</p>
+                <p class="text-sm text-gray-700 bg-green-50 p-3 rounded break-words">{{ selectedTask.result }}</p>
+              </div>
+            </div>
+
+            <!-- Validation Score -->
+            <div v-if="selectedTask.validation" class="bg-blue-50 rounded p-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Validation</p>
+              <div class="flex items-center gap-4">
+                <div>
+                  <p class="text-sm font-semibold text-gray-700">
+                    {{ selectedTask.validation.valid ? '✅ Valid' : '❌ Invalid' }}
+                  </p>
+                  <p class="text-xs text-gray-600 mt-1">
+                    Score: {{ (selectedTask.validation.score * 100).toFixed(0) }}%
+                  </p>
+                </div>
+                <p class="text-xs text-gray-600 flex-1">{{ selectedTask.validation.notes }}</p>
+              </div>
+            </div>
+
+            <!-- Pricing and Payment -->
+            <div v-if="selectedTask.pricing" class="grid grid-cols-2 gap-3">
+              <div class="bg-gray-50 p-3 rounded">
+                <p class="text-xs text-gray-500">Client Payment</p>
+                <p class="font-semibold text-gray-800">{{ selectedTask.pricing.clientPayment.toFixed(6) }} USDC</p>
+              </div>
+              <div class="bg-gray-50 p-3 rounded">
+                <p class="text-xs text-gray-500">Worker Payment</p>
+                <p class="font-semibold text-gray-800">{{ selectedTask.pricing.workerPayment?.toFixed(6) || '-' }} USDC</p>
+              </div>
+              <div class="bg-gray-50 p-3 rounded">
+                <p class="text-xs text-gray-500">Validator Payment</p>
+                <p class="font-semibold text-gray-800">{{ selectedTask.pricing.validatorPayment?.toFixed(6) || '-' }} USDC</p>
+              </div>
+              <div class="bg-gray-50 p-3 rounded">
+                <p class="text-xs text-gray-500">Orchestrator Margin</p>
+                <p class="font-semibold text-gray-800">{{ selectedTask.pricing.orchestratorMargin?.toFixed(6) || '-' }} USDC</p>
+              </div>
+            </div>
+
+            <!-- Execution Steps -->
+            <div v-if="selectedTask.executionSteps?.length" class="bg-gray-50 rounded p-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-3">Execution Steps</p>
+              <div class="space-y-2">
+                <div v-for="(step, idx) in selectedTask.executionSteps" :key="idx" class="text-xs text-gray-700">
+                  <span class="font-semibold">Step {{ step.step }}:</span> {{ step.message }}
+                  <span class="text-gray-400 ml-2">{{ new Date(step.timestamp).toLocaleTimeString() }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timestamps -->
+            <div class="text-xs text-gray-500 space-y-1">
+              <p><span class="font-semibold">Created:</span> {{ new Date(selectedTask.createdAt).toLocaleString() }}</p>
+              <p><span class="font-semibold">Updated:</span> {{ new Date(selectedTask.updatedAt).toLocaleString() }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -81,6 +185,8 @@ import WalletManager from '../components/WalletManager.vue';
 const me = ref(null);
 const missions = ref([]);
 const walletAddress = ref('');
+const selectedTask = ref(null);
+const loadingTask = ref(false);
 
 async function refresh() {
   me.value = await api.getMe();
@@ -100,6 +206,18 @@ async function saveWallet() {
 async function upgradeToProvider() {
   await api.becomeProvider();
   await refresh();
+}
+
+async function openTaskDetails(taskId) {
+  loadingTask.value = true;
+  try {
+    selectedTask.value = await api.getTask(taskId);
+  } catch (error) {
+    console.error('Failed to load task details:', error);
+    selectedTask.value = null;
+  } finally {
+    loadingTask.value = false;
+  }
 }
 
 function roleLabel(role) {
