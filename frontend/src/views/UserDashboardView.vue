@@ -48,10 +48,22 @@
       </div>
 
       <div class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-lg font-bold text-gray-800 mb-3">My missions</h2>
-        <div v-if="missions.length" class="space-y-2 max-h-96 overflow-auto">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-bold text-gray-800">My missions</h2>
+          <select
+            v-model="statusFilter"
+            class="text-sm px-3 py-1 border border-gray-300 rounded bg-white"
+          >
+            <option value="">All ({{ missions.length }})</option>
+            <option value="completed">✅ Completed ({{ completedCount }})</option>
+            <option value="failed">❌ Failed ({{ failedCount }})</option>
+            <option value="pending">⏳ Pending ({{ pendingCount }})</option>
+          </select>
+        </div>
+
+        <div v-if="filteredMissions.length" class="space-y-2 max-h-96 overflow-auto">
           <div
-            v-for="t in missions"
+            v-for="t in filteredMissions"
             :key="t.id"
             @click="openTaskDetails(t.id)"
             class="border border-gray-100 rounded p-3 text-sm cursor-pointer hover:bg-gray-50 hover:border-gray-300 transition"
@@ -60,14 +72,17 @@
               <span class="font-mono text-xs text-gray-500">{{ t.id.slice(0, 18) }}...</span>
               <span
                 class="text-xs px-2 py-0.5 rounded"
-                :class="t.status === 'completed' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'"
+                :class="t.status === 'completed' ? 'bg-green-100 text-green-700' : t.status === 'failed' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'"
               >{{ t.status }}</span>
             </div>
             <div class="text-gray-700 mt-1">{{ t.taskType }} · {{ t.pricing?.clientPayment || '-' }} USDC</div>
             <div class="text-gray-400 text-xs mt-0.5">{{ new Date(t.createdAt).toLocaleString() }}</div>
           </div>
         </div>
-        <p v-else class="text-sm text-gray-500">No missions yet. Head to Mission Control.</p>
+        <p v-else class="text-sm text-gray-500">
+          {{ statusFilter ? `No ${statusFilter} missions.` : 'No missions yet.' }}
+          <router-link to="/mission" class="text-blue-600 hover:text-blue-700 font-semibold">Head to Mission Control.</router-link>
+        </p>
       </div>
     </div>
 
@@ -177,7 +192,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { api } from '../services/api.js';
 import { h } from 'vue';
 import WalletManager from '../components/WalletManager.vue';
@@ -187,12 +202,22 @@ const missions = ref([]);
 const walletAddress = ref('');
 const selectedTask = ref(null);
 const loadingTask = ref(false);
+const statusFilter = ref('');
 
 async function refresh() {
   me.value = await api.getMe();
   walletAddress.value = me.value.walletAddress || '';
   missions.value = (await api.getMyTasks().catch(() => [])) || [];
 }
+
+const completedCount = computed(() => missions.value.filter(m => m.status === 'completed').length);
+const failedCount = computed(() => missions.value.filter(m => m.status === 'failed').length);
+const pendingCount = computed(() => missions.value.filter(m => m.status === 'pending').length);
+
+const filteredMissions = computed(() => {
+  if (!statusFilter.value) return missions.value;
+  return missions.value.filter(m => m.status === statusFilter.value);
+});
 
 async function rotate() {
   me.value = await api.rotateApiKey();
