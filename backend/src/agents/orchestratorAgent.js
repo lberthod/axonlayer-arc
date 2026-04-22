@@ -131,7 +131,7 @@ class OrchestratorAgent extends BaseAgent {
         taskType,
         targetLang: options.targetLang
       });
-      console.log(`[Orchestrator:step4] ✓ Worker executed: result="${workerResult.result?.substring(0, 50)}..."`);
+      console.log(`[Orchestrator:step4] ✓ Worker executed: result="${workerResult.result?.substring(0, 180)}"${workerResult.result?.length > 180 ? '...' : ''}`);
 
       executionSteps.push({
         step: 4,

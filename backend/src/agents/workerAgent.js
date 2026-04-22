@@ -7,7 +7,7 @@ import llmClient from '../core/llmClient.js';
  * Utilise OpenAI pour qualité supérieure avec fallback local
  */
 const LLM_PROMPTS = {
-  summarize: `You are an expert text summarizer. Analyze the input text and create a concise 1-2 sentence summary that captures the key meaning and importance. Focus on the most critical information while being clear and readable. Return ONLY the summary without any preamble.`,
+  summarize: `Create a concise 1-2 sentence summary. Capture the main idea and key details. Do not repeat the original text verbatim. Output only the summary.`,
 
   keywords: `You are an expert at identifying important keywords. Analyze the input text and extract exactly 5 of the most important, representative keywords or short phrases. These should be the concepts that best define the text's core content. Return ONLY the keywords as a comma-separated list, nothing else.`,
 
@@ -50,12 +50,12 @@ class WorkerAgent extends BaseAgent {
     // Try LLM first for quality
     if (llmClient.isEnabled()) {
       try {
-        console.log(`[${this.name}:execute] Trying LLM backend...`);
+        console.log(`[${this.name}:execute] Trying LLM backend (model: ${config.llm.model})...`);
         result = await this.executeWithLlm(taskType, text, input.targetLang);
-        backend = 'llm:gpt-5-nano';
+        backend = `llm:${config.llm.model}`;
         confidence = 0.95; // High confidence from LLM
         this.llmSuccesses++;
-        console.log(`[${this.name}:execute] ✓ LLM succeeded, result length=${result.length}`);
+        console.log(`[${this.name}:execute] ✓ LLM succeeded via ${config.llm.model}, result length=${result.length}`);
       } catch (error) {
         console.warn(`[${this.name}:execute] LLM failed (${this.llmAttempts}/${this.llmSuccesses}): ${error.message}`);
       }

@@ -1919,6 +1919,1030 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_37f5679c-7df5-49cd-8e6d-4bbcc1ae7290",
+      "input": "etst testt testt",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T04:44:20.889Z",
+      "updatedAt": "2026-04-22T04:44:29.378Z",
+      "result": "etst testt testt",
+      "validation": {
+        "valid": true,
+        "score": 0.8,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": false
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000516,
+        "workerPayment": 0.000217,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000155,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 16,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_b8983d8c-3719-49b6-a680-f86a0a3042a0",
+      "input": "test testt testt test test test test test",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T04:53:17.388Z",
+      "updatedAt": "2026-04-22T04:53:24.176Z",
+      "result": "test testt testt test test test test test",
+      "validation": {
+        "valid": true,
+        "score": 0.8,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": false
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000541,
+        "workerPayment": 0.000227,
+        "validatorPayment": 0.000152,
+        "orchestratorMargin": 0.000162,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 41,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_2810d157-23d2-4996-b4cc-985792499d1d",
+      "input": "Il était une fois un homme nommé Léo qui aimait grimper partout. Un matin, il vit une très haute montagne et dit avec confiance : « Aujourd’hui, je la clambdie ! » Personne ne comprit vraiment ce mot, mais tout le monde sentit qu’il voulait dire : grimper avec courage, maladresse et beaucoup d’énergie.\n\nLéo mit son sac sur le dos, prit une gourde, un morceau de pain et commença son ascension. Au début, tout allait bien. Il avançait entre les pierres, les fleurs et les petits arbustes. Mais plus il montait, plus le vent soufflait fort. Ses jambes tremblaient, ses mains glissaient, et il se demanda s’il allait réussir.\n\nAlors, il s’arrêta un instant. Il regarda la vallée en bas, respira profondément et continua, pas après pas. Un oiseau se posa près de lui, comme pour l’encourager. Un rayon de soleil traversa les nuages. Léo sourit.\n\nAprès un long effort, il atteignit enfin le sommet. Là-haut, le monde semblait immense et paisible. Il comprit que « clambdie » voulait peut-être dire cela : avancer même quand c’est difficile.\n\nEt ce jour-là, Léo redescendit fatigué, mais fier, avec une grande histoire à raconter.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T04:56:44.427Z",
+      "updatedAt": "2026-04-22T04:56:56.405Z",
+      "result": "Il était une fois un homme nommé Léo qui aimait grimper partout. Un matin, il vit une très haute montagne et dit avec confiance : « Aujourd’hui, je la clambdie !",
+      "validation": {
+        "valid": true,
+        "score": 0.9,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": true
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.001626,
+        "workerPayment": 0.000683,
+        "validatorPayment": 0.000455,
+        "orchestratorMargin": 0.000488,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 1126,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_e117e14d-67dd-4b5b-b1df-fefee0d191d4",
+      "input": "Il était une fois un homme nommé Léo qui aimait grimper partout. Un matin, il vit une très haute montagne et dit avec confiance : « Aujourd’hui, je la clambdie ! » Personne ne comprit vraiment ce mot, mais tout le monde sentit qu’il voulait dire : grimper avec courage, maladresse et beaucoup d’énergie. Léo mit son sac sur le dos, prit une gourde, un morceau de pain et commença son ascension. Au début, tout allait bien. Il avançait entre les pierres, les fleurs et les petits arbustes. Mais plus il montait, plus le vent soufflait fort. Ses jambes tremblaient, ses mains glissaient, et il se demanda s’il allait réussir. Alors, il s’arrêta un instant. Il regarda la vallée en bas, respira profondément et continua, pas après pas. Un oiseau se posa près de lui, comme pour l’encourager. Un rayon de soleil traversa les nuages. Léo sourit. Après un long effort, il atteignit enfin le sommet. Là-haut, le monde semblait immense et paisible. Il comprit que « clambdie » voulait peut-être dire cela : avancer même quand c’est difficile. Et ce jour-là, Léo redescendit fatigué, mais fier, avec une grande histoire à raconter.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:00:44.575Z",
+      "updatedAt": "2026-04-22T05:00:50.723Z",
+      "result": "Il était une fois un homme nommé Léo qui aimait grimper partout. Un matin, il vit une très haute montagne et dit avec confiance : « Aujourd’hui, je la clambdie !",
+      "validation": {
+        "valid": true,
+        "score": 0.9,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": true
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.001622,
+        "workerPayment": 0.000681,
+        "validatorPayment": 0.000454,
+        "orchestratorMargin": 0.000487,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 1122,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_63e02bed-1f41-4c19-914e-35819dd7a48f",
+      "input": "Il était une fois un homme nommé Léo qui aimait grimper partout. Un matin, il vit une très haute montagne et dit avec confiance : « Aujourd’hui, je la clambdie ! » Personne ne comprit vraiment ce mot, mais tout le monde sentit qu’il voulait dire : grimper avec courage, maladresse et beaucoup d’énergie. Léo mit son sac sur le dos, prit une gourde, un morceau de pain et commença son ascension. Au début, tout allait bien. Il avançait entre les pierres, les fleurs et les petits arbustes. Mais plus il montait, plus le vent soufflait fort. Ses jambes tremblaient, ses mains glissaient, et il se demanda s’il allait réussir. Alors, il s’arrêta un instant. Il regarda la vallée en bas, respira profondément et continua, pas après pas. Un oiseau se posa près de lui, comme pour l’encourager. Un rayon de soleil traversa les nuages. Léo sourit. Après un long effort, il atteignit enfin le sommet. Là-haut, le monde semblait immense et paisible. Il comprit que « clambdie » voulait peut-être dire cela : avancer même quand c’est difficile. Et ce jour-là, Léo redescendit fatigué, mais fier, avec une grande histoire à raconter.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:01:18.760Z",
+      "updatedAt": "2026-04-22T05:01:25.557Z",
+      "result": "Il était une fois un homme nommé Léo qui aimait grimper partout. Un matin, il vit une très haute montagne et dit avec confiance : « Aujourd’hui, je la clambdie !",
+      "validation": {
+        "valid": true,
+        "score": 0.9,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": true
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.001622,
+        "workerPayment": 0.000681,
+        "validatorPayment": 0.000454,
+        "orchestratorMargin": 0.000487,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 1122,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_326eb96f-36a7-4748-8fd9-a4d023cd42d4",
+      "input": "Il était une fois un homme nommé Léo qui aimait grimper partout. Un matin, il vit une très haute montagne et dit avec confiance : « Aujourd’hui, je la clambdie ! » Personne ne comprit vraiment ce mot, mais tout le monde sentit qu’il voulait dire : grimper avec courage, maladresse et beaucoup d’énergie. Léo mit son sac sur le dos, prit une gourde, un morceau de pain et commença son ascension. Au début, tout allait bien. Il avançait entre les pierres, les fleurs et les petits arbustes. Mais plus il montait, plus le vent soufflait fort. Ses jambes tremblaient, ses mains glissaient, et il se demanda s’il allait réussir. Alors, il s’arrêta un instant. Il regarda la vallée en bas, respira profondément et continua, pas après pas. Un oiseau se posa près de lui, comme pour l’encourager. Un rayon de soleil traversa les nuages. Léo sourit. Après un long effort, il atteignit enfin le sommet. Là-haut, le monde semblait immense et paisible. Il comprit que « clambdie » voulait peut-être dire cela : avancer même quand c’est difficile. Et ce jour-là, Léo redescendit fatigué, mais fier, avec une grande histoire à raconter.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:02:43.807Z",
+      "updatedAt": "2026-04-22T05:02:52.188Z",
+      "result": "Il était une fois un homme nommé Léo qui aimait grimper partout. Un matin, il vit une très haute montagne et dit avec confiance : « Aujourd’hui, je la clambdie !",
+      "validation": {
+        "valid": true,
+        "score": 0.9,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": true
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.001622,
+        "workerPayment": 0.000681,
+        "validatorPayment": 0.000454,
+        "orchestratorMargin": 0.000487,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 1122,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_f18d76bd-09a2-4e55-901a-f268ae6adf64",
+      "input": "Artificial intelligence is transforming the world. Machine learning models can now recognize patterns in data that humans cannot see. Deep learning networks have achieved superhuman performance on many tasks including image recognition and language understanding.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:07:43.038Z",
+      "updatedAt": "2026-04-22T05:07:54.886Z",
+      "result": "Artificial intelligence is transforming the world as machine learning models uncover data patterns humans miss, with deep learning achieving superhuman performance in tasks such as image recognition and language understanding",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": true
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 1,
+          "successes": 1,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000763,
+        "workerPayment": 0.00032,
+        "validatorPayment": 0.000214,
+        "orchestratorMargin": 0.000229,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 263,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_83370e89-490a-46a8-86cd-989f85a30ae7",
+      "input": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n’était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n’était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu’au sommet, on pouvait voir les champs, les routes, les temples, et jusqu’aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu’il allait enfin la gravir. Il prit un petit sac, une bouteille d’eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d’orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d’une étrange joie.\n\nLa montée commença doucement. D’abord un sentier de terre, puis des pierres, puis des racines d’arbres qui sortaient du sol comme les veines d’un vieux géant. La chaleur montait vite. Le soleil de l’Isan n’était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l’air d’une lumière blanche. Kiet transpirait, soufflait, s’arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s’assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s’ouvrit devant lui.\n\nIl vit l’Isan entier comme une mer de terre et de lumière. Les champs s’étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s’assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l’horizon. À cet instant, il comprit que grimper n’était pas seulement monter une colline. C’était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l’air, et quelque part, une musique d’Isan s’élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n’avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu’au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.\n\nSi tu veux, je peux maintenant t’en écrire une version encore plus littéraire, plus poétique, ou plus drôle.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:08:34.222Z",
+      "updatedAt": "2026-04-22T05:08:45.930Z",
+      "result": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong. Au cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet.",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 1,
+          "successes": 1,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004928,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.002428,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4428,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_75fc2923-2531-4f23-ba8a-48cd9079611f",
+      "input": "Climate change is one of the most pressing global challenges. Rising temperatures are melting polar ice caps, causing sea levels to rise and threatening coastal communities. Renewable energy and carbon reduction strategies are critical solutions.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:09:33.749Z",
+      "updatedAt": "2026-04-22T05:09:44.839Z",
+      "result": "Climate change drives rising temperatures that melt polar ice caps and raise sea levels, threatening coastal communities. Implementing renewable energy and carbon reduction strategies is essential to address these impacts.",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": true
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 2,
+          "successes": 2,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000746,
+        "workerPayment": 0.000348,
+        "validatorPayment": 0.000174,
+        "orchestratorMargin": 0.000224,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 246,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.002,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_8b3f1e85-e682-46b5-a894-738da88236fc",
+      "input": "Python is a popular programming language known for its simplicity and readability. It is widely used in data science, machine learning, and web development. The language emphasizes code clarity through the use of indentation and clean syntax.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:10:52.748Z",
+      "updatedAt": "2026-04-22T05:11:03.996Z",
+      "result": "Python is a popular, readable programming language that emphasizes clear syntax and indentation, widely used in data science, machine learning, and web development.",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": true
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 1,
+          "successes": 1,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000742,
+        "workerPayment": 0.000311,
+        "validatorPayment": 0.000208,
+        "orchestratorMargin": 0.000223,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 242,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_323e2962-e669-49fe-977d-7ab9cf5db061",
+      "input": "Bien sûr — voici une version plus longue, avec l'ambiance de l'Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l'Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l'odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n'était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n'était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu'au sommet, on pouvait voir les champs, les routes, les temples, et jusqu'aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu'il allait enfin la gravir. Il prit un petit sac, une bouteille d'eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d'orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d'une étrange joie.\n\nLa montée commença doucement. D'abord un sentier de terre, puis des pierres, puis des racines d'arbres qui sortaient du sol comme les veines d'un vieux géant. La chaleur montait vite. Le soleil de l'Isan n'était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l'air d'une lumière blanche. Kiet transpirait, soufflait, s'arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s'assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s'ouvrit devant lui.\n\nIl vit l'Isan entier comme une mer de terre et de lumière. Les champs s'étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s'assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l'horizon. À cet instant, il comprit que grimper n'était pas seulement monter une colline. C'était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l'air, et quelque part, une musique d'Isan s'élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n'avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu'au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:16:59.395Z",
+      "updatedAt": "2026-04-22T05:17:12.786Z",
+      "result": "Bien sûr — voici une version plus longue, avec l'ambiance de l'Isan, la Thaïlande, Buriram et Song Hong. Au cœur de l'Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet.",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 1,
+          "successes": 1,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004818,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.002318,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4318,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_74495b5d-023e-474a-a8d1-ebfbaa203cba",
+      "input": "Bien sûr — voici une version plus longue, avec l'ambiance de l'Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l'Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l'odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n'était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n'était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu'au sommet, on pouvait voir les champs, les routes, les temples, et jusqu'aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu'il allait enfin la gravir. Il prit un petit sac, une bouteille d'eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d'orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d'une étrange joie.\n\nLa montée commença doucement. D'abord un sentier de terre, puis des pierres, puis des racines d'arbres qui sortaient du sol comme les veines d'un vieux géant. La chaleur montait vite. Le soleil de l'Isan n'était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l'air d'une lumière blanche. Kiet transpirait, soufflait, s'arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s'assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s'ouvrit devant lui.\n\nIl vit l'Isan entier comme une mer de terre et de lumière. Les champs s'étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s'assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l'horizon. À cet instant, il comprit que grimper n'était pas seulement monter une colline. C'était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l'air, et quelque part, une musique d'Isan s'élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n'avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu'au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:17:47.352Z",
+      "updatedAt": "2026-04-22T05:17:58.115Z",
+      "result": "Bien sûr — voici une version plus longue, avec l'ambiance de l'Isan, la Thaïlande, Buriram et Song Hong. Au cœur de l'Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet.",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 1,
+          "successes": 1,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004818,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.002318,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4318,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_5000e6af-b4fd-487b-a4fa-4776182ba424",
+      "input": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n’était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n’était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu’au sommet, on pouvait voir les champs, les routes, les temples, et jusqu’aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu’il allait enfin la gravir. Il prit un petit sac, une bouteille d’eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d’orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d’une étrange joie.\n\nLa montée commença doucement. D’abord un sentier de terre, puis des pierres, puis des racines d’arbres qui sortaient du sol comme les veines d’un vieux géant. La chaleur montait vite. Le soleil de l’Isan n’était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l’air d’une lumière blanche. Kiet transpirait, soufflait, s’arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s’assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s’ouvrit devant lui.\n\nIl vit l’Isan entier comme une mer de terre et de lumière. Les champs s’étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s’assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l’horizon. À cet instant, il comprit que grimper n’était pas seulement monter une colline. C’était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l’air, et quelque part, une musique d’Isan s’élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n’avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu’au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.\n\nSi tu veux, je peux maintenant t’en écrire une version encore plus littéraire, plus poétique, ou plus drôle.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:20:06.711Z",
+      "updatedAt": "2026-04-22T05:20:18.417Z",
+      "result": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong. Au cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet.",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 2,
+          "successes": 2,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004928,
+        "workerPayment": 0.002,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.001928,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4428,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.002,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_426c83d0-a68f-4a56-9ce0-1f8cefa2d9d8",
+      "input": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n’était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n’était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu’au sommet, on pouvait voir les champs, les routes, les temples, et jusqu’aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu’il allait enfin la gravir. Il prit un petit sac, une bouteille d’eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d’orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d’une étrange joie.\n\nLa montée commença doucement. D’abord un sentier de terre, puis des pierres, puis des racines d’arbres qui sortaient du sol comme les veines d’un vieux géant. La chaleur montait vite. Le soleil de l’Isan n’était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l’air d’une lumière blanche. Kiet transpirait, soufflait, s’arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s’assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s’ouvrit devant lui.\n\nIl vit l’Isan entier comme une mer de terre et de lumière. Les champs s’étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s’assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l’horizon. À cet instant, il comprit que grimper n’était pas seulement monter une colline. C’était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l’air, et quelque part, une musique d’Isan s’élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n’avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu’au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.\n\nSi tu veux, je peux maintenant t’en écrire une version encore plus littéraire, plus poétique, ou plus drôle.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:21:31.267Z",
+      "updatedAt": "2026-04-22T05:21:42.053Z",
+      "result": "Kiet, un homme",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 3,
+          "successes": 3,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004928,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.002428,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4428,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_6eac837f-4aae-403f-8694-656ed3e5ddd5",
+      "input": "Bien sûr — voici une version plus longue, avec l'ambiance de l'Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l'Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l'odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n'était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n'était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu'au sommet, on pouvait voir les champs, les routes, les temples, et jusqu'aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu'il allait enfin la gravir. Il prit un petit sac, une bouteille d'eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d'orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d'une étrange joie.\n\nLa montée commença doucement. D'abord un sentier de terre, puis des pierres, puis des racines d'arbres qui sortaient du sol comme les veines d'un vieux géant. La chaleur montait vite. Le soleil de l'Isan n'était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l'air d'une lumière blanche. Kiet transpirait, soufflait, s'arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s'assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s'ouvrit devant lui.\n\nIl vit l'Isan entier comme une mer de terre et de lumière. Les champs s'étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s'assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l'horizon. À cet instant, il comprit que grimper n'était pas seulement monter une colline. C'était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l'air, et quelque part, une musique d'Isan s'élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n'avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu'au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:25:14.309Z",
+      "updatedAt": "2026-04-22T05:25:25.823Z",
+      "result": "Kiet, un homme de l’Isan près de Buriram, gravit patiemment une colline isolée et découvre que l’ascension n’est pas une conquête extérieure mais un voyage intérieur, lui apportant clart",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 1,
+          "successes": 1,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004818,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.002318,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4318,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_74bb0387-f131-4381-95bb-f5ad040690de",
+      "input": "Paris est la capitale de la France. La ville est célèbre pour la Tour Eiffel, le Louvre et la Cathédrale Notre-Dame. Des millions de touristes visitent Paris chaque année pour admirer son architecture et sa culture riche.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:25:37.717Z",
+      "updatedAt": "2026-04-22T05:25:51.217Z",
+      "result": "Paris",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 2,
+          "successes": 2,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000721,
+        "workerPayment": 0.000337,
+        "validatorPayment": 0.000168,
+        "orchestratorMargin": 0.000216,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 221,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.002,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_6a3886c5-4747-4ddf-bd3b-05b9383976bf",
+      "input": "Paris est la capitale de la France. La ville est célèbre pour la Tour Eiffel, le Louvre et la Cathédrale Notre-Dame. Des millions de touristes visitent Paris chaque année.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:27:45.169Z",
+      "updatedAt": "2026-04-22T05:27:59.615Z",
+      "result": "Paris est la capitale de la France, connue pour des monuments emblématiques tels que la Tour",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": true
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 1,
+          "successes": 1,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000671,
+        "workerPayment": 0.000282,
+        "validatorPayment": 0.000188,
+        "orchestratorMargin": 0.000201,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 171,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_116cab7d-924f-44e0-a0d1-903e803f8c4f",
+      "input": "Bien sûr — voici une version plus longue, avec l'ambiance de l'Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l'Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l'odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n'était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n'était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu'au sommet, on pouvait voir les champs, les routes, les temples, et jusqu'aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu'il allait enfin la gravir. Il prit un petit sac, une bouteille d'eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d'orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d'une étrange joie.\n\nLa montée commença doucement. D'abord un sentier de terre, puis des pierres, puis des racines d'arbres qui sortaient du sol comme les veines d'un vieux géant. La chaleur montait vite. Le soleil de l'Isan n'était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l'air d'une lumière blanche. Kiet transpirait, soufflait, s'arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s'assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s'ouvrit devant lui.\n\nIl vit l'Isan entier comme une mer de terre et de lumière. Les champs s'étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s'assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l'horizon. À cet instant, il comprit que grimper n'était pas seulement monter une colline. C'était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l'air, et quelque part, une musique d'Isan s'élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n'avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu'au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:28:07.523Z",
+      "updatedAt": "2026-04-22T05:28:19.494Z",
+      "result": "Kiet, un homme simple de l’Isan près de Buriram, décide d’escalader une colline isolée près de Song Hong. Au sommet, il comprend que monter représente porter sa fatigue et ses souvenirs, et qu’elle mène à une découverte de soi et à une",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 2,
+          "successes": 2,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004818,
+        "workerPayment": 0.002,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.001818,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4318,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.002,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_4cac448b-f1a0-41ff-bca7-fa8fd38866b9",
+      "input": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n’était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n’était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu’au sommet, on pouvait voir les champs, les routes, les temples, et jusqu’aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu’il allait enfin la gravir. Il prit un petit sac, une bouteille d’eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d’orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d’une étrange joie.\n\nLa montée commença doucement. D’abord un sentier de terre, puis des pierres, puis des racines d’arbres qui sortaient du sol comme les veines d’un vieux géant. La chaleur montait vite. Le soleil de l’Isan n’était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l’air d’une lumière blanche. Kiet transpirait, soufflait, s’arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s’assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s’ouvrit devant lui.\n\nIl vit l’Isan entier comme une mer de terre et de lumière. Les champs s’étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s’assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l’horizon. À cet instant, il comprit que grimper n’était pas seulement monter une colline. C’était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l’air, et quelque part, une musique d’Isan s’élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n’avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu’au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.\n\nSi tu veux, je peux maintenant t’en écrire une version encore plus littéraire, plus poétique, ou plus drôle.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:28:52.883Z",
+      "updatedAt": "2026-04-22T05:29:03.143Z",
+      "result": "Dans l’Isan, près de Buriram et de Song Hong, Kiet, homme simple et attaché à la vie du village, entrepr",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 3,
+          "successes": 3,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004928,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.002428,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4428,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_a0e7ddd1-8a3e-462c-ad49-ca9f6f972e44",
+      "input": "Bien sûr — voici une version plus longue, avec l'ambiance de l'Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l'Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l'odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n'était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n'était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu'au sommet, on pouvait voir les champs, les routes, les temples, et jusqu'aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu'il allait enfin la gravir. Il prit un petit sac, une bouteille d'eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d'orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d'une étrange joie.\n\nLa montée commença doucement. D'abord un sentier de terre, puis des pierres, puis des racines d'arbres qui sortaient du sol comme les veines d'un vieux géant. La chaleur montait vite. Le soleil de l'Isan n'était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l'air d'une lumière blanche. Kiet transpirait, soufflait, s'arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s'assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s'ouvrit devant lui.\n\nIl vit l'Isan entier comme une mer de terre et de lumière. Les champs s'étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s'assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l'horizon. À cet instant, il comprit que grimper n'était pas seulement monter une colline. C'était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l'air, et quelque part, une musique d'Isan s'élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n'avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu'au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:30:13.885Z",
+      "updatedAt": "2026-04-22T05:30:25.372Z",
+      "result": "Kiet, un homme simple de l’Isan près de Buriram, entreprend l’ascension d’une colline isolée près de Song Hong, portant du riz gluant et de l’eau, animé par le désir de grimper non seulement une pente mais aussi ses propres doutes et souvenirs",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 4,
+          "successes": 4,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004818,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.002318,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4318,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_66c6e14b-2579-4f5f-871d-5dcff9223044",
+      "input": "Bien sûr — voici une version plus longue, avec l'ambiance de l'Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l'Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l'odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n'était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n'était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu'au sommet, on pouvait voir les champs, les routes, les temples, et jusqu'aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu'il allait enfin la gravir. Il prit un petit sac, une bouteille d'eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d'orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d'une étrange joie.\n\nLa montée commença doucement. D'abord un sentier de terre, puis des pierres, puis des racines d'arbres qui sortaient du sol comme les veines d'un vieux géant. La chaleur montait vite. Le soleil de l'Isan n'était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l'air d'une lumière blanche. Kiet transpirait, soufflait, s'arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s'assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s'ouvrit devant lui.\n\nIl vit l'Isan entier comme une mer de terre et de lumière. Les champs s'étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s'assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l'horizon. À cet instant, il comprit que grimper n'était pas seulement monter une colline. C'était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l'air, et quelque part, une musique d'Isan s'élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n'avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu'au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:31:13.470Z",
+      "updatedAt": "2026-04-22T05:31:26.786Z",
+      "result": "Kiet, un homme simple d’Isan près de Buriram, décide d’escalader une colline isolée pour chercher un sens plus profond à sa vie. À mesure qu’il porte sa fatigue et ses souvenirs jusqu’au sommet, il réalise que",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 1,
+          "successes": 1,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004818,
+        "workerPayment": 0.0015,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.002318,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4318,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_6346ffb7-d486-4d18-a72b-5aa4e221ee44",
+      "input": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong.\n\nAu cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet. Il habitait non loin de Buriram, dans un coin simple et paisible, vers Song Hong, où les journées commençaient avec le chant des coqs, le bruit lointain des motos, et l’odeur du riz gluant qui cuisait dans les cuisines ouvertes.\n\nKiet n’était pas riche, mais il connaissait la valeur des choses vraies. Il aimait les arbres, les buffles, les petits chemins de terre, les marchés du matin et les soirées chaudes où les grillons chantaient sans fin. Depuis son enfance, il regardait une vieille colline isolée au loin. Ce n’était pas une montagne immense, mais dans son cœur, elle semblait grande comme un royaume. On disait qu’au sommet, on pouvait voir les champs, les routes, les temples, et jusqu’aux horizons poussiéreux de Buriram.\n\nUn matin, avant même que la chaleur ne devienne lourde, Kiet décida qu’il allait enfin la gravir. Il prit un petit sac, une bouteille d’eau, du khao niao enveloppé dans un tissu, un peu de poulet grillé, et partit à pied. Le ciel était encore doux, teinté de rose et d’orange. Des chiens dormaient sous les maisons sur pilotis. Une vieille femme balaya devant sa porte et lui lança un sourire sans poser de question, comme si elle savait déjà.\n\nLe chemin passait entre les champs de manioc, les rizières sèches de saison chaude, et quelques palmiers secoués par le vent. Kiet avançait tranquillement. Il croisait des enfants en uniforme scolaire, des paysans déjà au travail, et des vendeurs installant leurs paniers de fruits au bord de la route. Plus il approchait de la colline, plus il sentait son cœur battre fort, non pas de peur, mais d’une étrange joie.\n\nLa montée commença doucement. D’abord un sentier de terre, puis des pierres, puis des racines d’arbres qui sortaient du sol comme les veines d’un vieux géant. La chaleur montait vite. Le soleil de l’Isan n’était pas tendre. Il collait à la peau, brûlait la nuque et remplissait l’air d’une lumière blanche. Kiet transpirait, soufflait, s’arrêtait parfois pour boire une gorgée. Autour de lui, les cigales criaient comme si toute la forêt vibrait.\n\nÀ mi-chemin, il s’assit sous un arbre tordu. De là, il voyait déjà Buriram au loin, les routes droites, quelques toits brillants, des parcelles de terre dessinées comme un patchwork immense. Il pensa à sa vie, simple mais chargée de souvenirs. Il pensa aux repas partagés, aux fêtes de village, aux sons du mor lam, aux pluies violentes de la mousson, aux longues saisons sèches, aux visages des anciens qui parlaient peu mais voyaient tout.\n\nIl aurait pu redescendre. Personne ne lui aurait reproché. Mais quelque chose en lui voulait aller plus haut. Alors il reprit sa marche.\n\nLa dernière partie fut la plus difficile. Le sol glissait, le vent soufflait plus fort, et ses jambes devenaient lourdes. Pourtant, il continua, pas après pas, comme on traverse les années : sans bruit, avec patience. Quand enfin il atteignit le sommet, le monde s’ouvrit devant lui.\n\nIl vit l’Isan entier comme une mer de terre et de lumière. Les champs s’étendaient à perte de vue. Les villages semblaient minuscules. Les temples brillaient doucement sous le soleil. Buriram apparaissait là-bas, vivante, poussiéreuse, chaude et réelle. Le vent passait sur son visage comme une bénédiction.\n\nKiet s’assit en silence. Il mangea un peu de riz gluant, but le reste de son eau, et regarda longtemps l’horizon. À cet instant, il comprit que grimper n’était pas seulement monter une colline. C’était aussi porter sa fatigue, ses souvenirs, ses doutes, et continuer malgré tout.\n\nQuand il redescendit vers Song Hong, le soleil commençait à descendre lui aussi. La lumière devenait dorée. Les enfants jouaient près des maisons, une odeur de viande grillée flottait dans l’air, et quelque part, une musique d’Isan s’élevait doucement.\n\nKiet rentra chez lui fatigué, couvert de poussière, mais le cœur léger. Il n’avait conquis ni montagne ni trésor. Pourtant, il avait trouvé quelque chose de précieux : la preuve qu’au milieu des terres calmes de Buriram, un homme pouvait encore grimper vers lui-même.\n\nSi tu veux, je peux maintenant t’en écrire une version encore plus littéraire, plus poétique, ou plus drôle.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T05:32:02.736Z",
+      "updatedAt": "2026-04-22T05:32:16.368Z",
+      "result": "Bien sûr — voici une version plus longue, avec l’ambiance de l’Isan, la Thaïlande, Buriram et Song Hong. Au cœur de l’Isan, dans le nord-est de la Thaïlande, là où la terre rouge chauffe sous le soleil et où les rizières brillent comme des miroirs après la pluie, vivait un homme nommé Kiet.",
+      "validation": {
+        "valid": true,
+        "score": 0.5,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 50/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 2,
+          "successes": 2,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.004928,
+        "workerPayment": 0.002,
+        "validatorPayment": 0.001,
+        "orchestratorMargin": 0.001928,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4428,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.002,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }

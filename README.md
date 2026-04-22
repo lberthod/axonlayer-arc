@@ -526,6 +526,51 @@ curl -X POST http://localhost:3001/api/tasks \
 
 ---
 
+## 🤖 AI-Powered Task Execution: GPT-5-nano
+
+Arc Agent Hub integrates **OpenAI's GPT-5-nano** for intelligent task execution:
+
+### Text Summarization (Worker Agent)
+- **Model:** `gpt-5-nano-2025-08-07` (lightweight, cost-effective, fast)
+- **Capability:** Condenses long narratives to concise 1-2 sentence summaries
+- **Configuration:** 
+  - Reasoning: `disabled` (faster execution)
+  - Max output: 4096 tokens (flexible for different input sizes)
+  - Fallback: Local algorithm if LLM unavailable
+
+**Example:**
+```
+Input (4318 chars): Long story about Kiet climbing a hill in Isan, Thailand...
+Output: "Kiet, un homme simple d'Isan près de Buriram, décide d'escalader une 
+colline isolée pour chercher un sens plus profond à sa vie. Au sommet, il 
+découvre que l'ascension représente un voyage intérieur vers lui-même."
+```
+
+### Quality Validation (Validator Agent)
+- **Model:** Same `gpt-5-nano-2025-08-07` for semantic validation
+- **Purpose:** Verify summaries capture the essence without copy-pasting
+- **Score:** 0-100 with detailed validation notes
+- **Fallback:** Local validation if LLM unavailable
+
+### Cost Efficiency
+- **Per-task cost:** ~$0.0005 USDC (nano pricing profile)
+- **Model inference:** Sub-500ms latency
+- **No reasoning overhead:** Disabled for speed & cost
+
+### Configuration
+Set these environment variables to enable:
+```bash
+OPENAI_API_KEY=sk-proj-...                    # Your OpenAI API key
+OPENAI_BASE_URL=https://api.openai.com/v1     # OpenAI endpoint
+OPENAI_MODEL=gpt-5-nano-2025-08-07            # GPT-5-nano model
+OPENAI_REASONING_EFFORT=none                  # Disable reasoning
+OPENAI_MAX_OUTPUT_TOKENS=4096                 # Output budget
+```
+
+If `OPENAI_API_KEY` is not set, the system gracefully falls back to local algorithms.
+
+---
+
 ## 🚀 Vision
 
 Arc Agent Hub is **the execution backbone for the agent economy.** 

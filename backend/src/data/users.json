@@ -10,17 +10,17 @@
       "createdAt": "2026-04-19T07:38:00.679Z",
       "lastLoginAt": "2026-04-21T08:49:36.831Z",
       "usage": {
-        "tasks": 13,
-        "totalSpent": 0.011495,
+        "tasks": 35,
+        "totalSpent": 0.076235,
         "today": {
           "date": "2026-04-22",
-          "tasks": 1,
-          "spent": 0.000531
+          "tasks": 23,
+          "spent": 0.065271
         }
       },
       "missionWallet": {
         "address": "mission_FBL1A76M9lNRSftKFsrTPUgZwfB2_0c1176cb0876af51",
-        "balance": 19.999628
+        "balance": 19.99203
       },
       "wallet": {
         "address": "0xb57d96cc5b17a049ed8b5a8571b58dcd9bada5de",
