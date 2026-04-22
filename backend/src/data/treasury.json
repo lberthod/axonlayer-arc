@@ -1,8 +1,8 @@
 {
   "address": "0xA89044f1d22e8CD292B3Db092C8De28eB1728d74",
-  "balance": 99.999075,
+  "balance": 99.99915,
   "feeRate": 0.2,
-  "reserved": -0.000925,
+  "reserved": -0.000722,
   "history": [
     {
       "type": "init",
@@ -71,6 +71,42 @@
       "taskId": "task_f208a1c5-f7a5-4967-bb24-46ebd4236bf4",
       "balanceAfter": 99.999075,
       "timestamp": "2026-04-22T04:30:44.926Z"
+    },
+    {
+      "type": "fund",
+      "amount": 0.0005,
+      "reason": "Mission funding",
+      "taskId": "task_eaf5c404-2b11-4905-ac71-3cc2abeb925d",
+      "balanceAfter": 99.999575,
+      "timestamp": "2026-04-22T04:43:07.862Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.000178,
+      "fee": 0.000036,
+      "netAmount": 0.000142,
+      "reason": "Payment for worker_fast",
+      "taskId": "task_eaf5c404-2b11-4905-ac71-3cc2abeb925d",
+      "balanceAfter": 99.999397,
+      "timestamp": "2026-04-22T04:43:07.862Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.000119,
+      "fee": 0.000024,
+      "netAmount": 0.000095,
+      "reason": "Payment for validator_default",
+      "taskId": "task_eaf5c404-2b11-4905-ac71-3cc2abeb925d",
+      "balanceAfter": 99.999278,
+      "timestamp": "2026-04-22T04:43:12.430Z"
+    },
+    {
+      "type": "refund",
+      "amount": 0.000128,
+      "reason": "Mission refund",
+      "taskId": "task_eaf5c404-2b11-4905-ac71-3cc2abeb925d",
+      "balanceAfter": 99.99915,
+      "timestamp": "2026-04-22T04:43:15.534Z"
     }
   ]
 }

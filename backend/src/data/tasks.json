@@ -1871,6 +1871,54 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_eaf5c404-2b11-4905-ac71-3cc2abeb925d",
+      "input": "Test mission with synced wallet",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T04:43:07.860Z",
+      "updatedAt": "2026-04-22T04:43:15.537Z",
+      "result": "Test mission with synced wallet",
+      "validation": {
+        "valid": true,
+        "score": 0.9,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": true
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000531,
+        "workerPayment": 0.000223,
+        "validatorPayment": 0.000149,
+        "orchestratorMargin": 0.000159,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 31,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }
