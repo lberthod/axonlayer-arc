@@ -1,8 +1,8 @@
 {
   "address": "0xA89044f1d22e8CD292B3Db092C8De28eB1728d74",
-  "balance": 99.986794,
+  "balance": 99.982294,
   "feeRate": 0.2,
-  "reserved": -0.012788,
+  "reserved": -0.017288,
   "history": [
     {
       "type": "init",
@@ -635,6 +635,90 @@
       "taskId": "task_116cab7d-924f-44e0-a0d1-903e803f8c4f",
       "balanceAfter": 99.986794,
       "timestamp": "2026-04-22T05:28:14.470Z"
+    },
+    {
+      "type": "fund",
+      "amount": 0.0005,
+      "reason": "Mission funding",
+      "taskId": "task_4cac448b-f1a0-41ff-bca7-fa8fd38866b9",
+      "balanceAfter": 99.987294,
+      "timestamp": "2026-04-22T05:28:52.885Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.0012,
+      "fee": 0.00024,
+      "netAmount": 0.00096,
+      "reason": "Payment for worker_fast",
+      "taskId": "task_4cac448b-f1a0-41ff-bca7-fa8fd38866b9",
+      "balanceAfter": 99.986094,
+      "timestamp": "2026-04-22T05:28:52.886Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.0008,
+      "fee": 0.00016,
+      "netAmount": 0.00064,
+      "reason": "Payment for validator_default",
+      "taskId": "task_4cac448b-f1a0-41ff-bca7-fa8fd38866b9",
+      "balanceAfter": 99.985294,
+      "timestamp": "2026-04-22T05:28:58.280Z"
+    },
+    {
+      "type": "fund",
+      "amount": 0.0005,
+      "reason": "Mission funding",
+      "taskId": "task_a0e7ddd1-8a3e-462c-ad49-ca9f6f972e44",
+      "balanceAfter": 99.985794,
+      "timestamp": "2026-04-22T05:30:13.887Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.0012,
+      "fee": 0.00024,
+      "netAmount": 0.00096,
+      "reason": "Payment for worker_fast",
+      "taskId": "task_a0e7ddd1-8a3e-462c-ad49-ca9f6f972e44",
+      "balanceAfter": 99.984594,
+      "timestamp": "2026-04-22T05:30:13.887Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.0008,
+      "fee": 0.00016,
+      "netAmount": 0.00064,
+      "reason": "Payment for validator_default",
+      "taskId": "task_a0e7ddd1-8a3e-462c-ad49-ca9f6f972e44",
+      "balanceAfter": 99.983794,
+      "timestamp": "2026-04-22T05:30:20.280Z"
+    },
+    {
+      "type": "fund",
+      "amount": 0.0005,
+      "reason": "Mission funding",
+      "taskId": "task_66c6e14b-2579-4f5f-871d-5dcff9223044",
+      "balanceAfter": 99.984294,
+      "timestamp": "2026-04-22T05:31:13.472Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.0012,
+      "fee": 0.00024,
+      "netAmount": 0.00096,
+      "reason": "Payment for worker_fast",
+      "taskId": "task_66c6e14b-2579-4f5f-871d-5dcff9223044",
+      "balanceAfter": 99.983094,
+      "timestamp": "2026-04-22T05:31:13.473Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.0008,
+      "fee": 0.00016,
+      "netAmount": 0.00064,
+      "reason": "Payment for validator_default",
+      "taskId": "task_66c6e14b-2579-4f5f-871d-5dcff9223044",
+      "balanceAfter": 99.982294,
+      "timestamp": "2026-04-22T05:31:20.295Z"
     }
   ]
 }
