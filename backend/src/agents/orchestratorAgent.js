@@ -49,6 +49,7 @@ class OrchestratorAgent extends BaseAgent {
   }
 
   async executeTask(inputText, taskType = 'summarize', options = {}) {
+    console.log(`[Orchestrator] Starting task execution: taskType=${taskType}`);
     const task = taskEngine.createTask(inputText, taskType, {
       requesterUid: options.requesterUid || null
     });
@@ -56,8 +57,10 @@ class OrchestratorAgent extends BaseAgent {
     const budget = options.budget || config.pricing.clientPayment;
     let totalSpent = 0;
 
+    console.log(`[Orchestrator] Task created: ${task.id}, budget=${budget}`);
     const workerEntry = agentRegistry.selectWorker(taskType, options.selectionStrategy);
     const validatorEntry = agentRegistry.selectValidator(options.selectionStrategy);
+    console.log(`[Orchestrator] Selected worker: ${workerEntry?.id}, validator: ${validatorEntry?.id}`);
 
     if (!workerEntry) {
       taskEngine.updateTaskStatus(task.id, 'failed');
@@ -94,15 +97,18 @@ class OrchestratorAgent extends BaseAgent {
 
       // Fund mission from user wallet to treasury
       if (options.requesterUid) {
+        console.log(`[Orchestrator:step2] Funding mission: uid=${options.requesterUid}, amount=${budget}`);
         await taskEngine.fundMission(options.requesterUid, budget, task.id);
         executionSteps.push({
           step: 2,
           message: `Mission funded: ${budget} USDC from user wallet to treasury`,
           timestamp: new Date().toISOString()
         });
+        console.log(`[Orchestrator:step2] ✓ Mission funded successfully`);
       }
 
       // Pay worker from treasury with platform fee
+      console.log(`[Orchestrator:step3] Paying worker: ${workerEntry.id}`);
       const { fee: workerFee, agentAmount: workerNetAmount } = this.splitPayment(pricing.workerPayment);
       await this.payAgentFromTreasury(
         worker.walletId,
@@ -117,12 +123,15 @@ class OrchestratorAgent extends BaseAgent {
         message: `Worker "${workerEntry.id}" paid ${workerNetAmount.toFixed(6)} USDC (fee: ${workerFee.toFixed(6)})`,
         timestamp: new Date().toISOString()
       });
+      console.log(`[Orchestrator:step3] ✓ Worker paid`);
 
+      console.log(`[Orchestrator:step4] Executing worker task`);
       const workerResult = await worker.execute({
         text: inputText,
         taskType,
         targetLang: options.targetLang
       });
+      console.log(`[Orchestrator:step4] ✓ Worker executed: result="${workerResult.result?.substring(0, 50)}..."`);
 
       executionSteps.push({
         step: 4,
@@ -131,6 +140,7 @@ class OrchestratorAgent extends BaseAgent {
       });
 
       // Pay validator from treasury with platform fee
+      console.log(`[Orchestrator:step5] Paying validator: ${validatorEntry.id}`);
       const { fee: validatorFee, agentAmount: validatorNetAmount } = this.splitPayment(pricing.validatorPayment);
       await this.payAgentFromTreasury(
         validator.walletId,
@@ -145,11 +155,14 @@ class OrchestratorAgent extends BaseAgent {
         message: `Validator "${validatorEntry.id}" paid ${validatorNetAmount.toFixed(6)} USDC (fee: ${validatorFee.toFixed(6)})`,
         timestamp: new Date().toISOString()
       });
+      console.log(`[Orchestrator:step5] ✓ Validator paid`);
 
+      console.log(`[Orchestrator:step6] Running validator`);
       const validationResult = await validator.execute({
         result: workerResult.result,
         originalText: inputText
       });
+      console.log(`[Orchestrator:step6] ✓ Validation result: valid=${validationResult.validation.valid}, score=${validationResult.validation.score}`);
 
       executionSteps.push({
         step: 6,
@@ -255,6 +268,11 @@ class OrchestratorAgent extends BaseAgent {
         settlementType: paymentAdapter.mode
       };
     } catch (error) {
+      const errorLocation = `${error.stack?.split('\n')[1] || 'unknown'}`;
+      console.error(`[Orchestrator:ERROR] Mission failed at: ${errorLocation}`);
+      console.error(`[Orchestrator:ERROR] Error message: ${error.message}`);
+      console.error(`[Orchestrator:ERROR] Full stack:\n${error.stack}`);
+
       taskEngine.updateTaskStatus(task.id, 'failed');
 
       agentRegistry.recordOutcome('worker', workerEntry.id, { success: false });
@@ -263,22 +281,27 @@ class OrchestratorAgent extends BaseAgent {
       // Refund on error
       if (options.requesterUid && totalSpent < budget) {
         try {
+          console.log(`[Orchestrator] Refunding unused budget: ${budget - totalSpent} USDC`);
           await taskEngine.refundUnusedBudget(options.requesterUid, task.id, budget, totalSpent);
+          console.log(`[Orchestrator] ✓ Refund successful`);
         } catch (refundError) {
-          console.error('Refund failed:', refundError.message);
+          console.error('[Orchestrator] Refund failed:', refundError.message);
         }
       }
 
       executionSteps.push({
         step: 99,
         message: `Error: ${error.message}`,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        location: errorLocation
       });
 
       return {
         taskId: task.id,
         status: 'failed',
         error: error.message,
+        errorLocation: errorLocation,
+        errorStack: error.stack,
         executionSteps,
         settlementType: paymentAdapter.mode
       };
