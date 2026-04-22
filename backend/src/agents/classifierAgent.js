@@ -5,20 +5,28 @@ import llmClient from '../core/llmClient.js';
  * ClassifierAgent optimisé avec GPT-5-nano
  * Classification intelligente multilingue de textes
  */
-const LLM_PROMPT = `You are an expert text classifier. Analyze the provided text and classify it into ONE of these categories:
-- technology
-- finance
-- business
-- health
-- science
-- entertainment
-- sports
-- education
-- environment
-- politics
-- other
+const LLM_PROMPT = `You are an expert text classifier with deep domain knowledge.
 
-Return ONLY the category name, nothing else.`;
+Analyze the provided text and classify it into the MOST APPROPRIATE category from:
+- technology: AI, software, blockchain, data science, cloud computing
+- finance: payments, USDC, markets, investments, banking
+- business: companies, startups, commerce, enterprise, sales
+- health: medicine, biotech, wellness, healthcare
+- science: research, physics, chemistry, biology, discovery
+- entertainment: movies, music, arts, celebrities, culture
+- sports: athletics, games, teams, competitions, championship
+- education: learning, schools, courses, academics, training
+- environment: climate, renewable energy, sustainability, ecology
+- politics: government, elections, legislation, policy
+- other: doesn't fit above categories
+
+Consider:
+- Primary subject matter
+- Language and terminology used
+- Context and industry focus
+- Implicit signals (not just explicit keywords)
+
+Return ONLY the category name in lowercase, nothing else.`;
 
 const TOPICS = {
   technology: ['ai', 'software', 'computer', 'blockchain', 'data', 'cloud', 'quantum', 'machine', 'algorithm', 'app', 'code', 'digital'],
@@ -57,12 +65,14 @@ class ClassifierAgent extends BaseAgent {
     // Try LLM first for quality
     if (llmClient.isEnabled()) {
       try {
+        console.log(`[${this.name}:execute] Trying LLM backend (model: gpt-5-nano-2025-08-07)...`);
         classification = await this.classifyWithLlm(text);
         backend = 'llm:gpt-5-nano';
         confidence = 0.95;
         this.llmSuccesses++;
+        console.log(`[${this.name}:execute] ✓ LLM succeeded via gpt-5-nano-2025-08-07: ${classification}`);
       } catch (error) {
-        console.warn(`[${this.name}] LLM classification failed:`, error.message);
+        console.warn(`[${this.name}:execute] LLM failed: ${error.message}`);
       }
       this.llmAttempts++;
     }

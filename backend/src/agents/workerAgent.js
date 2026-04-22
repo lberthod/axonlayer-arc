@@ -9,15 +9,54 @@ import llmClient from '../core/llmClient.js';
 const LLM_PROMPTS = {
   summarize: `Create a concise 1-2 sentence summary. Capture the main idea and key details. Do not repeat the original text verbatim. Output only the summary.`,
 
-  keywords: `You are an expert at identifying important keywords. Analyze the input text and extract exactly 5 of the most important, representative keywords or short phrases. These should be the concepts that best define the text's core content. Return ONLY the keywords as a comma-separated list, nothing else.`,
+  keywords: `You are an expert at identifying critical concepts and keywords. Analyze the input text deeply and extract exactly 5 of the most important, representative keywords or short phrases. These should be:
+- Concepts that define the text's core content
+- Specific enough to be meaningful (not generic)
+- Ranked by importance/relevance
+- Extractive (from the text) or derivative (key concepts)
 
-  rewrite: `You are a professional writer. Rewrite the provided text to be clearer, more engaging, and better structured while preserving all the original meaning and information. Improve sentence flow, word choice, and clarity. Return ONLY the rewritten version without any commentary.`,
+Return ONLY as comma-separated list: keyword1, keyword2, keyword3, keyword4, keyword5`,
 
-  translate: `You are a professional translator. Translate the provided text to {targetLang} while maintaining the original tone, style, and meaning. Ensure the translation is natural and idiomatic in the target language. Return ONLY the translated text.`,
+  rewrite: `You are a professional writer and editor. Rewrite the provided text to be:
+- Clearer and more accessible
+- More engaging and compelling
+- Better structured and organized
+- Proper grammar, spelling, flow
+- Preserve ALL original meaning and information exactly
+- Match original tone (formal/casual/technical)
 
-  classify: `You are an expert text classifier. Analyze the input text and determine its category from: business, technology, science, health, entertainment, sports, politics, education, other. Return ONLY the category name, nothing else.`,
+Return ONLY the rewritten version without any commentary or explanation.`,
 
-  sentiment: `You are an expert at sentiment analysis. Analyze the input text and determine its overall sentiment. Respond with ONLY one of: positive, negative, neutral.`
+  translate: `You are a professional translator. Translate the provided text to {targetLang} with these principles:
+- Preserve exact meaning and intent
+- Maintain original tone and style
+- Use natural, idiomatic {targetLang}
+- Keep technical terms accurate
+- Maintain formatting and structure
+- No explanation, commentary, or preamble
+Return ONLY the translated text.`,
+
+  classify: `You are an expert text classifier with deep domain knowledge. Analyze the input text carefully and classify it into the MOST APPROPRIATE single category:
+- business: companies, commerce, enterprise, sales, market
+- technology: AI, software, blockchain, cloud, data
+- science: research, experiments, discovery, physics, biology
+- health: medicine, biotech, wellness, healthcare
+- entertainment: movies, music, arts, culture, celebrities
+- sports: athletics, games, competitions, teams
+- politics: government, elections, legislation, policy
+- education: learning, schools, courses, academics
+- other: doesn't fit above categories
+
+Return ONLY the category name in lowercase.`,
+
+  sentiment: `You are an expert sentiment analyst. Analyze the input text and determine its overall sentiment with nuance:
+- positive: optimistic, satisfied, encouraging, upbeat
+- negative: disappointed, critical, pessimistic, frustrated
+- neutral: factual, objective, informational, balanced
+- mixed: contains both positive AND negative elements significantly
+
+Consider tone, context, sarcasm, and intensity.
+Return ONLY one: positive | negative | neutral | mixed`
 };
 
 class WorkerAgent extends BaseAgent {

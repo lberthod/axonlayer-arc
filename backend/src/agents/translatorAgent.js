@@ -6,16 +6,43 @@ import llmClient from '../core/llmClient.js';
  * Support de traductions multilingues de qualité professionnelle
  */
 const TRANSLATION_PROMPTS = {
-  fr: 'Translate the provided text to French. Maintain the original tone and meaning exactly. Return ONLY the translated text.',
-  es: 'Translate the provided text to Spanish. Maintain the original tone and meaning exactly. Return ONLY the translated text.',
-  de: 'Translate the provided text to German. Maintain the original tone and meaning exactly. Return ONLY the translated text.',
-  it: 'Translate the provided text to Italian. Maintain the original tone and meaning exactly. Return ONLY the translated text.',
-  pt: 'Translate the provided text to Portuguese. Maintain the original tone and meaning exactly. Return ONLY the translated text.',
-  ja: 'Translate the provided text to Japanese. Maintain the original tone and meaning exactly. Return ONLY the translated text.',
-  zh: 'Translate the provided text to Chinese (Simplified). Maintain the original tone and meaning exactly. Return ONLY the translated text.',
-  ko: 'Translate the provided text to Korean. Maintain the original tone and meaning exactly. Return ONLY the translated text.',
-  ru: 'Translate the provided text to Russian. Maintain the original tone and meaning exactly. Return ONLY the translated text.',
-  ar: 'Translate the provided text to Arabic. Maintain the original tone and meaning exactly. Return ONLY the translated text.'
+  fr: `You are a professional translator specializing in French. Translate the provided text to French with these principles:
+- Preserve exact meaning and intent (not literal word-for-word)
+- Match the original tone (formal, casual, technical, creative)
+- Use natural, idiomatic French (not awkward literal translation)
+- Keep technical terms accurate (USDC → USDC, blockchain → blockchain)
+- Maintain formatting, line breaks, structure
+Return ONLY the translated text, nothing else.`,
+
+  es: `You are a professional translator specializing in Spanish. Translate to Spanish with these principles:
+- Preserve exact meaning and intent
+- Match the original tone and register
+- Use natural, idiomatic Spanish
+- Keep technical terms accurate
+- Maintain original formatting
+Return ONLY the translated text, nothing else.`,
+
+  de: `You are a professional translator specializing in German. Translate to German with these principles:
+- Preserve exact meaning and intent
+- Match the original tone and register
+- Use natural, idiomatic German
+- Keep technical terms accurate
+- Maintain original formatting
+Return ONLY the translated text, nothing else.`,
+
+  it: `Traduci il testo fornito all'italiano mantenendo il significato esatto, il tono originale, e lo stile naturale. Usa termini tecnici accurati. Restituisci SOLO il testo tradotto.`,
+
+  pt: `Você é um tradutor profissional especializado em português. Traduza para português brasileiro mantendo significado exato, tom original, e linguagem natural. Retorne APENAS o texto traduzido.`,
+
+  ja: `あなたは日本語の専門翻訳者です。元の意味、トーン、スタイルを保つ自然な日本語に翻訳してください。翻訳されたテキストのみを返してください。`,
+
+  zh: `你是一位专业翻译者。将文本翻译为简体中文，保留原意、语气和风格。返回仅翻译后的文本。`,
+
+  ko: `당신은 전문 번역가입니다. 원래 의미, 톤, 스타일을 유지하면서 한국어로 번역하세요. 번역된 텍스트만 반환하세요.`,
+
+  ru: `Вы профессиональный переводчик. Переведите текст на русский язык, сохраняя исходное значение, тон и стиль. Верните только переведенный текст.`,
+
+  ar: `أنت مترجم متخصص. ترجم النص إلى العربية مع الحفاظ على المعنى والنبرة والأسلوب الأصلي. أرجع النص المترجم فقط.`
 };
 
 // Simple dictionary for fallback
@@ -48,11 +75,13 @@ class TranslatorAgent extends BaseAgent {
     // Try LLM first for quality
     if (llmClient.isEnabled()) {
       try {
+        console.log(`[${this.name}:execute] Trying LLM backend (model: gpt-5-nano-2025-08-07) for ${targetLang}...`);
         result = await this.translateWithLlm(text, targetLang);
         backend = 'llm:gpt-5-nano';
         this.llmSuccesses++;
+        console.log(`[${this.name}:execute] ✓ LLM succeeded via gpt-5-nano-2025-08-07: translated to ${targetLang} (length: ${result.length})`);
       } catch (error) {
-        console.warn(`[${this.name}] LLM translation failed:`, error.message);
+        console.warn(`[${this.name}:execute] LLM failed: ${error.message}`);
       }
       this.llmAttempts++;
     }
