@@ -10,9 +10,9 @@
       "fee": 0.00024,
       "netAmount": 0.00096,
       "reason": "Payment for worker_fast",
-      "taskId": "task_e40814bc-0e92-4a9e-93f6-5ac1d7f0e831",
+      "taskId": "task_ecc43c2c-f94f-483f-a612-4dc2c27b652b",
       "balanceAfter": 99.9988,
-      "timestamp": "2026-04-22T06:55:19.589Z"
+      "timestamp": "2026-04-22T07:07:32.945Z"
     },
     {
       "type": "agent_payment",
@@ -20,9 +20,9 @@
       "fee": 0.00016,
       "netAmount": 0.00064,
       "reason": "Payment for validator_default",
-      "taskId": "task_e40814bc-0e92-4a9e-93f6-5ac1d7f0e831",
+      "taskId": "task_ecc43c2c-f94f-483f-a612-4dc2c27b652b",
       "balanceAfter": 99.998,
-      "timestamp": "2026-04-22T06:55:19.590Z"
+      "timestamp": "2026-04-22T07:07:32.946Z"
     }
   ]
 }

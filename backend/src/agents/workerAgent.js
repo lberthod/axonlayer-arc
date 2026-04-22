@@ -90,13 +90,18 @@ class WorkerAgent extends BaseAgent {
     if (llmClient.isEnabled()) {
       try {
         console.log(`[${this.name}:execute] Trying LLM backend (model: ${config.llm.model})...`);
+        console.log(`[${this.name}:execute] Input length: ${text.length} chars, Task: ${taskType}`);
         result = await this.executeWithLlm(taskType, text, input.targetLang);
+        if (!result || result.trim().length === 0) {
+          throw new Error('LLM returned empty result');
+        }
         backend = `llm:${config.llm.model}`;
         confidence = 0.95; // High confidence from LLM
         this.llmSuccesses++;
         console.log(`[${this.name}:execute] ✓ LLM succeeded via ${config.llm.model}, result length=${result.length}`);
       } catch (error) {
-        console.warn(`[${this.name}:execute] LLM failed (${this.llmAttempts}/${this.llmSuccesses}): ${error.message}`);
+        console.warn(`[${this.name}:execute] LLM failed: ${error.message}`);
+        console.warn(`[${this.name}:execute] Falling back to local algorithm...`);
       }
       this.llmAttempts++;
     }
@@ -179,7 +184,8 @@ class WorkerAgent extends BaseAgent {
   }
 
   /**
-   * Smart local summarization using sentence extraction
+   * Smart local summarization using intelligent sentence selection
+   * Picks the 1-2 most important sentences that capture the essence
    */
   summarizeLocal(text) {
     const cleaned = text.replace(/\s+/g, ' ').trim();
@@ -187,15 +193,28 @@ class WorkerAgent extends BaseAgent {
 
     if (sentences.length === 0) {
       const words = cleaned.split(' ').filter(Boolean);
-      return words.slice(0, 20).join(' ') + (words.length > 20 ? '...' : '');
+      return words.slice(0, 15).join(' ') + (words.length > 15 ? '...' : '');
     }
 
     if (sentences.length === 1) {
-      return sentences[0];
+      return sentences[0].length > 200 ? sentences[0].slice(0, 200) + '...' : sentences[0];
     }
 
-    // Return first 1-2 most relevant sentences
-    return sentences.slice(0, Math.min(2, sentences.length)).join(' ');
+    // Score sentences by informativeness (length + keyword presence)
+    const scoredSentences = sentences.map((sent, idx) => {
+      const words = sent.split(/\s+/).length;
+      const score = Math.min(1, words / 20) + (idx === 0 ? 0.3 : 0); // Slight boost to first
+      return { sentence: sent, score, index: idx };
+    });
+
+    // Select top 1-2 sentences by score, preferring diverse positions
+    const selected = scoredSentences
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 2)
+      .sort((a, b) => a.index - b.index) // Re-order by appearance
+      .map(s => s.sentence);
+
+    return selected.join(' ');
   }
 
   /**
@@ -315,17 +334,18 @@ class WorkerAgent extends BaseAgent {
 
   /**
    * Get optimal token limit based on task type
+   * IMPORTANT: Must be high enough for LLM to complete without hitting max_output_tokens limit
    */
   getOptimalTokenLimit(taskType) {
     const limits = {
-      summarize: 150,
-      keywords: 100,
-      rewrite: 500,
-      translate: 500,
-      classify: 50,
-      sentiment: 50
+      summarize: 512,      // Increased from 150 - needs space to complete
+      keywords: 256,       // Increased from 100
+      rewrite: 1024,       // Increased from 500
+      translate: 1024,     // Increased from 500
+      classify: 128,       // Increased from 50
+      sentiment: 128       // Increased from 50
     };
-    return limits[taskType] || 150;
+    return limits[taskType] || 256;
   }
 }
 

@@ -1,12 +1,12 @@
 {
   "tasks": [
     {
-      "id": "task_b7a2924d-43da-4ccf-81eb-9cd07a911298",
+      "id": "task_a3c831f2-d45f-4d4a-a49e-3702b3541b6e",
       "input": "This is a long enough input text for a quick summarization job.",
       "taskType": "summarize",
       "status": "failed",
-      "createdAt": "2026-04-22T06:55:20.181Z",
-      "updatedAt": "2026-04-22T06:55:20.182Z",
+      "createdAt": "2026-04-22T07:07:33.539Z",
+      "updatedAt": "2026-04-22T07:07:33.541Z",
       "result": null,
       "validation": null,
       "transactions": [],
