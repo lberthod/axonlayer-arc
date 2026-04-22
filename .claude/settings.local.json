@@ -67,7 +67,12 @@
       "Bash(pkill -f \"node --env-file.*src/server.js\")",
       "Bash(curl -s -X POST http://localhost:3001/api/tasks -H 'Content-Type: application/json' -d @/tmp/isan_text.json)",
       "Bash(curl -s -X POST https://api.openai.com/v1/responses -H 'Content-Type: application/json' -H 'Authorization: Bearer sk-proj-YOUR-KEY-HERE' -d '{ *)",
-      "Bash(git rebase *)"
+      "Bash(git rebase *)",
+      "Bash(curl -s -X POST https://api.openai.com/v1/responses -H 'Content-Type: application/json' -H 'Authorization: Bearer sk-proj-YOUR-KEY-HERE' -d '{ *)",
+      "Bash(curl -s -X POST http://localhost:3001/api/tasks -H 'Content-Type: application/json' -d '{\"input\":\"Apple released new AI chips\",\"taskType\":\"classify\"}')",
+      "Bash(gh repo *)",
+      "Bash(curl -s -X POST https://api.openai.com/v1/responses -H 'Content-Type: application/json' -H 'Authorization: Bearer sk-proj-YOUR-KEY-HERE' -d '{ *)",
+      "Bash(pkill -f \"node --env-file\")"
     ]
   }
 }

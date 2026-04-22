@@ -5,17 +5,29 @@ import llmClient from '../core/llmClient.js';
  * SentimentAgent optimisé avec GPT-5-nano
  * Analyse de sentiments nuancée et contextuelle
  */
-const LLM_PROMPT = `You are an expert at sentiment analysis. Analyze the provided text and determine its overall sentiment.
+const LLM_PROMPT = `You are an expert sentiment analyst with nuanced understanding of emotions, context, and language.
 
-Respond with ONLY one of these in lowercase: "positive", "negative", "neutral", or "mixed"
+Analyze the provided text and determine its OVERALL sentiment:
 
-Consider:
-- Overall emotional tone
-- Intensity and conviction
-- Context and sarcasm
-- Mixed signals
+Categories:
+- positive: optimistic, satisfied, grateful, upbeat, encouraging
+- negative: disappointed, frustrated, concerned, critical, pessimistic
+- neutral: factual, objective, balanced, informational
+- mixed: contains both positive AND negative elements
 
-Respond with exactly one sentiment label.`;
+Nuances to consider:
+- Explicit emotional language (word choice, exclamation, intensity)
+- Implicit tone (sarcasm, irony, underlying meaning)
+- Context-dependent meaning (what seems negative might be neutral in context)
+- Intensity level (mild concern vs strong anger)
+- Multi-part content (paragraphs with different sentiments)
+
+Decision logic:
+- If clearly 1 sentiment → return that (positive/negative/neutral)
+- If significant elements of both + and − → return "mixed"
+- If mostly factual/informational → return "neutral"
+
+Return ONLY one: positive | negative | neutral | mixed`;
 
 const POSITIVE_WORDS = [
   'good', 'great', 'excellent', 'love', 'positive', 'amazing', 'wonderful', 'fantastic',
@@ -55,9 +67,11 @@ class SentimentAgent extends BaseAgent {
     // Try LLM first for nuanced analysis
     if (llmClient.isEnabled()) {
       try {
+        console.log(`[${this.name}:execute] Trying LLM backend (model: gpt-5-nano-2025-08-07)...`);
         const llmResult = await this.analyzeWithLlm(text);
         sentiment = llmResult.sentiment;
         score = llmResult.score;
+        console.log(`[${this.name}:execute] ✓ LLM succeeded via gpt-5-nano-2025-08-07: ${sentiment} (score: ${score})`);
         backend = 'llm:gpt-5-nano';
         confidence = 0.95;
         this.llmSuccesses++;

@@ -61,7 +61,17 @@ class LlmClient {
     }
 
     const data = await response.json();
-    return this.#extractOutputText(data);
+    const result = this.#extractOutputText(data);
+
+    // Debug logging for empty results
+    if (!result || result.trim().length === 0) {
+      console.error('[LLM:respond] WARNING: Empty result from API');
+      console.error('[LLM:respond] Response data:', JSON.stringify(data).slice(0, 500));
+      console.error('[LLM:respond] Model:', model || config.llm.model);
+      console.error('[LLM:respond] Input length:', input.length);
+    }
+
+    return result;
   }
 
   /**

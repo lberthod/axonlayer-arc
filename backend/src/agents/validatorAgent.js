@@ -129,8 +129,8 @@ class ValidatorAgent extends BaseAgent {
     const response = await llmClient.respond({
       instructions: prompt,
       input: originalText || '',
-      maxOutputTokens: 100,
-      reasoningEffort: 'low'
+      maxOutputTokens: 256,  // Increased from 100 - needs space to complete validation
+      reasoningEffort: 'minimal'  // Use minimal instead of low
     });
 
     return this.parseLlmValidation(response, originalText, result);

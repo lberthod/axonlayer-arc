@@ -174,6 +174,20 @@ export const config = {
     defaultScore: 0.75
   },
 
+  // Égalité: Fair distribution across all agents
+  equality: {
+    enabled: true,
+    equalizePayments: true,       // All agents paid equally per task
+    equalizeSelection: true,       // All agents have equal chance of selection
+    harmonizeScores: true,         // Validation scores normalized fairly
+    equalBasePayment: 0.0002,      // Base payment per agent (USDC)
+    shareDistribution: {
+      worker: 0.45,
+      validator: 0.25,
+      orchestrator: 0.30
+    }
+  },
+
   auth: {
     enabled: env.AUTH_ENABLED !== 'false',
     firebaseProjectId: env.FIREBASE_PROJECT_ID || '',

@@ -9,15 +9,54 @@ import llmClient from '../core/llmClient.js';
 const LLM_PROMPTS = {
   summarize: `Create a concise 1-2 sentence summary. Capture the main idea and key details. Do not repeat the original text verbatim. Output only the summary.`,
 
-  keywords: `You are an expert at identifying important keywords. Analyze the input text and extract exactly 5 of the most important, representative keywords or short phrases. These should be the concepts that best define the text's core content. Return ONLY the keywords as a comma-separated list, nothing else.`,
+  keywords: `You are an expert at identifying critical concepts and keywords. Analyze the input text deeply and extract exactly 5 of the most important, representative keywords or short phrases. These should be:
+- Concepts that define the text's core content
+- Specific enough to be meaningful (not generic)
+- Ranked by importance/relevance
+- Extractive (from the text) or derivative (key concepts)
 
-  rewrite: `You are a professional writer. Rewrite the provided text to be clearer, more engaging, and better structured while preserving all the original meaning and information. Improve sentence flow, word choice, and clarity. Return ONLY the rewritten version without any commentary.`,
+Return ONLY as comma-separated list: keyword1, keyword2, keyword3, keyword4, keyword5`,
 
-  translate: `You are a professional translator. Translate the provided text to {targetLang} while maintaining the original tone, style, and meaning. Ensure the translation is natural and idiomatic in the target language. Return ONLY the translated text.`,
+  rewrite: `You are a professional writer and editor. Rewrite the provided text to be:
+- Clearer and more accessible
+- More engaging and compelling
+- Better structured and organized
+- Proper grammar, spelling, flow
+- Preserve ALL original meaning and information exactly
+- Match original tone (formal/casual/technical)
 
-  classify: `You are an expert text classifier. Analyze the input text and determine its category from: business, technology, science, health, entertainment, sports, politics, education, other. Return ONLY the category name, nothing else.`,
+Return ONLY the rewritten version without any commentary or explanation.`,
 
-  sentiment: `You are an expert at sentiment analysis. Analyze the input text and determine its overall sentiment. Respond with ONLY one of: positive, negative, neutral.`
+  translate: `You are a professional translator. Translate the provided text to {targetLang} with these principles:
+- Preserve exact meaning and intent
+- Maintain original tone and style
+- Use natural, idiomatic {targetLang}
+- Keep technical terms accurate
+- Maintain formatting and structure
+- No explanation, commentary, or preamble
+Return ONLY the translated text.`,
+
+  classify: `You are an expert text classifier with deep domain knowledge. Analyze the input text carefully and classify it into the MOST APPROPRIATE single category:
+- business: companies, commerce, enterprise, sales, market
+- technology: AI, software, blockchain, cloud, data
+- science: research, experiments, discovery, physics, biology
+- health: medicine, biotech, wellness, healthcare
+- entertainment: movies, music, arts, culture, celebrities
+- sports: athletics, games, competitions, teams
+- politics: government, elections, legislation, policy
+- education: learning, schools, courses, academics
+- other: doesn't fit above categories
+
+Return ONLY the category name in lowercase.`,
+
+  sentiment: `You are an expert sentiment analyst. Analyze the input text and determine its overall sentiment with nuance:
+- positive: optimistic, satisfied, encouraging, upbeat
+- negative: disappointed, critical, pessimistic, frustrated
+- neutral: factual, objective, informational, balanced
+- mixed: contains both positive AND negative elements significantly
+
+Consider tone, context, sarcasm, and intensity.
+Return ONLY one: positive | negative | neutral | mixed`
 };
 
 class WorkerAgent extends BaseAgent {
@@ -51,13 +90,18 @@ class WorkerAgent extends BaseAgent {
     if (llmClient.isEnabled()) {
       try {
         console.log(`[${this.name}:execute] Trying LLM backend (model: ${config.llm.model})...`);
+        console.log(`[${this.name}:execute] Input length: ${text.length} chars, Task: ${taskType}`);
         result = await this.executeWithLlm(taskType, text, input.targetLang);
+        if (!result || result.trim().length === 0) {
+          throw new Error('LLM returned empty result');
+        }
         backend = `llm:${config.llm.model}`;
         confidence = 0.95; // High confidence from LLM
         this.llmSuccesses++;
         console.log(`[${this.name}:execute] ✓ LLM succeeded via ${config.llm.model}, result length=${result.length}`);
       } catch (error) {
-        console.warn(`[${this.name}:execute] LLM failed (${this.llmAttempts}/${this.llmSuccesses}): ${error.message}`);
+        console.warn(`[${this.name}:execute] LLM failed: ${error.message}`);
+        console.warn(`[${this.name}:execute] Falling back to local algorithm...`);
       }
       this.llmAttempts++;
     }
@@ -140,7 +184,8 @@ class WorkerAgent extends BaseAgent {
   }
 
   /**
-   * Smart local summarization using sentence extraction
+   * Smart local summarization using intelligent sentence selection
+   * Picks the 1-2 most important sentences that capture the essence
    */
   summarizeLocal(text) {
     const cleaned = text.replace(/\s+/g, ' ').trim();
@@ -148,15 +193,28 @@ class WorkerAgent extends BaseAgent {
 
     if (sentences.length === 0) {
       const words = cleaned.split(' ').filter(Boolean);
-      return words.slice(0, 20).join(' ') + (words.length > 20 ? '...' : '');
+      return words.slice(0, 15).join(' ') + (words.length > 15 ? '...' : '');
     }
 
     if (sentences.length === 1) {
-      return sentences[0];
+      return sentences[0].length > 200 ? sentences[0].slice(0, 200) + '...' : sentences[0];
     }
 
-    // Return first 1-2 most relevant sentences
-    return sentences.slice(0, Math.min(2, sentences.length)).join(' ');
+    // Score sentences by informativeness (length + keyword presence)
+    const scoredSentences = sentences.map((sent, idx) => {
+      const words = sent.split(/\s+/).length;
+      const score = Math.min(1, words / 20) + (idx === 0 ? 0.3 : 0); // Slight boost to first
+      return { sentence: sent, score, index: idx };
+    });
+
+    // Select top 1-2 sentences by score, preferring diverse positions
+    const selected = scoredSentences
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 2)
+      .sort((a, b) => a.index - b.index) // Re-order by appearance
+      .map(s => s.sentence);
+
+    return selected.join(' ');
   }
 
   /**
@@ -276,17 +334,18 @@ class WorkerAgent extends BaseAgent {
 
   /**
    * Get optimal token limit based on task type
+   * IMPORTANT: Must be high enough for LLM to complete without hitting max_output_tokens limit
    */
   getOptimalTokenLimit(taskType) {
     const limits = {
-      summarize: 150,
-      keywords: 100,
-      rewrite: 500,
-      translate: 500,
-      classify: 50,
-      sentiment: 50
+      summarize: 512,      // Increased from 150 - needs space to complete
+      keywords: 256,       // Increased from 100
+      rewrite: 1024,       // Increased from 500
+      translate: 1024,     // Increased from 500
+      classify: 128,       // Increased from 50
+      sentiment: 128       // Increased from 50
     };
-    return limits[taskType] || 150;
+    return limits[taskType] || 256;
   }
 }
 
