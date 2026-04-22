@@ -61,7 +61,10 @@
       "Bash(curl -s http://localhost:3001/api/tasks/mine)",
       "Bash(curl -s http://localhost:3001/api/tasks/task_359e0901-a201-4293-968c-5e99bc66137a)",
       "Bash(curl -s -X POST http://localhost:3001/api/auth/mission-wallet/sync)",
-      "Bash(curl -s -X POST http://localhost:3001/api/tasks -H 'Content-Type: application/json' -d '{ *)"
+      "Bash(curl -s -X POST http://localhost:3001/api/tasks -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(gh pr *)",
+      "Bash(netstat -tuln)",
+      "Bash(pkill -f \"node --env-file.*src/server.js\")"
     ]
   }
 }

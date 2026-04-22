@@ -77,11 +77,11 @@ class ValidatorAgent extends BaseAgent {
     // Try LLM validation first
     if (llmClient.isEnabled()) {
       try {
-        console.log(`[${this.name}:execute] Trying LLM validation...`);
+        console.log(`[${this.name}:execute] Trying LLM validation (model: ${config.llm.model})...`);
         validation = await this.validateWithLlm(result, originalText, taskType);
         usedLlm = true;
         this.llmSuccesses++;
-        console.log(`[${this.name}:execute] ✓ LLM validation succeeded: valid=${validation.valid}, score=${validation.score}`);
+        console.log(`[${this.name}:execute] ✓ LLM validation succeeded via ${config.llm.model}: valid=${validation.valid}, score=${validation.score}`);
       } catch (error) {
         console.warn(`[${this.name}:execute] LLM validation failed: ${error.message}`);
         console.error(`[${this.name}:execute] Stack: ${error.stack}`);

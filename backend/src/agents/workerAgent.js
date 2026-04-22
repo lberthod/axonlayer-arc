@@ -50,12 +50,12 @@ class WorkerAgent extends BaseAgent {
     // Try LLM first for quality
     if (llmClient.isEnabled()) {
       try {
-        console.log(`[${this.name}:execute] Trying LLM backend...`);
+        console.log(`[${this.name}:execute] Trying LLM backend (model: ${config.llm.model})...`);
         result = await this.executeWithLlm(taskType, text, input.targetLang);
-        backend = 'llm:gpt-5-nano';
+        backend = `llm:${config.llm.model}`;
         confidence = 0.95; // High confidence from LLM
         this.llmSuccesses++;
-        console.log(`[${this.name}:execute] ✓ LLM succeeded, result length=${result.length}`);
+        console.log(`[${this.name}:execute] ✓ LLM succeeded via ${config.llm.model}, result length=${result.length}`);
       } catch (error) {
         console.warn(`[${this.name}:execute] LLM failed (${this.llmAttempts}/${this.llmSuccesses}): ${error.message}`);
       }
