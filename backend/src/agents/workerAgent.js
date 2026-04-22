@@ -7,7 +7,7 @@ import llmClient from '../core/llmClient.js';
  * Utilise OpenAI pour qualité supérieure avec fallback local
  */
 const LLM_PROMPTS = {
-  summarize: `You are an expert text summarizer. Analyze the input text and create a concise 1-2 sentence summary that captures the key meaning and importance. Focus on the most critical information while being clear and readable. Return ONLY the summary without any preamble.`,
+  summarize: `Create a concise 1-2 sentence summary. Capture the main idea and key details. Do not repeat the original text verbatim. Output only the summary.`,
 
   keywords: `You are an expert at identifying important keywords. Analyze the input text and extract exactly 5 of the most important, representative keywords or short phrases. These should be the concepts that best define the text's core content. Return ONLY the keywords as a comma-separated list, nothing else.`,
 

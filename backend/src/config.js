@@ -249,7 +249,7 @@ export const config = {
       apiKey,
       baseUrl: sanitize(env.OPENAI_BASE_URL, 'https://api.openai.com/v1'),
       model: sanitize(env.OPENAI_MODEL, 'gpt-5-nano-2025-08-07'),
-      maxOutputTokens: Number(sanitize(env.OPENAI_MAX_OUTPUT_TOKENS, '512')) || 512,
+      maxOutputTokens: Number(sanitize(env.OPENAI_MAX_OUTPUT_TOKENS, '10512')) || 10512,
       reasoningEffort: effort
     };
   })()

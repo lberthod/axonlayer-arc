@@ -18,16 +18,19 @@ Result: {result}
 
 Provide a single assessment: "PASS" if the result meets quality standards, "FAIL" if it doesn't. Return ONLY "PASS" or "FAIL" followed by a brief score 0-100.`,
 
-  summarize: `Validate this text summary. Check if:
-1. It captures the main points of the original text
-2. It's concise yet complete
-3. There are no factual errors
-4. It's well-written and clear
+  summarize: `Validate this text summary. STRICT validation rules:
+1. Is it 1-2 sentences? (FAIL if more than 3 sentences)
+2. Is it under 100 words? (FAIL if longer)
+3. Does it capture the main theme/story? (FAIL if it just copies beginning)
+4. Is it a true SUMMARY, not copy-paste from original? (FAIL if it's just the original text quoted)
+5. Does it have NO introduction/preamble? (FAIL if it has "Here is...", "The summary is...", etc.)
+6. Are there factual errors? (FAIL if yes)
 
 Original: {input}
 Summary: {result}
 
-Return ONLY "PASS" or "FAIL" with a score 0-100.`,
+Be STRICT. If the summary is just the beginning of the original text, it's FAIL.
+Return ONLY "PASS" or "FAIL" followed by score 0-100.`,
 
   rewrite: `Validate this rewritten text. Check if:
 1. All original meaning is preserved

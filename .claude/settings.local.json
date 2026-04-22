@@ -64,7 +64,9 @@
       "Bash(curl -s -X POST http://localhost:3001/api/tasks -H 'Content-Type: application/json' -d '{ *)",
       "Bash(gh pr *)",
       "Bash(netstat -tuln)",
-      "Bash(pkill -f \"node --env-file.*src/server.js\")"
+      "Bash(pkill -f \"node --env-file.*src/server.js\")",
+      "Bash(curl -s -X POST http://localhost:3001/api/tasks -H 'Content-Type: application/json' -d @/tmp/isan_text.json)",
+      "Bash(curl -s -X POST https://api.openai.com/v1/responses -H 'Content-Type: application/json' -H 'Authorization: Bearer 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' -d '{ *)"
     ]
   }
 }
