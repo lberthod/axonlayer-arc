@@ -223,8 +223,10 @@ const statusFilter = ref('');
 
 async function refresh() {
   me.value = await api.getMe();
-  walletAddress.value = me.value.walletAddress || '';
-  missions.value = (await api.getMyTasks().catch(() => [])) || [];
+  if (me.value) {
+    walletAddress.value = me.value.walletAddress || '';
+    missions.value = (await api.getMyTasks().catch(() => [])) || [];
+  }
 }
 
 const completedCount = computed(() => missions.value.filter(m => m.status === 'completed').length);

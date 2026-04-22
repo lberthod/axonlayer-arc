@@ -189,7 +189,7 @@ export const config = {
   },
 
   auth: {
-    enabled: env.AUTH_ENABLED !== 'false',
+    enabled: false,
     firebaseProjectId: env.FIREBASE_PROJECT_ID || '',
     serviceAccountPath: env.FIREBASE_SERVICE_ACCOUNT || '',
     adminEmails: (env.ADMIN_EMAILS || '').split(',').map((s) => s.trim()).filter(Boolean),
