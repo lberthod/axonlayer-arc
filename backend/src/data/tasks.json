@@ -1697,6 +1697,84 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_62a1f544-bdbf-4d79-bca2-efe5c1436497",
+      "input": "The Arc ecosystem is revolutionizing how agents can coordinate work across blockchains using USDC for secure, instant settlement.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-22T04:20:35.367Z",
+      "updatedAt": "2026-04-22T04:20:35.368Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000629,
+        "workerPayment": 0.000264,
+        "validatorPayment": 0.000176,
+        "orchestratorMargin": 0.000189,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 129,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_36b699bc-541e-4614-bfc4-7985bfaedca8",
+      "input": "The Arc ecosystem is revolutionizing how agents can coordinate work across blockchains using USDC for secure, instant settlement.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-22T04:22:53.399Z",
+      "updatedAt": "2026-04-22T04:23:01.242Z",
+      "result": "The Arc ecosystem is revolutionizing how agents can coordinate work across blockchains using USDC for secure, instant settlement.",
+      "validation": {
+        "valid": true,
+        "score": 0.9,
+        "checks": {
+          "notEmpty": true,
+          "reasonableLength": true,
+          "hasContent": true,
+          "shorterThanSource": true,
+          "reasonableLengthDelta": false,
+          "noRepetition": true
+        },
+        "notes": "Validation passed: result meets quality standards",
+        "usedLlm": false,
+        "llmStats": {
+          "attempts": 0,
+          "successes": 0,
+          "successRate": "N/A"
+        }
+      },
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000629,
+        "workerPayment": 0.000264,
+        "validatorPayment": 0.000176,
+        "orchestratorMargin": 0.000189,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 129,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }
