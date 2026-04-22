@@ -48,40 +48,57 @@
       </div>
 
       <div class="bg-white rounded-lg shadow p-6">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-bold text-gray-800">My missions</h2>
-          <select
-            v-model="statusFilter"
-            class="text-sm px-3 py-1 border border-gray-300 rounded bg-white"
-          >
-            <option value="">All ({{ missions.length }})</option>
-            <option value="completed">✅ Completed ({{ completedCount }})</option>
-            <option value="failed">❌ Failed ({{ failedCount }})</option>
-            <option value="pending">⏳ Pending ({{ pendingCount }})</option>
-          </select>
+        <div class="space-y-3 mb-4">
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold text-gray-800">My missions</h2>
+            <select
+              v-model="statusFilter"
+              class="text-sm px-3 py-2 border border-gray-300 rounded bg-white font-medium"
+            >
+              <option value="">All ({{ missions.length }})</option>
+              <option value="completed">✅ Completed ({{ completedCount }})</option>
+              <option value="failed">❌ Failed ({{ failedCount }})</option>
+              <option value="pending">⏳ Pending ({{ pendingCount }})</option>
+            </select>
+          </div>
+          <p class="text-xs text-gray-500">Click any mission to view details, pricing, validation score, and execution timeline</p>
         </div>
 
-        <div v-if="filteredMissions.length" class="space-y-2 max-h-96 overflow-auto">
+        <div v-if="filteredMissions.length" class="space-y-3 max-h-96 overflow-auto">
           <div
             v-for="t in filteredMissions"
             :key="t.id"
-            @click="openTaskDetails(t.id)"
-            class="border border-gray-100 rounded p-3 text-sm cursor-pointer hover:bg-gray-50 hover:border-gray-300 transition"
+            class="border border-gray-200 rounded-lg p-4 hover:border-violet-400 hover:shadow-md transition bg-gradient-to-r from-gray-50 to-transparent"
           >
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-xs text-gray-500">{{ t.id.slice(0, 18) }}...</span>
-              <span
-                class="text-xs px-2 py-0.5 rounded"
-                :class="t.status === 'completed' ? 'bg-green-100 text-green-700' : t.status === 'failed' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'"
-              >{{ t.status }}</span>
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="font-mono text-xs text-gray-500 truncate">{{ t.id.slice(0, 18) }}...</span>
+                  <span
+                    class="text-xs px-2 py-0.5 rounded-full font-semibold whitespace-nowrap"
+                    :class="t.status === 'completed' ? 'bg-green-100 text-green-700' : t.status === 'failed' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'"
+                  >{{ t.status.toUpperCase() }}</span>
+                </div>
+                <p class="text-sm font-medium text-gray-900">{{ t.taskType }}</p>
+                <p class="text-sm text-gray-600 mt-1">
+                  💰 {{ t.pricing?.clientPayment?.toFixed(6) || '-' }} USDC
+                </p>
+                <p class="text-xs text-gray-400 mt-1">{{ new Date(t.createdAt).toLocaleString() }}</p>
+              </div>
+
+              <button
+                @click="openTaskDetails(t.id)"
+                :disabled="loadingTask"
+                class="px-4 py-2 rounded-lg bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed transition whitespace-nowrap"
+              >
+                {{ loadingTask ? '...' : 'View Details' }}
+              </button>
             </div>
-            <div class="text-gray-700 mt-1">{{ t.taskType }} · {{ t.pricing?.clientPayment || '-' }} USDC</div>
-            <div class="text-gray-400 text-xs mt-0.5">{{ new Date(t.createdAt).toLocaleString() }}</div>
           </div>
         </div>
-        <p v-else class="text-sm text-gray-500">
+        <p v-else class="text-sm text-gray-500 py-4">
           {{ statusFilter ? `No ${statusFilter} missions.` : 'No missions yet.' }}
-          <router-link to="/mission" class="text-blue-600 hover:text-blue-700 font-semibold">Head to Mission Control.</router-link>
+          <router-link to="/mission" class="text-blue-600 hover:text-blue-700 font-semibold">Head to Mission Control →</router-link>
         </p>
       </div>
     </div>
