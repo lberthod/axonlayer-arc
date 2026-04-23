@@ -72,7 +72,10 @@
       "Bash(curl -s -X POST http://localhost:3001/api/tasks -H 'Content-Type: application/json' -d '{\"input\":\"Apple released new AI chips\",\"taskType\":\"classify\"}')",
       "Bash(gh repo *)",
       "Bash(curl -s -X POST https://api.openai.com/v1/responses -H 'Content-Type: application/json' -H 'Authorization: Bearer sk-proj-YOUR-KEY-HERE' -d '{ *)",
-      "Bash(pkill -f \"node --env-file\")"
+      "Bash(pkill -f \"node --env-file\")",
+      "Bash(git branch *)",
+      "Bash(lsof -ti:3001)",
+      "Bash(grep -E \"^/.*\\\\.md$\")"
     ]
   }
 }

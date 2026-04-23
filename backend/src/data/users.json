@@ -8,19 +8,19 @@
       "apiKey": "sk_583fcd6db2fcf4d7f966ae53620c4301485165d1d0ade138",
       "walletAddress": null,
       "createdAt": "2026-04-19T07:38:00.679Z",
-      "lastLoginAt": "2026-04-21T08:49:36.831Z",
+      "lastLoginAt": "2026-04-23T10:24:58.751Z",
       "usage": {
-        "tasks": 51,
-        "totalSpent": 0.11865,
+        "tasks": 53,
+        "totalSpent": 0.124058,
         "today": {
-          "date": "2026-04-22",
-          "tasks": 39,
-          "spent": 0.107686
+          "date": "2026-04-23",
+          "tasks": 2,
+          "spent": 0.005408
         }
       },
       "missionWallet": {
         "address": "mission_FBL1A76M9lNRSftKFsrTPUgZwfB2_0c1176cb0876af51",
-        "balance": 19.98447
+        "balance": 19.98347
       },
       "wallet": {
         "address": "0xb57d96cc5b17a049ed8b5a8571b58dcd9bada5de",
