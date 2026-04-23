@@ -8,7 +8,7 @@
       "apiKey": "sk_583fcd6db2fcf4d7f966ae53620c4301485165d1d0ade138",
       "walletAddress": null,
       "createdAt": "2026-04-19T07:38:00.679Z",
-      "lastLoginAt": "2026-04-23T10:55:20.290Z",
+      "lastLoginAt": "2026-04-23T11:05:04.296Z",
       "usage": {
         "tasks": 53,
         "totalSpent": 0.124058,
@@ -23,13 +23,13 @@
         "balance": 19.98347
       },
       "wallet": {
-        "address": "0xb57d96cc5b17a049ed8b5a8571b58dcd9bada5de",
-        "privateKey": "c65ffb0761a2f9d26898bf251d40dcd26a81bd23c2b5a9a21ecca097af4638e3",
-        "publicKey": "0xb57d96cc5b17a049ed8b5a8571b58dcd9bada5de94a69b0a2fef164e19ed724c",
-        "mnemonic": "adapt abandon ability able about above absent absorb abstract abuse access accident",
+        "address": "0x1325079d2a81ca6882f91ee5764c78cb4823e72b",
+        "privateKey": "975e2de829c9d71aecd030b27d68a38b96b0665d7695268c470b3a2b7539ee0f",
+        "publicKey": "0x1325079d2a81ca6882f91ee5764c78cb4823e72b2c85a6c05803bd3787c54b6f",
+        "mnemonic": "abandon ability able about above absent absorb abstract abuse access accident account",
         "chain": "arc",
         "token": "USDC",
-        "createdAt": "2026-04-21T07:04:33.378Z",
+        "createdAt": "2026-04-23T11:03:35.342Z",
         "balance": 0
       },
       "balance": 0

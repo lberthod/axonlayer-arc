@@ -201,7 +201,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import { api } from '../services/api.js';
 import { toastSuccess, toastError } from '../stores/toastStore.js';
 import { walletStore } from '../stores/walletStore.js';
@@ -236,7 +236,11 @@ async function createWallet() {
   creatingWallet.value = true;
   try {
     const result = await api.createWallet();
-    walletStore.setWalletData(result.wallet);
+    // Update global store so all components sync
+    walletStore.updateFromUser({
+      wallet: result.wallet,
+      balance: 0
+    });
     toastSuccess('Wallet created! Save your private key in a secure location.');
   } catch (err) {
     toastError(err, 'Failed to create wallet');
@@ -263,7 +267,9 @@ async function checkBalance() {
     // Check balance on Arc blockchain
     const result = await api.getBlockchainBalance(walletData.value.address);
     const balance = result.balance || 0;
-    walletStore.setBalance(balance, new Date().toLocaleTimeString());
+
+    // Update global store - all components will sync
+    walletStore.updateBalance(balance);
 
     if (balance > 0) {
       toastSuccess(`✅ Balance confirmed: ${balance.toFixed(4)} USDC on Arc testnet!`);

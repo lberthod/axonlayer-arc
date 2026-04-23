@@ -181,7 +181,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, h } from 'vue';
+import { ref, computed, onMounted, onUnmounted, watch, h } from 'vue';
 import HeroBanner from '../components/HeroBanner.vue';
 import CostComparison from '../components/CostComparison.vue';
 import MissionBudgetBar from '../components/MissionBudgetBar.vue';
@@ -199,6 +199,7 @@ import AgentsPanel from '../components/AgentsPanel.vue';
 import WalletSetup from '../components/WalletSetup.vue';
 import { api } from '../services/api.js';
 import { toastError, toastSuccess, toastInfo } from '../stores/toastStore.js';
+import { walletStore } from '../stores/walletStore.js';
 
 const missionFormRef = ref(null);
 const metricsPanelRef = ref(null);
@@ -429,11 +430,22 @@ async function runBatch(n) {
 }
 
 let walletRefreshInterval = null;
+let unsubscribeWallet = null;
 
 onMounted(async () => {
   try {
     await refreshWallet();
     await loadData();
+
+    // Subscribe to wallet store changes
+    // When wallet is regenerated anywhere, auto-sync here
+    unsubscribeWallet = walletStore.subscribe(() => {
+      user.value = {
+        ...user.value,
+        wallet: walletStore.getWallet(),
+        balance: walletStore.getBalance()
+      };
+    });
 
     // Refresh wallet balance from blockchain every 30 seconds
     walletRefreshInterval = setInterval(() => {
@@ -447,6 +459,9 @@ onMounted(async () => {
 onUnmounted(() => {
   if (walletRefreshInterval) {
     clearInterval(walletRefreshInterval);
+  }
+  if (unsubscribeWallet) {
+    unsubscribeWallet();
   }
 });
 

@@ -158,9 +158,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { api } from '../services/api.js';
 import { toastSuccess, toastError } from '../stores/toastStore.js';
+import { walletStore } from '../stores/walletStore.js';
 
 const user = ref(null);
 const showWalletDetails = ref(false);
@@ -256,7 +257,9 @@ async function regenerateWallet() {
   try {
     const result = await api.createWallet();
     user.value = result.user;
-    toastSuccess('New wallet generated! Save your private key in a secure location.');
+    // Sync globally so all components update
+    walletStore.updateFromUser(result.user);
+    toastSuccess('New wallet generated! Synced to all pages. Save your private key in a secure location.');
   } catch (err) {
     toastError(err, 'Failed to generate wallet');
   } finally {
@@ -264,5 +267,20 @@ async function regenerateWallet() {
   }
 }
 
-onMounted(loadUser);
+let unsubscribeWallet = null;
+
+onMounted(() => {
+  loadUser();
+
+  // Subscribe to wallet changes from other components
+  unsubscribeWallet = walletStore.subscribe(() => {
+    loadUser();
+  });
+});
+
+onUnmounted(() => {
+  if (unsubscribeWallet) {
+    unsubscribeWallet();
+  }
+});
 </script>

@@ -4,25 +4,35 @@ const WALLET_STORAGE_KEY = 'arc_wallet_setup';
 const BALANCE_STORAGE_KEY = 'arc_wallet_balance';
 
 const state = reactive({
-  walletData: null,
-  currentBalance: null,
-  setupComplete: false,
-  lastBalanceCheck: 'Never'
+  // User data from API
+  user: null,
+  wallet: null,
+  balance: 0,
+
+  // Sync status
+  lastUpdated: null,
+  isLoading: false,
+
+  // Setup status
+  setupComplete: false
 });
+
+// Listeners for reactive updates
+const listeners = new Set();
+
+function notifyListeners() {
+  listeners.forEach(fn => fn());
+}
 
 // Load from localStorage on init
 function initializeFromStorage() {
   const stored = localStorage.getItem(WALLET_STORAGE_KEY);
   if (stored) {
     try {
-      state.walletData = JSON.parse(stored);
-      const balanceStored = localStorage.getItem(BALANCE_STORAGE_KEY);
-      if (balanceStored) {
-        const balanceData = JSON.parse(balanceStored);
-        state.currentBalance = balanceData.balance;
-        state.lastBalanceCheck = balanceData.lastCheck;
-      }
-      state.setupComplete = state.walletData && state.currentBalance > 0;
+      const data = JSON.parse(stored);
+      state.wallet = data.wallet || null;
+      state.balance = data.balance || 0;
+      state.setupComplete = state.wallet && state.balance >= 0;
     } catch (e) {
       console.error('Failed to load wallet from storage:', e);
     }
@@ -32,40 +42,87 @@ function initializeFromStorage() {
 export const walletStore = {
   state,
 
-  setWalletData(wallet) {
-    state.walletData = wallet;
-    localStorage.setItem(WALLET_STORAGE_KEY, JSON.stringify(wallet));
+  /**
+   * Update entire user + wallet from API
+   * Call this when user logs in or after any wallet change
+   */
+  updateFromUser(user) {
+    state.user = user;
+    state.wallet = user?.wallet || null;
+    state.balance = user?.balance || 0;
+    state.lastUpdated = new Date().toLocaleTimeString();
+    state.setupComplete = state.wallet && state.balance >= 0;
+
+    // Persist to localStorage
+    if (state.wallet) {
+      localStorage.setItem(WALLET_STORAGE_KEY, JSON.stringify({
+        wallet: state.wallet,
+        balance: state.balance,
+        updatedAt: state.lastUpdated
+      }));
+    }
+
+    notifyListeners();
   },
 
-  setBalance(balance, lastCheck) {
-    state.currentBalance = balance;
-    state.lastBalanceCheck = lastCheck || new Date().toLocaleTimeString();
+  /**
+   * Update only the balance (from blockchain sync)
+   */
+  updateBalance(balance) {
+    state.balance = balance;
+    state.lastUpdated = new Date().toLocaleTimeString();
+    state.setupComplete = state.wallet && state.balance >= 0;
+
     localStorage.setItem(BALANCE_STORAGE_KEY, JSON.stringify({
       balance,
-      lastCheck: state.lastBalanceCheck
+      lastUpdated: state.lastUpdated
     }));
-    state.setupComplete = balance > 0;
+
+    notifyListeners();
+  },
+
+  /**
+   * Subscribe to wallet changes
+   * Returns unsubscribe function
+   */
+  subscribe(callback) {
+    listeners.add(callback);
+    return () => listeners.delete(callback);
+  },
+
+  /**
+   * Notify components wallet was regenerated
+   */
+  onWalletRegenerated(user) {
+    state.isLoading = false;
+    this.updateFromUser(user);
   },
 
   clearWallet() {
-    state.walletData = null;
-    state.currentBalance = null;
+    state.wallet = null;
+    state.balance = 0;
+    state.user = null;
     state.setupComplete = false;
-    state.lastBalanceCheck = 'Never';
+    state.lastUpdated = null;
     localStorage.removeItem(WALLET_STORAGE_KEY);
     localStorage.removeItem(BALANCE_STORAGE_KEY);
+    notifyListeners();
   },
 
   isSetupComplete() {
     return state.setupComplete;
   },
 
-  getWalletData() {
-    return state.walletData;
+  getWallet() {
+    return state.wallet;
   },
 
   getBalance() {
-    return state.currentBalance;
+    return state.balance;
+  },
+
+  getUser() {
+    return state.user;
   }
 };
 
