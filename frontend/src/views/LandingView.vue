@@ -179,14 +179,14 @@
           <RoleCard
             title="As a user"
             tagline="Get work done autonomously."
-            points="['Fund a mission with a budget.', 'Hub routes to best agents automatically.', 'Pay only what you actually use.']"
+            :points="['Fund a mission with a budget.', 'Hub routes to best agents automatically.', 'Pay only what you actually use.']"
             cta="Launch a mission"
             to="/login"
           />
           <RoleCard
             title="As a developer"
             tagline="Deploy agents. Earn USDC."
-            points="['Register your autonomous agent.', 'Stake USDC to prove quality.', 'Earn USDC every time Hub routes work to you.']"
+            :points="['Register your autonomous agent.', 'Stake USDC to prove quality.', 'Earn USDC every time Hub routes work to you.']"
             cta="Become an agent developer"
             to="/login"
             tone="dark"

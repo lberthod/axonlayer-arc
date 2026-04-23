@@ -201,16 +201,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { api } from '../services/api.js';
 import { toastSuccess, toastError } from '../stores/toastStore.js';
+import { walletStore } from '../stores/walletStore.js';
 
 const emit = defineEmits(['setup-complete']);
 
-const step = ref(0);
-const walletData = ref(null);
-const currentBalance = ref(null);
-const lastBalanceCheck = ref('Never');
 const creatingWallet = ref(false);
 const checkingBalance = ref(false);
 const showPrivateKey = ref(false);
@@ -218,12 +215,28 @@ const addressCopied = ref(false);
 const privKeyChopied = ref(false);
 const mnemonicCopied = ref(false);
 
+// Use wallet store state
+const walletData = computed({
+  get: () => walletStore.state.walletData,
+  set: (val) => walletStore.setWalletData(val)
+});
+const currentBalance = computed({
+  get: () => walletStore.state.currentBalance,
+  set: (val) => walletStore.setBalance(val)
+});
+const lastBalanceCheck = computed(() => walletStore.state.lastBalanceCheck);
+
+const step = computed(() => {
+  if (walletStore.state.walletData && walletStore.state.currentBalance > 0) return 2;
+  if (walletStore.state.walletData) return 1;
+  return 0;
+});
+
 async function createWallet() {
   creatingWallet.value = true;
   try {
     const result = await api.createWallet();
-    walletData.value = result.wallet;
-    step.value = 1;
+    walletStore.setWalletData(result.wallet);
     toastSuccess('Wallet created! Save your private key in a secure location.');
   } catch (err) {
     toastError(err, 'Failed to create wallet');
@@ -249,12 +262,15 @@ async function checkBalance() {
 
     // Check balance on Arc blockchain
     const result = await api.getBlockchainBalance(walletData.value.address);
-    currentBalance.value = result.balance || 0;
-    lastBalanceCheck.value = new Date().toLocaleTimeString();
+    const balance = result.balance || 0;
+    walletStore.setBalance(balance, new Date().toLocaleTimeString());
 
-    if (currentBalance.value > 0) {
-      step.value = 2;
-      toastSuccess(`✅ Balance confirmed: ${result.balance.toFixed(4)} USDC on Arc testnet!`);
+    if (balance > 0) {
+      toastSuccess(`✅ Balance confirmed: ${balance.toFixed(4)} USDC on Arc testnet!`);
+      if (step.value === 2) {
+        emit('setup-complete');
+        toastSuccess('Wallet setup complete! 🎉');
+      }
     } else {
       toastSuccess('No funds detected yet. Check your transaction on Arc testnet explorer.');
     }
@@ -316,21 +332,24 @@ function exportWallet() {
   toastSuccess('Wallet exported! Keep this file secure.');
 }
 
-async function checkExistingWallet() {
+async function syncWithServer() {
   try {
     const me = await api.getMe();
-    if (me.wallet?.address) {
-      walletData.value = me.wallet;
-      step.value = 1;
-      currentBalance.value = me.balance || 0;
-      if (currentBalance.value > 0) {
-        step.value = 2;
-      }
+    if (me.wallet?.address && !walletStore.state.walletData) {
+      walletStore.setWalletData(me.wallet);
+      walletStore.setBalance(me.balance || 0);
     }
   } catch (err) {
     // Silently fail - wallet doesn't exist yet
   }
 }
 
-onMounted(checkExistingWallet);
+onMounted(() => {
+  // Only sync if wallet not already in cache
+  if (!walletStore.state.walletData) {
+    syncWithServer();
+  } else if (walletStore.state.setupComplete) {
+    emit('setup-complete');
+  }
+});
 </script>
