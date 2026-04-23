@@ -154,25 +154,27 @@ class TaskEngine {
       throw new Error('User not found');
     }
 
-    if (!user.missionWallet) {
-      throw new Error('User mission wallet not found');
+    // Use Arc blockchain wallet (not simulated missionWallet)
+    if (!user.wallet || !user.wallet.address) {
+      throw new Error('User Arc wallet not found');
     }
 
-    if (user.missionWallet.balance < amount) {
-      throw new Error(`Insufficient balance: ${user.missionWallet.balance} < ${amount}`);
+    // Check real blockchain balance
+    if (user.balance < amount) {
+      throw new Error(`Insufficient Arc wallet balance: ${user.balance} < ${amount}`);
     }
 
-    // Deduct from user mission wallet
-    user.missionWallet.balance = this.normalizeAmount(user.missionWallet.balance - amount);
+    // Deduct from Arc blockchain wallet balance
+    user.balance = this.normalizeAmount(user.balance - amount);
     await userStore.store.flush();
 
     // Add to treasury balance
-    await treasuryStore.addFunds(amount, 'Mission funding', taskId);
+    await treasuryStore.addFunds(amount, 'Mission funding from Arc wallet', taskId);
 
     return {
       status: 'funded',
       amount,
-      from: user.missionWallet.address,
+      from: user.wallet.address,  // Arc blockchain wallet
       to: treasuryStore.getAddress()
     };
   }
@@ -184,21 +186,21 @@ class TaskEngine {
     }
 
     const user = userStore.getByUid(userUid);
-    if (!user || !user.missionWallet) {
-      throw new Error('User mission wallet not found');
+    if (!user || !user.wallet) {
+      throw new Error('User Arc wallet not found');
     }
 
     // Deduct from treasury balance
-    await treasuryStore.refund(unused, 'Mission refund', taskId);
+    await treasuryStore.refund(unused, 'Mission refund to Arc wallet', taskId);
 
-    // Add back to user mission wallet
-    user.missionWallet.balance = this.normalizeAmount(user.missionWallet.balance + unused);
+    // Add back to user Arc wallet balance
+    user.balance = this.normalizeAmount(user.balance + unused);
     await userStore.store.flush();
 
     return {
       refunded: unused,
       from: treasuryStore.getAddress(),
-      to: user.missionWallet.address
+      to: user.wallet.address  // Arc blockchain wallet
     };
   }
 }
