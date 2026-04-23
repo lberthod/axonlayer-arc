@@ -25,7 +25,10 @@
           />
 
           <div class="flex items-center justify-between mb-2">
-            <h3 class="text-sm font-semibold text-gray-700">Wallet Balance</h3>
+            <div>
+              <h3 class="text-sm font-semibold text-gray-700">Mission Wallet</h3>
+              <p class="text-xs text-gray-500">Executes & pays agents</p>
+            </div>
             <button
               @click="refreshWallet(false)"
               :disabled="isRefreshingWallet"
@@ -35,13 +38,18 @@
             </button>
           </div>
 
+          <div class="bg-white rounded-lg border border-gray-200 p-4 mb-3">
+            <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Wallet Address</p>
+            <p class="text-xs font-mono text-gray-700 break-all">{{ missionWalletAddress }}</p>
+          </div>
+
           <MissionWallet
             :balance="missionWalletBalance"
             :reserved="reservedBalance"
             :remaining="availableBalance"
           />
 
-          <p v-if="lastWalletRefresh" class="text-xs text-gray-400 mt-1">
+          <p v-if="lastWalletRefresh" class="text-xs text-gray-400 mt-2">
             Last synced: {{ lastWalletRefresh }}
           </p>
 
@@ -253,18 +261,20 @@ const developerCount = computed(() => {
 
 // Mission Wallet computed properties
 const missionWalletBalance = computed(() => {
-  // Get real on-chain balance from Arc testnet
-  // Updated via /api/auth/me which queries blockchain
+  // Get the mission wallet balance (the wallet that executes and spends on missions)
+  const missionWallet = user.value?.missionWallet;
+  if (missionWallet?.balance !== undefined && missionWallet.balance !== null) {
+    return missionWallet.balance;
+  }
+  // Fallback to user balance
   if (user.value?.balance !== undefined && user.value.balance !== null) {
     return user.value.balance;
   }
-  // Fallback to mission wallet if available
-  const userMissionWallet = user.value?.missionWallet;
-  if (userMissionWallet) {
-    return userMissionWallet.balance || 0;
-  }
-  // Fallback to treasury balance
-  return balances.value['arc_treasury_wallet'] || 0;
+  return 0;
+});
+
+const missionWalletAddress = computed(() => {
+  return user.value?.missionWallet?.address || 'Not created';
 });
 
 const reservedBalance = computed(() => {
