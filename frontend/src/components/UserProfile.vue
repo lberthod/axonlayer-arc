@@ -26,33 +26,37 @@
         </div>
       </div>
 
-      <!-- Wallet Info -->
-      <div v-if="user?.wallet" class="bg-white rounded-lg p-6 mb-6 border-2 border-emerald-100">
+      <!-- Mission Wallet Info (The real wallet for missions) -->
+      <div v-if="user?.wallet" class="bg-white rounded-lg p-6 mb-6 border-2 border-violet-200">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="text-xl font-bold text-gray-900">Arc USDC Wallet</h2>
+          <div>
+            <h2 class="text-xl font-bold text-gray-900">Mission Wallet</h2>
+            <p class="text-xs text-gray-600">Your Arc USDC wallet - send funds here to execute missions</p>
+          </div>
           <span class="text-2xl">💰</span>
         </div>
 
-        <!-- Wallet Address -->
-        <div class="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-          <p class="text-xs text-gray-500 uppercase mb-2 font-semibold">Wallet Address</p>
+        <!-- Mission Wallet Address (Arc Testnet) -->
+        <div class="mb-4 p-4 bg-violet-50 rounded-lg border border-violet-200">
+          <p class="text-xs text-violet-700 uppercase mb-2 font-semibold">🔗 Wallet Address (Arc Testnet)</p>
+          <p class="text-xs text-violet-600 mb-2">Send USDC to this address to fund missions</p>
           <div class="flex items-center gap-2">
             <code class="flex-1 text-sm font-mono bg-white p-2 rounded break-all">{{ user.wallet.address }}</code>
             <button
               @click="copyWalletAddress"
-              class="px-3 py-2 rounded bg-emerald-100 text-emerald-700 hover:bg-emerald-200 text-sm font-semibold transition"
+              class="px-3 py-2 rounded bg-violet-100 text-violet-700 hover:bg-violet-200 text-sm font-semibold transition"
             >
               {{ addressCopied ? '✓ Copied' : 'Copy' }}
             </button>
           </div>
         </div>
 
-        <!-- Current On-Chain Balance -->
+        <!-- Mission Wallet Balance -->
         <div class="mb-4 p-4 bg-emerald-50 rounded-lg border-2 border-emerald-200">
           <div class="flex items-center justify-between mb-2">
             <div>
-              <p class="text-xs text-emerald-700 uppercase mb-1 font-bold">🔗 Arc Testnet Balance</p>
-              <p class="text-xs text-emerald-600">Real-time balance from blockchain</p>
+              <p class="text-xs text-emerald-700 uppercase mb-1 font-bold">💰 Available Balance</p>
+              <p class="text-xs text-emerald-600">Real-time balance from Arc blockchain</p>
             </div>
             <span class="text-sm text-emerald-600 bg-emerald-100 px-2 py-1 rounded-full font-semibold">On-Chain</span>
           </div>
