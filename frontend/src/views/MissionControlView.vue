@@ -24,11 +24,26 @@
             @budget-change="(v) => liveBudget = v"
           />
 
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-sm font-semibold text-gray-700">Wallet Balance</h3>
+            <button
+              @click="refreshWallet(false)"
+              :disabled="isRefreshingWallet"
+              class="px-2 py-1 text-xs bg-violet-100 text-violet-700 hover:bg-violet-200 rounded transition disabled:opacity-50"
+            >
+              {{ isRefreshingWallet ? '⟳ Syncing...' : '⟳ Refresh' }}
+            </button>
+          </div>
+
           <MissionWallet
             :balance="missionWalletBalance"
             :reserved="reservedBalance"
             :remaining="availableBalance"
           />
+
+          <p v-if="lastWalletRefresh" class="text-xs text-gray-400 mt-1">
+            Last synced: {{ lastWalletRefresh }}
+          </p>
 
           <MissionBudgetBar
             :budget="displayBudget"
@@ -158,7 +173,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, h } from 'vue';
+import { ref, computed, onMounted, onUnmounted, h } from 'vue';
 import HeroBanner from '../components/HeroBanner.vue';
 import CostComparison from '../components/CostComparison.vue';
 import MissionBudgetBar from '../components/MissionBudgetBar.vue';
@@ -271,14 +286,23 @@ const hasBalance = computed(() => {
   return balance > 0;
 });
 
-async function refreshWallet() {
+const isRefreshingWallet = ref(false);
+const lastWalletRefresh = ref(null);
+
+async function refreshWallet(silent = false) {
   try {
+    isRefreshingWallet.value = true;
     user.value = await api.getMe();
-    if (user.value?.wallet) {
+    lastWalletRefresh.value = new Date().toLocaleTimeString();
+    if (user.value?.wallet && !silent) {
       toastSuccess('Wallet setup complete!');
     }
   } catch (err) {
-    toastError(err, 'Failed to refresh wallet');
+    if (!silent) {
+      toastError(err, 'Failed to refresh wallet');
+    }
+  } finally {
+    isRefreshingWallet.value = false;
   }
 }
 
@@ -400,12 +424,25 @@ async function runBatch(n) {
   }
 }
 
+let walletRefreshInterval = null;
+
 onMounted(async () => {
   try {
     await refreshWallet();
     await loadData();
+
+    // Refresh wallet balance from blockchain every 30 seconds
+    walletRefreshInterval = setInterval(() => {
+      refreshWallet(true); // silent refresh
+    }, 30000);
   } catch (err) {
     toastError(err, 'Failed to load Mission Control');
+  }
+});
+
+onUnmounted(() => {
+  if (walletRefreshInterval) {
+    clearInterval(walletRefreshInterval);
   }
 });
 
