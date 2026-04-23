@@ -8,28 +8,28 @@
       "apiKey": "sk_583fcd6db2fcf4d7f966ae53620c4301485165d1d0ade138",
       "walletAddress": null,
       "createdAt": "2026-04-19T07:38:00.679Z",
-      "lastLoginAt": "2026-04-23T11:05:04.296Z",
+      "lastLoginAt": "2026-04-23T11:20:41.013Z",
       "usage": {
-        "tasks": 53,
-        "totalSpent": 0.124058,
+        "tasks": 56,
+        "totalSpent": 0.129983,
         "today": {
           "date": "2026-04-23",
-          "tasks": 2,
-          "spent": 0.005408
+          "tasks": 5,
+          "spent": 0.011333
         }
       },
       "missionWallet": {
         "address": "mission_FBL1A76M9lNRSftKFsrTPUgZwfB2_0c1176cb0876af51",
-        "balance": 19.98347
+        "balance": 19.982108
       },
       "wallet": {
-        "address": "0x1325079d2a81ca6882f91ee5764c78cb4823e72b",
-        "privateKey": "975e2de829c9d71aecd030b27d68a38b96b0665d7695268c470b3a2b7539ee0f",
-        "publicKey": "0x1325079d2a81ca6882f91ee5764c78cb4823e72b2c85a6c05803bd3787c54b6f",
-        "mnemonic": "abandon ability able about above absent absorb abstract abuse access accident account",
+        "address": "0xff361e4dd6072b469fc4abbc8612b46ef2d34f93",
+        "privateKey": "37854fd6e9bac13708d1d9fe1f49646eae268a38b7e976f0c0b1d2f35964ae7b",
+        "publicKey": "0xff361e4dd6072b469fc4abbc8612b46ef2d34f9367e21aeb6fd4b058208d7368",
+        "mnemonic": "acute adapt abandon ability able about above absent absorb abstract abuse access",
         "chain": "arc",
         "token": "USDC",
-        "createdAt": "2026-04-23T11:03:35.342Z",
+        "createdAt": "2026-04-23T11:06:18.402Z",
         "balance": 0
       },
       "balance": 0

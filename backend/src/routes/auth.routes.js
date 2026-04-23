@@ -18,7 +18,6 @@ function sanitize(user) {
     usage: user.usage,
     createdAt: user.createdAt,
     wallet: user.wallet,
-    missionWallet: user.missionWallet,
     balance: user.balance || 0
   };
 }
@@ -39,19 +38,18 @@ router.get('/me', async (req, res) => {
       return res.status(401).json({ error: 'authentication required' });
     }
 
-    const sanitized = sanitize(user);
-
     // Get real on-chain balance if user has wallet
-    if (sanitized.wallet?.address) {
+    if (user.wallet?.address) {
       try {
-        const onChainBalance = await arcBlockchain.getBalance(sanitized.wallet.address);
-        sanitized.onChainBalance = onChainBalance;
-        sanitized.balance = onChainBalance;
+        const onChainBalance = await arcBlockchain.getBalance(user.wallet.address);
+        user.balance = onChainBalance;
+        await userStore.store.flush();
       } catch (err) {
         console.warn('Could not fetch on-chain balance:', err.message);
       }
     }
 
+    const sanitized = sanitize(user);
     res.json(sanitized);
   } catch (error) {
     console.error('Error fetching user:', error);
@@ -208,54 +206,6 @@ router.get('/wallet/balance/:address', async (req, res) => {
       network: 'arc-testnet'
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Sync mission wallet balance from on-chain wallet
-// This allows users to fund missions using their Arc testnet USDC
-router.post('/mission-wallet/sync', async (req, res) => {
-  try {
-    let user = req.user;
-
-    // In dev mode, use first user
-    if (!config.auth.enabled && !user) {
-      const allUsers = Object.values(userStore.users);
-      if (allUsers.length > 0) {
-        user = allUsers[0];
-      }
-    }
-
-    if (!user) {
-      return res.status(401).json({ error: 'authentication required' });
-    }
-
-    if (!user.wallet?.address) {
-      return res.status(400).json({ error: 'user has no on-chain wallet' });
-    }
-
-    // Get on-chain balance
-    const onChainBalance = await arcBlockchain.getBalance(user.wallet.address);
-
-    // Update mission wallet balance with on-chain balance
-    if (!user.missionWallet) {
-      user.missionWallet = {
-        address: `mission_${user.uid}_${Math.random().toString(16).slice(2, 10)}`,
-        balance: 0
-      };
-    }
-
-    user.missionWallet.balance = onChainBalance;
-    await userStore.store.flush();
-
-    res.json({
-      success: true,
-      missionWallet: user.missionWallet,
-      onChainBalance,
-      message: `Mission wallet funded with ${onChainBalance.toFixed(6)} USDC from on-chain wallet`
-    });
-  } catch (error) {
-    console.error('Error syncing mission wallet:', error);
     res.status(500).json({ error: error.message });
   }
 });

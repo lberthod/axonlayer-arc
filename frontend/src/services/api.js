@@ -125,7 +125,6 @@ export const api = {
   rotateApiKey: () => request('/auth/apikey/rotate', { method: 'POST' }),
   setWalletAddress: (address) => request('/auth/wallet', { method: 'POST', body: { address } }),
   becomeProvider: () => request('/auth/role/provider', { method: 'POST' }),
-  syncMissionWallet: () => request('/auth/mission-wallet/sync', { method: 'POST' }),
 
   // wallet management
   createWallet: () => request('/auth/wallet/create', { method: 'POST' }),

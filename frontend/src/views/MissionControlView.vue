@@ -283,7 +283,7 @@ const availableBalance = computed(() => {
 
 // Wallet setup checks
 const hasWallet = computed(() => {
-  return user.value?.wallet?.address || user.value?.missionWallet?.address;
+  return !!user.value?.wallet?.address;
 });
 
 const hasBalance = computed(() => {

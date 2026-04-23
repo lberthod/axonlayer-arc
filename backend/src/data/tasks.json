@@ -183,6 +183,144 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_cce60ef8-9390-4afd-84fd-8af0f791251d",
+      "input": "Bien sûr — voici une petite histoire :\n\nDans la chaleur douce du matin, un homme nommé Arun marchait lentement dans une rue de **Khon Kaen**. Il portait une chemise claire, des sandales usées, et un vieux sac brun posé sur l’épaule. Chaque jour, il passait devant le marché local, saluait les vendeuses de fruits, respirait l’odeur du riz grillé et du poulet rôti, puis continuait sa route sans jamais se presser.\n\nArun n’était ni riche ni célèbre. Il vivait seul dans une petite maison modeste au bord d’un terrain où poussaient quelques bananiers. Pourtant, dans le quartier, beaucoup le connaissaient. Non pas pour son argent, mais pour son calme. Il avait cette manière de regarder les choses comme si tout avait encore une chance de s’arranger.\n\nAutrefois, il avait quitté son village avec de grands rêves. Il pensait trouver à Khon Kaen une vie rapide, brillante, moderne. Mais les années lui avaient appris autre chose. La ville lui avait offert du travail, des rencontres, des peines aussi. Il avait connu des jours difficiles, des promesses cassées, des soirées seul sous la pluie chaude d’Isan. Malgré cela, il était resté.\n\nUn soir, alors que le ciel devenait orange au-dessus du lac Bueng Kaen Nakhon, Arun s’assit sur un banc. À côté de lui, un jeune garçon pleurait en tenant un vélo cassé. Arun ne parla pas tout de suite. Il observa la roue tordue, sortit un petit outil de son sac, et commença à réparer doucement le vélo.\n\nLe garçon le regardait en silence.\n\n— Pourquoi vous m’aidez ? demanda-t-il enfin.\n\nArun sourit légèrement.\n\n— Parce qu’un jour, quelqu’un m’a aidé aussi. Et parce qu’une ville devient meilleure quand les inconnus ne le restent pas longtemps.\n\nLe vélo réparé, le garçon repartit avec un grand sourire. Arun, lui, resta encore un moment face à l’eau. Les lumières de Khon Kaen commençaient à briller. Il comprit alors que sa vie n’avait peut-être pas été celle qu’il avait imaginée, mais qu’elle avait tout de même du sens.\n\nEt dans la nuit tiède de Khon Kaen, parmi les motos, les néons et les grillons, Arun rentra chez lui le cœur un peu plus léger.\n\nSi tu veux, je peux t’en écrire une **version plus longue, plus triste, plus romantique ou plus “Isan rural”**.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-23T11:07:19.407Z",
+      "updatedAt": "2026-04-23T11:07:31.212Z",
+      "result": "Arun, un homme simple et calme vivant à Khon Kaen, mène une vie modeste entre ses souvenirs de rêves et les réalités de la ville.  \nUn soir, il aide un jeune garçon en réparant son vélo près du lac Bueng Kaen Nakhon, réalisant que la bonté peut donner du sens à sa vie et que la ville s’améliore quand les inconnus s’entraident.",
+      "validation": {
+        "valid": true,
+        "score": 0.9,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": true,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 90/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 2,
+          "successes": 2,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.002704,
+        "workerPayment": 0.001136,
+        "validatorPayment": 0.000757,
+        "orchestratorMargin": 0.000811,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 2204,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_8f5b89f9-d541-4abc-b9d7-14242090d1fb",
+      "input": "Bien sûr — voici une petite histoire :\n\nDans la chaleur douce du matin, un homme nommé Arun marchait lentement dans une rue de **Khon Kaen**. Il portait une chemise claire, des sandales usées, et un vieux sac brun posé sur l’épaule. Chaque jour, il passait devant le marché local, saluait les vendeuses de fruits, respirait l’odeur du riz grillé et du poulet rôti, puis continuait sa route sans jamais se presser.\n\nArun n’était ni riche ni célèbre. Il vivait seul dans une petite maison modeste au bord d’un terrain où poussaient quelques bananiers. Pourtant, dans le quartier, beaucoup le connaissaient. Non pas pour son argent, mais pour son calme. Il avait cette manière de regarder les choses comme si tout avait encore une chance de s’arranger.\n\nAutrefois, il avait quitté son village avec de grands rêves. Il pensait trouver à Khon Kaen une vie rapide, brillante, moderne. Mais les années lui avaient appris autre chose. La ville lui avait offert du travail, des rencontres, des peines aussi. Il avait connu des jours difficiles, des promesses cassées, des soirées seul sous la pluie chaude d’Isan. Malgré cela, il était resté.\n\nUn soir, alors que le ciel devenait orange au-dessus du lac Bueng Kaen Nakhon, Arun s’assit sur un banc. À côté de lui, un jeune garçon pleurait en tenant un vélo cassé. Arun ne parla pas tout de suite. Il observa la roue tordue, sortit un petit outil de son sac, et commença à réparer doucement le vélo.\n\nLe garçon le regardait en silence.\n\n— Pourquoi vous m’aidez ? demanda-t-il enfin.\n\nArun sourit légèrement.\n\n— Parce qu’un jour, quelqu’un m’a aidé aussi. Et parce qu’une ville devient meilleure quand les inconnus ne le restent pas longtemps.\n\nLe vélo réparé, le garçon repartit avec un grand sourire. Arun, lui, resta encore un moment face à l’eau. Les lumières de Khon Kaen commençaient à briller. Il comprit alors que sa vie n’avait peut-être pas été celle qu’il avait imaginée, mais qu’elle avait tout de même du sens.\n\nEt dans la nuit tiède de Khon Kaen, parmi les motos, les néons et les grillons, Arun rentra chez lui le cœur un peu plus léger.\n\nSi tu veux, je peux t’en écrire une **version plus longue, plus triste, plus romantique ou plus “Isan rural”**.",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-23T11:11:46.989Z",
+      "updatedAt": "2026-04-23T11:11:57.840Z",
+      "result": "Arun, homme modeste et serein de Khon Kaen, mène une vie simple mais pleine de dignité malgré ses rêves non réalisés. Un soir, en réparant le vélo d’un jeune garçon, il comprend que sa vie prend du sens grâce à la solidarité entre inconnus.",
+      "validation": {
+        "valid": true,
+        "score": 0.72,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": true,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 72/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 3,
+          "successes": 3,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.002704,
+        "workerPayment": 0.001136,
+        "validatorPayment": 0.000757,
+        "orchestratorMargin": 0.000811,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 2204,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_e74b07bc-77cf-4539-b5f3-6ab0d0b2ecb5",
+      "input": "saéut saltu salut",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-23T11:15:33.618Z",
+      "updatedAt": "2026-04-23T11:15:45.144Z",
+      "result": "The text appears to be a casual, repeated greeting, with the word \"salut\" meaning hello appearing twice. It’s essentially a simple, repeated hello.",
+      "validation": {
+        "valid": true,
+        "score": 0.9,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": true,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 90/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 4,
+          "successes": 4,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000517,
+        "workerPayment": 0.000217,
+        "validatorPayment": 0.000145,
+        "orchestratorMargin": 0.000155,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 17,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }

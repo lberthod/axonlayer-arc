@@ -27,27 +27,11 @@
       </div>
 
       <!-- Balance Display -->
-      <div class="grid grid-cols-2 gap-4">
-        <div class="rounded-lg p-4 bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200">
-          <p class="text-xs font-semibold uppercase mb-1 text-emerald-700">On-Chain Balance</p>
-          <p class="text-2xl font-bold text-emerald-900">{{ balance.toFixed(4) }} <span class="text-sm text-emerald-600">USDC</span></p>
-        </div>
-
-        <div class="rounded-lg p-4 bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200">
-          <p class="text-xs font-semibold uppercase mb-1 text-blue-700">Mission Wallet</p>
-          <p class="text-2xl font-bold text-blue-900">{{ missionBalance.toFixed(4) }} <span class="text-sm text-blue-600">USDC</span></p>
-        </div>
+      <div class="rounded-lg p-4 bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200">
+        <p class="text-xs font-semibold uppercase mb-1 text-emerald-700">💰 Arc Testnet Balance</p>
+        <p class="text-3xl font-bold text-emerald-900">{{ balance.toFixed(4) }} <span class="text-sm text-emerald-600">USDC</span></p>
+        <p class="text-xs text-emerald-600 mt-2">Real-time on-chain balance · Automatically synced</p>
       </div>
-
-      <!-- Sync Button -->
-      <button
-        @click="syncMissionWallet"
-        :disabled="syncing"
-        class="w-full mt-4 px-4 py-2 rounded-lg bg-violet-600 text-white font-semibold hover:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
-      >
-        {{ syncing ? 'Syncing...' : '🔄 Fund Mission Wallet from On-Chain' }}
-      </button>
-      <p v-if="lastSync" class="text-xs text-gray-500 mt-2">Last synced: {{ new Date(lastSync).toLocaleTimeString() }}</p>
 
       <!-- Info Box -->
       <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
@@ -102,21 +86,15 @@ import { toastSuccess, toastError } from '../stores/toastStore.js';
 
 const wallet = ref(null);
 const balance = ref(0);
-const missionBalance = ref(0);
-const totalUsed = ref(0);
 const copied = ref(false);
 const recentTransactions = ref([]);
-const syncing = ref(false);
-const lastSync = ref(null);
 
 async function loadWalletData() {
   try {
     const me = await api.getMe();
     if (me.wallet) {
       wallet.value = me.wallet;
-      balance.value = me.balance || me.onChainBalance || 0;
-      missionBalance.value = me.missionWallet?.balance || 0;
-      totalUsed.value = me.usage?.totalSpent || 0;
+      balance.value = me.balance || 0;
     }
     // Load transactions (if available)
     try {
@@ -127,20 +105,6 @@ async function loadWalletData() {
     }
   } catch (err) {
     toastError(err, 'Failed to load wallet data');
-  }
-}
-
-async function syncMissionWallet() {
-  syncing.value = true;
-  try {
-    const result = await api.syncMissionWallet();
-    missionBalance.value = result.missionWallet.balance;
-    lastSync.value = new Date();
-    toastSuccess(result.message || 'Mission wallet synced successfully!');
-  } catch (err) {
-    toastError(err, 'Failed to sync mission wallet');
-  } finally {
-    syncing.value = false;
   }
 }
 
