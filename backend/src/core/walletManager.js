@@ -105,6 +105,11 @@ class WalletManager {
       }
     }
 
+    // Fallback: use orchestrator_wallet for treasury requests
+    if (!entry && (walletIdOrAddress === 'arc_treasury_wallet' || walletIdOrAddress === 'treasury_wallet')) {
+      entry = this.wallets['orchestrator_wallet'];
+    }
+
     if (!entry?.privateKey) return null;
 
     const ethers = await this.ensureEthers();
