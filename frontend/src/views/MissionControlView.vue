@@ -26,8 +26,8 @@
 
           <div class="flex items-center justify-between mb-2">
             <div>
-              <h3 class="text-sm font-semibold text-gray-700">Mission Wallet</h3>
-              <p class="text-xs text-gray-500">Executes & pays agents</p>
+              <h3 class="text-sm font-semibold text-gray-700">Mission Wallet (Arc USDC)</h3>
+              <p class="text-xs text-gray-500">Your account on Arc blockchain - executes & pays agents</p>
             </div>
             <button
               @click="refreshWallet(false)"
@@ -260,21 +260,15 @@ const developerCount = computed(() => {
 });
 
 // Mission Wallet computed properties
+// Single wallet: Arc blockchain wallet = Mission Wallet
 const missionWalletBalance = computed(() => {
-  // Get the mission wallet balance (the wallet that executes and spends on missions)
-  const missionWallet = user.value?.missionWallet;
-  if (missionWallet?.balance !== undefined && missionWallet.balance !== null) {
-    return missionWallet.balance;
-  }
-  // Fallback to user balance
-  if (user.value?.balance !== undefined && user.value.balance !== null) {
-    return user.value.balance;
-  }
-  return 0;
+  // Get the ONE mission wallet balance from Arc blockchain
+  return user.value?.balance || 0;
 });
 
 const missionWalletAddress = computed(() => {
-  return user.value?.missionWallet?.address || 'Not created';
+  // The Arc blockchain wallet address
+  return user.value?.wallet?.address || 'Not created';
 });
 
 const reservedBalance = computed(() => {

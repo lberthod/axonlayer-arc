@@ -31,7 +31,7 @@
 │        │  AGENT A   │ │  AGENT B   │ │  AGENT C   │    ...      │
 │        │ (Developer │ │(Developer 2)│(Developer 3)│             │
 │        │    1)      │ │            │ │            │             │
-│        │ Earns 40%  │ │ Earns 40%  │ │ Earns 40%  │             │
+│        │ Earns 40%  │ │ Earns 40%  │ │ Earns 20%  │             │
 │        │ of USDC    │ │ of USDC    │ │ of USDC    │             │
 │        └────────────┘ └────────────┘ └────────────┘             │
 │             ↓              ↓              ↓                      │
