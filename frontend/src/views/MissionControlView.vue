@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 bg-gradient-to-br from-gray-50 via-white to-violet-50 min-h-full">
+  <div class="p-6 bg-slate-950 min-h-full">
     <div class="max-w-7xl mx-auto">
 
       <!-- Wallet Setup Required -->
@@ -26,21 +26,21 @@
 
           <div class="flex items-center justify-between mb-2">
             <div>
-              <h3 class="text-sm font-semibold text-gray-700">Mission Wallet (Arc USDC)</h3>
-              <p class="text-xs text-gray-500">Your account on Arc blockchain - executes & pays agents</p>
+              <h3 class="text-sm font-semibold text-slate-300">Mission Wallet (Arc USDC)</h3>
+              <p class="text-xs text-slate-500">Your account on Arc blockchain - executes & pays agents</p>
             </div>
             <button
               @click="refreshWallet(false)"
               :disabled="isRefreshingWallet"
-              class="px-2 py-1 text-xs bg-violet-100 text-violet-700 hover:bg-violet-200 rounded transition disabled:opacity-50"
+              class="px-2 py-1 text-xs bg-indigo-600 text-white hover:bg-indigo-700 rounded transition disabled:opacity-50"
             >
               {{ isRefreshingWallet ? '⟳ Syncing...' : '⟳ Refresh' }}
             </button>
           </div>
 
-          <div class="bg-white rounded-lg border border-gray-200 p-4 mb-3">
-            <p class="text-xs text-gray-500 uppercase tracking-wider mb-2">Wallet Address</p>
-            <p class="text-xs font-mono text-gray-700 break-all">{{ missionWalletAddress }}</p>
+          <div class="bg-slate-800 rounded-lg border border-indigo-500/20 p-4 mb-3">
+            <p class="text-xs text-slate-500 uppercase tracking-wider mb-2">Wallet Address</p>
+            <p class="text-xs font-mono text-slate-300 break-all">{{ missionWalletAddress }}</p>
           </div>
 
           <MissionWallet
@@ -84,7 +84,7 @@
         <div class="lg:col-span-2 space-y-6">
 
           <!-- Network activity hero -->
-          <div class="bg-gradient-to-br from-violet-600 to-fuchsia-600 text-white rounded-xl shadow-lg p-6">
+          <div class="bg-gradient-to-br from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg p-6">
             <p class="text-[10px] uppercase tracking-[0.2em] opacity-80 mb-2">Network activity</p>
             <div class="grid grid-cols-2 gap-4">
               <div>
@@ -103,7 +103,7 @@
                 <p class="text-xl font-bold">{{ networkStats.avgCost }}</p>
                 <p class="text-xs opacity-80">Avg cost / action</p>
               </div>
-              <div class="col-span-2 bg-white/10 rounded-lg px-3 py-2 mt-1">
+              <div class="col-span-2 bg-slate-800/10 rounded-lg px-3 py-2 mt-1">
                 <p class="text-[10px] opacity-80 uppercase tracking-wider">Orchestrator margin</p>
                 <p class="text-lg font-extrabold">{{ networkStats.margin }} USDC</p>
               </div>
@@ -111,13 +111,13 @@
           </div>
 
           <!-- Batch simulator -->
-          <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+          <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
             <div class="flex items-center justify-between mb-3">
               <div>
-                <h2 class="text-lg font-bold text-gray-900">Scale proof</h2>
-                <p class="text-xs text-gray-500">Batch 50+ missions to show microeconomic viability.</p>
+                <h2 class="text-lg font-bold text-slate-100">Scale proof</h2>
+                <p class="text-xs text-slate-500">Batch 50+ missions to show microeconomic viability.</p>
               </div>
-              <span class="text-[10px] uppercase tracking-wider text-violet-700 bg-violet-50 px-2 py-1 rounded-full font-semibold">
+              <span class="text-[10px] uppercase tracking-wider text-violet-700 bg-indigo-950 px-2 py-1 rounded-full font-semibold">
                 Scalability
               </span>
             </div>
@@ -135,7 +135,7 @@
             </div>
             <div
               v-if="batchResult"
-              class="grid grid-cols-2 gap-2 bg-gradient-to-br from-violet-50 to-fuchsia-50 border border-violet-100 rounded-lg p-3"
+              class="grid grid-cols-2 gap-2 bg-gradient-to-br from-indigo-950 to-purple-950 border border-indigo-500/20 rounded-lg p-3"
             >
               <BatchStat label="Missions executed" :value="batchResult.executed" />
               <BatchStat label="Total transactions" :value="batchResult.transactionsCreated" />
@@ -155,13 +155,13 @@
           <TransactionsTable :transactions="transactions" />
 
           <!-- Private fabric drawer -->
-          <details class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-            <summary class="cursor-pointer text-sm font-semibold text-gray-700">
+          <details class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
+            <summary class="cursor-pointer text-sm font-semibold text-slate-300">
               Inspect private execution fabric
             </summary>
             <div class="mt-4">
               <AgentsPanel ref="agentsPanelRef" />
-              <div class="mt-4 border-t border-gray-100 pt-4">
+              <div class="mt-4 border-t border-slate-700 pt-4">
                 <WalletBalances :balances="balances" />
               </div>
             </div>
@@ -173,8 +173,8 @@
       <!-- Empty State when wallet not ready -->
       <div v-if="!hasWallet || !hasBalance" class="text-center py-20">
         <div class="text-6xl mb-4">⏳</div>
-        <h2 class="text-2xl font-bold text-gray-900 mb-2">Setting up your wallet...</h2>
-        <p class="text-gray-600">Complete the setup above to launch missions</p>
+        <h2 class="text-2xl font-bold text-slate-100 mb-2">Setting up your wallet...</h2>
+        <p class="text-slate-400">Complete the setup above to launch missions</p>
       </div>
     </div>
   </div>
@@ -468,10 +468,10 @@ onUnmounted(() => {
 const BatchStat = {
   props: ['label', 'value', 'tone'],
   setup(p) {
-    const cls = p.tone === 'emerald' ? 'text-emerald-700' : 'text-gray-900';
+    const cls = p.tone === 'emerald' ? 'text-emerald-700' : 'text-slate-100';
     return () =>
       h('div', {}, [
-        h('p', { class: 'text-[10px] uppercase tracking-wider text-gray-500' }, p.label),
+        h('p', { class: 'text-[10px] uppercase tracking-wider text-slate-500' }, p.label),
         h('p', { class: `text-base font-bold ${cls}` }, p.value)
       ]);
   }

@@ -1,32 +1,32 @@
 <template>
-  <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+  <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
     <div class="flex items-start justify-between mb-4">
       <div>
-        <h2 class="text-xl font-bold text-gray-900">New mission</h2>
-        <p class="text-sm text-gray-500">Define your goal and budget — the hub handles execution automatically.</p>
+        <h2 class="text-xl font-bold text-slate-100">New mission</h2>
+        <p class="text-sm text-slate-500">Define your goal and budget — Axon Layer handles execution automatically.</p>
       </div>
-      <span class="text-[11px] uppercase tracking-wider text-violet-600 bg-violet-50 px-2 py-1 rounded-md font-semibold">
+      <span class="text-[11px] uppercase tracking-wider text-indigo-400 bg-indigo-950 px-2 py-1 rounded-md font-semibold">
         Private execution fabric
       </span>
     </div>
 
     <div class="space-y-4">
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Goal</label>
+        <label class="block text-sm font-medium text-slate-300 mb-2">Goal</label>
         <textarea
           v-model="goal"
           rows="4"
-          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
+          class="w-full px-3 py-2 bg-slate-900 border border-slate-600 text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-500"
           placeholder="e.g. Summarize this long article in two sentences..."
         ></textarea>
       </div>
 
       <div class="grid grid-cols-2 gap-3">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Mission type</label>
+          <label class="block text-sm font-medium text-slate-300 mb-2">Mission type</label>
           <select
             v-model="missionType"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
+            class="w-full px-3 py-2 bg-slate-900 border border-slate-600 text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             <option value="summarize">Summarize content</option>
             <option value="keywords">Extract keywords</option>
@@ -38,10 +38,10 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Optimize for</label>
+          <label class="block text-sm font-medium text-slate-300 mb-2">Optimize for</label>
           <select
             v-model="optimize"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
+            class="w-full px-3 py-2 bg-slate-900 border border-slate-600 text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             <option value="balanced">Balanced (quality × cost)</option>
             <option value="quality">Quality first</option>
@@ -51,10 +51,10 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">
+        <label class="block text-sm font-medium text-slate-300 mb-2">
           Budget (USDC)
-          <span class="text-xs text-gray-400 font-normal">— max you're willing to spend on this mission</span>
-          <span v-if="props.availableBalance > 0" class="block text-xs text-violet-600 mt-1">
+          <span class="text-xs text-slate-500 font-normal">— max you're willing to spend on this mission</span>
+          <span v-if="props.availableBalance > 0" class="block text-xs text-indigo-400 mt-1">
             Available: {{ props.availableBalance.toFixed(6) }} USDC
           </span>
         </label>
@@ -65,13 +65,13 @@
             min="0.0001"
             :max="props.availableBalance || undefined"
             step="0.0001"
-            class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
+            class="flex-1 px-3 py-2 bg-slate-900 border border-slate-600 text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
           <button
             v-for="b in presets.filter(p => p <= (props.availableBalance || Infinity))"
             :key="b"
             @click="budget = b"
-            class="text-xs px-2 py-1 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-200"
+            class="text-xs px-2 py-1 rounded-md bg-slate-700 text-slate-400 hover:bg-slate-600"
           >{{ b }}</button>
         </div>
       </div>
@@ -80,7 +80,7 @@
         <button
           @click="handleSubmit"
           :disabled="isLoading || !goal.trim() || !(budget > 0) || insufficientBudget"
-          class="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-3 px-4 rounded-lg font-semibold shadow-md hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 active:scale-95 relative overflow-hidden group"
+          class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold shadow-md hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 active:scale-95 relative overflow-hidden group"
         >
           <span v-if="!isLoading" class="relative z-10">Launch mission</span>
           <span v-else class="relative z-10 flex items-center justify-center gap-2">
@@ -91,8 +91,8 @@
         </button>
 
         <!-- Budget warning -->
-        <div v-if="insufficientBudget" class="p-3 bg-red-50 border border-red-200 rounded-lg">
-          <p class="text-sm text-red-800">
+        <div v-if="insufficientBudget" class="p-3 bg-red-950/20 border border-red-900/50 rounded-lg">
+          <p class="text-sm text-red-400">
             <span class="font-semibold">⚠️ Insufficient budget:</span> Estimated cost {{ estimatedCost.toFixed(5) }} USDC exceeds your budget {{ budget.toFixed(5) }} USDC.
             <router-link to="/user" class="underline font-semibold hover:no-underline">Add funds to your wallet</router-link>.
           </p>
