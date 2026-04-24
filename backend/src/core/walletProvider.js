@@ -2,6 +2,62 @@ import ledger from './ledger.js';
 import walletManager from './walletManager.js';
 import treasuryStore from './treasuryStore.js';
 import { config } from '../config.js';
+import pino from 'pino';
+
+const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
+
+/**
+ * Check if an error is retryable (transient network issue)
+ */
+function isRetryableRpcError(error) {
+  const msg = String(
+    error?.message ||
+    error?.shortMessage ||
+    error?.info?.error?.message ||
+    ''
+  ).toLowerCase();
+
+  return (
+    msg.includes('txpool is full') ||
+    msg.includes('timeout') ||
+    msg.includes('could not coalesce error') ||
+    msg.includes('nonce too low') ||
+    msg.includes('replacement fee too low') ||
+    msg.includes('econnrefused') ||
+    msg.includes('econnreset')
+  );
+}
+
+/**
+ * Sleep for N milliseconds
+ */
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/**
+ * Retry a function with exponential backoff for retryable errors
+ */
+async function sendWithRetry(sendFn, maxRetries = 5) {
+  let lastError;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await sendFn();
+    } catch (error) {
+      lastError = error;
+      if (!isRetryableRpcError(error)) {
+        throw error;
+      }
+      const delay = 1000 * attempt;
+      logger.warn(
+        { attempt, maxRetries, delay, error: error.message },
+        '[onchain] retryable RPC error, will retry'
+      );
+      await sleep(delay);
+    }
+  }
+  throw lastError;
+}
 
 /**
  * WalletProvider is the abstraction layer over the actual settlement backend.
@@ -32,7 +88,7 @@ function resolveAddress(walletIdOrAddress) {
     if (typeof walletIdOrAddress === 'string' && walletIdOrAddress.match(/^0x[0-9a-fA-F]{40}$/)) {
       return walletIdOrAddress;
     }
-  } catch (e) {
+  } catch (_e) {
     // Not an address, try other resolution methods
   }
 
@@ -144,6 +200,7 @@ class OnChainWalletProvider {
     let chainTxHash = null;
     let settlementType = 'onchain-dryrun';
     let confirmations = 0;
+    let retryableError = false;
 
     const live = await this.ensureReady();
 
@@ -163,20 +220,56 @@ class OnChainWalletProvider {
           throw new Error(`Sender "${from}" has no signer configured (resolved to: ${fromAddress})`);
         }
 
+        // LOG: Check both balances before sending
+        const provider = await walletManager.getProvider();
+        const nativeBalance = await provider.getBalance(signer.address);
+        let usdcBalance = 0n;
+        try {
+          const usdcContract = await walletManager.getUsdcContract(from);
+          if (usdcContract) {
+            usdcBalance = await usdcContract.balanceOf(signer.address);
+          }
+        } catch (_e) {
+          logger.warn({ err: _e }, '[wallet] Could not fetch USDC balance');
+        }
+
+        logger.info(
+          {
+            signer: signer.address,
+            recipient: toAddress,
+            amount,
+            nativeBalance: this.ethers.formatEther(nativeBalance),
+            usdcBalance: this.ethers.formatUnits(usdcBalance, 6)
+          },
+          '[OnChainWalletProvider] Sending transaction'
+        );
+
         let response;
         if (this.options.nativeUsdc) {
           // Arc: USDC is the native asset. Use a plain value transfer.
           const value = this.ethers.parseUnits(String(amount), this.options.nativeDecimals);
-          response = await signer.sendTransaction({ to: toAddress, value });
+
+          // Wrap sendTransaction with retry logic
+          response = await sendWithRetry(async () => {
+            return await signer.sendTransaction({ to: toAddress, value });
+          }, 5);
         } else {
           // Standard ERC-20 USDC transfer.
           const contract = await walletManager.getUsdcContract(from);
           const decimals = await contract.decimals();
           const scaled = this.ethers.parseUnits(String(amount), Number(decimals));
-          response = await contract.transfer(toAddress, scaled);
+
+          // Wrap transfer with retry logic
+          response = await sendWithRetry(async () => {
+            return await contract.transfer(toAddress, scaled);
+          }, 5);
         }
 
         chainTxHash = response.hash;
+        logger.info(
+          { txHash: chainTxHash, from: signer.address, to: toAddress, amount },
+          '[OnChainWalletProvider] Transaction broadcast successfully'
+        );
 
         // 2️⃣ CONFIRMATION PHASE: Wait for at least 1 block confirmation
         //    For Arc (sub-second settlement), this is typically < 2 seconds.
@@ -186,16 +279,41 @@ class OnChainWalletProvider {
           const receipt = await response.wait(1, 60000); // wait up to 60s for 1 confirm
           confirmations = receipt?.confirmations || 1;
           settlementType = 'onchain';
-          console.log(`[OnChainWalletProvider] tx ${chainTxHash} confirmed with ${confirmations} confirmations`);
+          logger.info(
+            { txHash: chainTxHash, confirmations },
+            '[OnChainWalletProvider] Transaction confirmed on-chain'
+          );
         } catch (confirmError) {
           // Confirmation timeout — still mark as broadcast but pending
           settlementType = 'onchain-pending';
-          console.warn(`[OnChainWalletProvider] tx ${chainTxHash} broadcast but confirmation timeout:`, confirmError.message);
+          logger.warn(
+            { txHash: chainTxHash, error: confirmError.message },
+            '[OnChainWalletProvider] Transaction broadcast but confirmation timeout'
+          );
         }
       } catch (error) {
-        console.error('[OnChainWalletProvider] on-chain transfer failed, aborting:', error.message);
-        // Do NOT mutate the ledger — surface the error to the caller so the
-        // orchestrator can mark the task as failed and not charge the client.
+        // Check if this is a retryable error
+        retryableError = isRetryableRpcError(error);
+
+        logger.error(
+          {
+            error: error.message,
+            isRetryable: retryableError,
+            from,
+            to,
+            amount,
+            taskId
+          },
+          '[OnChainWalletProvider] Transfer failed'
+        );
+
+        // For retryable errors, we'll return a special response
+        // that the orchestrator can retry instead of failing the task
+        if (retryableError) {
+          throw new Error(`onchain transfer failed (retryable): ${error.message}`);
+        }
+
+        // For non-retryable errors, fail the task immediately
         throw new Error(`onchain transfer failed: ${error.message}`);
       }
     }
@@ -210,7 +328,8 @@ class OnChainWalletProvider {
       settlementType,
       chainTxHash,
       confirmations,
-      onChainStatus: settlementType === 'onchain' ? 'confirmed' : 'pending'
+      onChainStatus: settlementType === 'onchain' ? 'confirmed' : 'pending',
+      retryableError
     };
   }
 

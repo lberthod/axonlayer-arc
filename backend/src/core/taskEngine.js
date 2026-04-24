@@ -200,9 +200,24 @@ class TaskEngine {
         from: user.wallet.address,
         to: treasuryAddr,
         chainTxHash: txResult.chainTxHash,
-        settlementType: txResult.settlementType
+        settlementType: txResult.settlementType,
+        retryable: false
       };
     } catch (err) {
+      // Check if this is a retryable error (temporary RPC issue like txpool full)
+      const isRetryable = err.message.includes('retryable');
+
+      if (isRetryable) {
+        return {
+          status: 'funding_pending',
+          error: err.message,
+          retryable: true,
+          userUid,
+          amount,
+          taskId
+        };
+      }
+
       throw new Error(`Failed to fund mission on-chain: ${err.message}`);
     }
   }

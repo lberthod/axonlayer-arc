@@ -98,7 +98,34 @@ class OrchestratorAgent extends BaseAgent {
       // Fund mission from user wallet to treasury
       if (options.requesterUid) {
         console.log(`[Orchestrator:step2] Funding mission: uid=${options.requesterUid}, amount=${budget}`);
-        await taskEngine.fundMission(options.requesterUid, budget, task.id);
+        const fundResult = await taskEngine.fundMission(options.requesterUid, budget, task.id);
+
+        // Check if funding is pending due to temporary RPC issue
+        if (fundResult.status === 'funding_pending') {
+          console.warn(`[Orchestrator:step2] ⚠ Funding pending (retryable): ${fundResult.error}`);
+          taskEngine.updateTaskStatus(task.id, 'funding_retry_pending');
+
+          executionSteps.push({
+            step: 2,
+            message: `Funding pending (RPC busy): ${fundResult.error}. Task can be retried.`,
+            timestamp: new Date().toISOString()
+          });
+
+          return {
+            taskId: task.id,
+            status: 'funding_retry_pending',
+            error: fundResult.error,
+            canRetry: true,
+            retryInfo: {
+              userUid: fundResult.userUid,
+              amount: fundResult.amount,
+              taskId: fundResult.taskId
+            },
+            executionSteps,
+            settlementType: paymentAdapter.mode
+          };
+        }
+
         executionSteps.push({
           step: 2,
           message: `Mission funded: ${budget} USDC from user wallet to treasury`,
