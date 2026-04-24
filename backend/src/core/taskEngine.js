@@ -165,8 +165,15 @@ class TaskEngine {
       throw new Error(`Insufficient Arc wallet balance: ${user.balance} < ${amount}`);
     }
 
-    // Create on-chain transaction: user wallet → treasury wallet
+    // Ensure user wallet is registered in walletManager (re-register on each use since it's memory-only)
+    const walletManager = (await import('./walletManager.js')).default;
+    await walletManager.load();
     const walletId = `user_${userUid}`;
+    if (!walletManager.has(walletId)) {
+      walletManager.registerUserWallet(userUid, user.wallet);
+    }
+
+    // Create on-chain transaction: user wallet → treasury wallet
     const treasuryAddr = treasuryStore.getAddress();
 
     try {

@@ -95,40 +95,31 @@ router.post('/wallet/create', async (req, res) => {
     // Generate a real Arc USDC wallet with private key
     const wallet = ArcWalletService.generateWallet();
 
+    let uid, user;
     if (!config.auth.enabled) {
-      // Dev mode: initialize with test balance for development
-      wallet.balance = 10.0;
-      return res.json({
-        success: true,
-        wallet: {
-          address: wallet.address,
-          privateKey: wallet.privateKey,
-          mnemonic: wallet.mnemonic,
-          chain: wallet.chain,
-          token: wallet.token,
-          createdAt: wallet.createdAt,
-          instructions: 'Dev wallet. 10 USDC test balance initialized for development.'
-        },
-        user: {
+      // Dev mode: use dev user UID
+      uid = 'dev-user-000';
+      // Ensure dev user exists in store
+      const existingUser = userStore.getByUid(uid);
+      if (!existingUser) {
+        await userStore.upsertFromFirebase({
           uid: 'dev-user-000',
           email: 'dev@localhost',
-          displayName: 'Dev User',
-          role: 'admin',
-          wallet: { address: wallet.address },
-          balance: 10.0
-        }
-      });
+          displayName: 'Dev User'
+        });
+      }
+    } else {
+      if (!req.user) return res.status(401).json({ error: 'authentication required' });
+      uid = req.user.uid;
     }
 
-    if (!req.user) return res.status(401).json({ error: 'authentication required' });
-
-    // Store wallet for user (including private key for security)
-    const user = await userStore.setWallet(req.user.uid, wallet);
+    // Store wallet for user (both dev and prod modes)
+    user = await userStore.setWallet(uid, wallet);
 
     // Register wallet in walletManager so it can be used for on-chain transactions
     const walletManager = (await import('../core/walletManager.js')).default;
     await walletManager.load();
-    walletManager.registerUserWallet(req.user.uid, wallet);
+    walletManager.registerUserWallet(uid, wallet);
 
     // Return wallet details INCLUDING private key (user must secure it)
     res.json({

@@ -23,7 +23,7 @@ const DEFAULT_STORE_PATH = path.join(__dirname, '../data/treasury.json');
 class TreasuryStore {
   constructor(storePath = DEFAULT_STORE_PATH, initialConfig = {}) {
     this.storePath = storePath;
-    this.address = initialConfig.address || 'arc_treasury_wallet';
+    this.address = initialConfig.address || '0xA89044f1d22e8CD292B3Db092C8De28eB1728d74';
     this.balance = initialConfig.balance || 0;
     this.feeRate = initialConfig.feeRate || 0.2;
     this.reserved = 0; // Total reserved for active missions
