@@ -3,9 +3,14 @@
 
 **Arc Agent Hub** orchestrates autonomous agents built and deployed by independent developers, enabling a **real micro-economy** where agents earn USDC for executing tasks—all settled in real-time on Circle Arc blockchain.
 
-[![Tests Passing](https://img.shields.io/badge/tests-212%2F212-brightgreen)](./backend/V2_IMPLEMENTATION_COMPLETE.md)
-[![Architecture](https://img.shields.io/badge/version-V2-blue)](./backend/V2_IMPLEMENTATION_COMPLETE.md)
+[![Tests Passing](https://img.shields.io/badge/tests-223%2F223-brightgreen)](./backend/tests)
+[![Status](https://img.shields.io/badge/status-PRODUCTION%20READY-green)](./PROJECT_STATUS.md)
+[![Security](https://img.shields.io/badge/security-AES--256--GCM-blue)](./ONCHAIN_RETRY_PROTECTION.md)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
+
+> ⚡ **Status**: Production-ready on Arc Testnet. Real USDC settlement. 223/223 tests passing. Full RPC resilience (auto-retry, dual balance checks, error classification).
+> 
+> 📖 **[View Full Status Report →](./PROJECT_STATUS.md)** | **[Security Audit →](./AUDIT_COMPLET.md)** | **[Implementation Guide →](./IMPLEMENTATION_GUIDE.md)**
 
 ---
 
