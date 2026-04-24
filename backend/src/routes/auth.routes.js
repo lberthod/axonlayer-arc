@@ -94,10 +94,10 @@ router.post('/wallet/create', async (req, res) => {
   try {
     // Generate a real Arc USDC wallet with private key
     const wallet = ArcWalletService.generateWallet();
-    wallet.balance = 0;
 
     if (!config.auth.enabled) {
-      // Dev mode: just return wallet
+      // Dev mode: initialize with test balance for development
+      wallet.balance = 10.0;
       return res.json({
         success: true,
         wallet: {
@@ -107,14 +107,15 @@ router.post('/wallet/create', async (req, res) => {
           chain: wallet.chain,
           token: wallet.token,
           createdAt: wallet.createdAt,
-          instructions: 'Dev wallet. Save your private key in a secure location.'
+          instructions: 'Dev wallet. 10 USDC test balance initialized for development.'
         },
         user: {
           uid: 'dev-user-000',
           email: 'dev@localhost',
           displayName: 'Dev User',
           role: 'admin',
-          wallet: { address: wallet.address }
+          wallet: { address: wallet.address },
+          balance: 10.0
         }
       });
     }

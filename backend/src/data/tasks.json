@@ -321,6 +321,128 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_aa0afc96-da39-4845-a39a-3e964e08cb6e",
+      "input": "test tesrat test",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-24T08:07:22.225Z",
+      "updatedAt": "2026-04-24T08:07:35.416Z",
+      "result": "The text appears to be a test phrase, featuring \"test\" and a misspelled variant \"tesrat,\" likely indicating a placeholder or testing input.",
+      "validation": {
+        "valid": true,
+        "score": 0.7,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": true,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 70/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 5,
+          "successes": 5,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000516,
+        "workerPayment": 0.000217,
+        "validatorPayment": 0.000144,
+        "orchestratorMargin": 0.000155,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 16,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_d5ec52bb-f8f1-4863-8dd0-cdf149714c0a",
+      "input": "ra rararfrarr raar",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-24T08:15:46.309Z",
+      "updatedAt": "2026-04-24T08:16:00.503Z",
+      "result": "The input consists of random letters with no coherent message or identifiable meaning.",
+      "validation": {
+        "valid": false,
+        "score": 0,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": false,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation failed: score 0/100. Result does not meet quality standards.",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 6,
+          "successes": 6,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000518,
+        "workerPayment": 0.000218,
+        "validatorPayment": 0.000145,
+        "orchestratorMargin": 0.000155,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 18,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_034e4f3a-3297-4975-b387-925f371befc5",
+      "input": "test test tesattt",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-24T08:16:19.450Z",
+      "updatedAt": "2026-04-24T08:16:19.452Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000517,
+        "workerPayment": 0.000217,
+        "validatorPayment": 0.000145,
+        "orchestratorMargin": 0.000155,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 17,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }
