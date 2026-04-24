@@ -125,6 +125,11 @@ router.post('/wallet/create', async (req, res) => {
     // Store wallet for user (including private key for security)
     const user = await userStore.setWallet(req.user.uid, wallet);
 
+    // Register wallet in walletManager so it can be used for on-chain transactions
+    const walletManager = (await import('../core/walletManager.js')).default;
+    await walletManager.load();
+    walletManager.registerUserWallet(req.user.uid, wallet);
+
     // Return wallet details INCLUDING private key (user must secure it)
     res.json({
       success: true,

@@ -64,6 +64,19 @@ class WalletManager {
     return Boolean(this.wallets[walletId]);
   }
 
+  // Register a user wallet dynamically (for Arc user wallets created at runtime)
+  registerUserWallet(userId, walletData) {
+    const walletId = `user_${userId}`;
+    this.wallets[walletId] = {
+      address: walletData.address,
+      privateKey: walletData.privateKey
+    };
+    // Clear signer cache for this wallet
+    delete this.signers[walletId];
+    delete this.signers[walletData.address];
+    return walletId;
+  }
+
   getAddress(walletId) {
     return this.wallets[walletId]?.address || null;
   }

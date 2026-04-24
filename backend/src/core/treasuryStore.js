@@ -102,7 +102,7 @@ class TreasuryStore {
   /**
    * Add funds to treasury (mission funding)
    */
-  async addFunds(amount, reason, taskId) {
+  async addFunds(amount, reason, taskId, chainTxHash = null) {
     const normalized = this.normalizeAmount(amount);
     this.balance = this.normalizeAmount(this.balance + normalized);
     this.reserved = this.normalizeAmount(this.reserved + normalized);
@@ -112,6 +112,7 @@ class TreasuryStore {
       amount: normalized,
       reason,
       taskId,
+      chainTxHash,
       balanceAfter: this.balance,
       timestamp: new Date().toISOString()
     });

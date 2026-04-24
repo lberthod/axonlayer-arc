@@ -443,6 +443,98 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_162e0c40-7bea-4a3c-bd6d-a098c271189b",
+      "input": "test testtt",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-24T08:18:05.933Z",
+      "updatedAt": "2026-04-24T08:18:16.719Z",
+      "result": "The user submitted a short test message containing two tokens: \"test\" and \"testtt.\"",
+      "validation": {
+        "valid": true,
+        "score": 0.6,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 60/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 1,
+          "successes": 1,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000511,
+        "workerPayment": 0.000215,
+        "validatorPayment": 0.000143,
+        "orchestratorMargin": 0.000153,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 11,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_4d2e79d8-630d-4fff-941f-a17ba025d266",
+      "input": "testte et e st e stest",
+      "taskType": "summarize",
+      "status": "completed",
+      "createdAt": "2026-04-24T08:20:42.646Z",
+      "updatedAt": "2026-04-24T08:20:55.306Z",
+      "result": "The text appears to be a sequence of fragmented \"test\" substrings with no clear message or meaning.",
+      "validation": {
+        "valid": true,
+        "score": 0.6,
+        "checks": {
+          "notEmpty": true,
+          "semanticallyValid": false,
+          "llmApproved": true,
+          "reasonableLengthDelta": false
+        },
+        "notes": "LLM validation passed: score 60/100",
+        "usedLlm": true,
+        "llmStats": {
+          "attempts": 2,
+          "successes": 2,
+          "successRate": "1.00"
+        }
+      },
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000522,
+        "workerPayment": 0.000243,
+        "validatorPayment": 0.000122,
+        "orchestratorMargin": 0.000157,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 22,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.002,
+          "validatorQuote": 0.001
+        }
+      },
+      "selectedWorker": "worker_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }

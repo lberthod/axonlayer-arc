@@ -1,8 +1,8 @@
 {
   "address": "arc_treasury_wallet",
-  "balance": 99.991892,
+  "balance": 99.992037,
   "feeRate": 0.2,
-  "reserved": -0.006194,
+  "reserved": -0.005772,
   "history": [
     {
       "type": "agent_payment",
@@ -303,6 +303,78 @@
       "taskId": "task_034e4f3a-3297-4975-b387-925f371befc5",
       "balanceAfter": 99.991892,
       "timestamp": "2026-04-24T08:16:19.452Z"
+    },
+    {
+      "type": "fund",
+      "amount": 0.0005,
+      "reason": "Mission funding from Arc wallet",
+      "taskId": "task_162e0c40-7bea-4a3c-bd6d-a098c271189b",
+      "balanceAfter": 99.992392,
+      "timestamp": "2026-04-24T08:18:05.934Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.000172,
+      "fee": 0.000034,
+      "netAmount": 0.000138,
+      "reason": "Payment for worker_fast",
+      "taskId": "task_162e0c40-7bea-4a3c-bd6d-a098c271189b",
+      "balanceAfter": 99.99222,
+      "timestamp": "2026-04-24T08:18:05.937Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.000114,
+      "fee": 0.000023,
+      "netAmount": 0.000091,
+      "reason": "Payment for validator_default",
+      "taskId": "task_162e0c40-7bea-4a3c-bd6d-a098c271189b",
+      "balanceAfter": 99.992106,
+      "timestamp": "2026-04-24T08:18:12.185Z"
+    },
+    {
+      "type": "refund",
+      "amount": 0.000142,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_162e0c40-7bea-4a3c-bd6d-a098c271189b",
+      "balanceAfter": 99.991964,
+      "timestamp": "2026-04-24T08:18:16.717Z"
+    },
+    {
+      "type": "fund",
+      "amount": 0.0005,
+      "reason": "Mission funding from Arc wallet",
+      "taskId": "task_4d2e79d8-630d-4fff-941f-a17ba025d266",
+      "balanceAfter": 99.992464,
+      "timestamp": "2026-04-24T08:20:42.656Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.000194,
+      "fee": 0.000039,
+      "netAmount": 0.000155,
+      "reason": "Payment for worker_default",
+      "taskId": "task_4d2e79d8-630d-4fff-941f-a17ba025d266",
+      "balanceAfter": 99.99227,
+      "timestamp": "2026-04-24T08:20:42.658Z"
+    },
+    {
+      "type": "agent_payment",
+      "grossAmount": 0.000098,
+      "fee": 0.00002,
+      "netAmount": 0.000078,
+      "reason": "Payment for validator_default",
+      "taskId": "task_4d2e79d8-630d-4fff-941f-a17ba025d266",
+      "balanceAfter": 99.992172,
+      "timestamp": "2026-04-24T08:20:50.198Z"
+    },
+    {
+      "type": "refund",
+      "amount": 0.000135,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_4d2e79d8-630d-4fff-941f-a17ba025d266",
+      "balanceAfter": 99.992037,
+      "timestamp": "2026-04-24T08:20:55.304Z"
     }
   ]
 }
