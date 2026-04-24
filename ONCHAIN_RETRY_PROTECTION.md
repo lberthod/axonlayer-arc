@@ -2,7 +2,8 @@
 
 **Date**: April 24, 2026  
 **Status**: ✅ Implemented and tested  
-**Objective**: Make Arc Agent Hub resilient to temporary RPC issues (txpool full, timeouts, etc.)
+**Project**: Axon Layer
+**Objective**: Make Axon Layer resilient to temporary RPC issues (txpool full, timeouts, etc.)
 
 ---
 

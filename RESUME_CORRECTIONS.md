@@ -1,4 +1,4 @@
-# ✅ RÉSUMÉ COMPLET DES CORRECTIONS - Arc Agent Hub
+# ✅ RÉSUMÉ COMPLET DES CORRECTIONS - Axon Layer
 
 **Date**: 24 Avril 2026  
 **Commit**: 🔒 Security hardening: Encrypt wallets, implement two-phase commit, fix pricing  

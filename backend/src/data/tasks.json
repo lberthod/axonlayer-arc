@@ -1,12 +1,12 @@
 {
   "tasks": [
     {
-      "id": "task_34561710-e28c-4216-8876-dcfca0df2091",
+      "id": "task_cf84c0ca-6e15-4ca1-a730-44b3be7b4688",
       "input": "This is a long enough input text for a quick summarization job.",
       "taskType": "summarize",
       "status": "failed",
-      "createdAt": "2026-04-24T08:54:18.133Z",
-      "updatedAt": "2026-04-24T08:54:18.134Z",
+      "createdAt": "2026-04-24T09:05:53.296Z",
+      "updatedAt": "2026-04-24T09:05:53.298Z",
       "result": null,
       "validation": null,
       "transactions": [],
@@ -23,12 +23,174 @@
           "taskType": "summarize",
           "multiplier": 1,
           "workerQuote": 0.0015,
-          "validatorQuote": 0.001
+          "validatorQuote": 0.001,
+          "minMargin": 0.00015000000000000001,
+          "marginGuaranteed": true
         }
       },
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.005
+    },
+    {
+      "id": "task_93254858-a57f-4eda-9531-b2535061bebc",
+      "input": "testtt",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-24T09:15:55.941Z",
+      "updatedAt": "2026-04-24T09:15:56.492Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000506,
+        "workerPayment": 0.000301,
+        "validatorPayment": 0.0002,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 6,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_04b9f8c5-d2ca-4f0b-9187-47db859017fc",
+      "input": "test",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-24T09:22:33.097Z",
+      "updatedAt": "2026-04-24T09:22:33.701Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000504,
+        "workerPayment": 0.000299,
+        "validatorPayment": 0.0002,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 4,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_490d9973-be7e-431d-b4d0-307f458488a1",
+      "input": "testtt",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-24T09:22:45.444Z",
+      "updatedAt": "2026-04-24T09:22:46.532Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000506,
+        "workerPayment": 0.000301,
+        "validatorPayment": 0.0002,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 6,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_aa215691-a628-4691-b1f0-204dc91409a4",
+      "input": "testttt",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-24T09:24:25.234Z",
+      "updatedAt": "2026-04-24T09:24:27.526Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000507,
+        "workerPayment": 0.000301,
+        "validatorPayment": 0.000201,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 7,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_42b60002-e2cb-4c74-be73-bc351dfa7dc5",
+      "input": "tstete",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-24T09:24:47.689Z",
+      "updatedAt": "2026-04-24T09:24:49.621Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000506,
+        "workerPayment": 0.000301,
+        "validatorPayment": 0.0002,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 6,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }
