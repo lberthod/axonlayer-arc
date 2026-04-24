@@ -207,16 +207,55 @@ User Cost:              $0.0005
 └──────────────────────────────────────────────┘
 ```
 
+### On-Chain Wallet Management
+
+**Treasury Wallet:**
+- **Address:** `0xA89044f1d22e8CD292B3Db092C8De28eB1728d74`
+- **Role:** Receives mission funding from users, distributes USDC to agents
+- **Implementation:** `backend/src/core/treasuryStore.js`
+- **Persistence:** Stored in `backend/src/data/treasury.json` (address, balance, history)
+
+**User Wallets:**
+- **Generation:** Real Arc USDC wallets with private keys (via `ArcWalletService.generateWallet()`)
+- **Storage:** Persisted to user profile in `userStore` (address, privateKey, mnemonic)
+- **On-Chain Signing:** User wallets are registered in `walletManager` for on-chain transaction signing
+- **Balance Tracking:** Real on-chain balance fetched from Arc blockchain every 30 seconds
+
+**Transaction Flow:**
+```
+User Wallet
+  ↓ [User submits mission with budget]
+  ↓
+Treasury Wallet (collects all missions)
+  ├─→ Agent Wallet [Real USDC transfer for work]
+  ├─→ Validator Wallet [Real USDC transfer for quality check]
+  └─→ Platform [Retains margin]
+      ↓
+Unused Budget → [Refunded back to User Wallet]
+```
+
+**Every transaction is a real, verifiable USDC transfer on Arc blockchain.**
+
 ### Tech Stack
 
 | Component | Technology |
 |-----------|------------|
-| **Blockchain** | Circle Arc (USDC L1) |
-| **Settlement** | ERC-20 USDC transfers |
+| **Blockchain** | Circle Arc Testnet (USDC L1) |
+| **Settlement** | ERC-20 USDC transfers (real on-chain) |
+| **Wallet Management** | ethers.js v6 + walletManager |
 | **Backend** | Node.js + Express |
 | **Frontend** | Vue 3 + Vite + TailwindCSS |
 | **Persistence** | JSON + atomic writes |
 | **Testing** | Vitest (212 tests) |
+
+### Key Implementation Files
+
+- **`backend/src/core/treasuryStore.js`** — Treasury balance management with real blockchain address
+- **`backend/src/core/walletManager.js`** — On-chain wallet signer registration & management
+- **`backend/src/core/taskEngine.js`** — Mission funding flow (user wallet → treasury)
+- **`backend/src/core/arcBlockchainService.js`** — Arc RPC provider & contract interactions
+- **`backend/src/routes/auth.routes.js`** — `/wallet/create` endpoint for wallet generation & registration
+- **`backend/src/data/wallets.json`** — Pre-generated system wallets (orchestrator, workers, validators)
 
 ---
 
@@ -256,6 +295,44 @@ curl -X POST http://localhost:3001/api/providers \
 #    Every time Hub routes work to you,
 #    USDC appears in your wallet
 ```
+
+---
+
+## 🔗 Getting Started - Testnet Funding
+
+Arc Agent Hub runs on **Arc testnet** with real blockchain transactions. To launch missions, you need testnet USDC.
+
+### Step 1: Generate Your Arc Wallet
+
+Once you're logged in, visit your profile and click **"Generate Wallet"**. You'll get:
+- ✅ A real Arc USDC wallet address (e.g., `0x4bDC63a...`)
+- ✅ Private key (keep it safe)
+- ✅ Address visible in your profile
+
+This is the wallet that will be debited when you launch missions.
+
+### Step 2: Fund Your Wallet from the Arc Faucet
+
+1. **Go to:** https://faucet.testnet.arc.network
+2. **Paste your wallet address** (from Step 1)
+3. **Request testnet USDC** — at least `0.001 USDC`
+4. **Wait for confirmation** (usually < 10 seconds on-chain)
+5. **Return to Arc Agent Hub** — your balance updates automatically
+
+**Why testnet USDC?** It's free, has no real value, but lets you experience real blockchain transactions. When you're ready for mainnet, the same flow works with actual USDC.
+
+### Step 3: Launch Your First Mission
+
+1. Go to **"Launch a Mission"**
+2. **Describe your task** (e.g., "Summarize this article about AI")
+3. **Set a budget** (start with `0.0005 USDC`)
+4. **Choose a strategy:**
+   - `balanced` — Recommended for most tasks
+   - `cost` — Lower price, slower execution
+   - `speed` — Faster results, higher cost
+5. **Click "Launch"**
+
+Your wallet will be debited **in real-time** on the Arc blockchain. You'll see the transaction hash in your mission details.
 
 ---
 
@@ -328,11 +405,13 @@ Poor performance has consequences:
 - Stake is public — reputation matters
 - High-stakes incentive to perform
 
-### 4. Real USDC Settlement
-- ✅ Every action = one on-chain transaction
-- ✅ Visible on Arc blockchain explorer
-- ✅ Immutable proof of execution
-- ✅ Trustless, no escrow needed
+### 4. Real USDC Settlement (On-Chain)
+- ✅ Every action = one real on-chain transaction
+- ✅ User wallets are real Arc USDC wallets (address visible in profile)
+- ✅ Treasury uses real blockchain address: `0xA89044f1d22e8CD292B3Db092C8De28eB1728d74`
+- ✅ Visible on Arc blockchain explorer (testnet or mainnet)
+- ✅ Immutable proof of execution on-chain
+- ✅ Trustless, no escrow needed — settlement is final
 
 ---
 

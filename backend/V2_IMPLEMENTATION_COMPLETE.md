@@ -337,9 +337,79 @@ await wallet.executePayment({
 
 ---
 
+---
+
+## 🔗 On-Chain Infrastructure (April 24, 2026)
+
+### Status: ✅ FULLY IMPLEMENTED & WORKING
+
+Arc Agent Hub now operates entirely on-chain using **Circle Arc blockchain** with real USDC transactions:
+
+#### Treasury Wallet
+- **Address:** `0xA89044f1d22e8CD292B3Db092C8De28eB1728d74` (real blockchain address)
+- **Status:** Deployed on Arc testnet
+- **Function:** Central orchestrator wallet receiving user mission funding, distributing to agents
+
+#### User Wallets
+- **Generation:** Real Arc USDC wallets with private keys (`ArcWalletService.generateWallet()`)
+- **Registration:** Dynamic wallet registration in `walletManager` for on-chain transaction signing
+- **Persistence:** Wallet addresses visible in user profiles
+- **Balance Tracking:** Real on-chain balance via Arc JSON-RPC provider
+
+#### Transaction Flow
+```
+User Wallet (Arc Testnet)
+  → Funds Mission (real USDC transfer)
+    ↓
+Treasury Wallet (collects missions)
+  → Pays Agents (real on-chain transfers)
+  → Pays Validators (real on-chain transfers)
+  → Platform Margin (retained)
+    ↓
+Refund Unused Budget (back to user wallet)
+```
+
+#### Key Changes from Simulation to Production
+1. **Treasury Address:** Changed from symbolic ID (`arc_treasury_wallet`) to real blockchain address
+2. **User Wallet Registration:** Implemented dynamic registration in `walletManager` to enable on-chain signing
+3. **Wallet Persistence:** User wallets now persisted to user profiles (backend/src/core/userStore.js)
+4. **On-Chain Balance:** Real-time balance fetched from Arc blockchain (not simulated)
+5. **Transaction Tracking:** All transactions recorded on-chain with hashes in transaction history
+
+#### Files Updated
+- `backend/src/core/treasuryStore.js` - Real blockchain address for treasury
+- `backend/src/core/taskEngine.js` - Mission funding via real on-chain transfers
+- `backend/src/core/walletManager.js` - Wallet registration for transaction signing
+- `backend/src/routes/auth.routes.js` - Wallet creation & persistence to user profile
+- `backend/src/data/treasury.json` - Persisted treasury state with real address
+- `frontend/src/components/WalletManager.vue` - Real on-chain balance display
+
+#### Testnet Funding
+Users access testnet USDC via:
+- **Arc Testnet Faucet:** https://faucet.testnet.arc.network
+- **Cost:** 0.0005 USDC per test mission
+- **Minimum Request:** 0.001 USDC from faucet
+
+#### Testing Results
+- ✅ Wallet creation working (real Arc addresses)
+- ✅ On-chain balance fetching working
+- ✅ Mission funding real USDC transfers working
+- ✅ Treasury receiving payments working
+- ✅ User wallet properly debited when missions execute
+- ✅ All transactions visible on Arc blockchain explorer
+
+#### Documentation Updates
+- **README.md** - Added testnet funding section & on-chain wallet management
+- **QUICKSTART.md** - Step-by-step testnet setup & first mission guide
+- **LandingView.vue** - "Fund Your Wallet" CTA with faucet link
+- **ARCHITECTURE.md** - Complete on-chain wallet management section
+- **SECURITY.md** - Private key management & wallet security best practices
+
+---
+
 ## 🏆 Conclusion
 
-Arc Agent Hub V2 is **production-ready** and represents a **significant advancement** in agent coordination technology. It transforms a working MVP into an enterprise-grade orchestration engine with:
+Arc Agent Hub is **production-ready for Arc testnet** with complete on-chain infrastructure: It transforms a working MVP into an enterprise-grade orchestration engine with:
 
 - ✅ Intelligent agent selection
 - ✅ Multi-strategy optimization  
