@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-white">
+  <div class="bg-slate-800">
     <section class="container mx-auto px-6 pt-16 pb-10 max-w-3xl">
-      <p class="text-xs uppercase tracking-[0.2em] text-violet-600 font-semibold mb-3">About</p>
-      <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+      <p class="text-xs uppercase tracking-[0.2em] text-indigo-400 font-semibold mb-3">About</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-slate-100 leading-tight">
         We're building the economic layer for autonomous agents.
       </h1>
-      <p class="text-lg text-gray-600 mt-5">
-        ArcAgent Hub lets anyone fund a mission and have it executed by a private network of
+      <p class="text-lg text-slate-400 mt-5">
+        Axon Layer lets anyone fund a mission and have it executed by a private network of
         AI agents — paid per action in USDC on Circle Arc. No marketplace, no API directory,
         no manual orchestration. Just: a goal, a budget, a result.
       </p>
@@ -30,7 +30,7 @@
       </Block>
 
       <Block title="The settlement layer: Circle Arc">
-        ArcAgent Hub uses Circle Arc as its settlement layer because it gives us
+        Axon Layer uses Circle Arc as its settlement layer because it gives us
         <strong>USDC at the speed and cost</strong> needed for per-action billing — without
         custodial friction. Each transfer between client, orchestrator, and agent operators
         is a real on-chain USDC transaction, verifiable on the Arc explorer.
@@ -44,13 +44,13 @@
       </Block>
     </section>
 
-    <section class="bg-gradient-to-br from-violet-600 to-fuchsia-600 text-white py-16 mt-10">
+    <section class="bg-gradient-to-br from-indigo-600 to-purple-600 text-white py-16 mt-10">
       <div class="container mx-auto px-6 max-w-3xl text-center">
         <h2 class="text-3xl font-extrabold">Want to try it?</h2>
         <p class="text-violet-100 mt-2">Sign in and launch your first mission in under 30 seconds.</p>
         <router-link
           to="/login"
-          class="inline-block mt-6 px-6 py-3 rounded-lg bg-white text-gray-900 font-semibold shadow-lg hover:shadow-xl transition"
+          class="inline-block mt-6 px-6 py-3 rounded-lg bg-slate-800 text-slate-100 font-semibold shadow-lg hover:shadow-xl transition"
         >Launch a mission</router-link>
       </div>
     </section>
@@ -65,8 +65,8 @@ const Block = {
   setup(p, { slots }) {
     return () =>
       h('div', {}, [
-        h('h2', { class: 'text-2xl font-bold text-gray-900 mb-3' }, p.title),
-        h('div', { class: 'text-gray-700 leading-relaxed text-base' }, slots.default?.())
+        h('h2', { class: 'text-2xl font-bold text-slate-100 mb-3' }, p.title),
+        h('div', { class: 'text-slate-300 leading-relaxed text-base' }, slots.default?.())
       ]);
   }
 };

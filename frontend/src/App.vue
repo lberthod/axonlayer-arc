@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white flex flex-col">
+  <div class="min-h-screen bg-slate-950 flex flex-col text-slate-100">
     <SettlementBanner v-if="!isMarketing" />
     <PublicHeader v-if="!auth.firebaseUser" />
     <AppHeader v-else />

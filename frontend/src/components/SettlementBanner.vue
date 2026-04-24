@@ -71,9 +71,9 @@ const toneClass = computed(() => {
 
 const badgeClass = computed(() => {
   switch (mode.value) {
-    case 'live':    return 'bg-white/20 text-white';
+    case 'live':    return 'bg-slate-800/20 text-white';
     case 'dryrun':  return 'bg-amber-900/20 text-amber-950';
-    default:        return 'bg-white/10 text-white';
+    default:        return 'bg-slate-800/10 text-white';
   }
 });
 </script>

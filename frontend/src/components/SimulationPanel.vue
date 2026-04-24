@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-white rounded-lg shadow-md p-6">
+  <div class="bg-slate-800 rounded-lg shadow-md p-6">
     <h2 class="text-xl font-bold mb-4 text-gray-800">Simulation</h2>
     <div class="space-y-4">
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Number of Missions</label>
+        <label class="block text-sm font-medium text-slate-300 mb-2">Number of Missions</label>
         <input
           v-model.number="missionCount"
           type="number"
@@ -29,18 +29,18 @@
           <p v-if="simulationResult.transactionsCreated >= 50" class="text-sm mt-1 font-semibold">
             ✅ 50+ transactions demonstrated
           </p>
-          <p v-else class="text-sm mt-1 text-gray-600">
+          <p v-else class="text-sm mt-1 text-slate-400">
             Run 50+ missions to demonstrate scale
           </p>
         </div>
 
         <div class="grid grid-cols-1 gap-2 text-sm">
-          <div class="flex justify-between items-center p-2 bg-white rounded-lg">
-            <span class="text-gray-600">Missions simulated</span>
-            <span class="font-bold text-gray-900">{{ simulationResult.executed }}</span>
+          <div class="flex justify-between items-center p-2 bg-slate-800 rounded-lg">
+            <span class="text-slate-400">Missions simulated</span>
+            <span class="font-bold text-slate-100">{{ simulationResult.executed }}</span>
           </div>
-          <div class="flex justify-between items-center p-2 bg-white rounded-lg">
-            <span class="text-gray-600">Avg cost per action</span>
+          <div class="flex justify-between items-center p-2 bg-slate-800 rounded-lg">
+            <span class="text-slate-400">Avg cost per action</span>
             <span class="font-bold text-emerald-600">{{ avgCostPerAction }} USDC</span>
           </div>
         </div>
@@ -85,7 +85,7 @@ const txBadgeClass = computed(() => {
   if (txCount >= 50) {
     return 'bg-emerald-100 border-2 border-emerald-300 text-emerald-800';
   }
-  return 'bg-gray-100 border border-gray-300 text-gray-700';
+  return 'bg-slate-700 border border-gray-300 text-slate-300';
 });
 
 defineExpose({ setRunning, setResult });

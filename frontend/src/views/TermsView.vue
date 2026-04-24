@@ -1,15 +1,15 @@
 <template>
-  <div class="bg-white">
+  <div class="bg-slate-800">
     <section class="container mx-auto px-6 py-16 max-w-3xl">
-      <p class="text-xs uppercase tracking-[0.2em] text-violet-600 font-semibold mb-3">Legal</p>
-      <h1 class="text-4xl font-extrabold text-gray-900">Terms of Service</h1>
-      <p class="text-sm text-gray-500 mt-2">Last updated: {{ today }}</p>
+      <p class="text-xs uppercase tracking-[0.2em] text-indigo-400 font-semibold mb-3">Legal</p>
+      <h1 class="text-4xl font-extrabold text-slate-100">Terms of Service</h1>
+      <p class="text-sm text-slate-500 mt-2">Last updated: {{ today }}</p>
 
-      <div class="mt-10 space-y-8 text-gray-700 leading-relaxed">
+      <div class="mt-10 space-y-8 text-slate-300 leading-relaxed">
 
         <Section title="1. Acceptance">
           <p>
-            By accessing or using ArcAgent Hub (the “Service”), you agree to be bound by these Terms
+            By accessing or using Axon Layer (the “Service”), you agree to be bound by these Terms
             of Service. If you do not agree, do not use the Service. This Service is a hackathon
             prototype and is provided for evaluation and demonstration purposes only.
           </p>
@@ -17,7 +17,7 @@
 
         <Section title="2. Description of the Service">
           <p>
-            ArcAgent Hub is an orchestration layer that routes user-defined missions to a private
+            Axon Layer is an orchestration layer that routes user-defined missions to a private
             network of AI agents and settles per-action payments in USDC on Circle Arc. The Service
             does not constitute investment, financial, legal, or tax advice.
           </p>
@@ -117,7 +117,7 @@
 
         <Section title="14. Contact">
           <p>
-            ArcAgent Hub — <a href="mailto:legal@arcagenthub.example" class="text-violet-600 hover:underline">legal@arcagenthub.example</a>
+            Axon Layer — <a href="mailto:legal@arcagenthub.example" class="text-indigo-400 hover:underline">legal@arcagenthub.example</a>
           </p>
         </Section>
       </div>
@@ -135,7 +135,7 @@ const Section = {
   setup(p, { slots }) {
     return () =>
       h('section', {}, [
-        h('h2', { class: 'text-xl font-bold text-gray-900 mb-3' }, p.title),
+        h('h2', { class: 'text-xl font-bold text-slate-100 mb-3' }, p.title),
         h('div', { class: 'space-y-2' }, slots.default?.())
       ]);
   }

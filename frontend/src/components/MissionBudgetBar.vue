@@ -1,20 +1,20 @@
 <template>
-  <div class="bg-white rounded-xl shadow-md p-4 border border-gray-100">
+  <div class="bg-slate-800 rounded-xl shadow-md p-4 border border-slate-700">
     <div class="flex items-center justify-between mb-3">
-      <h3 class="text-sm font-bold text-gray-900">Mission Budget</h3>
-      <span class="text-[10px] uppercase tracking-wider text-violet-600 font-semibold bg-violet-50 px-2 py-0.5 rounded-full">
+      <h3 class="text-sm font-bold text-slate-100">Mission Budget</h3>
+      <span class="text-[10px] uppercase tracking-wider text-indigo-400 font-semibold bg-indigo-950 px-2 py-0.5 rounded-full">
         Live Economic HUD
       </span>
     </div>
 
     <div class="grid grid-cols-3 gap-3 mb-4">
-      <div class="rounded-lg p-3 bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 transition-all duration-300">
-        <p class="text-[9px] uppercase tracking-wider text-gray-600 font-semibold mb-1">Budget</p>
-        <p class="text-lg font-bold text-gray-900 tracking-tight">{{ budget.toFixed(3) }} <span class="text-xs text-gray-500">USDC</span></p>
+      <div class="rounded-lg p-3 bg-gradient-to-br from-gray-50 to-gray-100 border border-indigo-500/20 transition-all duration-300">
+        <p class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold mb-1">Budget</p>
+        <p class="text-lg font-bold text-slate-100 tracking-tight">{{ budget.toFixed(3) }} <span class="text-xs text-slate-500">USDC</span></p>
       </div>
       <div class="rounded-lg p-3 bg-gradient-to-br from-violet-50 to-fuchsia-50 border border-violet-100 transition-all duration-300">
         <p class="text-[9px] uppercase tracking-wider text-violet-700 font-semibold mb-1">Spent</p>
-        <p class="text-lg font-bold text-violet-800 tracking-tight">{{ spent.toFixed(3) }} <span class="text-xs text-violet-600">USDC</span></p>
+        <p class="text-lg font-bold text-violet-800 tracking-tight">{{ spent.toFixed(3) }} <span class="text-xs text-indigo-400">USDC</span></p>
       </div>
       <div class="rounded-lg p-3 bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 transition-all duration-300">
         <p class="text-[9px] uppercase tracking-wider text-emerald-700 font-semibold mb-1">Remaining</p>
@@ -24,14 +24,14 @@
 
     <!-- Progress Bar -->
     <div class="relative">
-      <div class="h-4 bg-gradient-to-r from-gray-200 to-gray-100 rounded-full overflow-hidden shadow-sm border border-gray-200">
+      <div class="h-4 bg-gradient-to-r from-gray-200 to-gray-100 rounded-full overflow-hidden shadow-sm border border-indigo-500/20">
         <div
           class="h-full rounded-full transition-all duration-500 ease-out shadow-lg"
           :class="progressColor"
           :style="{ width: `${progressPercentage}%` }"
         ></div>
       </div>
-      <p class="text-[10px] text-gray-500 mt-2 text-right font-semibold">
+      <p class="text-[10px] text-slate-500 mt-2 text-right font-semibold">
         {{ progressPercentage.toFixed(0) }}% utilized
       </p>
     </div>

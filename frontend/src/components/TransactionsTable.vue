@@ -1,18 +1,18 @@
 <template>
-  <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-    <h2 class="text-xl font-bold mb-4 text-gray-900">Execution Transactions</h2>
+  <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
+    <h2 class="text-xl font-bold mb-4 text-slate-100">Execution Transactions</h2>
 
     <div v-if="reversedTransactions.length > 0" class="overflow-x-auto">
       <table class="w-full">
         <thead>
-          <tr class="border-b border-gray-200 bg-gray-50/50">
-            <th class="text-left py-2 px-3 text-sm font-medium text-gray-600">Type</th>
-            <th class="text-left py-2 px-3 text-sm font-medium text-gray-600">From</th>
-            <th class="text-left py-2 px-3 text-sm font-medium text-gray-600">To</th>
-            <th class="text-left py-2 px-3 text-sm font-medium text-gray-600">Amount</th>
-            <th class="text-left py-2 px-3 text-sm font-medium text-gray-600">Reason</th>
-            <th class="text-left py-2 px-3 text-sm font-medium text-gray-600">Settlement</th>
-            <th class="text-left py-2 px-3 text-sm font-medium text-gray-600">Time</th>
+          <tr class="border-b border-indigo-500/20 bg-gray-50/50">
+            <th class="text-left py-2 px-3 text-sm font-medium text-slate-400">Type</th>
+            <th class="text-left py-2 px-3 text-sm font-medium text-slate-400">From</th>
+            <th class="text-left py-2 px-3 text-sm font-medium text-slate-400">To</th>
+            <th class="text-left py-2 px-3 text-sm font-medium text-slate-400">Amount</th>
+            <th class="text-left py-2 px-3 text-sm font-medium text-slate-400">Reason</th>
+            <th class="text-left py-2 px-3 text-sm font-medium text-slate-400">Settlement</th>
+            <th class="text-left py-2 px-3 text-sm font-medium text-slate-400">Time</th>
           </tr>
         </thead>
 
@@ -20,7 +20,7 @@
           <tr
             v-for="tx in reversedTransactions"
             :key="tx.id"
-            class="border-b border-gray-100 hover:bg-violet-50/30 transition-colors duration-200"
+            class="border-b border-slate-700 hover:bg-indigo-950/30 transition-colors duration-200"
           >
             <td class="py-2 px-3 text-sm">
               <span
@@ -34,7 +34,7 @@
             <td class="py-2 px-3 text-sm font-medium text-green-600">
               {{ formatAmount(tx.amount) }} USDC
             </td>
-            <td class="py-2 px-3 text-sm text-gray-600">{{ tx.reason }}</td>
+            <td class="py-2 px-3 text-sm text-slate-400">{{ tx.reason }}</td>
             <td class="py-2 px-3 text-sm">
               <span
                 :class="['px-2 py-0.5 rounded-full text-[11px] font-semibold', settlementClass(tx)]"
@@ -52,13 +52,13 @@
                 {{ shortHash(tx.chainTxHash) }} ↗
               </a>
             </td>
-            <td class="py-2 px-3 text-sm text-gray-500">{{ formatTime(tx.timestamp) }}</td>
+            <td class="py-2 px-3 text-sm text-slate-500">{{ formatTime(tx.timestamp) }}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div v-else class="text-gray-500 text-center py-8">
+    <div v-else class="text-slate-500 text-center py-8">
       No transactions yet.
     </div>
   </div>
@@ -131,6 +131,6 @@ function typeClass(type) {
   if (type === 'fund') return 'bg-blue-100 text-blue-800';
   if (type === 'agent_payment') return 'bg-violet-100 text-violet-800';
   if (type === 'refund') return 'bg-emerald-100 text-emerald-800';
-  return 'bg-gray-100 text-gray-800';
+  return 'bg-slate-700 text-gray-800';
 }
 </script>

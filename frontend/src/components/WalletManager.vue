@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+  <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
     <div class="flex items-center justify-between mb-4">
       <div>
-        <h2 class="text-xl font-bold text-gray-900">Mission Wallet</h2>
-        <p class="text-sm text-gray-500">Manage your Arc USDC budget</p>
+        <h2 class="text-xl font-bold text-slate-100">Mission Wallet</h2>
+        <p class="text-sm text-slate-500">Manage your Arc USDC budget</p>
       </div>
       <span class="text-2xl">💰</span>
     </div>
@@ -12,9 +12,9 @@
     <div v-if="wallet" class="space-y-4">
       <!-- Wallet Address -->
       <div>
-        <p class="text-xs font-semibold uppercase text-gray-500 mb-2">Wallet Address</p>
+        <p class="text-xs font-semibold uppercase text-slate-500 mb-2">Wallet Address</p>
         <div class="flex items-center gap-2">
-          <code class="flex-1 text-sm font-mono bg-gray-50 p-3 rounded break-all border border-gray-200">
+          <code class="flex-1 text-sm font-mono bg-gray-50 p-3 rounded break-all border border-indigo-500/20">
             {{ wallet.address }}
           </code>
           <button
@@ -46,8 +46,8 @@
       </div>
 
       <!-- Recent Transactions -->
-      <div v-if="recentTransactions.length" class="pt-4 border-t border-gray-200">
-        <h3 class="text-sm font-bold text-gray-900 mb-3">Recent Transactions</h3>
+      <div v-if="recentTransactions.length" class="pt-4 border-t border-indigo-500/20">
+        <h3 class="text-sm font-bold text-slate-100 mb-3">Recent Transactions</h3>
         <div class="space-y-2 max-h-40 overflow-y-auto">
           <div
             v-for="tx in recentTransactions"
@@ -55,8 +55,8 @@
             class="flex items-center justify-between p-2 bg-gray-50 rounded text-xs"
           >
             <div>
-              <p class="font-semibold text-gray-900">{{ tx.type === 'deposit' ? '+ Deposit' : '- Mission' }}</p>
-              <p class="text-gray-500">{{ new Date(tx.timestamp).toLocaleDateString() }}</p>
+              <p class="font-semibold text-slate-100">{{ tx.type === 'deposit' ? '+ Deposit' : '- Mission' }}</p>
+              <p class="text-slate-500">{{ new Date(tx.timestamp).toLocaleDateString() }}</p>
             </div>
             <span :class="tx.type === 'deposit' ? 'text-emerald-600 font-bold' : 'text-red-600 font-bold'">
               {{ tx.type === 'deposit' ? '+' : '-' }}{{ tx.amount.toFixed(4) }} USDC
@@ -68,7 +68,7 @@
 
     <!-- No Wallet -->
     <div v-else class="text-center py-8">
-      <p class="text-gray-600 mb-4">No wallet created yet</p>
+      <p class="text-slate-400 mb-4">No wallet created yet</p>
       <router-link
         to="/mission"
         class="inline-block px-4 py-2 rounded-lg bg-violet-600 text-white font-semibold hover:bg-violet-700 transition"

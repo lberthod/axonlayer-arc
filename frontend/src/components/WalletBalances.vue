@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-    <h2 class="text-xl font-bold mb-4 text-gray-900">Wallet Balances</h2>
+  <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
+    <h2 class="text-xl font-bold mb-4 text-slate-100">Wallet Balances</h2>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div
@@ -11,7 +11,7 @@
         :style="{ 'animation-delay': `${idx * 50}ms` }"
       >
         <p class="text-xs font-semibold uppercase mb-2 opacity-70">{{ formatWalletName(item.wallet) }}</p>
-        <p class="text-2xl font-bold tracking-tight">{{ formatBalance(item.balance) }} <span class="text-xs text-gray-500">USDC</span></p>
+        <p class="text-2xl font-bold tracking-tight">{{ formatBalance(item.balance) }} <span class="text-xs text-slate-500">USDC</span></p>
       </div>
     </div>
   </div>
@@ -66,6 +66,6 @@ const getWalletColor = (wallet) => {
     'worker_wallet': 'bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 text-blue-900',
     'validator_wallet': 'bg-gradient-to-br from-amber-50 to-amber-100 border-amber-200 text-amber-900'
   };
-  return colors[wallet] || 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200 text-gray-900';
+  return colors[wallet] || 'bg-gradient-to-br from-gray-50 to-gray-100 border-indigo-500/20 text-slate-100';
 };
 </script>

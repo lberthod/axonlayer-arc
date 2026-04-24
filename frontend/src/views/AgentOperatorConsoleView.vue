@@ -20,19 +20,19 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <!-- Register -->
-      <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-        <h2 class="text-lg font-bold text-gray-900 mb-1">Register a new agent</h2>
-        <p class="text-xs text-gray-500 mb-4">
+      <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
+        <h2 class="text-lg font-bold text-slate-100 mb-1">Register a new agent</h2>
+        <p class="text-xs text-slate-500 mb-4">
           Your agent stays private — it's not visible to end-users as a catalog entry.
         </p>
         <form class="space-y-3" @submit.prevent="submit">
           <div class="grid grid-cols-2 gap-3">
             <label class="text-sm">
-              <span class="text-gray-600">Agent name</span>
+              <span class="text-slate-400">Agent name</span>
               <input v-model="form.name" required class="mt-1 w-full border rounded-md px-2 py-1.5" />
             </label>
             <label class="text-sm">
-              <span class="text-gray-600">Capability role</span>
+              <span class="text-slate-400">Capability role</span>
               <select v-model="form.role" class="mt-1 w-full border rounded-md px-2 py-1.5">
                 <option value="worker">Execution agent</option>
                 <option value="validator">Quality agent</option>
@@ -40,28 +40,28 @@
             </label>
           </div>
           <label class="text-sm block">
-            <span class="text-gray-600">Description</span>
+            <span class="text-slate-400">Description</span>
             <textarea v-model="form.description" rows="2" class="mt-1 w-full border rounded-md px-2 py-1.5" placeholder="What does your agent do?"></textarea>
           </label>
           <div class="grid grid-cols-2 gap-3">
             <label class="text-sm">
-              <span class="text-gray-600">Price per action (USDC)</span>
+              <span class="text-slate-400">Price per action (USDC)</span>
               <input v-model.number="form.basePrice" type="number" step="0.0001" min="0" class="mt-1 w-full border rounded-md px-2 py-1.5" />
             </label>
             <label class="text-sm">
-              <span class="text-gray-600">Capabilities</span>
+              <span class="text-slate-400">Capabilities</span>
               <input v-model="form.taskTypesRaw" class="mt-1 w-full border rounded-md px-2 py-1.5" placeholder="summarize,keywords" />
             </label>
           </div>
           <label class="text-sm block">
-            <span class="text-gray-600">API endpoint (private)</span>
+            <span class="text-slate-400">API endpoint (private)</span>
             <input v-model="form.apiEndpoint" class="mt-1 w-full border rounded-md px-2 py-1.5" placeholder="https://my-agent.example.com/run" />
           </label>
           <label class="text-sm block">
-            <span class="text-gray-600">Payout wallet (EVM)</span>
+            <span class="text-slate-400">Payout wallet (EVM)</span>
             <input v-model="form.walletAddress" class="mt-1 w-full border rounded-md px-2 py-1.5 font-mono" placeholder="0x..." />
           </label>
-          <button class="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-2 rounded-md font-semibold hover:shadow-lg transition">
+          <button class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-2 rounded-md font-semibold hover:shadow-lg transition">
             Submit for network approval
           </button>
           <p v-if="error" class="text-red-600 text-sm">{{ error }}</p>
@@ -70,33 +70,33 @@
       </div>
 
       <!-- My agents -->
-      <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+      <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
         <div class="flex items-center justify-between mb-3">
-          <h2 class="text-lg font-bold text-gray-900">My agents</h2>
-          <button @click="refresh" class="text-xs text-violet-600 hover:text-violet-800">Refresh</button>
+          <h2 class="text-lg font-bold text-slate-100">My agents</h2>
+          <button @click="refresh" class="text-xs text-indigo-400 hover:text-violet-800">Refresh</button>
         </div>
         <div v-if="providers.length" class="space-y-3">
           <div
             v-for="p in providers"
             :key="p.id"
-            class="border border-gray-100 rounded-lg p-4 hover:border-violet-200 transition"
+            class="border border-slate-700 rounded-lg p-4 hover:border-violet-200 transition"
           >
             <div class="flex items-center justify-between">
               <div>
-                <div class="font-semibold text-gray-900">{{ p.name }}</div>
-                <div class="text-xs text-gray-500 font-mono">{{ p.id }} · {{ roleLabel(p.role) }}</div>
+                <div class="font-semibold text-slate-100">{{ p.name }}</div>
+                <div class="text-xs text-slate-500 font-mono">{{ p.id }} · {{ roleLabel(p.role) }}</div>
               </div>
               <span class="text-xs px-2 py-0.5 rounded-full font-semibold" :class="statusTone(p.status)">
                 {{ p.status }}
               </span>
             </div>
-            <div class="grid grid-cols-4 gap-2 text-xs text-gray-600 mt-3">
+            <div class="grid grid-cols-4 gap-2 text-xs text-slate-400 mt-3">
               <div><span class="text-gray-400 block">Price</span>{{ p.basePrice }} USDC</div>
               <div><span class="text-gray-400 block">Stake</span>{{ p.stake }} USDC</div>
               <div><span class="text-gray-400 block">Score</span>{{ p.score.toFixed(2) }}</div>
               <div><span class="text-gray-400 block">Earned</span>{{ p.stats.earned }} USDC</div>
             </div>
-            <div class="grid grid-cols-3 gap-2 text-xs text-gray-500 mt-2">
+            <div class="grid grid-cols-3 gap-2 text-xs text-slate-500 mt-2">
               <div>Missions served: <span class="text-gray-800 font-semibold">{{ p.stats.completed || 0 }}</span></div>
               <div>Failed: <span class="text-gray-800 font-semibold">{{ p.stats.failed || 0 }}</span></div>
               <div>Slash: <span class="text-gray-800 font-semibold">{{ p.stats.slashCount || 0 }}</span></div>
@@ -119,7 +119,7 @@
             </p>
           </div>
         </div>
-        <p v-else class="text-sm text-gray-500">
+        <p v-else class="text-sm text-slate-500">
           No agents yet. Register one to join the private execution fabric.
         </p>
       </div>
@@ -198,16 +198,16 @@ function statusTone(status) {
   return {
     approved: 'bg-emerald-100 text-emerald-700',
     pending: 'bg-yellow-100 text-yellow-700',
-    rejected: 'bg-gray-200 text-gray-600',
+    rejected: 'bg-slate-600 text-slate-400',
     slashed: 'bg-red-100 text-red-700'
-  }[status] || 'bg-gray-100 text-gray-600';
+  }[status] || 'bg-slate-700 text-slate-400';
 }
 
 const OpStat = {
   props: ['value', 'label'],
   setup(p) {
     return () =>
-      h('div', { class: 'bg-white/10 backdrop-blur rounded-lg px-4 py-2 min-w-[90px]' }, [
+      h('div', { class: 'bg-slate-800/10 backdrop-blur rounded-lg px-4 py-2 min-w-[90px]' }, [
         h('p', { class: 'text-lg font-bold' }, p.value),
         h('p', { class: 'text-[10px] uppercase tracking-wider opacity-80' }, p.label)
       ]);

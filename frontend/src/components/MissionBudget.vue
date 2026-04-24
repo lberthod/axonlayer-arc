@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+  <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
     <div class="flex items-center justify-between mb-4">
-      <h2 class="text-xl font-bold text-gray-900">Execution budget</h2>
+      <h2 class="text-xl font-bold text-slate-100">Execution budget</h2>
       <span
         v-if="settlementType"
         class="text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-semibold"
@@ -17,13 +17,13 @@
       <Stat label="Remaining" :value="fmt(remaining)" tone="emerald" />
     </div>
 
-    <div class="h-2 rounded-full bg-gray-100 overflow-hidden">
+    <div class="h-2 rounded-full bg-slate-700 overflow-hidden">
       <div
         class="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 transition-all"
         :style="{ width: `${pct}%` }"
       ></div>
     </div>
-    <p class="text-xs text-gray-500 mt-2">
+    <p class="text-xs text-slate-500 mt-2">
       {{ pct.toFixed(1) }}% of budget consumed across {{ stepCount }} paid agent step(s).
     </p>
   </div>
@@ -54,7 +54,7 @@ const settlementLabel = computed(() => {
 const settlementBadge = computed(() =>
   props.settlementType.includes('onchain')
     ? 'bg-emerald-50 text-emerald-700'
-    : 'bg-gray-100 text-gray-600'
+    : 'bg-slate-700 text-slate-400'
 );
 
 function fmt(v) {
@@ -67,7 +67,7 @@ const Stat = {
   setup(p) {
     const toneClass = {
       gray: 'bg-gray-50 text-gray-800',
-      violet: 'bg-violet-50 text-violet-800',
+      violet: 'bg-indigo-950 text-violet-800',
       emerald: 'bg-emerald-50 text-emerald-800'
     }[p.tone] || 'bg-gray-50 text-gray-800';
     return () =>

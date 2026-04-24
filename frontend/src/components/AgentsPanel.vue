@@ -2,8 +2,8 @@
   <div>
     <div class="flex items-center justify-between mb-3">
       <div>
-        <h3 class="text-sm font-bold text-gray-900">Private execution fabric</h3>
-        <p class="text-[11px] text-gray-500">Agents hosted by external developers — not directly callable by end-users.</p>
+        <h3 class="text-sm font-bold text-slate-100">Private execution fabric</h3>
+        <p class="text-[11px] text-slate-500">Agents hosted by external developers — not directly callable by end-users.</p>
       </div>
       <button
         @click="refresh"
@@ -16,20 +16,20 @@
 
     <div v-if="data">
       <div class="mb-4">
-        <p class="text-[10px] uppercase tracking-wider text-gray-500 mb-2">Execution agents</p>
+        <p class="text-[10px] uppercase tracking-wider text-slate-500 mb-2">Execution agents</p>
         <AgentCards :rows="data.workers" kind="execution" />
       </div>
       <div>
-        <p class="text-[10px] uppercase tracking-wider text-gray-500 mb-2">Quality agents</p>
+        <p class="text-[10px] uppercase tracking-wider text-slate-500 mb-2">Quality agents</p>
         <AgentCards :rows="data.validators" kind="quality" />
       </div>
-      <p class="text-[11px] text-gray-500 mt-3">
+      <p class="text-[11px] text-slate-500 mt-3">
         Strategy: <span class="font-mono">{{ data.strategy }}</span>
       </p>
     </div>
 
     <div v-else-if="error" class="text-red-600 text-sm">{{ error }}</div>
-    <div v-else class="text-gray-500 text-center py-4 text-sm">Loading…</div>
+    <div v-else class="text-slate-500 text-center py-4 text-sm">Loading…</div>
   </div>
 </template>
 
@@ -62,7 +62,7 @@ const AgentCards = {
   setup(props) {
     return () => {
       if (!props.rows?.length) {
-        return h('div', { class: 'text-xs text-gray-500' }, 'No agents.');
+        return h('div', { class: 'text-xs text-slate-500' }, 'No agents.');
       }
       return h(
         'div',
@@ -73,11 +73,11 @@ const AgentCards = {
             'div',
             {
               key: row.id,
-              class: 'border border-gray-200 rounded-lg p-2.5 bg-white hover:border-violet-300 transition'
+              class: 'border border-indigo-500/20 rounded-lg p-2.5 bg-slate-800 hover:border-violet-300 transition'
             },
             [
               h('div', { class: 'flex items-start justify-between mb-1.5' }, [
-                h('span', { class: 'font-semibold text-sm text-gray-900 truncate' }, row.name || row.id),
+                h('span', { class: 'font-semibold text-sm text-slate-100 truncate' }, row.name || row.id),
                 h(
                   'div',
                   {
@@ -94,18 +94,18 @@ const AgentCards = {
                     h(
                       'div',
                       {
-                        class: 'text-[8px] text-gray-600 text-right leading-tight max-w-28 bg-violet-50 rounded px-1.5 py-1 border border-violet-100'
+                        class: 'text-[8px] text-slate-400 text-right leading-tight max-w-28 bg-indigo-950 rounded px-1.5 py-1 border border-violet-100'
                       },
                       [
                         h('div', { class: 'font-semibold text-violet-800 mb-0.5' }, '• Hosted on external VPS'),
-                        h('div', { class: 'text-gray-600' }, '• Not accessible directly'),
-                        h('div', { class: 'text-gray-600' }, '• Only callable via ArcAgent Hub')
+                        h('div', { class: 'text-slate-400' }, '• Not accessible directly'),
+                        h('div', { class: 'text-slate-400' }, '• Only callable via Axon Layer')
                       ]
                     )
                   ]
                 )
               ]),
-              h('p', { class: 'text-[10px] text-gray-500 font-mono truncate' }, row.id),
+              h('p', { class: 'text-[10px] text-slate-500 font-mono truncate' }, row.id),
               h('div', { class: 'grid grid-cols-3 gap-1 mt-2 text-[11px]' }, [
                 h('div', {}, [
                   h('span', { class: 'text-gray-400 block text-[9px]' }, 'Price'),
@@ -122,7 +122,7 @@ const AgentCards = {
               ]),
               h(
                 'p',
-                { class: 'text-[10px] text-gray-500 mt-1.5' },
+                { class: 'text-[10px] text-slate-500 mt-1.5' },
                 [
                   h('span', { class: 'text-gray-400' }, 'Owner: '),
                   h(

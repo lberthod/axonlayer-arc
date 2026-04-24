@@ -20,16 +20,16 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-        <h2 class="text-lg font-bold text-gray-900 mb-3">Agent approval queue</h2>
+      <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
+        <h2 class="text-lg font-bold text-slate-100 mb-3">Agent approval queue</h2>
         <div v-if="pending.length" class="space-y-3">
           <div v-for="p in pending" :key="p.id" class="border rounded-lg p-3 text-sm">
             <div class="flex justify-between">
               <div class="font-semibold">{{ p.name }}</div>
-              <span class="text-xs text-gray-500">{{ roleLabel(p.role) }}</span>
+              <span class="text-xs text-slate-500">{{ roleLabel(p.role) }}</span>
             </div>
-            <div class="text-xs text-gray-500 mb-2">{{ p.description || '—' }}</div>
-            <div class="text-xs text-gray-600 mb-2">
+            <div class="text-xs text-slate-500 mb-2">{{ p.description || '—' }}</div>
+            <div class="text-xs text-slate-400 mb-2">
               Price: {{ p.basePrice }} USDC · Stake: {{ p.stake }} USDC · Types: {{ p.taskTypes.join(', ') }}
             </div>
             <div class="flex gap-2">
@@ -38,31 +38,31 @@
             </div>
           </div>
         </div>
-        <p v-else class="text-sm text-gray-500">No agents waiting for approval.</p>
+        <p v-else class="text-sm text-slate-500">No agents waiting for approval.</p>
       </div>
 
-      <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-        <h2 class="text-lg font-bold text-gray-900 mb-3">Active agents</h2>
+      <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
+        <h2 class="text-lg font-bold text-slate-100 mb-3">Active agents</h2>
         <div v-if="approved.length" class="space-y-2 max-h-96 overflow-auto">
           <div v-for="p in approved" :key="p.id" class="border rounded-md p-2 text-sm flex items-center justify-between">
             <div>
               <div class="font-semibold">{{ p.name }}</div>
-              <div class="text-xs text-gray-500">
+              <div class="text-xs text-slate-500">
                 stake {{ p.stake }} · score {{ p.score.toFixed(2) }} · slashes {{ p.stats.slashCount }}
               </div>
             </div>
             <button @click="slash(p.id)" class="text-xs px-2 py-1 rounded-md bg-red-600 text-white font-semibold">Slash</button>
           </div>
         </div>
-        <p v-else class="text-sm text-gray-500">No active agents.</p>
+        <p v-else class="text-sm text-slate-500">No active agents.</p>
       </div>
     </div>
 
-    <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-      <h2 class="text-lg font-bold text-gray-900 mb-3">Users</h2>
+    <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
+      <h2 class="text-lg font-bold text-slate-100 mb-3">Users</h2>
       <table class="w-full text-sm">
         <thead>
-          <tr class="text-left text-xs text-gray-500 uppercase">
+          <tr class="text-left text-xs text-slate-500 uppercase">
             <th class="py-1 pr-3">Email</th>
             <th class="py-1 pr-3">Role</th>
             <th class="py-1 pr-3">Missions</th>
@@ -71,7 +71,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="u in users" :key="u.uid" class="border-t border-gray-100">
+          <tr v-for="u in users" :key="u.uid" class="border-t border-slate-700">
             <td class="py-1 pr-3">{{ u.email }}</td>
             <td class="py-1 pr-3">
               <select
@@ -86,7 +86,7 @@
             </td>
             <td class="py-1 pr-3">{{ u.usage.tasks }}</td>
             <td class="py-1 pr-3">{{ u.usage.totalSpent }} USDC</td>
-            <td class="py-1 text-xs text-gray-500">{{ u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleString() : '—' }}</td>
+            <td class="py-1 text-xs text-slate-500">{{ u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleString() : '—' }}</td>
           </tr>
         </tbody>
       </table>
@@ -136,8 +136,8 @@ const Stat = {
   props: ['label', 'value'],
   setup(props) {
     return () =>
-      h('div', { class: 'bg-white rounded-lg shadow p-4' }, [
-        h('p', { class: 'text-[10px] uppercase tracking-wider text-gray-500 mb-1' }, props.label),
+      h('div', { class: 'bg-slate-800 rounded-lg shadow p-4' }, [
+        h('p', { class: 'text-[10px] uppercase tracking-wider text-slate-500 mb-1' }, props.label),
         h('p', { class: 'text-lg font-bold text-gray-800' }, props.value)
       ]);
   }

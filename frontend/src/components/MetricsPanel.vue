@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+  <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
     <div class="flex items-center justify-between mb-4">
-      <h2 class="text-xl font-bold text-gray-900">Network metrics</h2>
+      <h2 class="text-xl font-bold text-slate-100">Network metrics</h2>
       <div class="flex items-center gap-2">
         <select
           v-model="windowMs"
@@ -15,7 +15,7 @@
         <button
           @click="refresh"
           :disabled="loading"
-          class="text-sm px-3 py-1.5 rounded-lg bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-md"
+          class="text-sm px-3 py-1.5 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 text-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-md"
         >
           {{ loading ? 'Loading…' : 'Refresh' }}
         </button>
@@ -24,7 +24,7 @@
 
     <div v-if="metrics" class="space-y-4">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div class="rounded-lg p-4 border bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200 transition-all duration-300 hover:shadow-md">
+        <div class="rounded-lg p-4 border bg-gradient-to-br from-gray-50 to-gray-100 border-indigo-500/20 transition-all duration-300 hover:shadow-md">
           <p class="text-[10px] font-semibold uppercase mb-1 opacity-70 tracking-wider">Missions</p>
           <p class="text-lg font-bold">{{ metrics.totals.totalTasks }}</p>
         </div>
@@ -42,13 +42,13 @@
         </div>
         <div class="rounded-lg p-4 border bg-gradient-to-br from-violet-50 to-violet-100 border-violet-200 transition-all duration-300 hover:shadow-md">
           <p class="text-[10px] font-semibold uppercase mb-1 opacity-70 tracking-wider">Gross Volume</p>
-          <p class="text-lg font-bold text-violet-800">{{ formatAmount(metrics.totals.grossVolume) }} <span class="text-xs text-violet-600">USDC</span></p>
+          <p class="text-lg font-bold text-violet-800">{{ formatAmount(metrics.totals.grossVolume) }} <span class="text-xs text-indigo-400">USDC</span></p>
         </div>
         <div class="rounded-lg p-4 border bg-gradient-to-br from-emerald-50 to-teal-100 border-emerald-200 transition-all duration-300 hover:shadow-md">
           <p class="text-[10px] font-semibold uppercase mb-1 opacity-70 tracking-wider">Platform Fees</p>
           <p class="text-lg font-bold text-emerald-800">{{ formatAmount(metrics.totals.platformFees || 0) }} <span class="text-xs text-emerald-600">USDC</span></p>
         </div>
-        <div class="rounded-lg p-4 border bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200 transition-all duration-300 hover:shadow-md">
+        <div class="rounded-lg p-4 border bg-gradient-to-br from-gray-50 to-gray-100 border-indigo-500/20 transition-all duration-300 hover:shadow-md">
           <p class="text-[10px] font-semibold uppercase mb-1 opacity-70 tracking-wider">Transactions</p>
           <p class="text-lg font-bold">{{ metrics.totals.transactions }}</p>
         </div>
@@ -59,14 +59,14 @@
       </div>
 
       <div v-if="taskTypeEntries.length" class="pt-2">
-        <h3 class="text-sm font-semibold text-gray-700 mb-2">Volume by mission type</h3>
+        <h3 class="text-sm font-semibold text-slate-300 mb-2">Volume by mission type</h3>
         <div class="space-y-1">
           <div
             v-for="[type, vol] in taskTypeEntries"
             :key="type"
             class="flex justify-between text-sm"
           >
-            <span class="text-gray-600 capitalize">{{ type }}</span>
+            <span class="text-slate-400 capitalize">{{ type }}</span>
             <span class="font-mono text-gray-800">{{ formatAmount(vol) }} USDC</span>
           </div>
         </div>
@@ -74,7 +74,7 @@
     </div>
 
     <div v-else-if="error" class="text-red-600 text-sm">{{ error }}</div>
-    <div v-else class="text-gray-500 text-center py-4">Loading...</div>
+    <div v-else class="text-slate-500 text-center py-4">Loading...</div>
   </div>
 </template>
 

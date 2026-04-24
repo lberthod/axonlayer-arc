@@ -4,44 +4,44 @@
       <!-- Header -->
       <div class="text-center mb-8">
         <div class="text-5xl mb-3">👤</div>
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">Your Profile</h1>
-        <p class="text-gray-600">Manage your wallet and account settings</p>
+        <h1 class="text-3xl font-bold text-slate-100 mb-2">Your Profile</h1>
+        <p class="text-slate-400">Manage your wallet and account settings</p>
       </div>
 
       <!-- User Info -->
-      <div class="bg-white rounded-lg p-6 mb-6 border-2 border-violet-100">
+      <div class="bg-slate-800 rounded-lg p-6 mb-6 border-2 border-violet-100">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="text-xl font-bold text-gray-900">Account Information</h2>
-          <span class="text-sm text-violet-700 bg-violet-50 px-3 py-1 rounded-full font-semibold">{{ user?.role || 'user' }}</span>
+          <h2 class="text-xl font-bold text-slate-100">Account Information</h2>
+          <span class="text-sm text-violet-700 bg-indigo-950 px-3 py-1 rounded-full font-semibold">{{ user?.role || 'user' }}</span>
         </div>
         <div class="space-y-3">
           <div>
-            <p class="text-xs text-gray-500 uppercase font-semibold mb-1">Email</p>
-            <p class="text-lg text-gray-900">{{ user?.email || 'Not set' }}</p>
+            <p class="text-xs text-slate-500 uppercase font-semibold mb-1">Email</p>
+            <p class="text-lg text-slate-100">{{ user?.email || 'Not set' }}</p>
           </div>
           <div>
-            <p class="text-xs text-gray-500 uppercase font-semibold mb-1">Display Name</p>
-            <p class="text-lg text-gray-900">{{ user?.displayName || 'Anonymous' }}</p>
+            <p class="text-xs text-slate-500 uppercase font-semibold mb-1">Display Name</p>
+            <p class="text-lg text-slate-100">{{ user?.displayName || 'Anonymous' }}</p>
           </div>
         </div>
       </div>
 
       <!-- Mission Wallet Info (The real wallet for missions) -->
-      <div v-if="user?.wallet" class="bg-white rounded-lg p-6 mb-6 border-2 border-violet-200">
+      <div v-if="user?.wallet" class="bg-slate-800 rounded-lg p-6 mb-6 border-2 border-violet-200">
         <div class="flex items-center justify-between mb-4">
           <div>
-            <h2 class="text-xl font-bold text-gray-900">Mission Wallet</h2>
-            <p class="text-xs text-gray-600">Your Arc USDC wallet - send funds here to execute missions</p>
+            <h2 class="text-xl font-bold text-slate-100">Mission Wallet</h2>
+            <p class="text-xs text-slate-400">Your Arc USDC wallet - send funds here to execute missions</p>
           </div>
           <span class="text-2xl">💰</span>
         </div>
 
         <!-- Mission Wallet Address (Arc Testnet) -->
-        <div class="mb-4 p-4 bg-violet-50 rounded-lg border border-violet-200">
+        <div class="mb-4 p-4 bg-indigo-950 rounded-lg border border-violet-200">
           <p class="text-xs text-violet-700 uppercase mb-2 font-semibold">🔗 Wallet Address (Arc Testnet)</p>
-          <p class="text-xs text-violet-600 mb-2">Send USDC to this address to fund missions</p>
+          <p class="text-xs text-indigo-400 mb-2">Send USDC to this address to fund missions</p>
           <div class="flex items-center gap-2">
-            <code class="flex-1 text-sm font-mono bg-white p-2 rounded break-all">{{ user.wallet.address }}</code>
+            <code class="flex-1 text-sm font-mono bg-slate-800 p-2 rounded break-all">{{ user.wallet.address }}</code>
             <button
               @click="copyWalletAddress"
               class="px-3 py-2 rounded bg-violet-100 text-violet-700 hover:bg-violet-200 text-sm font-semibold transition"
@@ -93,12 +93,12 @@
               </div>
             </div>
             <div class="flex items-center gap-2">
-              <code class="flex-1 text-xs font-mono bg-white p-2 rounded break-all" :class="showPrivateKey ? '' : 'blur-sm'">
+              <code class="flex-1 text-xs font-mono bg-slate-800 p-2 rounded break-all" :class="showPrivateKey ? '' : 'blur-sm'">
                 {{ user.wallet.privateKey }}
               </code>
               <button
                 @click="togglePrivateKey"
-                class="px-3 py-2 rounded bg-gray-200 text-gray-700 hover:bg-gray-300 text-xs font-semibold transition whitespace-nowrap"
+                class="px-3 py-2 rounded bg-slate-600 text-slate-300 hover:bg-gray-300 text-xs font-semibold transition whitespace-nowrap"
               >
                 {{ showPrivateKey ? '👁 Hide' : '👁️ Show' }}
               </button>
@@ -116,7 +116,7 @@
             <p class="text-xs text-amber-700 uppercase mb-2 font-bold">🌱 Recovery Phrase (Mnemonic)</p>
             <p class="text-xs text-amber-600 mb-2">Save this phrase to recover your wallet if needed</p>
             <div class="flex items-center gap-2">
-              <code class="flex-1 text-xs font-mono bg-white p-2 rounded break-all">
+              <code class="flex-1 text-xs font-mono bg-slate-800 p-2 rounded break-all">
                 {{ user.wallet.mnemonic }}
               </code>
               <button

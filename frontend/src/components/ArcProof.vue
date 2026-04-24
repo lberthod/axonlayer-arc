@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+  <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
     <div class="flex items-center justify-between mb-4">
       <div>
-        <h2 class="text-xl font-bold text-gray-900">Arc settlement proof</h2>
-        <p class="text-xs text-gray-500">Every payment is an on-chain USDC transfer on Circle Arc.</p>
+        <h2 class="text-xl font-bold text-slate-100">Arc settlement proof</h2>
+        <p class="text-xs text-slate-500">Every payment is an on-chain USDC transfer on Circle Arc.</p>
       </div>
       <span
         class="text-[10px] uppercase tracking-[0.15em] font-bold px-2.5 py-1 rounded-full"
@@ -17,20 +17,20 @@
     <div v-if="anyOnchain" class="mb-4 p-4 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg border border-emerald-100">
       <div class="flex items-center gap-2 mb-3">
         <span class="text-2xl">🔗</span>
-        <span class="font-bold text-gray-900">Settlement verified on-chain</span>
+        <span class="font-bold text-slate-100">Settlement verified on-chain</span>
       </div>
       <div class="grid grid-cols-1 gap-2 text-sm">
         <div class="flex items-center gap-2">
           <span class="text-emerald-600 font-bold text-lg">✔</span>
-          <span class="text-gray-700">Settled on Arc</span>
+          <span class="text-slate-300">Settled on Arc</span>
         </div>
         <div class="flex items-center gap-2">
           <span class="text-emerald-600 font-bold text-lg">✔</span>
-          <span class="text-gray-700">USDC transaction</span>
+          <span class="text-slate-300">USDC transaction</span>
         </div>
         <div class="flex items-center gap-2">
           <span class="text-emerald-600 font-bold text-lg">✔</span>
-          <span class="text-gray-700">Verified on-chain</span>
+          <span class="text-slate-300">Verified on-chain</span>
         </div>
       </div>
       <a
@@ -49,23 +49,23 @@
       <div
         v-for="(tx, i) in payments"
         :key="tx.id || i"
-        class="flex items-center justify-between border border-gray-100 rounded-lg p-3 hover:border-emerald-200 transition"
+        class="flex items-center justify-between border border-slate-700 rounded-lg p-3 hover:border-emerald-200 transition"
       >
         <div class="flex items-center gap-3 min-w-0">
           <div
             class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
             :class="isOnchain(tx)
               ? 'bg-emerald-100 text-emerald-700'
-              : 'bg-gray-100 text-gray-500'"
+              : 'bg-slate-700 text-slate-500'"
           >{{ i + 1 }}</div>
           <div class="min-w-0">
-            <p class="text-xs text-gray-500">
-              <span class="font-semibold text-gray-700">{{ prettyWallet(tx.from) }}</span>
+            <p class="text-xs text-slate-500">
+              <span class="font-semibold text-slate-300">{{ prettyWallet(tx.from) }}</span>
               <span class="mx-1">→</span>
-              <span class="font-semibold text-gray-700">{{ prettyWallet(tx.to) }}</span>
+              <span class="font-semibold text-slate-300">{{ prettyWallet(tx.to) }}</span>
             </p>
-            <p class="text-sm font-bold text-gray-900">{{ formatAmount(tx.amount) }} USDC</p>
-            <p class="text-[11px] text-gray-500 truncate">{{ tx.reason || '—' }}</p>
+            <p class="text-sm font-bold text-slate-100">{{ formatAmount(tx.amount) }} USDC</p>
+            <p class="text-[11px] text-slate-500 truncate">{{ tx.reason || '—' }}</p>
           </div>
         </div>
         <div class="text-right flex-shrink-0 ml-3">
@@ -90,7 +90,7 @@
       </div>
     </div>
 
-    <p v-else class="text-sm text-gray-500 text-center py-6">
+    <p v-else class="text-sm text-slate-500 text-center py-6">
       No payments yet. Launch a mission to settle USDC on Arc.
     </p>
   </div>
@@ -134,7 +134,7 @@ function settlementClass(tx) {
   if (t === 'onchain') return 'bg-emerald-100 text-emerald-700';
   if (t === 'onchain-dryrun') return 'bg-amber-100 text-amber-700';
   if (t === 'onchain-error') return 'bg-red-100 text-red-700';
-  return 'bg-gray-100 text-gray-600';
+  return 'bg-slate-700 text-slate-400';
 }
 
 function prettyWallet(w) {

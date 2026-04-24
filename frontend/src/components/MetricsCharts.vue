@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-white rounded-lg shadow-md p-6">
+  <div class="bg-slate-800 rounded-lg shadow-md p-6">
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-xl font-bold text-gray-800">Charts</h2>
       <button
         @click="refresh"
-        class="text-xs px-2 py-1 rounded border border-gray-200 text-gray-600 hover:bg-gray-50"
+        class="text-xs px-2 py-1 rounded border border-indigo-500/20 text-slate-400 hover:bg-gray-50"
       >Refresh</button>
     </div>
 
@@ -16,11 +16,11 @@
 
     <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <h3 class="text-sm font-semibold text-gray-700 mb-2">Revenue by wallet</h3>
+        <h3 class="text-sm font-semibold text-slate-300 mb-2">Revenue by wallet</h3>
         <Bar :data="barData" :options="barOptions" />
       </div>
       <div>
-        <h3 class="text-sm font-semibold text-gray-700 mb-2">Volume by mission type</h3>
+        <h3 class="text-sm font-semibold text-slate-300 mb-2">Volume by mission type</h3>
         <Doughnut :data="doughnutData" :options="doughnutOptions" />
       </div>
     </div>

@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+  <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
     <div class="flex items-center justify-between mb-4">
-      <h2 class="text-xl font-bold text-gray-900">Execution timeline</h2>
+      <h2 class="text-xl font-bold text-slate-100">Execution timeline</h2>
       <div class="flex items-center gap-2">
         <span
           v-if="phases.length"
-          class="text-[10px] uppercase tracking-wider font-semibold text-violet-700 bg-violet-50 px-2 py-0.5 rounded-full"
+          class="text-[10px] uppercase tracking-wider font-semibold text-violet-700 bg-indigo-950 px-2 py-0.5 rounded-full"
         >
           Machine-to-machine economy
         </span>
@@ -20,9 +20,9 @@
 
     <!-- WOW MOMENT: Economic Coordination Visualization -->
     <div v-if="phases.length && completed" class="mb-6 p-4 bg-gradient-to-br from-violet-50 to-fuchsia-50 rounded-lg border border-violet-100">
-      <p class="text-sm font-bold text-gray-900 mb-3 text-center">
+      <p class="text-sm font-bold text-slate-100 mb-3 text-center">
         Agents are not just executed.
-        <span class="bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">They are economically coordinated.</span>
+        <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">They are economically coordinated.</span>
       </p>
       <div class="flex items-center justify-center gap-2 text-sm flex-wrap">
         <div class="flex items-center gap-1">
@@ -51,20 +51,20 @@
         <div
           v-if="i < phases.length - 1"
           class="absolute left-4 top-8 bottom-0 w-px"
-          :class="phase.done ? 'bg-gradient-to-b from-violet-500 to-fuchsia-500' : 'bg-gray-200'"
+          :class="phase.done ? 'bg-gradient-to-b from-violet-500 to-fuchsia-500' : 'bg-slate-600'"
         ></div>
         <div
           class="relative flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold z-10"
           :class="phase.done
-            ? 'bg-gradient-to-br from-violet-600 to-fuchsia-600 text-white shadow-md'
-            : 'bg-gray-200 text-gray-500'"
+            ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white shadow-md'
+            : 'bg-slate-600 text-slate-500'"
         >
           <span v-if="phase.done">{{ phase.icon || '✓' }}</span>
           <span v-else>{{ i + 1 }}</span>
         </div>
         <div class="flex-1 pt-0.5">
-          <p class="text-sm font-semibold text-gray-900">{{ phase.title }}</p>
-          <p class="text-xs text-gray-600">{{ phase.detail }}</p>
+          <p class="text-sm font-semibold text-slate-100">{{ phase.title }}</p>
+          <p class="text-xs text-slate-400">{{ phase.detail }}</p>
           <div v-if="phase.payment" class="mt-1.5 inline-flex items-center gap-2 bg-emerald-50 border border-emerald-100 rounded-md px-2 py-0.5">
             <span class="text-[11px] font-semibold text-emerald-800">
               {{ phase.payment.amount }} USDC
@@ -84,14 +84,14 @@
             </a>
             <span
               v-else-if="phase.payment.hash"
-              class="text-[10px] font-mono text-gray-500"
+              class="text-[10px] font-mono text-slate-500"
             >{{ phase.payment.shortHash }}</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div v-else class="text-gray-500 text-center py-8 text-sm">
+    <div v-else class="text-slate-500 text-center py-8 text-sm">
       No execution yet. Launch a mission to see the orchestrator in action.
     </div>
   </div>

@@ -1,15 +1,15 @@
 <template>
-  <div class="bg-white">
+  <div class="bg-slate-800">
     <section class="container mx-auto px-6 py-16 max-w-3xl">
-      <p class="text-xs uppercase tracking-[0.2em] text-violet-600 font-semibold mb-3">Legal</p>
-      <h1 class="text-4xl font-extrabold text-gray-900">Privacy Policy</h1>
-      <p class="text-sm text-gray-500 mt-2">Last updated: {{ today }}</p>
+      <p class="text-xs uppercase tracking-[0.2em] text-indigo-400 font-semibold mb-3">Legal</p>
+      <h1 class="text-4xl font-extrabold text-slate-100">Privacy Policy</h1>
+      <p class="text-sm text-slate-500 mt-2">Last updated: {{ today }}</p>
 
-      <div class="prose prose-gray max-w-none mt-10 space-y-8 text-gray-700 leading-relaxed">
+      <div class="prose prose-gray max-w-none mt-10 space-y-8 text-slate-300 leading-relaxed">
 
         <Section title="1. Who we are">
           <p>
-            ArcAgent Hub (“we”, “us”, “our”) operates an orchestration layer for autonomous AI agents
+            Axon Layer (“we”, “us”, “our”) operates an orchestration layer for autonomous AI agents
             settled in USDC on Circle Arc. This Privacy Policy describes what data we collect, why we
             collect it, and what rights you have over it. This product is currently a hackathon prototype
             — it is not intended for production use with sensitive personal data.
@@ -47,7 +47,7 @@
 
         <Section title="5. Blockchain disclaimer">
           <p>
-            On-chain transactions are <strong>public and irreversible</strong>. By using ArcAgent Hub
+            On-chain transactions are <strong>public and irreversible</strong>. By using Axon Layer
             you acknowledge that transaction amounts, wallet addresses, and timestamps will be visible
             on the Arc blockchain explorer.
           </p>
@@ -56,7 +56,7 @@
         <Section title="6. Retention">
           <p>
             We retain account and mission data while your account is active. You can request
-            deletion at any time at <a href="mailto:privacy@arcagenthub.example" class="text-violet-600 hover:underline">privacy@arcagenthub.example</a>.
+            deletion at any time at <a href="mailto:privacy@arcagenthub.example" class="text-indigo-400 hover:underline">privacy@arcagenthub.example</a>.
             On-chain data cannot be deleted.
           </p>
         </Section>
@@ -65,7 +65,7 @@
           <p>
             Subject to applicable law (GDPR / CCPA), you have the right to access, correct, export, and
             delete the personal data we hold about you, and to object to certain processing.
-            Contact us at <a href="mailto:privacy@arcagenthub.example" class="text-violet-600 hover:underline">privacy@arcagenthub.example</a>.
+            Contact us at <a href="mailto:privacy@arcagenthub.example" class="text-indigo-400 hover:underline">privacy@arcagenthub.example</a>.
           </p>
         </Section>
 
@@ -78,7 +78,7 @@
 
         <Section title="9. Contact">
           <p>
-            ArcAgent Hub — <a href="mailto:privacy@arcagenthub.example" class="text-violet-600 hover:underline">privacy@arcagenthub.example</a>
+            Axon Layer — <a href="mailto:privacy@arcagenthub.example" class="text-indigo-400 hover:underline">privacy@arcagenthub.example</a>
           </p>
         </Section>
       </div>
@@ -96,7 +96,7 @@ const Section = {
   setup(p, { slots }) {
     return () =>
       h('section', {}, [
-        h('h2', { class: 'text-xl font-bold text-gray-900 mb-3' }, p.title),
+        h('h2', { class: 'text-xl font-bold text-slate-100 mb-3' }, p.title),
         h('div', { class: 'space-y-2' }, slots.default?.())
       ]);
   }

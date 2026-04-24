@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+  <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
     <div class="flex items-center justify-between mb-4">
-      <h2 class="text-xl font-bold text-gray-900">Mission Wallet</h2>
-      <span class="text-[10px] uppercase tracking-wider text-violet-700 bg-violet-50 px-2 py-1 rounded-full font-semibold">
+      <h2 class="text-xl font-bold text-slate-100">Mission Wallet</h2>
+      <span class="text-[10px] uppercase tracking-wider text-violet-700 bg-indigo-950 px-2 py-1 rounded-full font-semibold">
         Pre-funded
       </span>
     </div>
@@ -13,13 +13,13 @@
       <Stat label="Remaining" :value="fmt(remaining)" tone="emerald" />
     </div>
 
-    <div class="h-2 rounded-full bg-gray-100 overflow-hidden">
+    <div class="h-2 rounded-full bg-slate-700 overflow-hidden">
       <div
         class="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 transition-all"
         :style="{ width: `${pct}%` }"
       ></div>
     </div>
-    <p class="text-xs text-gray-500 mt-2">
+    <p class="text-xs text-slate-500 mt-2">
       {{ pct.toFixed(1) }}% of balance reserved for active missions.
     </p>
   </div>
@@ -49,7 +49,7 @@ const Stat = {
   setup(p) {
     const toneClass = {
       gray: 'bg-gray-50 text-gray-800',
-      violet: 'bg-violet-50 text-violet-800',
+      violet: 'bg-indigo-950 text-violet-800',
       emerald: 'bg-emerald-50 text-emerald-800'
     }[p.tone] || 'bg-gray-50 text-gray-800';
     return () =>
