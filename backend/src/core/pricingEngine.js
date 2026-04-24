@@ -21,6 +21,7 @@ class PricingEngine {
    * @param {number} [params.workerQuote]  optional price proposed by chosen worker
    * @param {number} [params.validatorQuote] optional price proposed by chosen validator
    * @returns {{clientPayment:number, workerPayment:number, validatorPayment:number, orchestratorMargin:number, breakdown:object}}
+   * @throws {Error} if quotes are incompatible with budget
    */
   price({ input = '', taskType = 'summarize', workerQuote, validatorQuote } = {}) {
     const dyn = config.pricing.dynamic;
@@ -43,7 +44,11 @@ class PricingEngine {
       Math.min(Math.max(rawClient, dyn.minClientPayment), dyn.maxClientPayment)
     );
 
-    // If agents supplied quotes, honour them but clamp within the client budget.
+    // Minimum margin is required to avoid loss
+    const MIN_MARGIN = dyn.minClientPayment * 0.05; // 5% minimum margin
+    const minAgentPayment = this.normalize(clientPayment - MIN_MARGIN);
+
+    // If agents supplied quotes, honour them but clamp within budget AND margin constraint
     let workerPayment = this.normalize(
       typeof workerQuote === 'number' ? workerQuote : clientPayment * dyn.workerShare
     );
@@ -51,9 +56,11 @@ class PricingEngine {
       typeof validatorQuote === 'number' ? validatorQuote : clientPayment * dyn.validatorShare
     );
 
-    const maxAgentCost = this.normalize(clientPayment * (1 - dyn.marginRatio));
-    if (workerPayment + validatorPayment > maxAgentCost) {
-      const ratio = maxAgentCost / (workerPayment + validatorPayment);
+    // Check if quotes exceed budget even after accounting for minimum margin
+    const totalQuotes = this.normalize(workerPayment + validatorPayment);
+    if (totalQuotes > minAgentPayment) {
+      // Quotes are too high - rescale them
+      const ratio = minAgentPayment / totalQuotes;
       workerPayment = this.normalize(workerPayment * ratio);
       validatorPayment = this.normalize(validatorPayment * ratio);
     }
@@ -61,6 +68,22 @@ class PricingEngine {
     const orchestratorMargin = this.normalize(
       clientPayment - workerPayment - validatorPayment
     );
+
+    // CRITICAL INVARIANT: Margin must never be negative
+    if (orchestratorMargin < 0) {
+      throw new Error(
+        `Pricing invariant violated: orchestratorMargin=${orchestratorMargin} < 0. ` +
+        `clientPayment=${clientPayment}, worker=${workerPayment}, validator=${validatorPayment}`
+      );
+    }
+
+    // Also warn if margin is too thin (< 1 mill USDC)
+    if (orchestratorMargin < 0.000001) {
+      console.warn(
+        `[PRICING] Warning: margin ${orchestratorMargin} is suspiciously low ` +
+        `for task type ${taskType} with input length ${length}`
+      );
+    }
 
     return {
       clientPayment,
@@ -73,7 +96,9 @@ class PricingEngine {
         taskType,
         multiplier,
         workerQuote: workerQuote ?? null,
-        validatorQuote: validatorQuote ?? null
+        validatorQuote: validatorQuote ?? null,
+        minMargin: MIN_MARGIN,
+        marginGuaranteed: orchestratorMargin >= MIN_MARGIN
       }
     };
   }

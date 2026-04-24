@@ -75,7 +75,9 @@
       "Bash(pkill -f \"node --env-file\")",
       "Bash(git branch *)",
       "Bash(lsof -ti:3001)",
-      "Bash(grep -E \"^/.*\\\\.md$\")"
+      "Bash(grep -E \"^/.*\\\\.md$\")",
+      "Bash(awk '{print $2}')",
+      "Bash(curl -s http://localhost:3000/)"
     ]
   }
 }

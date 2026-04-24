@@ -122,4 +122,56 @@ describe('PricingEngine — Ledger Invariant', () => {
       expect(expensive.clientPayment).toBeGreaterThan(standard.clientPayment);
     }
   });
+
+  /**
+   * CRITICAL: Margin must NEVER be negative
+   * This was the audit bug - aggressive agent quotes could make margin < 0
+   */
+  it('CRITICAL: margin is never negative even with aggressive quotes', () => {
+    // Simulate aggressive agent quotes
+    const scenarios = [
+      { workerQuote: 0.0008, validatorQuote: 0.0008, input: 'small' },
+      { workerQuote: 0.001, validatorQuote: 0.001, input: 'medium task' },
+      { workerQuote: 0.005, validatorQuote: 0.005, input: 'x'.repeat(5000) }
+    ];
+
+    for (const { workerQuote, validatorQuote, input } of scenarios) {
+      const pricing = engine.price({
+        input,
+        taskType: 'summarize',
+        workerQuote,
+        validatorQuote
+      });
+
+      expect(pricing.orchestratorMargin).toBeGreaterThanOrEqual(0,
+        `Margin ${pricing.orchestratorMargin} < 0 with quotes ${workerQuote}/${validatorQuote}`);
+
+      // Also verify invariant
+      const sum = engine.normalize(pricing.workerPayment + pricing.validatorPayment + pricing.orchestratorMargin);
+      expect(sum).toBe(pricing.clientPayment);
+    }
+  });
+
+  /**
+   * Margin must be guaranteed even in edge cases
+   */
+  it('guarantees minimum margin in breakdown', () => {
+    const dyn = config.pricing.dynamic;
+    if (!dyn?.enabled) {
+      console.log('  (dynamic pricing disabled, skipping margin guarantee check)');
+      return;
+    }
+
+    const pricing = engine.price({
+      input: 'task with aggressive quotes',
+      taskType: 'summarize',
+      workerQuote: 0.001,
+      validatorQuote: 0.001
+    });
+
+    // breakdown should indicate margin is guaranteed
+    if (pricing.breakdown.marginGuaranteed !== undefined) {
+      expect(pricing.breakdown.marginGuaranteed).toBe(true);
+    }
+  });
 });
