@@ -7,8 +7,9 @@ import { config } from '../config.js';
  * {
  *   uid, email, displayName, role: 'user'|'provider'|'admin',
  *   apiKey, walletAddress, createdAt, lastLoginAt,
- *   usage: { tasks, totalSpent, lastReset, today },
- *   missionWallet: { address: string, balance: number }
+ *   wallet: { address, privateKey, mnemonic, chain, token, createdAt },
+ *   balance: number,
+ *   usage: { tasks, totalSpent, lastReset, today }
  * }
  */
 class UserStore {
@@ -33,13 +34,6 @@ class UserStore {
       existing.displayName = displayName || existing.displayName;
       existing.lastLoginAt = new Date().toISOString();
       if (isAdminByEmail && existing.role !== 'admin') existing.role = 'admin';
-      // Ensure mission wallet exists for existing users
-      if (!existing.missionWallet) {
-        existing.missionWallet = {
-          address: `mission_${uid}_${crypto.randomBytes(8).toString('hex')}`,
-          balance: 0
-        };
-      }
       await this.store.flush();
       return existing;
     }
@@ -52,13 +46,11 @@ class UserStore {
       role: isAdminByEmail ? 'admin' : 'user',
       apiKey,
       walletAddress: null,
+      wallet: null,
+      balance: 0,
       createdAt: new Date().toISOString(),
       lastLoginAt: new Date().toISOString(),
-      usage: { tasks: 0, totalSpent: 0, today: { date: null, tasks: 0, spent: 0 } },
-      missionWallet: {
-        address: `mission_${uid}_${crypto.randomBytes(8).toString('hex')}`,
-        balance: 0
-      }
+      usage: { tasks: 0, totalSpent: 0, today: { date: null, tasks: 0, spent: 0 } }
     };
     this.users[uid] = user;
     this.byApiKey[apiKey] = uid;
