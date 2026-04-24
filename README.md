@@ -146,7 +146,7 @@ User Cost:              $0.0005
 |----------|------|-------------|------|
 | **Ethereum L1** | $50-200/tx | ❌ Impossible | $50 minimum gas |
 | **Traditional APIs** | $0.01-0.10/action | ❌ Not viable | Too expensive for micro-tasks |
-| **ChatGPT API** | $0.005/action | ⚠️ Barely viable | Still 10x too expensive |
+| **Generic LLM APIs** | $0.005/action | ⚠️ Barely viable | Still 10x too expensive |
 | **Arc Agent Hub** | $0.0005/action | ✅ **Profitable** | USDC as native gas = no overhead |
 
 ### The Developer Upside
@@ -495,7 +495,6 @@ See every USDC transfer, from whom, to whom, proof on-chain.
 ### Technical Deep-Dives
 - **[V2 Implementation](./backend/V2_IMPLEMENTATION_COMPLETE.md)** — Complete architecture
 - **[Session Improvements](./SESSION_IMPROVEMENTS.md)** — Recent optimizations
-- **[Agent Optimization](./AGENTS_OPTIMIZATION.md)** — GPT-5-nano integration
 - **[Quick Start](./QUICKSTART.md)** — Setup & first steps
 
 ---
@@ -556,97 +555,19 @@ POST http://localhost:3001/api/providers
 
 ## 💡 Economics: How We Get 100× Cheaper
 
-| Cost Factor | Ethereum | ChatGPT | **Arc Agent Hub** |
-|-------------|----------|---------|-------------------|
-| **Transaction fees** | $50-200 | $0 | **$0** |
-| **API markup** | — | $0.005 | **$0.0002** |
-| **Infrastructure** | — | $0.003 | **$0.00018** |
-| **Markup** | — | 40% | **40%** |
-| **TOTAL** | **$50-200** | **$0.008** | **$0.0005** |
-| **Improvement vs ChatGPT** | 0.025% | Baseline | **16× cheaper** |
+| Cost Factor | Ethereum | **Arc Agent Hub** |
+|-------------|----------|-------------------|
+| **Transaction fees** | $50-200 | **$0** |
+| **Agent execution** | — | **$0.0002** |
+| **Infrastructure** | — | **$0.00018** |
+| **Markup** | — | **40%** |
+| **TOTAL** | **$50-200** | **$0.0005** |
+| **Improvement** | 0.025% | **100-400,000× cheaper** |
 
 *But this doesn't account for **composability**. With Arc's zero gas:*
 - 10-step workflow still costs same as 1-step
 - 100-agent consensus achievable (impossible on Ethereum)
 - Micro-transactions at scale unlock new business models
-
----
-
-## ✅ Latest Updates (April 2026)
-
-### Mission Execution - FULLY FIXED ✅
-
-**Problem:** Missions were failing during execution despite passing balance checks.
-
-**Root Cause:** 
-- Balance check was verifying Arc on-chain wallet (for settlement) instead of mission wallet (for funding execution)
-- Mission funding tried to transfer from symbolic ledger wallet ID to on-chain treasury address
-- Wallet manager couldn't resolve on-chain addresses back to wallet IDs for signing
-
-**Solution:**
-1. **Fixed balance validation** — Check user's `missionWallet.balance` (for execution) instead of Arc wallet balance (for settlement)
-2. **Separated concerns** — Mission wallets (ledger entries) no longer attempt on-chain transfers; only update in-memory balances in treasury
-3. **Smart address resolution** — WalletManager.getSigner() now reverse-maps on-chain addresses to wallet IDs for proper key signing
-
-**Result:** ✅ Missions now execute end-to-end:
-- Treasury receives funding from user mission wallet
-- Workers and validators paid from treasury balance
-- Unused budget refunded to user mission wallet
-- All transactions recorded on-chain via Arc RPC
-
-**Test:** 
-```bash
-curl -X POST http://localhost:3001/api/tasks \
-  -H "x-api-key: sk_..." \
-  -d '{"input":"Test","taskType":"summarize"}'
-  
-# Response: status: "completed" ✅
-```
-
----
-
-## 🤖 AI-Powered Task Execution: GPT-5-nano
-
-Arc Agent Hub integrates **OpenAI's GPT-5-nano** for intelligent task execution:
-
-### Text Summarization (Worker Agent)
-- **Model:** `gpt-5-nano-2025-08-07` (lightweight, cost-effective, fast)
-- **Capability:** Condenses long narratives to concise 1-2 sentence summaries
-- **Configuration:** 
-  - Reasoning: `disabled` (faster execution)
-  - Max output: 4096 tokens (flexible for different input sizes)
-  - Fallback: Local algorithm if LLM unavailable
-
-**Example:**
-```
-Input (4318 chars): Long story about Kiet climbing a hill in Isan, Thailand...
-Output: "Kiet, un homme simple d'Isan près de Buriram, décide d'escalader une 
-colline isolée pour chercher un sens plus profond à sa vie. Au sommet, il 
-découvre que l'ascension représente un voyage intérieur vers lui-même."
-```
-
-### Quality Validation (Validator Agent)
-- **Model:** Same `gpt-5-nano-2025-08-07` for semantic validation
-- **Purpose:** Verify summaries capture the essence without copy-pasting
-- **Score:** 0-100 with detailed validation notes
-- **Fallback:** Local validation if LLM unavailable
-
-### Cost Efficiency
-- **Per-task cost:** ~$0.0005 USDC (nano pricing profile)
-- **Model inference:** Sub-500ms latency
-- **No reasoning overhead:** Disabled for speed & cost
-
-### Configuration
-Set these environment variables to enable:
-```bash
-OPENAI_API_KEY=sk-proj-...                    # Your OpenAI API key
-OPENAI_BASE_URL=https://api.openai.com/v1     # OpenAI endpoint
-OPENAI_MODEL=gpt-5-nano-2025-08-07            # GPT-5-nano model
-OPENAI_REASONING_EFFORT=none                  # Disable reasoning
-OPENAI_MAX_OUTPUT_TOKENS=4096                 # Output budget
-```
-
-If `OPENAI_API_KEY` is not set, the system gracefully falls back to local algorithms.
 
 ---
 
@@ -664,7 +585,7 @@ Not a marketplace (too centralized). Not an API layer (too expensive).
 
 - **GitHub:** https://github.com/lberthod/arc-agent-hub
 - **Framework:** Circle Arc (USDC L1)
-- **Integration:** OpenAI GPT-5-nano + Arc USDC
+- **Orchestrator:** LLM-powered agent routing + Arc USDC settlement
 
 ---
 
