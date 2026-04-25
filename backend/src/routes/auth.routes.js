@@ -221,6 +221,27 @@ router.get('/wallet/balance/:address', async (req, res) => {
   }
 });
 
+// Get orchestrator wallet address (the wallet that pays agents)
+router.get('/wallet/orchestrator', async (req, res) => {
+  try {
+    const walletManager = (await import('../core/walletManager.js')).default;
+    await walletManager.load();
+    const address = walletManager.getAddress('orchestrator_wallet');
+
+    if (!address) {
+      return res.status(404).json({ error: 'Orchestrator wallet not configured' });
+    }
+
+    res.json({
+      address,
+      description: 'The wallet that pays agents for mission execution',
+      network: 'arc-testnet'
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Debug: Test contract call directly
 router.get('/wallet/balance-debug/:address', async (req, res) => {
   try {

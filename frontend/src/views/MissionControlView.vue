@@ -50,6 +50,19 @@
             </a>
           </div>
 
+          <div class="bg-slate-800 rounded-lg border border-amber-500/20 p-4 mb-3">
+            <p class="text-xs text-slate-500 uppercase tracking-wider mb-2">🔑 Orchestrator Wallet (Pays Agents)</p>
+            <a
+              v-if="orchestratorWalletAddress"
+              :href="`https://testnet.arcscan.app/address/${orchestratorWalletAddress}`"
+              target="_blank"
+              class="text-xs font-mono text-amber-400 hover:text-amber-300 break-all underline transition"
+            >
+              {{ orchestratorWalletAddress }}
+            </a>
+            <p v-else class="text-xs text-slate-400">Loading...</p>
+          </div>
+
           <!-- Treasury Wallet Balance Display -->
           <div class="bg-slate-800 rounded-lg border border-indigo-500/20 p-4 mb-3 space-y-3">
             <div>
@@ -338,6 +351,7 @@ const hasBalance = computed(() => {
 const isRefreshingWallet = ref(false);
 const lastWalletRefresh = ref(null);
 const treasuryWalletBalance = ref(0);
+const orchestratorWalletAddress = ref('');
 
 // Treasury Wallet computed properties
 const treasuryWalletAddress = computed(() => {
@@ -359,11 +373,26 @@ async function loadTreasuryBalance() {
   }
 }
 
+async function loadOrchestratorWalletAddress() {
+  try {
+    const response = await fetch('https://wool-alternatives-com-intention.trycloudflare.com/api/auth/wallet/orchestrator');
+    if (!response.ok) {
+      console.warn('Failed to load orchestrator wallet address');
+      return;
+    }
+    const data = await response.json();
+    orchestratorWalletAddress.value = data.address || '';
+  } catch (err) {
+    console.warn('Failed to load orchestrator wallet:', err.message);
+  }
+}
+
 async function refreshWallet(silent = false) {
   try {
     isRefreshingWallet.value = true;
     user.value = await api.auth.getMe();
     await loadTreasuryBalance();
+    await loadOrchestratorWalletAddress();
     lastWalletRefresh.value = new Date().toLocaleTimeString();
     if (user.value?.wallet && !silent) {
       toastSuccess('Wallet setup complete!');
