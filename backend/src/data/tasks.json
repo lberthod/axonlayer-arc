@@ -909,6 +909,102 @@
       "selectedWorker": "classifier_default",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_c0d49a44-72e8-4965-867e-01182eab6911",
+      "input": "Artificial intelligence is transforming industries across the globe, from healthcare to finance.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:49:48.283Z",
+      "updatedAt": "2026-04-25T14:49:48.289Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000596,
+        "workerPayment": 0.000355,
+        "validatorPayment": 0.000236,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 96,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_8c880c2f-cdd8-4483-82b5-6a24c82e0328",
+      "input": "Blockchain technology enables decentralized transactions without intermediaries.",
+      "taskType": "keywords",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:49:48.289Z",
+      "updatedAt": "2026-04-25T14:49:48.291Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000564,
+        "workerPayment": 0.000335,
+        "validatorPayment": 0.000224,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 80,
+          "taskType": "keywords",
+          "multiplier": 0.8,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_984fc2f4-d13a-4e0c-8eb4-a9e09f2e5c46",
+      "input": "Climate change requires immediate global cooperation and sustainable solutions.",
+      "taskType": "rewrite",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:49:48.291Z",
+      "updatedAt": "2026-04-25T14:49:48.292Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000595,
+        "workerPayment": 0.000393,
+        "validatorPayment": 0.000197,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 79,
+          "taskType": "rewrite",
+          "multiplier": 1.2,
+          "workerQuote": 0.002,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }

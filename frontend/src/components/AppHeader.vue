@@ -12,9 +12,7 @@
           <router-link to="/mission"
             class="text-slate-400 hover:text-slate-100 px-3 py-2 rounded-md transition duration-200 hover:bg-slate-700"
             active-class="text-indigo-400 font-semibold bg-indigo-950">Mission Control</router-link>
-          <router-link to="/user"
-            class="text-slate-400 hover:text-slate-100 px-3 py-2 rounded-md transition duration-200 hover:bg-slate-700"
-            active-class="text-indigo-400 font-semibold bg-indigo-950">My missions</router-link>
+
           <router-link to="/profile"
             class="text-slate-400 hover:text-slate-100 px-3 py-2 rounded-md transition duration-200 hover:bg-slate-700"
             active-class="text-indigo-400 font-semibold bg-indigo-950">Profile</router-link>

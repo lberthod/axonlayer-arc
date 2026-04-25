@@ -65,7 +65,8 @@ async function startServer() {
       console.log(`  GET  /api/tasks/:id       - Get task details`);
       console.log(`  GET  /api/balances        - Get all wallet balances`);
       console.log(`  GET  /api/transactions    - Get transactions`);
-      console.log(`  POST /api/simulate        - Run simulation`);
+      console.log(`  POST /api/simulate        - Run simulation (batch results at end)`);
+      console.log(`  POST /api/simulate/stream - Stream batch progress in real-time (SSE)`);
       console.log(`  GET  /api/metrics         - Get operational / economic metrics`);
       console.log(`  GET  /api/agents          - List agents + stats`);
       console.log(`  POST /api/agents/quote    - Quote a task (price + selected agents)`);

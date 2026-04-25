@@ -111,7 +111,9 @@
       "Bash(curl -s http://localhost:5173/ -I)",
       "Bash(pkill -f \"vite\\\\|node.*server\")",
       "Bash(curl -s http://localhost:3001/api/balances)",
-      "Bash(pkill -f \"node\")"
+      "Bash(pkill -f \"node\")",
+      "Read(//private/tmp/**)",
+      "Bash(timeout 15 curl -s -X POST http://localhost:3001/api/simulate/stream -H 'Content-Type: application/json' -d '{\"count\": 3, \"selectionStrategy\": \"score_price\"}')"
     ]
   }
 }
