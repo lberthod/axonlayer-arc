@@ -61,10 +61,10 @@ const buildUrl = (endpoint) => {
 
 export const api = {
   tasks: {
-    create: (data) => apiCall('/api/tasks', { method: 'POST', body: JSON.stringify(data) }),
-    list: () => apiCall('/api/tasks'),
-    get: (id) => apiCall(`/api/tasks/${id}`),
-    execute: (id) => apiCall(`/api/tasks/${id}/execute`, { method: 'POST' }),
+    create: (data) => apiCallWithAuth('/api/tasks', { method: 'POST', body: JSON.stringify(data) }),
+    list: () => apiCallWithAuth('/api/tasks'),
+    get: (id) => apiCallWithAuth(`/api/tasks/${id}`),
+    execute: (id) => apiCallWithAuth(`/api/tasks/${id}/execute`, { method: 'POST' }),
   },
 
   auth: {
