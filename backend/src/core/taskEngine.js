@@ -165,8 +165,16 @@ class TaskEngine {
     await walletManager.load();
     const walletId = `user_${userUid}`;
 
+    // Clear cached signer to force fresh load
+    delete walletManager.signers[walletId];
+    delete walletManager.signers[user.treasuryWallet.address];
+
     // Always register/update with TREASURY wallet (replaces old Arc wallet if exists)
     await walletManager.registerUserWallet(userUid, user.treasuryWallet);
+
+    // Force reload to ensure encrypted wallet is refreshed from file
+    walletManager.loaded = false;
+    await walletManager.load();
 
     // Create on-chain transaction: user's treasury wallet → orchestrator wallet
     const orchestratorAddr = walletManager.getAddress('orchestrator_wallet');
