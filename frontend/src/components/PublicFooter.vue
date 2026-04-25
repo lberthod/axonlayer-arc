@@ -39,7 +39,7 @@
 
     <div class="border-t border-white/10">
       <div class="container mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-2">
-        <p>© {{ year }} Axon Layer. All rights reserved.</p>
+        <p>© {{ year }} Axon Layer. All rights reserved. · v{{ version }}</p>
         <p>
           Settlement layer:
           <a href="https://www.circle.com/arc" target="_blank" rel="noopener noreferrer" class="text-violet-400 hover:text-violet-300">Circle Arc</a>
@@ -52,5 +52,7 @@
 
 <script setup>
 import { computed } from 'vue';
+import pkg from '../../package.json';
 const year = computed(() => new Date().getFullYear());
+const version = pkg.version;
 </script>

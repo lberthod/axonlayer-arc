@@ -21,3 +21,4 @@ credentials.json
 .firebase/
 functions/node_modules/
 functions/.env.local
+firebase-key.json
