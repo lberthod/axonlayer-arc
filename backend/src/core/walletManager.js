@@ -55,7 +55,7 @@ class WalletManager {
     const filePath = this.resolvePath(config.walletProvider.onChain.walletsFile);
 
     try {
-      const data = await secretManager.loadAndDecryptWallets(filePath);
+      const data = await secretManager.loadWallets(filePath);
 
       // Store encrypted wallets for on-demand decryption
       this.encryptedWallets = data.wallets;

@@ -152,7 +152,27 @@ class SecretManager {
   }
 
   /**
-   * Load and decrypt wallets from file
+   * Load wallets from file WITHOUT decrypting (returns encrypted wallets as-is)
+   * For use by WalletManager which decrypts on-demand in getSigner()
+   */
+  async loadWallets(filePath) {
+    try {
+      const raw = await fs.readFile(filePath, 'utf-8');
+      const data = JSON.parse(raw);
+      return {
+        network: data.network,
+        chainId: data.chainId,
+        wallets: data.wallets, // Return as-is (encrypted or plaintext)
+        encrypted: data.encrypted === true
+      };
+    } catch (error) {
+      logger.error({ err: error, filePath }, 'Failed to load wallets file');
+      throw error;
+    }
+  }
+
+  /**
+   * Load and decrypt wallets from file (DEPRECATED - use loadWallets() instead)
    * Returns: { wallets: { agentId: decryptedWallet } }
    */
   async loadAndDecryptWallets(filePath) {
