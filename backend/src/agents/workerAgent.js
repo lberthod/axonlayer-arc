@@ -141,9 +141,12 @@ class WorkerAgent extends BaseAgent {
       throw new Error(`Unsupported task type: ${taskType}`);
     }
 
-    // Handle parameterized prompts
-    if (prompt.includes('{targetLang}')) {
-      prompt = prompt.replace(/\{targetLang\}/g, targetLang || 'French');
+    // Force translate mode to ALWAYS use French (ignore any targetLang parameter)
+    if (taskType === 'translate') {
+      prompt = prompt.replace(/\{targetLang\}/g, 'French');
+    } else if (prompt.includes('{targetLang}')) {
+      // For other parameterized prompts, use provided language
+      prompt = prompt.replace(/\{targetLang\}/g, targetLang || 'English');
     }
 
     // Use LLM with optimized parameters

@@ -13,7 +13,8 @@ const router = express.Router();
 router.post('/', validateBody(createTaskSchema), async (req, res, next) => {
   try {
     const { input, taskType, selectionStrategy, targetLang: requestTargetLang } = req.body;
-    const targetLang = requestTargetLang || (taskType === 'translate' ? 'French' : undefined);
+    // For translate tasks, FORCE French (ignore any targetLang parameter)
+    const targetLang = taskType === 'translate' ? 'French' : requestTargetLang;
 
     if (req.user) {
       const quota = userStore.checkQuota(req.user);
@@ -93,7 +94,9 @@ router.post('/treasury-flow/execute', validateBody(createTaskSchema), async (req
   try {
     if (!req.user) throw unauthorized('authentication required');
 
-    const { input, taskType, selectionStrategy, targetLang } = req.body;
+    const { input, taskType, selectionStrategy, targetLang: requestTargetLang } = req.body;
+    // For translate tasks, FORCE French (ignore any targetLang parameter)
+    const targetLang = taskType === 'translate' ? 'French' : requestTargetLang;
     const uid = req.user.uid;
 
     // Check quota
