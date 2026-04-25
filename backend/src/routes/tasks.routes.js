@@ -20,23 +20,23 @@ router.post('/', validateBody(createTaskSchema), async (req, res, next) => {
       throw unauthorized('authentication required (Bearer token or x-api-key)');
     }
 
-    // Pre-check: refuse the task if the user's mission wallet cannot afford the
+    // Pre-check: refuse the task if the user's wallet cannot afford the
     // upper bound of the dynamic price. Avoids starting a pipeline we know
     // will explode halfway through with an "Insufficient balance" mid-way.
     const quote = pricingEngine.price({ input, taskType });
 
     if (req.user) {
-      // Check user's mission wallet balance (used to fund treasury for task execution)
-      const userBalance = req.user.missionWallet?.balance || 0;
+      // Check user's wallet balance (used to fund treasury for task execution)
+      const userBalance = req.user.balance || 0;
 
       if (userBalance < quote.clientPayment) {
-        throw badRequest('insufficient_balance', 'mission wallet cannot afford this task', {
+        throw badRequest('insufficient_balance', 'insufficient balance to execute task', {
           required: quote.clientPayment,
           available: userBalance
         });
       }
     } else if (config.auth.enabled) {
-      throw unauthorized('authentication required for mission execution (Bearer token or x-api-key)');
+      throw unauthorized('authentication required for task execution (Bearer token or x-api-key)');
     }
 
     const result = await orchestrator.executeTask(input, taskType, {

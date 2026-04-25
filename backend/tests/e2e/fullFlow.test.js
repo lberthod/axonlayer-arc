@@ -30,7 +30,8 @@ describe('E2E: Complete Task Execution Flow', () => {
 
   beforeAll(async () => {
     // Create a test user
-    testUser = await userStore.createUser({
+    testUser = await userStore.upsertFromFirebase({
+      uid: 'test-user-' + Date.now(),
       email: 'e2e-test@example.com',
       displayName: 'E2E Test User'
     });
@@ -38,12 +39,12 @@ describe('E2E: Complete Task Execution Flow', () => {
     // Generate auth token
     testAuthToken = `Bearer ${testUser.apiKey}`;
 
-    // Fund their mission wallet with initial balance
+    // Fund their wallet with initial balance
     const initialBalance = 1.0; // 1 USDC
-    await userStore.fundMissionWallet(testUser.uid, initialBalance);
+    await userStore.setBalance(testUser.uid, initialBalance);
 
     console.log(`\n✓ Test user created: ${testUser.uid}`);
-    console.log(`✓ Mission wallet balance: ${initialBalance} USDC`);
+    console.log(`✓ Wallet balance: ${initialBalance} USDC`);
   });
 
   afterAll(async () => {
@@ -53,7 +54,7 @@ describe('E2E: Complete Task Execution Flow', () => {
 
   it('should complete full task flow without money loss', async () => {
     // Get initial state
-    const initialBalance = testUser.missionWallet.balance;
+    const initialBalance = testUser.balance;
     const initialTreasuryBalance = treasuryStore.getBalance();
     const initialLedgerLength = ledger.getTransactions().length;
 
@@ -106,11 +107,11 @@ describe('E2E: Complete Task Execution Flow', () => {
     console.log(`\nLedger transactions for task: ${taskTxs.length}`);
 
     // Step 4: Verify user balance decreased
-    const userAfter = userStore.getUser(testUser.uid);
-    const balanceDecrease = initialBalance - userAfter.missionWallet.balance;
+    const userAfter = userStore.getByUid(testUser.uid);
+    const balanceDecrease = initialBalance - userAfter.balance;
 
     console.log(`\nAfter task execution:`);
-    console.log(`  User balance: ${userAfter.missionWallet.balance} USDC`);
+    console.log(`  User balance: ${userAfter.balance} USDC`);
     console.log(`  Balance decrease: ${balanceDecrease} USDC`);
 
     expect(balanceDecrease).toBeCloseTo(pricing.clientPayment, 6);
@@ -133,7 +134,7 @@ describe('E2E: Complete Task Execution Flow', () => {
     console.log(`  Balance change: ${balanceDecrease} USDC`);
 
     // Invariant: money is either in user wallet or treasury
-    const totalInSystem = userAfter.missionWallet.balance + treasuryAfter;
+    const totalInSystem = userAfter.balance + treasuryAfter;
     const moneyLoss = initialBalance + initialTreasuryBalance - totalInSystem;
 
     console.log(`  Total money in system: ${totalInSystem} USDC`);
@@ -146,12 +147,13 @@ describe('E2E: Complete Task Execution Flow', () => {
 
   it('should handle insufficient balance correctly', async () => {
     // Create a user with low balance
-    const poorUser = await userStore.createUser({
+    const poorUser = await userStore.upsertFromFirebase({
+      uid: 'poor-user-' + Date.now(),
       email: 'poor-user@example.com',
       displayName: 'Poor User'
     });
 
-    await userStore.fundMissionWallet(poorUser.uid, 0.0001); // Very low balance
+    await userStore.setBalance(poorUser.uid, 0.0001); // Very low balance
 
     const poorUserToken = `Bearer ${poorUser.apiKey}`;
 
