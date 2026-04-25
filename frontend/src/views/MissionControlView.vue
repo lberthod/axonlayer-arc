@@ -84,6 +84,31 @@
             Last synced: {{ lastWalletRefresh }}
           </p>
 
+          <!-- System Wallets Display -->
+          <div v-if="systemWallets.length > 0" class="bg-slate-800 rounded-lg border border-slate-700 p-4 mb-3">
+            <h3 class="text-sm font-semibold text-slate-300 mb-3">💰 All System Wallets</h3>
+            <div class="space-y-3">
+              <div v-for="wallet in systemWallets" :key="wallet.name" class="bg-slate-900 rounded p-3 border border-slate-700">
+                <div class="flex items-start justify-between mb-2">
+                  <div>
+                    <p class="text-xs font-semibold text-slate-200">{{ wallet.name }}</p>
+                    <p class="text-xs text-slate-400">{{ wallet.description }}</p>
+                  </div>
+                  <p class="text-right">
+                    <p class="text-sm font-bold text-amber-400">{{ Number(wallet.balance || 0).toFixed(6) }} USDC</p>
+                  </p>
+                </div>
+                <a
+                  :href="`https://testnet.arcscan.app/address/${wallet.address}`"
+                  target="_blank"
+                  class="text-xs font-mono text-indigo-400 hover:text-indigo-300 break-all underline transition"
+                >
+                  {{ wallet.address }}
+                </a>
+              </div>
+            </div>
+          </div>
+
           <MissionBudgetBar
             :budget="displayBudget"
             :spent="currentSpent"
@@ -352,6 +377,7 @@ const isRefreshingWallet = ref(false);
 const lastWalletRefresh = ref(null);
 const treasuryWalletBalance = ref(0);
 const orchestratorWalletAddress = ref('');
+const systemWallets = ref([]);
 
 // Treasury Wallet computed properties
 const treasuryWalletAddress = computed(() => {
@@ -387,12 +413,23 @@ async function loadOrchestratorWalletAddress() {
   }
 }
 
+async function loadSystemWallets() {
+  try {
+    const data = await api.wallets.getSystemWallets();
+    systemWallets.value = data.wallets || [];
+  } catch (err) {
+    console.warn('Failed to load system wallets:', err.message);
+    systemWallets.value = [];
+  }
+}
+
 async function refreshWallet(silent = false) {
   try {
     isRefreshingWallet.value = true;
     user.value = await api.auth.getMe();
     await loadTreasuryBalance();
     await loadOrchestratorWalletAddress();
+    await loadSystemWallets();
     lastWalletRefresh.value = new Date().toLocaleTimeString();
     if (user.value?.wallet && !silent) {
       toastSuccess('Wallet setup complete!');

@@ -110,6 +110,10 @@ export const api = {
   blockchain: {
     getBalance: (address) => apiCall(`/api/auth/wallet/balance/${address}`),
   },
+
+  wallets: {
+    getSystemWallets: () => apiCallWithAuth('/api/auth/wallets/system'),
+  },
 };
 
 // Add convenience methods at top level for backward compatibility
@@ -119,6 +123,7 @@ api.getBlockchainBalance = api.blockchain.getBalance;
 api.getAgents = api.agents.list;
 api.getTask = api.tasks.get;
 api.getTransactions = () => apiCall('/api/transactions');
+api.getSystemWallets = () => api.wallets.getSystemWallets();
 
 // Add missing methods for MissionControlView
 api.createTask = (input, taskType, options = {}) =>

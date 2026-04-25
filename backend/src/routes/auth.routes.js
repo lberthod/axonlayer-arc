@@ -242,6 +242,72 @@ router.get('/wallet/orchestrator', async (req, res) => {
   }
 });
 
+// Get all system wallets with balances
+router.get('/wallets/system', async (req, res) => {
+  try {
+    const walletManager = (await import('../core/walletManager.js')).default;
+    const arcBlockchain = (await import('../core/arcBlockchainService.js')).default;
+
+    await walletManager.load();
+
+    const walletNames = ['client_wallet', 'orchestrator_wallet', 'worker_wallet', 'validator_wallet'];
+    const wallets = [];
+
+    for (const name of walletNames) {
+      const address = walletManager.getAddress(name);
+      if (address) {
+        let balance = 0;
+        try {
+          const result = await arcBlockchain.getBalance(address);
+          balance = result || 0;
+        } catch (err) {
+          // Balance fetch failed, set to 0
+        }
+
+        wallets.push({
+          name,
+          address,
+          balance,
+          description: getWalletDescription(name)
+        });
+      }
+    }
+
+    // Add user's Treasury Wallet if available
+    if (req.user?.treasuryWallet?.address) {
+      let balance = 0;
+      try {
+        const result = await arcBlockchain.getBalance(req.user.treasuryWallet.address);
+        balance = result || 0;
+      } catch (err) {
+        // Balance fetch failed
+      }
+
+      wallets.push({
+        name: 'user_treasury_wallet',
+        address: req.user.treasuryWallet.address,
+        balance,
+        description: `Your personal Treasury Wallet for agent payments`,
+        owner: req.user.uid
+      });
+    }
+
+    res.json({ wallets });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+function getWalletDescription(name) {
+  const descriptions = {
+    'client_wallet': 'System client wallet for mission funding',
+    'orchestrator_wallet': 'Orchestrator wallet that executes and pays agents',
+    'worker_wallet': 'Worker agent wallet',
+    'validator_wallet': 'Validator agent wallet'
+  };
+  return descriptions[name] || name;
+}
+
 // Debug: Test contract call directly
 router.get('/wallet/balance-debug/:address', async (req, res) => {
   try {
