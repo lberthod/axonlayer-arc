@@ -131,6 +131,42 @@
         </div>
       </div>
 
+      <!-- Treasury Wallet Info (Handles agent payments) -->
+      <div v-if="treasuryInfo" class="bg-slate-800 rounded-lg p-6 mb-6 border-2 border-blue-200">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-xl font-bold text-slate-100">Treasury Wallet</h2>
+            <p class="text-xs text-slate-400">Manages payments to agents on Arc - auto-funded from missions</p>
+          </div>
+          <span class="text-2xl">🏦</span>
+        </div>
+
+        <!-- Treasury Address -->
+        <div class="mb-4 p-4 bg-blue-950 rounded-lg border border-blue-200">
+          <p class="text-xs text-blue-400 uppercase mb-2 font-semibold">🔗 Treasury Address (Arc Testnet)</p>
+          <p class="text-xs text-blue-400 mb-2">Receives mission funds and pays agents automatically</p>
+          <div class="flex items-center gap-2">
+            <code class="flex-1 text-sm font-mono bg-slate-800 p-2 rounded break-all">{{ treasuryInfo.address }}</code>
+            <button @click="copyTreasuryAddress"
+              class="px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm font-semibold transition">
+              {{ treasuryAddressCopied ? '✓ Copied' : 'Copy' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Treasury Balance -->
+        <div class="p-4 bg-sky-50 rounded-lg border-2 border-sky-200">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <p class="text-xs text-sky-700 uppercase mb-1 font-bold">💵 Treasury Balance</p>
+              <p class="text-xs text-sky-600">Available for agent payments</p>
+            </div>
+            <span class="text-sm text-sky-600 bg-sky-100 px-2 py-1 rounded-full font-semibold">Internal</span>
+          </div>
+          <p class="text-3xl font-bold text-sky-700">{{ (treasuryInfo.balance || 0).toFixed(6) }} USDC</p>
+        </div>
+      </div>
+
       <!-- Security Warning -->
       <div class="p-4 bg-red-50 rounded-lg border border-red-200">
         <p class="text-sm text-red-800">
@@ -150,9 +186,11 @@ import { toastSuccess, toastError } from '../stores/toastStore.js';
 import { walletStore } from '../stores/walletStore.js';
 
 const user = ref(null);
+const treasuryInfo = ref(null);
 const showWalletDetails = ref(false);
 const showPrivateKey = ref(false);
 const addressCopied = ref(false);
+const treasuryAddressCopied = ref(false);
 const privKeyCopied = ref(false);
 const mnemonicCopied = ref(false);
 const checkingBalance = ref(false);
@@ -161,8 +199,32 @@ const creatingWallet = ref(false);
 async function loadUser() {
   try {
     user.value = await api.auth.getMe();
+    await loadTreasuryInfo();
   } catch (err) {
     toastError(err, 'Failed to load profile');
+  }
+}
+
+async function loadTreasuryInfo() {
+  try {
+    // Fetch all balances to get treasury info
+    const balances = await api.balances.getBalances();
+
+    // Treasury wallet is usually under 'orchestrator_wallet' or 'arc_treasury_wallet'
+    const treasuryAddress = '0xA89044f1d22e8CD292B3Db092C8De28eB1728d74'; // Default Arc hub treasury
+    const treasuryBalance = balances['orchestrator_wallet'] || balances['arc_treasury_wallet'] || 0;
+
+    treasuryInfo.value = {
+      address: treasuryAddress,
+      balance: treasuryBalance
+    };
+  } catch (err) {
+    console.warn('Failed to load treasury info:', err.message);
+    // Set default if unable to fetch
+    treasuryInfo.value = {
+      address: '0xA89044f1d22e8CD292B3Db092C8De28eB1728d74',
+      balance: 0
+    };
   }
 }
 
@@ -190,6 +252,14 @@ function copyWalletAddress() {
     navigator.clipboard.writeText(user.value.wallet.address);
     addressCopied.value = true;
     setTimeout(() => { addressCopied.value = false; }, 2000);
+  }
+}
+
+function copyTreasuryAddress() {
+  if (treasuryInfo.value?.address) {
+    navigator.clipboard.writeText(treasuryInfo.value.address);
+    treasuryAddressCopied.value = true;
+    setTimeout(() => { treasuryAddressCopied.value = false; }, 2000);
   }
 }
 
