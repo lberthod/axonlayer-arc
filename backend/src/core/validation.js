@@ -19,7 +19,7 @@ export const createTaskSchema = z.object({
     .max(5000, 'input is too long (max 5000 chars)'),
   taskType: taskTypeSchema.default('summarize'),
   selectionStrategy: selectionStrategySchema.optional(),
-  targetLang: z.string().max(10).optional()
+  targetLang: z.string().max(10).default('French').optional()
 }).refine(
   (data) => {
     // Additional validation per task type

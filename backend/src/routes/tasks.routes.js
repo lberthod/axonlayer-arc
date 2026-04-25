@@ -12,7 +12,8 @@ const router = express.Router();
 
 router.post('/', validateBody(createTaskSchema), async (req, res, next) => {
   try {
-    const { input, taskType, selectionStrategy, targetLang } = req.body;
+    const { input, taskType, selectionStrategy, targetLang: requestTargetLang } = req.body;
+    const targetLang = requestTargetLang || (taskType === 'translate' ? 'French' : undefined);
 
     if (req.user) {
       const quota = userStore.checkQuota(req.user);

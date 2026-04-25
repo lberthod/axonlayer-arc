@@ -143,7 +143,7 @@ class WorkerAgent extends BaseAgent {
 
     // Handle parameterized prompts
     if (prompt.includes('{targetLang}')) {
-      prompt = prompt.replace('{targetLang}', targetLang || 'English');
+      prompt = prompt.replace('{targetLang}', targetLang || 'French');
     }
 
     // Use LLM with optimized parameters
