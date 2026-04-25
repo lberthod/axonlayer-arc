@@ -79,7 +79,7 @@
       "Bash(awk '{print $2}')",
       "Bash(curl -s http://localhost:3000/)",
       "Bash(pkill -f \"npm start\")",
-      "Bash(find . -name '*.vue' -type f -exec sed -i '' -e 's/ArcAgent Hub/Axon Layer/g' -e s/bg-white/bg-slate-800/g -e s/text-gray-900/text-slate-100/g -e s/text-gray-700/text-slate-300/g -e s/text-gray-600/text-slate-400/g -e s/text-gray-500/text-slate-500/g -e s/bg-gray-100/bg-slate-700/g -e s/bg-gray-200/bg-slate-600/g -e 's/border-gray-200/border-indigo-500\\\\/20/g' -e s/border-gray-100/border-slate-700/g -e s/hover:bg-gray-100/hover:bg-slate-700/g -e 's/from-violet-600 to-fuchsia-600/from-indigo-600 to-purple-600/g' -e s/text-violet-600/text-indigo-400/g -e s/bg-violet-50/bg-indigo-950/g '{}' +)",
+      "Bash(find . -name '*.vue' -type f -exec sed -i '' -e 's/ArcAgent Hub/Axonlayer/g' -e s/bg-white/bg-slate-800/g -e s/text-gray-900/text-slate-100/g -e s/text-gray-700/text-slate-300/g -e s/text-gray-600/text-slate-400/g -e s/text-gray-500/text-slate-500/g -e s/bg-gray-100/bg-slate-700/g -e s/bg-gray-200/bg-slate-600/g -e 's/border-gray-200/border-indigo-500\\\\/20/g' -e s/border-gray-100/border-slate-700/g -e s/hover:bg-gray-100/hover:bg-slate-700/g -e 's/from-violet-600 to-fuchsia-600/from-indigo-600 to-purple-600/g' -e s/text-violet-600/text-indigo-400/g -e s/bg-violet-50/bg-indigo-950/g '{}' +)",
       "Bash(ssh -o StrictHostKeyChecking=no root@72.61.108.21 \"uname -a && echo '---' && pwd && echo '---' && ls -la /root\")",
       "Bash(chmod +x /tmp/deploy-axonlayer.sh)",
       "Bash(bash /tmp/configure-frontend.sh)",
@@ -109,7 +109,9 @@
       "Bash(pkill -f \"vite\\\\|npm run dev\")",
       "Bash(VITE_PORT=5173 npm run dev)",
       "Bash(curl -s http://localhost:5173/ -I)",
-      "Bash(pkill -f \"vite\\\\|node.*server\")"
+      "Bash(pkill -f \"vite\\\\|node.*server\")",
+      "Bash(curl -s http://localhost:3001/api/balances)",
+      "Bash(pkill -f \"node\")"
     ]
   }
 }

@@ -4,7 +4,7 @@
       <div>
         <div class="flex items-center gap-2 text-white font-extrabold text-lg mb-3">
           <span class="inline-block w-2.5 h-2.5 rounded-full bg-gradient-to-br from-violet-400 to-fuchsia-400"></span>
-          Axon Layer
+          Axonlayer
         </div>
         <p class="text-sm text-gray-400">
           Fund a mission. A private network of AI agents executes it. Settled in USDC on Circle Arc.
@@ -39,11 +39,13 @@
     </div>
 
     <div class="border-t border-white/10">
-      <div class="container mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-2">
-        <p>© {{ year }} Axon Layer. All rights reserved. · v{{ version }}</p>
+      <div
+        class="container mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+        <p>© {{ year }} Axonlayer. All rights reserved. · v{{ version }}</p>
         <p>
           Settlement layer:
-          <a href="https://www.circle.com/arc" target="_blank" rel="noopener noreferrer" class="text-violet-400 hover:text-violet-300">Circle Arc</a>
+          <a href="https://www.circle.com/arc" target="_blank" rel="noopener noreferrer"
+            class="text-violet-400 hover:text-violet-300">Circle Arc</a>
           · Asset: USDC
         </p>
       </div>

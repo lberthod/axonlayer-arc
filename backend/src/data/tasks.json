@@ -589,6 +589,326 @@
       "selectedWorker": "worker_fast",
       "selectedValidator": "validator_default",
       "budget": 0.0005
+    },
+    {
+      "id": "task_ff48e861-8541-45ad-8de5-56143fe026f3",
+      "input": "Artificial intelligence is transforming industries across the globe, from healthcare to finance.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:39:04.450Z",
+      "updatedAt": "2026-04-25T14:39:04.454Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000596,
+        "workerPayment": 0.000355,
+        "validatorPayment": 0.000236,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 96,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_90a8d46d-6fb1-4f0c-b78c-686c5a9dbfbd",
+      "input": "Blockchain technology enables decentralized transactions without intermediaries.",
+      "taskType": "keywords",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:39:04.454Z",
+      "updatedAt": "2026-04-25T14:39:04.456Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000564,
+        "workerPayment": 0.000335,
+        "validatorPayment": 0.000224,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 80,
+          "taskType": "keywords",
+          "multiplier": 0.8,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_b1febb69-fade-4291-b4f3-05d50dd10c0a",
+      "input": "Climate change requires immediate global cooperation and sustainable solutions.",
+      "taskType": "rewrite",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:39:04.456Z",
+      "updatedAt": "2026-04-25T14:39:04.457Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000595,
+        "workerPayment": 0.000393,
+        "validatorPayment": 0.000197,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 79,
+          "taskType": "rewrite",
+          "multiplier": 1.2,
+          "workerQuote": 0.002,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_e534a8f7-8371-4169-b757-4dfa26c50ccc",
+      "input": "The future of work involves remote collaboration and digital transformation.",
+      "taskType": "translate",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:39:04.457Z",
+      "updatedAt": "2026-04-25T14:39:04.458Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000614,
+        "workerPayment": 0.000406,
+        "validatorPayment": 0.000203,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 76,
+          "taskType": "translate",
+          "multiplier": 1.5,
+          "workerQuote": 0.002,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_f17a504f-797e-4971-aab1-69fb515aa657",
+      "input": "Machine learning algorithms can process vast amounts of data efficiently.",
+      "taskType": "classify",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:39:04.458Z",
+      "updatedAt": "2026-04-25T14:39:04.459Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000566,
+        "workerPayment": 0.000361,
+        "validatorPayment": 0.0002,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 73,
+          "taskType": "classify",
+          "multiplier": 0.9,
+          "workerQuote": 0.0018,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "classifier_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_4f83ce6b-99dc-46a5-ac0e-637e30df3dc7",
+      "input": "Artificial intelligence is transforming industries across the globe, from healthcare to finance.",
+      "taskType": "summarize",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:39:17.500Z",
+      "updatedAt": "2026-04-25T14:39:17.502Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000596,
+        "workerPayment": 0.000355,
+        "validatorPayment": 0.000236,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 96,
+          "taskType": "summarize",
+          "multiplier": 1,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_900e355d-05c1-4b0c-8395-cdfb4d9cb479",
+      "input": "Blockchain technology enables decentralized transactions without intermediaries.",
+      "taskType": "keywords",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:39:17.503Z",
+      "updatedAt": "2026-04-25T14:39:17.504Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000564,
+        "workerPayment": 0.000335,
+        "validatorPayment": 0.000224,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 80,
+          "taskType": "keywords",
+          "multiplier": 0.8,
+          "workerQuote": 0.0015,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_fast",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_1340d8ef-316a-425c-9fe2-202eb1aba90e",
+      "input": "Climate change requires immediate global cooperation and sustainable solutions.",
+      "taskType": "rewrite",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:39:17.504Z",
+      "updatedAt": "2026-04-25T14:39:17.505Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000595,
+        "workerPayment": 0.000393,
+        "validatorPayment": 0.000197,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 79,
+          "taskType": "rewrite",
+          "multiplier": 1.2,
+          "workerQuote": 0.002,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_abd6fe79-90cf-4458-9a31-ff582f176654",
+      "input": "The future of work involves remote collaboration and digital transformation.",
+      "taskType": "translate",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:39:17.505Z",
+      "updatedAt": "2026-04-25T14:39:17.508Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000614,
+        "workerPayment": 0.000406,
+        "validatorPayment": 0.000203,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 76,
+          "taskType": "translate",
+          "multiplier": 1.5,
+          "workerQuote": 0.002,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "worker_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
+    },
+    {
+      "id": "task_889220a5-faa7-41f1-b809-2b98ac8b4b90",
+      "input": "Machine learning algorithms can process vast amounts of data efficiently.",
+      "taskType": "classify",
+      "status": "failed",
+      "createdAt": "2026-04-25T14:39:17.508Z",
+      "updatedAt": "2026-04-25T14:39:17.510Z",
+      "result": null,
+      "validation": null,
+      "transactions": [],
+      "requesterUid": null,
+      "providerIds": null,
+      "pricing": {
+        "clientPayment": 0.000566,
+        "workerPayment": 0.000361,
+        "validatorPayment": 0.0002,
+        "orchestratorMargin": 0.000005,
+        "breakdown": {
+          "strategy": "dynamic",
+          "inputLength": 73,
+          "taskType": "classify",
+          "multiplier": 0.9,
+          "workerQuote": 0.0018,
+          "validatorQuote": 0.001,
+          "minMargin": 0.000005,
+          "marginGuaranteed": true
+        }
+      },
+      "selectedWorker": "classifier_default",
+      "selectedValidator": "validator_default",
+      "budget": 0.0005
     }
   ]
 }

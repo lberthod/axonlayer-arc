@@ -2,8 +2,8 @@
 
 **Date**: April 24, 2026  
 **Status**: ✅ Implemented and tested  
-**Project**: Axon Layer
-**Objective**: Make Axon Layer resilient to temporary RPC issues (txpool full, timeouts, etc.)
+**Project**: Axonlayer
+**Objective**: Make Axonlayer resilient to temporary RPC issues (txpool full, timeouts, etc.)
 
 ---
 

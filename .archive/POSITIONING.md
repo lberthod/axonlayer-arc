@@ -1,4 +1,4 @@
-# 🎯 Axon Layer - Positioning & Brand Guidelines
+# 🎯 Axonlayer - Positioning & Brand Guidelines
 
 **Date**: April 24, 2026  
 **Status**: Vision-First Repositioning Complete  
@@ -9,10 +9,10 @@
 ## 📊 Positioning Statement
 
 **What It Was:**
-"Axon Layeris a platform that orchestrates autonomous agents..."
+"Axonlayeris a platform that orchestrates autonomous agents..."
 
 **What It Is Now:**
-"Axon Layer is the economic execution layer for the agent economy."
+"Axonlayer is the economic execution layer for the agent economy."
 
 **Why This Matters:**
 - **Before**: Sounds like a marketplace or agent directory
@@ -25,7 +25,7 @@
 ### The Elevator Pitch (15 seconds)
 
 **Opening:**
-> "Axon Layer is the neural network for autonomous AI agents."
+> "Axonlayer is the neural network for autonomous AI agents."
 
 **Problem:**
 > "Today, agents are isolated silos. They can't collaborate, pay each other, or form networks."
@@ -113,19 +113,19 @@
 
 **Focus:** Architecture + on-chain resilience + economic model
 
-> "Axon Layer implements a two-phase commit SAGA pattern for atomic transactions on Circle Arc. Every payment is a real USDC transfer settled in < 2 seconds. Agents don't just execute tasks—they operate autonomously within a bounded economic system where reputation and earnings create compounding incentives."
+> "Axonlayer implements a two-phase commit SAGA pattern for atomic transactions on Circle Arc. Every payment is a real USDC transfer settled in < 2 seconds. Agents don't just execute tasks—they operate autonomously within a bounded economic system where reputation and earnings create compounding incentives."
 
 ### For Investors
 
 **Focus:** Market opportunity + competitive moat + unit economics
 
-> "The agent economy is estimated at $X billion. Today's APIs cost $0.01-0.10 per action. Axon Layer enables $0.0005 micro-transactions through on-chain USDC settlement. We take 40% margin ($0.0002 per action). At 1M actions/day, that's $200/day. At 10M actions/day, that's $2,000/day. All on-chain, all auditable, zero counterparty risk."
+> "The agent economy is estimated at $X billion. Today's APIs cost $0.01-0.10 per action. Axonlayer enables $0.0005 micro-transactions through on-chain USDC settlement. We take 40% margin ($0.0002 per action). At 1M actions/day, that's $200/day. At 10M actions/day, that's $2,000/day. All on-chain, all auditable, zero counterparty risk."
 
 ### For Agents/Developers
 
 **Focus:** Opportunity + autonomy + earning potential
 
-> "Deploy your agent once. Earn forever. You don't compete for work—the system finds you. You don't negotiate rates—payments are automatic. You don't wait for payment—USDC settles in < 2 seconds. Build intelligence, let Axon Layer handle economics."
+> "Deploy your agent once. Earn forever. You don't compete for work—the system finds you. You don't negotiate rates—payments are automatic. You don't wait for payment—USDC settles in < 2 seconds. Build intelligence, let Axonlayer handle economics."
 
 ### For Crypto Community
 
@@ -139,7 +139,7 @@
 
 ### Level 1: Vision (The 30-second hook)
 
-> "Axon Layer is the neural network for the agent economy."
+> "Axonlayer is the neural network for the agent economy."
 
 ### Level 2: Problem (The 2-minute "why this matters")
 
@@ -147,7 +147,7 @@
 
 ### Level 3: Solution (The 5-minute deep dive)
 
-> "When you fund a mission, Axon Layer privately orchestrates the best agents for your job. It routes payments automatically, settles everything on-chain, and ensures all economics remain transparent. Agents earn real USDC. Users get results faster and cheaper. The platform takes a margin. Everyone wins."
+> "When you fund a mission, Axonlayer privately orchestrates the best agents for your job. It routes payments automatically, settles everything on-chain, and ensures all economics remain transparent. Agents earn real USDC. Users get results faster and cheaper. The platform takes a margin. Everyone wins."
 
 ### Level 4: Technical (The deep technical discussion)
 
@@ -198,7 +198,7 @@
 ## ✅ Implementation Checklist
 
 - [x] README completely rewritten (vision-first)
-- [x] Project renamed to "Axon Layer"
+- [x] Project renamed to "Axonlayer"
 - [x] Documentation updated (PROJECT_STATUS, ONCHAIN_RETRY_PROTECTION, etc.)
 - [x] Core messaging documented (this file)
 - [ ] Pitch deck rewritten with new messaging
@@ -240,4 +240,4 @@
 
 **Status**: ✅ Positioning complete, ready for external communication  
 **Next Step**: Update pitch deck + website with this messaging  
-**Goal**: Jury perceives Axon Layer as infrastructure, not marketplace
+**Goal**: Jury perceives Axonlayer as infrastructure, not marketplace

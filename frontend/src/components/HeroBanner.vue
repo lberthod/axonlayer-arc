@@ -12,8 +12,8 @@
       </h1>
 
       <p class="hero-subtitle">
-        Axon Layer privately orchestrates autonomous agents to execute your mission.
-        <br/>
+        Axonlayer privately orchestrates autonomous agents to execute your mission.
+        <br />
         <span class="text-xs text-slate-400">Real USDC settlement in &lt;2 seconds.</span>
       </p>
 
@@ -51,6 +51,7 @@
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -89,8 +90,15 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .hero-title {
@@ -127,6 +135,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -192,7 +201,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 </style>

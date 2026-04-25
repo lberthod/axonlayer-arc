@@ -1,6 +1,6 @@
 # 🚀 Implementation Guide - Security Fixes & On-Chain Resilience
 
-**Project**: Axon Layer  
+**Project**: Axonlayer  
 **Audit Date**: April 24, 2026  
 **Developer**: Claude Code  
 **Status**: Production-ready (Arc Testnet)

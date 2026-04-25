@@ -1,4 +1,4 @@
-# ✅ RÉSUMÉ COMPLET DES CORRECTIONS - Axon Layer
+# ✅ RÉSUMÉ COMPLET DES CORRECTIONS - Axonlayer
 
 **Date**: 24 Avril 2026  
 **Commit**: 🔒 Security hardening: Encrypt wallets, implement two-phase commit, fix pricing  

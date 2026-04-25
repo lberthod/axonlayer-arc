@@ -36,7 +36,7 @@ class SimulationEngine {
         orchestratorMargin: 0
       },
       perTaskType: {},
-      missions: []  // NEW: Collect per-mission details
+      missions: []
     };
 
     for (let i = 0; i < count; i++) {
@@ -49,6 +49,7 @@ class SimulationEngine {
       });
 
       const executionTime = Date.now() - executionStart;
+      let missionData;
 
       if (task?.status === 'completed') {
         results.executed += 1;
@@ -79,8 +80,7 @@ class SimulationEngine {
         bucket.volume = this.normalizeAmount(bucket.volume + pricing.clientPayment);
         results.perTaskType[taskType] = bucket;
 
-        // NEW: Collect per-mission details for report
-        results.missions.push({
+        missionData = {
           id: task.id,
           index: i + 1,
           status: task.status,
@@ -90,14 +90,13 @@ class SimulationEngine {
           pricing,
           executionTime,
           agents: {
-            worker: task.workerUid || 'unknown',
-            validator: task.validatorUid || 'unknown'
+            worker: task.selectedWorker || task.workerUid || 'unknown',
+            validator: task.selectedValidator || task.validatorUid || 'unknown'
           }
-        });
+        };
       } else {
         results.failed += 1;
-        // Still collect failed missions
-        results.missions.push({
+        missionData = {
           id: task?.id || `failed_${i}`,
           index: i + 1,
           status: 'failed',
@@ -108,7 +107,14 @@ class SimulationEngine {
           executionTime,
           agents: { worker: 'none', validator: 'none' },
           error: task?.error || 'Unknown error'
-        });
+        };
+      }
+
+      results.missions.push(missionData);
+
+      // Call progress callback if provided
+      if (options.onMissionComplete) {
+        options.onMissionComplete(missionData, results);
       }
     }
 

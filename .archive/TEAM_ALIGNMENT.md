@@ -1,4 +1,4 @@
-# 🤝 Axon Layer - Team Alignment Guide
+# 🤝 Axonlayer - Team Alignment Guide
 
 **Date**: April 24, 2026  
 **Purpose**: Ensure consistent messaging across all team communication  
@@ -70,7 +70,7 @@
 ### Business / Partnerships Team
 
 **Your narrative:**
-"Axon Layer is opening a new economic category—agent economies at scale. Companies will use us to orchestrate autonomous AI agents for micro-tasks at $0.0005 per action. That's 100x cheaper than existing APIs."
+"Axonlayer is opening a new economic category—agent economies at scale. Companies will use us to orchestrate autonomous AI agents for micro-tasks at $0.0005 per action. That's 100x cheaper than existing APIs."
 
 **When explaining to investors:**
 "The TAM is the entire API economy ($100B+). We're replacing API calls with mission funding. 40% margin at scale = sustainable unit economics."
@@ -87,7 +87,7 @@
 ### Marketing / Communications
 
 **Your narrative:**
-"Axon Layer is infrastructure for the inevitable future where autonomous agents coordinate through real-time programmable payments."
+"Axonlayer is infrastructure for the inevitable future where autonomous agents coordinate through real-time programmable payments."
 
 **When talking to press:**
 "We're not another agent marketplace. We're building the settlement layer. Every payment is real USDC on blockchain. The jury will understand this is fundamentally different."
@@ -104,10 +104,10 @@
 ### Pitching / Presentation Team
 
 **Your narrative:**
-"Current AI agents are isolated silos. Axon Layer enables them to earn, spend, and settle autonomously. We're building the neural network for the agent economy."
+"Current AI agents are isolated silos. Axonlayer enables them to earn, spend, and settle autonomously. We're building the neural network for the agent economy."
 
 **Opening line (always):**
-"Axon Layer is the neural network for autonomous AI agents. We enable real-time programmable payments on blockchain. This is infrastructure for an economy that's inevitable."
+"Axonlayer is the neural network for autonomous AI agents. We enable real-time programmable payments on blockchain. This is infrastructure for an economy that's inevitable."
 
 **Key points:**
 - Lead with vision, not technology
@@ -141,7 +141,7 @@
 ### Pitch Deck
 - Opening: Vision statement
 - Problem: APIs are expensive, agents are isolated
-- Solution: Axon Layer = economic execution layer
+- Solution: Axonlayer = economic execution layer
 - Economics: $0.0005 per action
 - Vision: Future of autonomous agent networks
 
@@ -251,7 +251,7 @@ But the real advantage is that we're the only thing that does this. This is a ne
 ## 📞 When Someone Gets It Wrong
 
 ### If someone says: "We're an agent marketplace..."
-**Correct with**: "We're infrastructure for the agent economy. In a marketplace, agents are discoverable. In Axon Layer, they're private. You don't choose agents—the system routes to the best match. Completely different."
+**Correct with**: "We're infrastructure for the agent economy. In a marketplace, agents are discoverable. In Axonlayer, they're private. You don't choose agents—the system routes to the best match. Completely different."
 
 ### If someone says: "We take a fee on transactions..."
 **Correct with**: "We take a platform margin for infrastructure. We enable autonomous economic coordination. The margin is how we're sustainable as infrastructure."

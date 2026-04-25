@@ -1,4 +1,4 @@
-# 🎬 Axon Layer - Demo Video Script
+# 🎬 Axonlayer - Demo Video Script
 
 **Duration**: 3-4 minutes  
 **Audience**: Jury + investors + potential partners  
@@ -22,7 +22,7 @@ They can't collaborate.
 They can't pay each other.
 They can't form networks.
 
-Axon Layer changes that.
+Axonlayer changes that.
 
 We've built the neural network for the agent economy—where agents earn, spend, and settle value in real time."
 
@@ -46,7 +46,7 @@ Voiceover: "Agents are isolated silos. They can't coordinate. They can't share v
 Visual: Money exchange with middlemen, clocks showing delays
 Voiceover: "Payments require intermediaries, delays, and counterparty risk."
 
-**Final Visual**: All three problems fade and are replaced by Axon Layer logo
+**Final Visual**: All three problems fade and are replaced by Axonlayer logo
 
 **Voiceover:**
 "All three problems have one solution: infrastructure for the agent economy."
@@ -65,7 +65,7 @@ Voiceover: "You fund a mission. That's it. No agent selection, no API choices—
 
 **Step 2 - Orchestrate**
 Visual: System dashboard showing agent matching algorithm
-Voiceover: "Axon Layer privately evaluates agents—by cost, quality, speed, specialization. It finds the best match."
+Voiceover: "Axonlayer privately evaluates agents—by cost, quality, speed, specialization. It finds the best match."
 
 **Visual**: Multiple agents shown, system selecting one (with explanation that user doesn't see this)
 
@@ -91,7 +91,7 @@ Voiceover: "Everything settles on blockchain in under 2 seconds. Transparent. Ve
 
 #### Demo Part 1: Fund Mission
 ```
-Visual: Navigate to Axon Layer dashboard
+Visual: Navigate to Axonlayer dashboard
 Click: "Create Mission"
 Show: Input task, select budget ($0.0005)
 Show: System calculating agent costs automatically
@@ -170,11 +170,11 @@ Soon, agents will coordinate. Agent A will pay Agent B to handle a sub-task. Age
 
 Eventually, you'll have entire autonomous economies—networks of agents competing, specializing, and coordinating—all through real-time programmable payments.
 
-Axon Layer is the infrastructure layer for that future.
+Axonlayer is the infrastructure layer for that future.
 
 We're not disrupting a market. We're building the foundation for a new economic category."
 
-**Visual**: Slow zoom out showing vast network of agents all connected through Axon Layer
+**Visual**: Slow zoom out showing vast network of agents all connected through Axonlayer
 
 ---
 
@@ -182,11 +182,11 @@ We're not disrupting a market. We're building the foundation for a new economic 
 
 **Visual**: Return to minimalist opening aesthetic
 
-**On Screen Text**: "Axon Layer"
+**On Screen Text**: "Axonlayer"
 **Subtext**: "Infrastructure for the Agent Economy"
 
 **Voiceover**:
-"Axon Layer is production-ready on Circle Arc Testnet.
+"Axonlayer is production-ready on Circle Arc Testnet.
 
 Real on-chain settlement.
 Real economic incentives.
@@ -203,7 +203,7 @@ If you believe in autonomous agent economies, let's build this together."
 
 **Voiceover**: "Visit axon-layer.dev. Check out our open-source code. Let's talk."
 
-**Visual Fade**: Axon Layer logo fades out, leaving only the statement:
+**Visual Fade**: Axonlayer logo fades out, leaving only the statement:
 
 "The Neural Network for the Agent Economy"
 
@@ -262,7 +262,7 @@ If you believe in autonomous agent economies, let's build this together."
 
 1. **Opening Sequence** (3-5 seconds)
    - Agent network visualization
-   - Zoom into Axon Layer logo
+   - Zoom into Axonlayer logo
    
 2. **Problem Statement** (15 seconds)
    - Split screen showing 3 problems
@@ -283,7 +283,7 @@ If you believe in autonomous agent economies, let's build this together."
    - Future state visualization
 
 6. **Closing** (10 seconds)
-   - Axon Layer branding
+   - Axonlayer branding
    - Contact information
 
 ---

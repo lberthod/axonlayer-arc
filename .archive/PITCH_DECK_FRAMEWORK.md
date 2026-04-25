@@ -1,22 +1,22 @@
-# 🎤 Axon Layer - Pitch Deck Framework
+# 🎤 Axonlayer - Pitch Deck Framework
 
 **Format**: 7 slides (5 minutes)  
 **Audience**: Technical jury + investors  
-**Objective**: Position Axon Layer as infrastructure, not marketplace
+**Objective**: Position Axonlayer as infrastructure, not marketplace
 
 ---
 
 ## SLIDE 1: Hero / Opening
 
 ### Visual
-- Big, bold: **Axon Layer** logo/wordmark
+- Big, bold: **Axonlayer** logo/wordmark
 - Subtitle: "The Neural Network for the Agent Economy"
 - Minimal, premium aesthetic
 
 ### Script (30 seconds)
 "Current AI agents are isolated silos. They can't collaborate, pay each other, or form networks.
 
-Axon Layer changes that by enabling autonomous agents to earn, spend, and settle tasks in real time—using Circle's USDC on Arc, without intermediaries, without friction.
+Axonlayer changes that by enabling autonomous agents to earn, spend, and settle tasks in real time—using Circle's USDC on Arc, without intermediaries, without friction.
 
 We're not building a marketplace. We're building the infrastructure layer for an economy that's inevitable."
 
@@ -26,7 +26,7 @@ We're not building a marketplace. We're building the infrastructure layer for an
 
 ### Visual
 - 3-column comparison:
-  | ❌ Today | ⚡ With APIs | ✅ Axon Layer |
+  | ❌ Today | ⚡ With APIs | ✅ Axonlayer |
   | --- | --- | --- |
   | Agents are isolated | Expensive APIs ($0.01-0.10) | Real on-chain settlement |
   | No payments | Manual coordination | Autonomous payments |
@@ -52,7 +52,7 @@ All three problems can be solved with one layer: economic execution on blockchai
 ```
 User funds mission ($0.0005)
         ↓
-Axon Layer orchestrates
+Axonlayer orchestrates
 (private, intelligent routing)
         ↓
 Agents execute + earn USDC
@@ -63,7 +63,7 @@ Zero counterparty risk
 ```
 
 ### Script (60 seconds)
-"Here's how Axon Layer works:
+"Here's how Axonlayer works:
 
 **Step 1**: You fund a mission with a budget. That's it.
 
@@ -107,7 +107,7 @@ Circle Arc uses USDC as native gas. Zero settlement costs. That's the key.
 
 Traditional APIs cost $0.01-0.10 per action—they're 100x too expensive for micro-tasks.
 
-Axon Layer enables $0.0005 actions profitably.
+Axonlayer enables $0.0005 actions profitably.
 
 We take a 40% margin. On a million actions per day, that's $200/day revenue. On 10 million actions per day, that's $2,000/day.
 
@@ -173,7 +173,7 @@ Next, agents will pay each other. Agent A outsources a sub-task to Agent B. Agen
 
 Eventually, you'll have entire autonomous economies—networks of agents coordinating, competing, specializing—all through real-time programmable payments.
 
-Axon Layer is the infrastructure layer for that future.
+Axonlayer is the infrastructure layer for that future.
 
 We're not disrupting a market. We're building the foundation for a new economic category that doesn't yet exist.
 
@@ -210,7 +210,7 @@ In the next 30 days, we'll:
 
 We're looking for [partners/funding/beta users] to accelerate this.
 
-The agent economy is coming. Axon Layer is the infrastructure layer. Let's build it together."
+The agent economy is coming. Axonlayer is the infrastructure layer. Let's build it together."
 
 ---
 
@@ -266,7 +266,7 @@ The agent economy is coming. Axon Layer is the infrastructure layer. Let's build
 
 - [x] Slide 1: Hero (Vision statement)
 - [x] Slide 2: Problem (Why existing solutions fail)
-- [x] Slide 3: Solution (How Axon Layer works)
+- [x] Slide 3: Solution (How Axonlayer works)
 - [x] Slide 4: Economics (Market opportunity)
 - [x] Slide 5: Technology (Security & reliability)
 - [x] Slide 6: Vision (Long-term impact)

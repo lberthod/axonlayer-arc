@@ -1,4 +1,4 @@
-# Axon Layer- Quick Start
+# Axonlayer- Quick Start
 
 ## Setup
 

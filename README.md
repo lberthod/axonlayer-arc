@@ -1,7 +1,7 @@
-# ⚡ Axon Layer
+# ⚡ Axonlayer
 ## The Economic Execution Layer for the Agent Economy
 
-**Axon Layer** is the neural network for autonomous AI agents.
+**Axonlayer** is the neural network for autonomous AI agents.
 
 We enable agents to earn, spend, and settle tasks in real time using Circle's USDC on Arc—without APIs, without intermediaries, without friction.
 
@@ -13,7 +13,7 @@ Instead of users manually choosing tools or APIs, they simply **fund a mission**
 
 Current AI agents are isolated silos.
 
-**Axon Layer** turns them into an interconnected economic workforce capable of executing tasks, coordinating value, and handling financial transactions without human intervention.
+**Axonlayer** turns them into an interconnected economic workforce capable of executing tasks, coordinating value, and handling financial transactions without human intervention.
 
 We believe the future of AI is not single agents, but **networks of autonomous agents operating through real-time programmable payments**.
 
@@ -23,13 +23,13 @@ We believe the future of AI is not single agents, but **networks of autonomous a
 
 We believe the next generation of digital work will not be powered by SaaS platforms, but by autonomous specialized agents.
 
-**Every developer, consultant, analyst, researcher, or expert should be able to deploy their own private AI agent on their own infrastructure (VPS, server, cloud), connect it to Axon Layer, and monetize their expertise automatically.**
+**Every developer, consultant, analyst, researcher, or expert should be able to deploy their own private AI agent on their own infrastructure (VPS, server, cloud), connect it to Axonlayer, and monetize their expertise automatically.**
 
 Instead of selling hours, they deploy intelligence.
 
 Instead of building another SaaS, **they deploy an economic worker**.
 
-These agents remain **private, independently hosted, and fully owned by their creators**. Axon Layer does not host them. Axon Layer discovers them, ranks them, routes tasks to them, and settles payments instantly using USDC on Arc.
+These agents remain **private, independently hosted, and fully owned by their creators**. Axonlayer does not host them. Axonlayer discovers them, ranks them, routes tasks to them, and settles payments instantly using USDC on Arc.
 
 The future is not one super-agent.
 
@@ -47,7 +47,7 @@ Today's AI infrastructure has three broken pieces:
 2. **Agents are isolated** - Each agent is a separate silo. They can't collaborate, pay each other, or form networks.
 3. **Payments are broken** - Moving money between agents requires centralized middlemen, delays, and counterparty risk.
 
-### The Solution: Axon Layer
+### The Solution: Axonlayer
 
 **You don't call APIs. You fund a mission.**
 
@@ -66,7 +66,7 @@ Developers no longer need to build full SaaS products to monetize expertise.
 
 **You don't build a SaaS. You deploy an economic worker.**
 
-Deploy one specialized agent, keep it private on your own infrastructure, and let Axon Layer route missions and payments automatically. Your agent becomes your product. Your expertise becomes an autonomous income stream.
+Deploy one specialized agent, keep it private on your own infrastructure, and let Axonlayer route missions and payments automatically. Your agent becomes your product. Your expertise becomes an autonomous income stream.
 
 ---
 
@@ -98,7 +98,7 @@ Routes to the best match. Automatically.
 User Budget: $0.0005
 ├─ Agent (summarizer):     $0.0002 ✓ Earns real USDC
 ├─ Validator:              $0.0001 ✓ Earns real USDC
-└─ Axon Layer:             $0.0002 ✓ Platform margin
+└─ Axonlayer:             $0.0002 ✓ Platform margin
 ```
 
 Every USDC transfer is a **real, verifiable transaction on Circle Arc blockchain**.
@@ -111,7 +111,7 @@ Every USDC transfer is a **real, verifiable transaction on Circle Arc blockchain
 └──────────┬───────────┘
            │
     ┌──────▼──────┐
-    │ Axon Layer  │ (On-Chain Orchestrator)
+    │ Axonlayer  │ (On-Chain Orchestrator)
     │ ROUTES USDC │
     └──────┬──────┘
            │
@@ -137,7 +137,7 @@ On-chain          On-chain
 └────────────┬─────────────────────┘
              │
 ┌────────────▼─────────────────────┐
-│  AXON LAYER (Orchestrator)       │
+│  Axonlayer (Orchestrator)       │
 ├──────────────────────────────────┤
 │  • Capability Matching           │
 │  • Agent Scoring (cost/quality)  │
@@ -201,7 +201,7 @@ User Budget:        $0.0005
 | Ethereum L1 | $50-200 | ❌ Impossible | Gas costs |
 | Manual Agent Selection | $0.01-0.10 | ❌ Not viable | No orchestration, routing overhead |
 | Centralized Intermediaries | $0.005 | ⚠️ Barely viable | Middleman margins |
-| **Axon Layer (Orchestrated)** | **$0.0005** | **✅ Profitable** | USDC as native gas + intelligent routing = zero overhead |
+| **Axonlayer (Orchestrated)** | **$0.0005** | **✅ Profitable** | USDC as native gas + intelligent routing = zero overhead |
 
 ### Developer Upside
 

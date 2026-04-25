@@ -12,7 +12,8 @@
       <div class="bg-slate-800 rounded-lg p-6 mb-6 border-2 border-violet-100">
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-xl font-bold text-slate-100">Account Information</h2>
-          <span class="text-sm text-violet-700 bg-indigo-950 px-3 py-1 rounded-full font-semibold">{{ user?.role || 'user' }}</span>
+          <span class="text-sm text-violet-700 bg-indigo-950 px-3 py-1 rounded-full font-semibold">{{ user?.role ||
+            'user' }}</span>
         </div>
         <div class="space-y-3">
           <div>
@@ -42,10 +43,8 @@
           <p class="text-xs text-indigo-400 mb-2">Send USDC to this address to fund missions</p>
           <div class="flex items-center gap-2">
             <code class="flex-1 text-sm font-mono bg-slate-800 p-2 rounded break-all">{{ user.wallet.address }}</code>
-            <button
-              @click="copyWalletAddress"
-              class="px-3 py-2 rounded bg-violet-100 text-violet-700 hover:bg-violet-200 text-sm font-semibold transition"
-            >
+            <button @click="copyWalletAddress"
+              class="px-3 py-2 rounded bg-violet-100 text-violet-700 hover:bg-violet-200 text-sm font-semibold transition">
               {{ addressCopied ? '✓ Copied' : 'Copy' }}
             </button>
           </div>
@@ -61,21 +60,16 @@
             <span class="text-sm text-emerald-600 bg-emerald-100 px-2 py-1 rounded-full font-semibold">On-Chain</span>
           </div>
           <p class="text-3xl font-bold text-emerald-700 mb-2">{{ (user.balance || 0).toFixed(4) }} USDC</p>
-          <button
-            @click="refreshBalance"
-            :disabled="checkingBalance"
-            class="text-sm text-emerald-600 hover:text-emerald-700 font-semibold transition disabled:opacity-50 flex items-center gap-1"
-          >
+          <button @click="refreshBalance" :disabled="checkingBalance"
+            class="text-sm text-emerald-600 hover:text-emerald-700 font-semibold transition disabled:opacity-50 flex items-center gap-1">
             {{ checkingBalance ? '⏳ Checking blockchain...' : '🔄 Refresh Balance' }}
           </button>
         </div>
 
         <!-- View Private Key / Mnemonic -->
         <div class="mb-4">
-          <button
-            @click="showWalletDetails = !showWalletDetails"
-            class="w-full px-4 py-2 rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 font-semibold transition flex items-center justify-between"
-          >
+          <button @click="showWalletDetails = !showWalletDetails"
+            class="w-full px-4 py-2 rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 font-semibold transition flex items-center justify-between">
             <span>{{ showWalletDetails ? '🔒 Hide' : '🔓 View' }} Private Key & Mnemonic</span>
             <span>{{ showWalletDetails ? '▲' : '▼' }}</span>
           </button>
@@ -93,19 +87,16 @@
               </div>
             </div>
             <div class="flex items-center gap-2">
-              <code class="flex-1 text-xs font-mono bg-slate-800 p-2 rounded break-all" :class="showPrivateKey ? '' : 'blur-sm'">
+              <code class="flex-1 text-xs font-mono bg-slate-800 p-2 rounded break-all"
+                :class="showPrivateKey ? '' : 'blur-sm'">
                 {{ user.wallet.privateKey }}
               </code>
-              <button
-                @click="togglePrivateKey"
-                class="px-3 py-2 rounded bg-slate-600 text-slate-300 hover:bg-gray-300 text-xs font-semibold transition whitespace-nowrap"
-              >
+              <button @click="togglePrivateKey"
+                class="px-3 py-2 rounded bg-slate-600 text-slate-300 hover:bg-gray-300 text-xs font-semibold transition whitespace-nowrap">
                 {{ showPrivateKey ? '👁 Hide' : '👁️ Show' }}
               </button>
-              <button
-                @click="copyPrivateKey"
-                class="px-3 py-2 rounded bg-red-100 text-red-700 hover:bg-red-200 text-xs font-semibold transition"
-              >
+              <button @click="copyPrivateKey"
+                class="px-3 py-2 rounded bg-red-100 text-red-700 hover:bg-red-200 text-xs font-semibold transition">
                 {{ privKeyCopied ? '✓' : 'Copy' }}
               </button>
             </div>
@@ -119,10 +110,8 @@
               <code class="flex-1 text-xs font-mono bg-slate-800 p-2 rounded break-all">
                 {{ user.wallet.mnemonic }}
               </code>
-              <button
-                @click="copyMnemonic"
-                class="px-3 py-2 rounded bg-amber-100 text-amber-700 hover:bg-amber-200 text-xs font-semibold transition"
-              >
+              <button @click="copyMnemonic"
+                class="px-3 py-2 rounded bg-amber-100 text-amber-700 hover:bg-amber-200 text-xs font-semibold transition">
                 {{ mnemonicCopied ? '✓' : 'Copy' }}
               </button>
             </div>
@@ -131,17 +120,12 @@
 
         <!-- Regenerate Wallet -->
         <div class="flex gap-2">
-          <button
-            @click="exportWallet"
-            class="flex-1 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition"
-          >
+          <button @click="exportWallet"
+            class="flex-1 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition">
             ⬇️ Export Wallet (JSON)
           </button>
-          <button
-            @click="regenerateWallet"
-            :disabled="creatingWallet"
-            class="flex-1 px-4 py-2 rounded-lg border-2 border-red-600 text-red-600 hover:bg-red-50 text-sm font-semibold transition disabled:opacity-50"
-          >
+          <button @click="regenerateWallet" :disabled="creatingWallet"
+            class="flex-1 px-4 py-2 rounded-lg border-2 border-red-600 text-red-600 hover:bg-red-50 text-sm font-semibold transition disabled:opacity-50">
             {{ creatingWallet ? 'Generating...' : '🔄 Generate New Wallet' }}
           </button>
         </div>
@@ -150,7 +134,9 @@
       <!-- Security Warning -->
       <div class="p-4 bg-red-50 rounded-lg border border-red-200">
         <p class="text-sm text-red-800">
-          <span class="font-bold">⚠️ Security Warning:</span> Never share your private key or mnemonic with anyone. Store them in a secure location (password manager, hardware wallet, etc.). Axon Layerwill never ask for your private key.
+          <span class="font-bold">⚠️ Security Warning:</span> Never share your private key or mnemonic with anyone.
+          Store them in a secure location (password manager, hardware wallet, etc.). Axonlayerwill never ask for your
+          private key.
         </p>
       </div>
     </div>

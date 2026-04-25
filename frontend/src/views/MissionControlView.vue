@@ -450,30 +450,57 @@ async function runBatch(n) {
   }, 100);
 
   try {
-    const result = await api.runSimulation(n);
-    batchResult.value = result;
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+    const response = await fetch(`${baseUrl}/api/simulate/stream`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ count: n, selectionStrategy: 'score_price' })
+    });
 
-    // Animate missions appearing one by one
-    if (Array.isArray(result.missions)) {
-      for (let i = 0; i < result.missions.length; i++) {
-        await new Promise(resolve => setTimeout(resolve, 200)); // Stagger reveal
-        const mission = result.missions[i];
-        batchProgressMissions.value.push(mission);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
 
-        if (mission.status === 'completed') {
-          batchProgressCount.value = Math.min(i + 1, n);
-        } else {
-          batchFailedCount.value += 1;
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n\n');
+      buffer = lines.pop(); // Keep incomplete message in buffer
+
+      for (const line of lines) {
+        if (line.startsWith('data: ')) {
+          const jsonStr = line.slice(6).trim();
+          if (!jsonStr) continue;
+
+          try {
+            const data = JSON.parse(jsonStr);
+
+            if (data.type === 'mission_complete') {
+              const mission = data.mission;
+              batchProgressMissions.value.push(mission);
+              batchProgressCount.value = data.progress.executed;
+              batchFailedCount.value = data.progress.failed;
+            } else if (data.type === 'batch_complete') {
+              batchResult.value = data.results;
+              showBatchReport.value = true;
+              toastSuccess(`✅ Batch of ${data.results.executed} missions completed · $${data.results.summary?.grossVolume.toFixed(4)} USDC moved`);
+              await loadData();
+              refreshPanels();
+            } else if (data.type === 'error') {
+              throw new Error(data.error);
+            }
+          } catch (parseErr) {
+            console.error('[batch stream parse error]', parseErr.message);
+          }
         }
       }
     }
-
-    // Show report after all missions shown
-    showBatchReport.value = true;
-    toastSuccess(`✅ Batch of ${result.executed} missions completed · $${result.summary?.grossVolume.toFixed(4)} USDC moved`);
-
-    await loadData();
-    refreshPanels();
   } catch (err) {
     toastError(err, 'Batch simulation failed');
   } finally {

@@ -1,4 +1,4 @@
-# 🚀 Axon Layer - Developer Onboarding (v0.0.1)
+# 🚀 Axonlayer - Developer Onboarding (v0.0.1)
 
 ## Contexte Actuel
 

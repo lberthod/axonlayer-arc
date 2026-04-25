@@ -3,9 +3,10 @@
     <div class="flex items-start justify-between mb-4">
       <div>
         <h2 class="text-xl font-bold text-slate-100">New mission</h2>
-        <p class="text-sm text-slate-500">Define your goal and budget — Axon Layer handles execution automatically.</p>
+        <p class="text-sm text-slate-500">Define your goal and budget — Axonlayer handles execution automatically.</p>
       </div>
-      <span class="text-[11px] uppercase tracking-wider text-indigo-400 bg-indigo-950 px-2 py-1 rounded-md font-semibold">
+      <span
+        class="text-[11px] uppercase tracking-wider text-indigo-400 bg-indigo-950 px-2 py-1 rounded-md font-semibold">
         Private execution fabric
       </span>
     </div>
@@ -21,13 +22,10 @@
             {{ goal.trim().length }}/50 characters
           </span>
         </div>
-        <textarea
-          v-model="goal"
-          rows="4"
+        <textarea v-model="goal" rows="4"
           class="w-full px-3 py-2 bg-slate-900 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-500"
           :class="goal.trim().length >= 50 ? 'border-slate-600' : 'border-amber-600'"
-          placeholder="Enter at least 50 characters... e.g. Summarize this long article in two sentences and explain the key insights"
-        ></textarea>
+          placeholder="Enter at least 50 characters... e.g. Summarize this long article in two sentences and explain the key insights"></textarea>
         <p v-if="goal.trim().length < 50" class="text-xs text-amber-400 mt-2">
           ⚠️ Too short: {{ 50 - goal.trim().length }} characters needed
         </p>
@@ -36,10 +34,8 @@
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-sm font-medium text-slate-300 mb-2">Mission type</label>
-          <select
-            v-model="missionType"
-            class="w-full px-3 py-2 bg-slate-900 border border-slate-600 text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          >
+          <select v-model="missionType"
+            class="w-full px-3 py-2 bg-slate-900 border border-slate-600 text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
             <option value="summarize">Summarize content</option>
             <option value="keywords">Extract keywords</option>
             <option value="rewrite">Rewrite text</option>
@@ -51,10 +47,8 @@
 
         <div>
           <label class="block text-sm font-medium text-slate-300 mb-2">Optimize for</label>
-          <select
-            v-model="optimize"
-            class="w-full px-3 py-2 bg-slate-900 border border-slate-600 text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          >
+          <select v-model="optimize"
+            class="w-full px-3 py-2 bg-slate-900 border border-slate-600 text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
             <option value="balanced">Balanced (quality × cost)</option>
             <option value="quality">Quality first</option>
             <option value="cost">Lowest cost</option>
@@ -71,43 +65,37 @@
           </span>
         </label>
         <div class="flex items-center gap-2">
-          <input
-            v-model.number="budget"
-            type="number"
-            min="0.0001"
-            :max="props.availableBalance || undefined"
+          <input v-model.number="budget" type="number" min="0.0001" :max="props.availableBalance || undefined"
             step="0.0001"
-            class="flex-1 px-3 py-2 bg-slate-900 border border-slate-600 text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-          <button
-            v-for="b in presets.filter(p => p <= (props.availableBalance || Infinity))"
-            :key="b"
-            @click="budget = b"
-            class="text-xs px-2 py-1 rounded-md bg-slate-700 text-slate-400 hover:bg-slate-600"
-          >{{ b }}</button>
+            class="flex-1 px-3 py-2 bg-slate-900 border border-slate-600 text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <button v-for="b in presets.filter(p => p <= (props.availableBalance || Infinity))" :key="b"
+            @click="budget = b" class="text-xs px-2 py-1 rounded-md bg-slate-700 text-slate-400 hover:bg-slate-600">{{ b
+            }}</button>
         </div>
       </div>
 
       <div class="space-y-2">
-        <button
-          @click="openConfirmModal"
+        <button @click="openConfirmModal"
           :disabled="isLoading || !goal.trim() || goal.trim().length < 50 || !(budget > 0) || insufficientBudget"
           class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold shadow-md hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 active:scale-95 relative overflow-hidden group"
-          :title="goal.trim().length < 50 ? `Add ${50 - goal.trim().length} more characters` : ''"
-        >
+          :title="goal.trim().length < 50 ? `Add ${50 - goal.trim().length} more characters` : ''">
           <span v-if="!isLoading" class="relative z-10">Launch mission</span>
           <span v-else class="relative z-10 flex items-center justify-center gap-2">
             <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
             Orchestrating mission…
           </span>
-          <div v-if="!isLoading" class="absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-0"></div>
+          <div v-if="!isLoading"
+            class="absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-0">
+          </div>
         </button>
 
         <!-- Budget warning -->
         <div v-if="insufficientBudget" class="p-3 bg-red-950/20 border border-red-900/50 rounded-lg">
           <p class="text-sm text-red-400">
-            <span class="font-semibold">⚠️ Insufficient budget:</span> Estimated cost {{ estimatedCost.toFixed(5) }} USDC exceeds your budget {{ budget.toFixed(5) }} USDC.
-            <router-link to="/user" class="underline font-semibold hover:no-underline">Add funds to your wallet</router-link>.
+            <span class="font-semibold">⚠️ Insufficient budget:</span> Estimated cost {{ estimatedCost.toFixed(5) }}
+            USDC exceeds your budget {{ budget.toFixed(5) }} USDC.
+            <router-link to="/user" class="underline font-semibold hover:no-underline">Add funds to your
+              wallet</router-link>.
           </p>
         </div>
       </div>
@@ -115,8 +103,10 @@
       <!-- Authorization Confirmation Modal -->
       <Teleport to="body">
         <Transition name="fade">
-          <div v-if="showConfirmModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 backdrop-blur-sm">
-            <div class="bg-slate-800 rounded-xl p-6 max-w-md border-2 border-red-900/50 shadow-2xl animate-in fade-in-50 zoom-in-95">
+          <div v-if="showConfirmModal"
+            class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 backdrop-blur-sm">
+            <div
+              class="bg-slate-800 rounded-xl p-6 max-w-md border-2 border-red-900/50 shadow-2xl animate-in fade-in-50 zoom-in-95">
               <!-- Header -->
               <div class="flex items-start gap-3 mb-4">
                 <span class="text-2xl">⚠️</span>
@@ -153,38 +143,34 @@
               <div class="bg-yellow-950/30 rounded-lg p-3 mb-4 border border-yellow-900/40">
                 <p class="text-xs text-yellow-300">
                   <span class="font-bold block mb-1">⚡ Important:</span>
-                  This payment will be broadcast to the Arc blockchain. Once confirmed, it <strong>cannot be reversed or cancelled</strong>. Understand that this is a real on-chain transaction with real financial consequences.
+                  This payment will be broadcast to the Arc blockchain. Once confirmed, it <strong>cannot be reversed or
+                    cancelled</strong>. Understand that this is a real on-chain transaction with real financial
+                  consequences.
                 </p>
               </div>
 
               <!-- Consent Checkbox -->
               <label class="flex items-start gap-3 mb-6 cursor-pointer group">
-                <input
-                  v-model="consentAgreed"
-                  type="checkbox"
-                  class="w-5 h-5 rounded bg-slate-700 border-2 border-slate-600 cursor-pointer mt-0.5 accent-emerald-500 group-hover:border-emerald-500/50 transition"
-                />
+                <input v-model="consentAgreed" type="checkbox"
+                  class="w-5 h-5 rounded bg-slate-700 border-2 border-slate-600 cursor-pointer mt-0.5 accent-emerald-500 group-hover:border-emerald-500/50 transition" />
                 <span class="text-sm text-slate-300 group-hover:text-slate-100 transition">
-                  I understand this payment is <strong>final and cannot be reversed</strong>. I authorize this {{ budget.toFixed(6) }} USDC transaction on Arc blockchain.
+                  I understand this payment is <strong>final and cannot be reversed</strong>. I authorize this {{
+                    budget.toFixed(6) }} USDC transaction on Arc blockchain.
                 </span>
               </label>
 
               <!-- Action Buttons -->
               <div class="flex gap-3">
-                <button
-                  @click="closeConfirmModal"
-                  class="flex-1 px-4 py-2.5 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-300 font-semibold transition-colors"
-                >
+                <button @click="closeConfirmModal"
+                  class="flex-1 px-4 py-2.5 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-300 font-semibold transition-colors">
                   Cancel
                 </button>
-                <button
-                  @click="confirmAndSubmit"
-                  :disabled="!consentAgreed || isLoading"
-                  class="flex-1 px-4 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold transition-colors"
-                >
+                <button @click="confirmAndSubmit" :disabled="!consentAgreed || isLoading"
+                  class="flex-1 px-4 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold transition-colors">
                   <span v-if="!isLoading">Authorize Payment</span>
                   <span v-else class="flex items-center justify-center gap-2">
-                    <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    <span
+                      class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
                     Processing…
                   </span>
                 </button>
@@ -192,7 +178,7 @@
 
               <!-- Disclosure -->
               <p class="text-xs text-slate-500 mt-4 text-center">
-                Axon Layer will never ask for your private key. Do not share it with anyone.
+                Axonlayer will never ask for your private key. Do not share it with anyone.
               </p>
             </div>
           </div>
@@ -283,11 +269,13 @@ defineExpose({ setLoading, clearForm });
 </script>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.2s ease;
 }
 
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
@@ -301,6 +289,7 @@ defineExpose({ setLoading, clearForm });
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -315,6 +304,7 @@ defineExpose({ setLoading, clearForm });
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -328,6 +318,7 @@ defineExpose({ setLoading, clearForm });
   from {
     transform: scale(0.95);
   }
+
   to {
     transform: scale(1);
   }

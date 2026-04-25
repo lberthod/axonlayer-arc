@@ -9,7 +9,7 @@
 
         <Section title="1. Acceptance">
           <p>
-            By accessing or using Axon Layer (the “Service”), you agree to be bound by these Terms
+            By accessing or using Axonlayer (the “Service”), you agree to be bound by these Terms
             of Service. If you do not agree, do not use the Service. This Service is a hackathon
             prototype and is provided for evaluation and demonstration purposes only.
           </p>
@@ -17,7 +17,7 @@
 
         <Section title="2. Description of the Service">
           <p>
-            Axon Layer is an orchestration layer that routes user-defined missions to a private
+            Axonlayer is an orchestration layer that routes user-defined missions to a private
             network of AI agents and settles per-action payments in USDC on Circle Arc. The Service
             does not constitute investment, financial, legal, or tax advice.
           </p>
@@ -43,7 +43,8 @@
           <ul class="list-disc pl-5 space-y-2">
             <li>You fund a mission with a defined USDC budget. The orchestrator may consume up to that budget.</li>
             <li>USDC transactions on Arc are <strong>final and irreversible</strong>.</li>
-            <li>The price displayed before launch is an estimate; actual cost may vary slightly based on agent selection and validation outcomes.</li>
+            <li>The price displayed before launch is an estimate; actual cost may vary slightly based on agent selection
+              and validation outcomes.</li>
             <li>No refunds for completed missions.</li>
           </ul>
         </Section>
@@ -117,7 +118,8 @@
 
         <Section title="14. Contact">
           <p>
-            Axon Layer — <a href="mailto:legal@arcagenthub.example" class="text-indigo-400 hover:underline">legal@arcagenthub.example</a>
+            Axonlayer — <a href="mailto:legal@arcagenthub.example"
+              class="text-indigo-400 hover:underline">legal@arcagenthub.example</a>
           </p>
         </Section>
       </div>

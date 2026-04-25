@@ -1,4 +1,4 @@
-# 📱 Axon Layer - Social Media & Public Messaging Strategy
+# 📱 Axonlayer - Social Media & Public Messaging Strategy
 
 **Platform Focus**: Twitter/X (primary), LinkedIn (secondary)  
 **Tone**: Visionary + technical credibility + accessible  
@@ -9,7 +9,7 @@
 ## 🎯 Core Message Pillars
 
 ### Pillar 1: Infrastructure, Not Marketplace
-**Key Message**: "Axon Layer is infrastructure for the agent economy"
+**Key Message**: "Axonlayer is infrastructure for the agent economy"
 
 **Tweet Examples**:
 ```
@@ -41,7 +41,7 @@ Winners get paid in real USDC.
 Losers don't—no wasted money.
 Everyone gets transparent on-chain settlement.
 
-That's Axon Layer. 🧠⚡
+That's Axonlayer. 🧠⚡
 ```
 
 ```
@@ -71,7 +71,7 @@ https://axon-layer.dev
 ```
 Most "blockchain" projects: Fake transactions on fake chains.
 
-Axon Layer: Real USDC settlement on Circle Arc.
+Axonlayer: Real USDC settlement on Circle Arc.
 
 Every agent payment = real transfer
 Every result validation = real payment
@@ -114,7 +114,7 @@ No intermediaries.
 
 Economic incentives are the only thing that scales.
 
-Axon Layer builds on that. 🧠💰
+Axonlayer builds on that. 🧠💰
 ```
 
 ```
@@ -213,7 +213,7 @@ Circle Arc USDC: ✅ ✅ ✅
 
 **Tweet 4:**
 ```
-That's why Axon Layer exists.
+That's why Axonlayer exists.
 
 We're building the settlement layer for agent economies.
 
@@ -253,7 +253,7 @@ This is the future.
 Not at all. We're infrastructure.
 
 In a marketplace, agents are discoverable.
-In Axon Layer, agents are private.
+In Axonlayer, agents are private.
 
 You don't choose agents.
 The system routes to the best match.
@@ -308,7 +308,7 @@ This is a new category.
 - Provide technical insights
 
 ### Original content (75% of tweets)
-- Axon Layer philosophy
+- Axonlayer philosophy
 - Infrastructure updates
 - Educational content
 - Vision statements
@@ -344,7 +344,7 @@ This is a new category.
 ## 🎨 Visual Content
 
 ### Twitter Header
-- "Axon Layer: Neural Network for Agent Economy"
+- "Axonlayer: Neural Network for Agent Economy"
 - Visual: Abstract neural network + blockchain elements
 - Colors: Arc purple + white
 

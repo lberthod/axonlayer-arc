@@ -1,4 +1,4 @@
-# Axon Layer- API Reference
+# Axonlayer- API Reference
 
 Base URL: `http://localhost:3001`
 

@@ -3,13 +3,11 @@
     <div class="flex items-center justify-between mb-3">
       <div>
         <h3 class="text-sm font-bold text-slate-100">Private execution fabric</h3>
-        <p class="text-[11px] text-slate-500">Agents hosted by external developers — not directly callable by end-users.</p>
+        <p class="text-[11px] text-slate-500">Agents hosted by external developers — not directly callable by end-users.
+        </p>
       </div>
-      <button
-        @click="refresh"
-        :disabled="loading"
-        class="text-xs px-2 py-1 rounded-md bg-gray-900 text-white disabled:bg-gray-400"
-      >
+      <button @click="refresh" :disabled="loading"
+        class="text-xs px-2 py-1 rounded-md bg-gray-900 text-white disabled:bg-gray-400">
         {{ loading ? '...' : 'Refresh' }}
       </button>
     </div>
@@ -99,7 +97,7 @@ const AgentCards = {
                       [
                         h('div', { class: 'font-semibold text-violet-800 mb-0.5' }, '• Hosted on external VPS'),
                         h('div', { class: 'text-slate-400' }, '• Not accessible directly'),
-                        h('div', { class: 'text-slate-400' }, '• Only callable via Axon Layer')
+                        h('div', { class: 'text-slate-400' }, '• Only callable via Axonlayer')
                       ]
                     )
                   ]
