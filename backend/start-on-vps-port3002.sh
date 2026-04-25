@@ -53,9 +53,7 @@ CLIENT_MONTHLY_BUDGET=10
 PROVIDER_MIN_STAKE=0.1
 PROVIDER_SLASH_PENALTY=0.05
 
-HTTPS_ENABLED=true
-HTTPS_KEY_PATH=./key.pem
-HTTPS_CERT_PATH=./cert.pem
+HTTPS_ENABLED=false
 
 CORS_ORIGINS=http://localhost:3000,http://localhost:5173,https://72.61.108.21,http://72.61.108.21:3002,https://agenthubarc.web.app,https://axonlayer.web.app
 
@@ -70,10 +68,19 @@ ENVEOF
 
 echo "✓ .env created"
 
-echo "Step 5: Generate SSL certificates (self-signed)..."
-openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365 -nodes \
-  -subj "/CN=72.61.108.21/O=ARC/C=US" 2>/dev/null
-echo "✓ Certificates generated"
+echo "Step 5: Setup SSL certificates..."
+if [ ! -f "key.pem" ] || [ ! -f "cert.pem" ]; then
+  echo "Generating self-signed certificate (valid for 1 year)..."
+  openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365 -nodes \
+    -subj "/CN=72.61.108.21/O=ARC/C=US" 2>/dev/null || true
+  if [ ! -f "key.pem" ]; then
+    echo "⚠️  Could not generate certificates, running on HTTP instead"
+  else
+    echo "✓ Certificates generated"
+  fi
+else
+  echo "✓ Using existing certificates"
+fi
 
 echo "Step 6: Install dependencies..."
 npm install --production 2>&1 | grep -E "added|up to date|found"

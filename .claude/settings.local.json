@@ -96,7 +96,8 @@
       "Bash(chmod +x /Users/berthod/Desktop/arc-USDC1/backend/start-on-vps.sh)",
       "Bash(chmod +x /Users/berthod/Desktop/arc-USDC1/backend/start-on-vps-port3002.sh)",
       "Bash(chmod +x start-on-vps-port3002.sh)",
-      "Bash(./start-on-vps-port3002.sh)"
+      "Bash(./start-on-vps-port3002.sh)",
+      "Bash(curl -k https://72.61.108.21:3002/api/health)"
     ]
   }
 }

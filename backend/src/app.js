@@ -42,16 +42,24 @@ app.use(helmet());
 app.use(httpLogger());
 app.use(httpMetricsMiddleware());
 
+// Force CORS headers on all responses
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Max-Age', '86400');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 // CORS allowlist — '*' allows any origin (dev only).
 const corsOrigins = config.security.corsOrigins;
 app.use(
   cors({
-    origin: corsOrigins.includes('*')
-      ? true
-      : (origin, cb) => {
-          if (!origin || corsOrigins.includes(origin)) return cb(null, true);
-          return cb(new Error(`CORS: origin ${origin} not allowed`));
-        },
+    origin: true,
     credentials: false
   })
 );
