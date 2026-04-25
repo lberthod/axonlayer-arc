@@ -209,7 +209,7 @@ export const config = {
 
   security: {
     // Comma-separated list of allowed origins. '*' allows anything (dev only).
-    corsOrigins: (env.CORS_ORIGINS || 'http://localhost:3000,http://localhost:5173')
+    corsOrigins: (env.CORS_ORIGINS || 'http://localhost:3000,http://localhost:5173,https://agenthubarc.web.app,https://72.61.108.21,http://72.61.108.21:3001')
       .split(',')
       .map((s) => s.trim())
       .filter(Boolean),

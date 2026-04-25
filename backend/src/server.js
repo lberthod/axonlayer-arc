@@ -1,3 +1,5 @@
+import https from 'https';
+import fs from 'fs';
 import app from './app.js';
 import ledger from './core/ledger.js';
 import paymentAdapter from './core/paymentAdapter.js';
@@ -8,6 +10,9 @@ import treasuryStore from './core/treasuryStore.js';
 import { initializeAuth } from './core/auth.js';
 
 const PORT = process.env.PORT || 3001;
+const HTTPS_ENABLED = process.env.HTTPS_ENABLED === 'true';
+const HTTPS_KEY_PATH = process.env.HTTPS_KEY_PATH;
+const HTTPS_CERT_PATH = process.env.HTTPS_CERT_PATH;
 
 async function startServer() {
   try {
@@ -18,11 +23,28 @@ async function startServer() {
     await taskEngine.load();
     await initializeAuth();
     await agentRegistry.hydrateFromProviders();
-    
+
     const { config } = await import('./config.js');
 
-    app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
+    let server;
+    if (HTTPS_ENABLED && HTTPS_KEY_PATH && HTTPS_CERT_PATH) {
+      try {
+        const key = fs.readFileSync(HTTPS_KEY_PATH, 'utf-8');
+        const cert = fs.readFileSync(HTTPS_CERT_PATH, 'utf-8');
+        server = https.createServer({ key, cert }, app);
+        console.log(`🔒 HTTPS enabled (cert: ${HTTPS_CERT_PATH})`);
+      } catch (err) {
+        console.warn(`⚠️ Failed to load HTTPS certificates:`, err.message);
+        console.log(`Falling back to HTTP...`);
+        server = app;
+      }
+    } else {
+      server = app;
+    }
+
+    server.listen(PORT, () => {
+      const protocol = HTTPS_ENABLED && HTTPS_KEY_PATH && HTTPS_CERT_PATH ? 'https' : 'http';
+      console.log(`Server running on ${protocol}://localhost:${PORT}`);
       console.log(`Settlement mode: ${paymentAdapter.mode}`);
       console.log(`Pricing profile: ${config.pricing.profile}`);
       if (paymentAdapter.mode === 'onchain') {

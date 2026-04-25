@@ -84,7 +84,19 @@
       "Bash(chmod +x /tmp/deploy-axonlayer.sh)",
       "Bash(bash /tmp/configure-frontend.sh)",
       "Bash(chmod +x /tmp/FIX_VPS_NODEJS.sh)",
-      "Bash(chmod +x /tmp/SETUP_HTTPS.sh)"
+      "Bash(chmod +x /tmp/SETUP_HTTPS.sh)",
+      "Bash(find /Users/berthod/Desktop/arc-USDC1/frontend/src -name \"*.vue\" -exec grep -l \"api\\\\.getMe\" {} \\\\;)",
+      "Bash(chmod +x /Users/berthod/Desktop/arc-USDC1/deploy.sh)",
+      "Bash(chmod +x /Users/berthod/Desktop/arc-USDC1/configure-backend-url.sh)",
+      "Bash(chmod +x /Users/berthod/Desktop/arc-USDC1/frontend/deploy.sh)",
+      "Bash(firebase deploy *)",
+      "Bash(chmod +x /Users/berthod/Desktop/arc-USDC1/backend/setup-https.sh)",
+      "Bash(chmod +x /Users/berthod/Desktop/arc-USDC1/backend/restart.sh)",
+      "Bash(chmod +x /Users/berthod/Desktop/arc-USDC1/backend/deploy-to-vps.sh)",
+      "Bash(chmod +x /Users/berthod/Desktop/arc-USDC1/backend/start-on-vps.sh)",
+      "Bash(chmod +x /Users/berthod/Desktop/arc-USDC1/backend/start-on-vps-port3002.sh)",
+      "Bash(chmod +x start-on-vps-port3002.sh)",
+      "Bash(./start-on-vps-port3002.sh)"
     ]
   }
 }

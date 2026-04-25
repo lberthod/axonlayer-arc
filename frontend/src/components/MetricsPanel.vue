@@ -105,7 +105,7 @@ const refresh = async () => {
   loading.value = true;
   error.value = '';
   try {
-    metrics.value = await api.getMetrics(windowMs.value || undefined);
+    metrics.value = await api.metrics.getMetrics(windowMs.value || undefined);
   } catch (err) {
     error.value = err.message || 'Failed to load metrics';
   } finally {

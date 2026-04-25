@@ -174,7 +174,7 @@ const creatingWallet = ref(false);
 
 async function loadUser() {
   try {
-    user.value = await api.getMe();
+    user.value = await api.auth.getMe();
   } catch (err) {
     toastError(err, 'Failed to load profile');
   }

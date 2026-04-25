@@ -340,7 +340,7 @@ function exportWallet() {
 
 async function syncWithServer() {
   try {
-    const me = await api.getMe();
+    const me = await api.auth.getMe();
     if (me.wallet?.address && !walletStore.state.walletData) {
       walletStore.setWalletData(me.wallet);
       walletStore.setBalance(me.balance || 0);

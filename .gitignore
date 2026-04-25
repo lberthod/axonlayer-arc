@@ -16,3 +16,8 @@ firebase-service-account.json
 *.key
 .aws/
 credentials.json
+
+# Firebase & Functions
+.firebase/
+functions/node_modules/
+functions/.env.local

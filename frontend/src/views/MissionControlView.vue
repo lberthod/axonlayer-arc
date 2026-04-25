@@ -297,7 +297,7 @@ const lastWalletRefresh = ref(null);
 async function refreshWallet(silent = false) {
   try {
     isRefreshingWallet.value = true;
-    user.value = await api.getMe();
+    user.value = await api.auth.getMe();
     lastWalletRefresh.value = new Date().toLocaleTimeString();
     if (user.value?.wallet && !silent) {
       toastSuccess('Wallet setup complete!');
@@ -342,16 +342,12 @@ function makeIdempotencyKey() {
 }
 
 async function loadData() {
-  const [bal, tx, m, p] = await Promise.all([
-    api.getBalances(),
-    api.getTransactions({ latest: 20 }),
-    api.getMetrics().catch(() => null),
-    api.listProviders('approved').catch(() => [])
+  const [bal, m] = await Promise.all([
+    api.balances.getBalances().catch(() => null),
+    api.metrics.getMetrics().catch(() => null),
   ]);
   balances.value = bal;
-  transactions.value = tx;
   metrics.value = m;
-  providers.value = p || [];
 }
 
 function refreshPanels() {

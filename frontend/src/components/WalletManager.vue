@@ -91,7 +91,7 @@ const recentTransactions = ref([]);
 
 async function loadWalletData() {
   try {
-    const me = await api.getMe();
+    const me = await api.auth.getMe();
     if (me.wallet) {
       wallet.value = me.wallet;
       balance.value = me.balance || 0;

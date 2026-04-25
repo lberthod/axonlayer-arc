@@ -222,9 +222,8 @@ const loadingTask = ref(false);
 const statusFilter = ref('');
 
 async function refresh() {
-  me.value = await api.getMe();
+  me.value = await api.auth.getMe();
   walletAddress.value = me.value.walletAddress || '';
-  missions.value = (await api.getMyTasks().catch(() => [])) || [];
 }
 
 const completedCount = computed(() => missions.value.filter(m => m.status === 'completed').length);

@@ -1,5 +1,6 @@
 import { reactive, readonly } from 'vue';
 import { firebaseAuth, onAuthChange, loginWithGoogle, logout, getIdToken } from '../services/firebase.js';
+import { api } from '../services/api.js';
 
 const state = reactive({
   initialized: false,
@@ -18,11 +19,7 @@ async function refreshBackendUser() {
     return;
   }
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api'}/auth/me`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    state.user = await response.json();
+    state.user = await api.auth.getMe();
     state.role = state.user.role || 'user';
   } catch (err) {
     console.error('[authStore] /auth/me failed:', err);
@@ -62,26 +59,12 @@ export async function doLogout() {
 }
 
 export async function becomeProvider() {
-  const token = await getIdToken();
-  if (!token) return;
-  const base = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
-  await fetch(`${base}/auth/role/provider`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}` }
-  });
+  await api.auth.becomeProvider();
   await refreshBackendUser();
 }
 
 export async function rotateApiKey() {
-  const token = await getIdToken();
-  const base = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
-  const response = await fetch(`${base}/auth/apikey/rotate`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}` }
-  });
-  if (response.ok) {
-    state.user = await response.json();
-  }
+  state.user = await api.auth.rotateApiKey();
 }
 
 export const auth = readonly(state);

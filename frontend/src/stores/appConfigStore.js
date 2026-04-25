@@ -32,7 +32,7 @@ export async function loadAppConfig(force = false) {
   appConfig.loading = true;
   appConfig.error = null;
 
-  inflight = Promise.all([api.getConfig(), api.getHealth()])
+  inflight = Promise.all([api.config.getConfig(), api.config.getHealth()])
     .then(([cfg, health]) => {
       appConfig.asset = cfg.asset || 'USDC';
       Object.assign(appConfig.walletProvider, cfg.walletProvider || {});

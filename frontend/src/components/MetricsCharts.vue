@@ -51,7 +51,7 @@ const loading = ref(false);
 async function refresh() {
   loading.value = true;
   try {
-    metrics.value = await api.getMetrics();
+    metrics.value = await api.metrics.getMetrics();
   } catch (err) {
     toastError(err, 'Failed to load metrics');
   } finally {
