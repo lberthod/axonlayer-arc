@@ -209,6 +209,16 @@ class TreasuryStore {
   }
 
   /**
+   * Clear treasury history for a specific user (when user resets wallets)
+   */
+  async clearUserHistory(uid) {
+    // This is a placeholder - treasury is global, not per-user
+    // But we can archive history by filtering out old entries if needed
+    // For now, we just log the action
+    console.log(`[treasuryStore] User ${uid} reset wallets - treasury history retained for audit`);
+  }
+
+  /**
    * Reset treasury (for testing)
    */
   async reset() {

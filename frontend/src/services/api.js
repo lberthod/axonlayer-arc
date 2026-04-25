@@ -103,6 +103,10 @@ export const api = {
     },
     walletCreate: () => apiCallWithAuth('/api/auth/wallet/create', { method: 'POST' }),
     walletBalance: (address) => apiCall(`/api/auth/wallet/balance/${address}`),
+    walletRegenerateAll: () => {
+      clearMeCache();
+      return apiCallWithAuth('/api/auth/wallet/regenerate-all', { method: 'POST' });
+    },
     becomeProvider: () => apiCallWithAuth('/api/auth/role/provider', { method: 'POST' }),
     rotateApiKey: () => apiCallWithAuth('/api/auth/apikey/rotate', { method: 'POST' }),
   },

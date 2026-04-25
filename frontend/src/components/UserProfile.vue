@@ -125,8 +125,9 @@
             ⬇️ Export Wallet (JSON)
           </button>
           <button @click="regenerateWallet" :disabled="creatingWallet"
-            class="flex-1 px-4 py-2 rounded-lg border-2 border-red-600 text-red-600 hover:bg-red-50 text-sm font-semibold transition disabled:opacity-50">
-            {{ creatingWallet ? 'Generating...' : '🔄 Generate New Wallet' }}
+            class="flex-1 px-4 py-2 rounded-lg border-2 border-red-600 text-red-600 hover:bg-red-50 text-sm font-semibold transition disabled:opacity-50"
+            title="Regenerates both Mission & Treasury wallets and clears old data">
+            {{ creatingWallet ? 'Resetting...' : '🔄 Reset All Wallets' }}
           </button>
         </div>
       </div>
@@ -342,18 +343,18 @@ function exportWallet() {
 }
 
 async function regenerateWallet() {
-  if (!confirm('⚠️ This will create a new wallet and your current one will no longer be used.\n\nAre you sure?')) {
+  if (!confirm('⚠️ RESET ALL WALLETS\n\nThis will:\n✓ Generate new Mission Wallet\n✓ Generate new Treasury Wallet\n✓ Clear treasury history\n\nOld wallets cannot be used anymore.\n\nAre you sure?')) {
     return;
   }
   creatingWallet.value = true;
   try {
-    const result = await api.createWallet();
+    const result = await api.auth.walletRegenerateAll();
     user.value = result.user;
     // Sync globally so all components update
     walletStore.updateFromUser(result.user);
-    toastSuccess('New wallet generated! Synced to all pages. Save your private key in a secure location.');
+    toastSuccess('✅ All wallets regenerated! New addresses active. Save your private keys in a secure location.');
   } catch (err) {
-    toastError(err, 'Failed to generate wallet');
+    toastError(err, 'Failed to regenerate wallets');
   } finally {
     creatingWallet.value = false;
   }

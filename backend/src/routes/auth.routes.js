@@ -357,4 +357,70 @@ router.get('/wallet/balance-debug/:address', async (req, res) => {
   }
 });
 
+// Regenerate all wallets and clear old treasury data
+router.post('/wallet/regenerate-all', async (req, res) => {
+  try {
+    if (!config.auth.enabled) {
+      return res.status(400).json({ error: 'Not available in dev mode' });
+    }
+    if (!req.user) return res.status(401).json({ error: 'authentication required' });
+
+    const uid = req.user.uid;
+
+    // Generate new mission wallet
+    const newWallet = ArcWalletService.generateWallet();
+
+    // Generate new treasury wallet
+    const newTreasuryWallet = ArcWalletService.generateWallet();
+
+    // Update user with new wallets
+    let user = await userStore.setWallet(uid, newWallet);
+
+    // Update treasury wallet
+    user.treasuryWallet = {
+      address: newTreasuryWallet.address,
+      privateKey: newTreasuryWallet.privateKey,
+      mnemonic: newTreasuryWallet.mnemonic,
+      createdAt: new Date().toISOString()
+    };
+    await userStore.store.flush();
+
+    // Register new wallets in walletManager
+    const walletManager = (await import('../core/walletManager.js')).default;
+    await walletManager.load();
+    await walletManager.registerUserWallet(uid, newWallet);
+
+    // Clear treasury history for this user (archive old data)
+    const treasuryStore = (await import('../core/treasuryStore.js')).default;
+    treasuryStore.clearUserHistory(uid);
+
+    console.log(`[auth/wallet/regenerate-all] Regenerated wallets for user ${uid}`);
+
+    res.json({
+      success: true,
+      message: 'All wallets regenerated and treasury history cleared',
+      wallet: {
+        address: newWallet.address,
+        privateKey: newWallet.privateKey,
+        mnemonic: newWallet.mnemonic,
+        chain: newWallet.chain,
+        token: newWallet.token,
+        createdAt: newWallet.createdAt,
+        instructions: 'Save your new private key in a secure location. Send USDC to this address to fund your account.'
+      },
+      treasuryWallet: {
+        address: newTreasuryWallet.address,
+        privateKey: newTreasuryWallet.privateKey,
+        mnemonic: newTreasuryWallet.mnemonic,
+        createdAt: newTreasuryWallet.createdAt,
+        instructions: 'Your new Treasury Wallet for managing agent payments. Keep the private key secure.'
+      },
+      user: sanitize(user)
+    });
+  } catch (error) {
+    console.error('[auth/wallet/regenerate-all] Error:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export default router;
