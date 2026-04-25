@@ -220,8 +220,8 @@ export const config = {
       // Tasks: 30 / min / IP (protects paid pipeline)
       tasksMax: Number(env.RATE_LIMIT_TASKS || 30),
       tasksWindowMs: Number(env.RATE_LIMIT_TASKS_WINDOW_MS || 60 * 1000),
-      // Simulation: 3 / min / IP (generates lots of tx)
-      simulationMax: Number(env.RATE_LIMIT_SIM || 3),
+      // Simulation: 20 / min / user (allows batch testing of 25/50 missions)
+      simulationMax: Number(env.RATE_LIMIT_SIM || 20),
       simulationWindowMs: Number(env.RATE_LIMIT_SIM_WINDOW_MS || 60 * 1000),
       // Auth: 10 / min / IP
       authMax: Number(env.RATE_LIMIT_AUTH || 10),
