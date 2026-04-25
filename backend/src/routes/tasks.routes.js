@@ -27,8 +27,14 @@ router.post('/', validateBody(createTaskSchema), async (req, res, next) => {
     const quote = pricingEngine.price({ input, taskType });
 
     if (req.user) {
-      // Check user's wallet balance (used to fund treasury for task execution)
-      const userBalance = req.user.balance || 0;
+      // Get fresh user data from store to ensure we have correct wallets
+      const freshUser = userStore.getByUid(req.user.uid);
+      if (!freshUser) {
+        throw unauthorized('User not found in store');
+      }
+
+      // Check user's mission wallet balance (used to fund treasury for task execution)
+      const userBalance = freshUser.balance || 0;
 
       if (userBalance < quote.clientPayment) {
         throw badRequest('insufficient_balance', 'insufficient balance to execute task', {
@@ -93,10 +99,15 @@ router.post('/treasury-flow/execute', validateBody(createTaskSchema), async (req
     const quota = userStore.checkQuota(req.user);
     if (!quota.ok) throw tooMany(quota.reason);
 
-    // Verify user has Treasury Wallet
+    // Get fresh user data from store to ensure current wallet info
     const user = userStore.getByUid(uid);
-    if (!user?.treasuryWallet?.address) {
-      throw badRequest('no_treasury_wallet', 'User has no Treasury Wallet');
+    if (!user) {
+      throw unauthorized('User not found in store');
+    }
+
+    // Verify user has correct Treasury Wallet from profile
+    if (!user.treasuryWallet?.address) {
+      throw badRequest('no_treasury_wallet', `User ${uid} has no Treasury Wallet. Regenerate wallets in profile first.`);
     }
 
     // Get quote
@@ -111,6 +122,8 @@ router.post('/treasury-flow/execute', validateBody(createTaskSchema), async (req
         available: userBalance
       });
     }
+
+    console.log(`[TreasuryFlow] User ${uid} treasury flow: treasuryWallet=${user.treasuryWallet.address}, balance=${userBalance}`);
 
     const task = taskEngine.createTask(input, taskType, { requesterUid: uid });
     const flowTransactions = [];

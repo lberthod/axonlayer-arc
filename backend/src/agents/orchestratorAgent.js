@@ -48,9 +48,11 @@ class OrchestratorAgent extends BaseAgent {
   }
 
   async executeTask(inputText, taskType = 'summarize', options = {}) {
-    console.log(`[Orchestrator] Starting task execution: taskType=${taskType}`);
+    const requesterUid = options.requesterUid;
+    console.log(`[Orchestrator] Starting task execution: taskType=${taskType}, requester=${requesterUid || 'anonymous'}`);
+
     const task = taskEngine.createTask(inputText, taskType, {
-      requesterUid: options.requesterUid || null
+      requesterUid: requesterUid || null
     });
     const executionSteps = [];
     const budget = options.budget || config.pricing.clientPayment;
@@ -94,10 +96,10 @@ class OrchestratorAgent extends BaseAgent {
         timestamp: new Date().toISOString()
       });
 
-      // Fund mission from user wallet to treasury
-      if (options.requesterUid) {
-        console.log(`[Orchestrator:step2] Funding mission: uid=${options.requesterUid}, amount=${budget}`);
-        const fundResult = await taskEngine.fundMission(options.requesterUid, budget, task.id);
+      // Fund mission from user's Treasury Wallet to orchestrator
+      if (requesterUid) {
+        console.log(`[Orchestrator:step2] Funding mission from Treasury Wallet: uid=${requesterUid}, amount=${budget} USDC`);
+        const fundResult = await taskEngine.fundMission(requesterUid, budget, task.id);
 
         // Check if funding is pending due to temporary RPC issue
         if (fundResult.status === 'funding_pending') {

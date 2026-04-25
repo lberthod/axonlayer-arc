@@ -150,15 +150,20 @@ class TaskEngine {
   }
 
   async fundMission(userUid, amount, taskId) {
+    // Always get fresh user data from store to ensure wallet info is current
+    // (user may have regenerated wallets since last fetch)
     const user = userStore.getByUid(userUid);
     if (!user) {
       throw new Error('User not found');
     }
 
-    // Use user's Treasury Wallet (personal wallet for agent payments)
+    // Verify user has correct Treasury Wallet from profile
     if (!user.treasuryWallet || !user.treasuryWallet.address) {
-      throw new Error('User Treasury Wallet not found');
+      throw new Error(`User Treasury Wallet not found for ${userUid}. Check user profile to ensure wallet exists.`);
     }
+
+    // Log the wallet being used for debugging
+    console.log(`[fundMission] Using Treasury Wallet for user ${userUid}: ${user.treasuryWallet.address}`)
 
     // Use treasury wallet directly from user data (bypass walletManager to avoid sync issues)
     const walletManager = (await import('./walletManager.js')).default;
