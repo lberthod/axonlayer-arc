@@ -15,6 +15,7 @@
         <p class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-3">Product</p>
         <ul class="space-y-2 text-sm">
           <li><router-link to="/" class="hover:text-white">Home</router-link></li>
+          <li><router-link to="/slides" class="hover:text-white">📊 Slides</router-link></li>
           <li><router-link to="/mission" class="hover:text-white">Mission Control</router-link></li>
           <li><router-link to="/operator" class="hover:text-white">Agent Operator Console</router-link></li>
         </ul>
