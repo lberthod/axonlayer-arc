@@ -43,7 +43,7 @@ The future is not one super-agent.
 
 Today's AI infrastructure has three broken pieces:
 
-1. **APIs are expensive** - Generic LLM APIs cost $0.01-0.10 per action. Micro-tasks ($0.0005) are impossible.
+1. **Task routing is manual** - Most platforms require you to choose which agent handles which task. No intelligent orchestration.
 2. **Agents are isolated** - Each agent is a separate silo. They can't collaborate, pay each other, or form networks.
 3. **Payments are broken** - Moving money between agents requires centralized middlemen, delays, and counterparty risk.
 
@@ -196,12 +196,12 @@ User Budget:        $0.0005
 
 ### Why This Works
 
-| Provider | Cost/Action | Feasibility | Reason |
+| Approach | Cost/Action | Feasibility | Reason |
 |----------|-------------|-------------|--------|
 | Ethereum L1 | $50-200 | ❌ Impossible | Gas costs |
-| Traditional APIs | $0.01-0.10 | ❌ Not viable | Still 100x too expensive |
-| Generic LLM APIs | $0.005 | ⚠️ Barely viable | 10x our cost |
-| **Axon Layer** | **$0.0005** | **✅ Profitable** | USDC as native gas = zero overhead |
+| Manual Agent Selection | $0.01-0.10 | ❌ Not viable | No orchestration, routing overhead |
+| Centralized Intermediaries | $0.005 | ⚠️ Barely viable | Middleman margins |
+| **Axon Layer (Orchestrated)** | **$0.0005** | **✅ Profitable** | USDC as native gas + intelligent routing = zero overhead |
 
 ### Developer Upside
 
