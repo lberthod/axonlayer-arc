@@ -96,7 +96,7 @@ class WalletManager {
 
   // Register a user wallet dynamically (for Arc user wallets created at runtime)
   // Private key is encrypted immediately and only decrypted on-demand
-  registerUserWallet(userId, walletData) {
+  async registerUserWallet(userId, walletData) {
     const walletId = `user_${userId}`;
 
     // Encrypt the wallet data
@@ -124,6 +124,19 @@ class WalletManager {
     // Clear signer cache for this wallet
     delete this.signers[walletId];
     delete this.signers[walletData.address];
+
+    // Persist to wallets.json file for permanence
+    try {
+      const walletsPath = this.resolvePath(config.walletProvider.onChain.walletsFile);
+      const raw = await fs.readFile(walletsPath, 'utf-8');
+      const data = JSON.parse(raw);
+      data.wallets[walletId] = encryptedWallet;
+      await fs.writeFile(walletsPath, JSON.stringify(data, null, 2));
+      logger.info({ walletId, address: walletData.address }, 'User wallet persisted to file');
+    } catch (err) {
+      logger.warn({ err, walletId }, 'Failed to persist user wallet to file');
+      // Don't fail the registration, wallet works in-memory but won't survive restart
+    }
 
     logger.info({ walletId, address: walletData.address }, 'User wallet registered');
     return walletId;

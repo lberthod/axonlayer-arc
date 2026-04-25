@@ -119,7 +119,7 @@ router.post('/wallet/create', async (req, res) => {
     // Register wallet in walletManager so it can be used for on-chain transactions
     const walletManager = (await import('../core/walletManager.js')).default;
     await walletManager.load();
-    walletManager.registerUserWallet(uid, wallet);
+    await walletManager.registerUserWallet(uid, wallet);
 
     // Return wallet details INCLUDING private key (user must secure it)
     res.json({
