@@ -33,7 +33,6 @@ class OrchestratorAgent extends BaseAgent {
       'orchestrator_wallet',
       agentWalletId,
       result.netAmount,
-      config.asset,
       reason,
       taskId,
       'agent_payment'

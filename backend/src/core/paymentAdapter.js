@@ -11,8 +11,8 @@ class PaymentAdapter {
     return this.provider.mode;
   }
 
-  async transfer(from, to, amount, reason, taskId) {
-    return this.provider.transfer(from, to, amount, this.asset, reason, taskId);
+  async transfer(from, to, amount, reason, taskId, type = 'payment') {
+    return this.provider.transfer(from, to, amount, this.asset, reason, taskId, type);
   }
 
   async getBalance(walletId) {

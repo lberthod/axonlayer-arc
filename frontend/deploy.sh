@@ -1,54 +1,26 @@
 #!/bin/bash
-set -e
 
-echo "🚀 Deploying ARC USDC Frontend"
-echo "=============================="
+# Get current version from package.json
+VERSION=$(grep '"version"' package.json | sed 's/.*"\([^"]*\)".*/\1/')
 
-# Colors
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m'
+# Extract major, minor, patch
+IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
 
-# Check if we're in the frontend directory
-if [ ! -f "firebase.json" ]; then
-    echo -e "${RED}❌ firebase.json not found. Run this script from the frontend directory.${NC}"
-    exit 1
-fi
+# Increment patch version
+NEW_PATCH=$((PATCH + 1))
+NEW_VERSION="$MAJOR.$MINOR.$NEW_PATCH"
 
-# Step 1: Install Cloud Functions dependencies
-echo -e "${YELLOW}📦 Installing Cloud Functions dependencies...${NC}"
-cd functions
-npm install
-cd ..
-echo -e "${GREEN}✓ Dependencies installed${NC}"
+echo "Incrementing version from $VERSION to $NEW_VERSION"
 
-# Step 2: Build frontend
-echo ""
-echo -e "${YELLOW}🔨 Building frontend...${NC}"
+# Update package.json with new version
+sed -i '' "s/\"version\": \"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" package.json
+
+# Build
+echo "Running npm run build..."
 npm run build
-if [ $? -ne 0 ]; then
-    echo -e "${RED}❌ Build failed${NC}"
-    exit 1
-fi
-echo -e "${GREEN}✓ Frontend built${NC}"
 
-# Step 3: Deploy
-echo ""
-echo -e "${YELLOW}🚀 Deploying to Firebase...${NC}"
-firebase deploy
+# Deploy
+echo "Deploying to Firebase hosting..."
+firebase deploy --only hosting
 
-if [ $? -eq 0 ]; then
-    echo ""
-    echo -e "${GREEN}✅ Deployment successful!${NC}"
-    echo ""
-    echo "Frontend: https://axonlayer.web.app"
-    echo ""
-    echo -e "${YELLOW}Next steps:${NC}"
-    echo "1. Check Cloud Functions: firebase functions:log"
-    echo "2. Visit https://axonlayer.web.app"
-    echo "3. Test API: curl https://axonlayer.web.app/api/health"
-else
-    echo -e "${RED}❌ Deployment failed${NC}"
-    exit 1
-fi
+echo "Deploy completed successfully! Version updated to $NEW_VERSION"

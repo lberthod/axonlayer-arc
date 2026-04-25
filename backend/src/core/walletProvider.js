@@ -167,6 +167,7 @@ class OnChainWalletProvider {
     this.dryRun = options.dryRun !== false;
     this.ethers = null;
     this.ready = false;
+    this.txHashMap = new Map(); // Store on-chain metadata keyed by ledger tx ID
   }
 
   async ensureReady() {
@@ -330,13 +331,20 @@ class OnChainWalletProvider {
     //    In live mode the ledger entry is written only AFTER the chain tx was
     //    broadcast successfully (confirmations pending or complete).
     const tx = await ledger.createTransaction(from, to, amount, asset, reason, taskId, type);
-    return {
-      ...tx,
+
+    // Store on-chain metadata so getTransactions() can enrich the ledger tx
+    const enrichedData = {
       settlementType,
       chainTxHash,
       confirmations,
       onChainStatus: settlementType === 'onchain' ? 'confirmed' : 'pending',
       retryableError
+    };
+    this.txHashMap.set(tx.id, enrichedData);
+
+    return {
+      ...tx,
+      ...enrichedData
     };
   }
 
@@ -349,7 +357,12 @@ class OnChainWalletProvider {
   }
 
   async getTransactions(filters = {}) {
-    return ledger.getTransactions(filters);
+    const transactions = ledger.getTransactions(filters);
+    // Enrich with on-chain data (chainTxHash, settlementType, etc.) from txHashMap
+    return transactions.map(tx => {
+      const onchainData = this.txHashMap.get(tx.id);
+      return onchainData ? { ...tx, ...onchainData } : tx;
+    });
   }
 
   async setInitialBalances(initialBalances) {

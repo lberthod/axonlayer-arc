@@ -134,27 +134,47 @@
             <div
               v-for="(tx, idx) in allTransactions.slice(0, 50)"
               :key="`${tx.taskId}-${idx}`"
-              class="bg-slate-900 rounded-lg p-3 border border-slate-700 text-sm flex items-center justify-between"
+              class="bg-slate-900 rounded-lg p-3 border border-slate-700 text-sm"
             >
-              <div class="flex-1">
-                <div class="flex items-center gap-2 mb-1">
-                  <span
-                    :class="{
-                      'text-purple-400': tx.type === 'payment',
-                      'text-emerald-400': tx.type === 'fund',
-                      'text-orange-400': tx.type === 'refund',
-                      'text-blue-400': tx.type === 'agent_payment'
-                    }"
-                  >
-                    {{ tx.type === 'payment' ? '💳' : tx.type === 'fund' ? '📥' : tx.type === 'refund' ? '↩️' : '👤' }}
-                  </span>
-                  <span class="font-mono text-xs text-slate-400">{{ tx.from }} → {{ tx.to }}</span>
+              <div class="flex items-start gap-2 mb-2">
+                <span
+                  :class="{
+                    'text-purple-400': tx.type === 'payment',
+                    'text-emerald-400': tx.type === 'fund',
+                    'text-orange-400': tx.type === 'refund',
+                    'text-blue-400': tx.type === 'agent_payment'
+                  }"
+                >
+                  {{ tx.type === 'payment' ? '💳' : tx.type === 'fund' ? '📥' : tx.type === 'refund' ? '↩️' : '👤' }}
+                </span>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="font-mono text-xs text-slate-400">{{ tx.from }} → {{ tx.to }}</span>
+                  </div>
+                  <p class="text-xs text-slate-500 mb-1">{{ tx.reason }}</p>
+                  <!-- On-chain transaction link -->
+                  <div v-if="tx.chainTxHash && tx.settlementType === 'onchain'" class="flex items-center gap-2 text-xs">
+                    <span class="text-emerald-400">✓ On-chain</span>
+                    <a
+                      :href="`https://testnet.arcscan.app/tx/${tx.chainTxHash}`"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-blue-400 hover:text-blue-300 underline font-mono truncate"
+                      :title="tx.chainTxHash"
+                    >
+                      {{ tx.chainTxHash.slice(0, 10) }}...{{ tx.chainTxHash.slice(-8) }}
+                    </a>
+                  </div>
+                  <div v-else-if="tx.settlementType === 'onchain-pending'" class="text-xs text-yellow-400">
+                    ⏳ Pending on-chain...
+                  </div>
+                  <div v-else-if="tx.settlementType === 'simulated'" class="text-xs text-slate-500">
+                    💾 Simulated (ledger only)
+                  </div>
                 </div>
-                <p class="text-xs text-slate-500">{{ tx.reason }}</p>
               </div>
-              <div class="text-right ml-4 flex-shrink-0">
+              <div class="text-right">
                 <p class="font-semibold text-slate-100">${{ tx.amount.toFixed(6) }}</p>
-                <p class="text-xs text-slate-500">{{ tx.settlementType }}</p>
               </div>
             </div>
 
