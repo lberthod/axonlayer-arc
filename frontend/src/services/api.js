@@ -123,8 +123,11 @@ api.createTask = (input, taskType, options = {}) =>
 api.quoteTask = (input, taskType, selectionStrategy) =>
   api.agents.quote({ input, taskType, selectionStrategy });
 
-api.runSimulation = (batchSize) =>
-  apiCallWithAuth('/api/tasks/simulate', { method: 'POST', body: JSON.stringify({ batchSize }) });
+api.runSimulation = (count, taskType = 'summarize', selectionStrategy = 'balanced') =>
+  apiCallWithAuth('/api/simulate', {
+    method: 'POST',
+    body: JSON.stringify({ count, taskType, selectionStrategy })
+  });
 
 // Add wallet methods
 api.createWallet = () => api.auth.walletCreate();
