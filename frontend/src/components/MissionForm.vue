@@ -12,13 +12,25 @@
 
     <div class="space-y-4">
       <div>
-        <label class="block text-sm font-medium text-slate-300 mb-2">Goal</label>
+        <div class="flex items-center justify-between mb-2">
+          <label class="block text-sm font-medium text-slate-300">Goal</label>
+          <span :class="[
+            'text-xs font-semibold',
+            goal.trim().length >= 50 ? 'text-emerald-400' : 'text-amber-400'
+          ]">
+            {{ goal.trim().length }}/50 characters
+          </span>
+        </div>
         <textarea
           v-model="goal"
           rows="4"
-          class="w-full px-3 py-2 bg-slate-900 border border-slate-600 text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-500"
-          placeholder="e.g. Summarize this long article in two sentences..."
+          class="w-full px-3 py-2 bg-slate-900 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-500"
+          :class="goal.trim().length >= 50 ? 'border-slate-600' : 'border-amber-600'"
+          placeholder="Enter at least 50 characters... e.g. Summarize this long article in two sentences and explain the key insights"
         ></textarea>
+        <p v-if="goal.trim().length < 50" class="text-xs text-amber-400 mt-2">
+          ⚠️ Too short: {{ 50 - goal.trim().length }} characters needed
+        </p>
       </div>
 
       <div class="grid grid-cols-2 gap-3">
@@ -79,8 +91,9 @@
       <div class="space-y-2">
         <button
           @click="openConfirmModal"
-          :disabled="isLoading || !goal.trim() || !(budget > 0) || insufficientBudget"
+          :disabled="isLoading || !goal.trim() || goal.trim().length < 50 || !(budget > 0) || insufficientBudget"
           class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold shadow-md hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 active:scale-95 relative overflow-hidden group"
+          :title="goal.trim().length < 50 ? `Add ${50 - goal.trim().length} more characters` : ''"
         >
           <span v-if="!isLoading" class="relative z-10">Launch mission</span>
           <span v-else class="relative z-10 flex items-center justify-center gap-2">

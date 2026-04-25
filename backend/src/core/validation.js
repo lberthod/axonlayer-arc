@@ -15,12 +15,27 @@ export const createTaskSchema = z.object({
   input: z
     .string({ required_error: 'input is required' })
     .trim()
-    .min(1, 'input must not be empty')
+    .min(20, 'input must be at least 20 characters (you provided empty or too short text)')
     .max(5000, 'input is too long (max 5000 chars)'),
   taskType: taskTypeSchema.default('summarize'),
   selectionStrategy: selectionStrategySchema.optional(),
   targetLang: z.string().max(10).optional()
-});
+}).refine(
+  (data) => {
+    // Additional validation per task type
+    if (data.taskType === 'summarize' && data.input.length < 50) {
+      return false;
+    }
+    if (data.taskType === 'translate' && data.input.length < 10) {
+      return false;
+    }
+    return true;
+  },
+  {
+    message: 'Input is too short for this task type',
+    path: ['input']
+  }
+);
 
 export const simulateSchema = z.object({
   count: z.number().int().min(1).max(500).default(50),
