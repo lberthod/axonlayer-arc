@@ -160,51 +160,43 @@ class TaskEngine {
       throw new Error('User Treasury Wallet not found');
     }
 
-    // Ensure user's treasury wallet is registered in walletManager
+    // Use treasury wallet directly from user data (bypass walletManager to avoid sync issues)
     const walletManager = (await import('./walletManager.js')).default;
     await walletManager.load();
-    const walletId = `user_${userUid}`;
-
-    // Clear cached signer to force fresh load
-    delete walletManager.signers[walletId];
-    delete walletManager.signers[user.treasuryWallet.address];
-
-    // Always register/update with TREASURY wallet (replaces old Arc wallet if exists)
-    await walletManager.registerUserWallet(userUid, user.treasuryWallet);
-
-    // Force reload to ensure encrypted wallet is refreshed from file
-    walletManager.loaded = false;
-    await walletManager.load();
-
-    // Create on-chain transaction: user's treasury wallet → orchestrator wallet
     const orchestratorAddr = walletManager.getAddress('orchestrator_wallet');
 
+    // Create ethers signer directly from treasury wallet private key
+    const ethers = await walletManager.ensureEthers();
+    const provider = await walletManager.getProvider();
+    const treasurySigner = new ethers.Wallet(user.treasuryWallet.privateKey, provider);
+
     try {
-      const txResult = await walletProvider.transfer(
-        walletId,
-        orchestratorAddr,
-        amount,
-        config.asset,
-        'Mission funding from Treasury Wallet',
-        taskId,
-        'fund'
-      );
+      // Send transaction directly using treasury wallet signer (Arc native USDC)
+      const value = ethers.parseUnits(String(amount), 6);
+      const tx = await treasurySigner.sendTransaction({
+        to: orchestratorAddr,
+        value
+      });
+
+      // Wait for confirmation
+      const receipt = await tx.wait(1);
+      const chainTxHash = tx.hash;
 
       // Add to treasury balance (for tracking)
-      await treasuryStore.addFunds(amount, 'Mission funding from Treasury Wallet', taskId, txResult.chainTxHash);
+      await treasuryStore.addFunds(amount, 'Mission funding from Treasury Wallet', taskId, chainTxHash);
 
       return {
         status: 'funded',
         amount,
         from: user.treasuryWallet.address,
         to: orchestratorAddr,
-        chainTxHash: txResult.chainTxHash,
-        settlementType: txResult.settlementType,
+        chainTxHash,
+        settlementType: 'onchain',
         retryable: false
       };
     } catch (err) {
       // Check if this is a retryable error (temporary RPC issue like txpool full)
-      const isRetryable = err.message.includes('retryable');
+      const isRetryable = err.message.includes('retryable') || err.message.includes('pool');
 
       if (isRetryable) {
         return {
