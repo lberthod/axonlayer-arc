@@ -104,7 +104,7 @@ export const api = {
   },
 
   blockchain: {
-    getBalance: (address) => apiCall(`/auth/wallet/balance/${address}`),
+    getBalance: (address) => apiCall(`/api/auth/wallet/balance/${address}`),
   },
 };
 
