@@ -123,7 +123,7 @@ api.createTask = (input, taskType, options = {}) =>
 api.quoteTask = (input, taskType, selectionStrategy) =>
   api.agents.quote({ input, taskType, selectionStrategy });
 
-api.runSimulation = (count, taskType = 'summarize', selectionStrategy = 'balanced') =>
+api.runSimulation = (count, taskType = 'summarize', selectionStrategy = 'score_price') =>
   apiCallWithAuth('/api/simulate', {
     method: 'POST',
     body: JSON.stringify({ count, taskType, selectionStrategy })
