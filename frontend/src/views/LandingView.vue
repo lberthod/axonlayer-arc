@@ -135,19 +135,19 @@
       </div>
     </section>
 
-    <!-- WHY ARC -->
+    <!-- WHY DECENTRALIZED -->
     <section class="py-24 bg-slate-950">
       <div class="container mx-auto px-6">
-        <p class="text-xs uppercase tracking-[0.2em] text-violet-400 font-bold text-center mb-4">Why Arc?</p>
+        <p class="text-xs uppercase tracking-[0.2em] text-violet-400 font-bold text-center mb-4">Why Decentralized?</p>
         <h2 class="text-4xl md:text-5xl font-black text-slate-100 text-center max-w-2xl mx-auto">
-          100× cheaper than ChatGPT API
+          Decentralized routing with zero overhead
         </h2>
 
         <div class="mt-16 max-w-4xl mx-auto overflow-x-auto">
           <table class="w-full text-sm border-collapse">
             <thead>
               <tr class="border-b-2 border-violet-500/40">
-                <th class="text-left py-4 px-4 font-bold text-slate-200">Provider</th>
+                <th class="text-left py-4 px-4 font-bold text-slate-200">Approach</th>
                 <th class="text-left py-4 px-4 font-bold text-slate-200">Cost Per Action</th>
                 <th class="text-left py-4 px-4 font-bold text-slate-200">Why?</th>
                 <th class="text-center py-4 px-4 font-bold text-slate-200">Viable?</th>
@@ -155,21 +155,21 @@
             </thead>
             <tbody>
               <tr class="border-b border-slate-700/50 bg-slate-900/30">
-                <td class="py-4 px-4 font-semibold text-slate-100">Ethereum</td>
+                <td class="py-4 px-4 font-semibold text-slate-100">Blockchain Settlement</td>
                 <td class="py-4 px-4 text-slate-300">$50-200</td>
-                <td class="py-4 px-4 text-slate-400">$50+ gas per tx</td>
+                <td class="py-4 px-4 text-slate-400">High gas costs</td>
                 <td class="py-4 px-4 text-center"><span class="text-red-500 font-bold text-lg">❌</span></td>
               </tr>
               <tr class="border-b border-slate-700/50 bg-slate-900/20">
-                <td class="py-4 px-4 font-semibold text-slate-100">ChatGPT API</td>
+                <td class="py-4 px-4 font-semibold text-slate-100">Centralized Intermediaries</td>
                 <td class="py-4 px-4 text-slate-300">$0.005</td>
-                <td class="py-4 px-4 text-slate-400">OpenAI markup</td>
+                <td class="py-4 px-4 text-slate-400">Platform markup + margin</td>
                 <td class="py-4 px-4 text-center"><span class="text-yellow-500 font-bold text-lg">⚠️</span></td>
               </tr>
               <tr class="bg-gradient-to-r from-violet-950/60 to-indigo-950/60 border-t-2 border-emerald-500/40">
-                <td class="py-4 px-4 font-bold text-emerald-300">Arc Agent Hub</td>
+                <td class="py-4 px-4 font-bold text-emerald-300">Arc Orchestrated Agents</td>
                 <td class="py-4 px-4 font-bold text-emerald-300">$0.0005</td>
-                <td class="py-4 px-4 text-slate-300">USDC as native gas</td>
+                <td class="py-4 px-4 text-slate-300">USDC native gas + no intermediary</td>
                 <td class="py-4 px-4 text-center"><span class="text-emerald-400 font-bold text-lg">✅</span></td>
               </tr>
             </tbody>
@@ -177,7 +177,7 @@
         </div>
 
         <p class="text-center text-slate-300 mt-10 max-w-2xl mx-auto text-base leading-relaxed">
-          Arc makes USDC the native gas token. <span class="text-emerald-400 font-semibold">Zero gas overhead.</span> This unlocks agent-to-agent commerce at the penny scale.
+          With Arc, USDC is the native gas token. <span class="text-emerald-400 font-semibold">Zero intermediary overhead.</span> Private agents operate independently on their own VPS. Axon Layer orchestrates them transparently and settles payments on-chain. This unlocks autonomous agent networks at the penny scale.
         </p>
       </div>
     </section>

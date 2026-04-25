@@ -78,7 +78,7 @@
 
       <div class="space-y-2">
         <button
-          @click="handleSubmit"
+          @click="openConfirmModal"
           :disabled="isLoading || !goal.trim() || !(budget > 0) || insufficientBudget"
           class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold shadow-md hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 active:scale-95 relative overflow-hidden group"
         >
@@ -98,6 +98,93 @@
           </p>
         </div>
       </div>
+
+      <!-- Authorization Confirmation Modal -->
+      <Teleport to="body">
+        <Transition name="fade">
+          <div v-if="showConfirmModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 backdrop-blur-sm">
+            <div class="bg-slate-800 rounded-xl p-6 max-w-md border-2 border-red-900/50 shadow-2xl animate-in fade-in-50 zoom-in-95">
+              <!-- Header -->
+              <div class="flex items-start gap-3 mb-4">
+                <span class="text-2xl">⚠️</span>
+                <div>
+                  <h2 class="text-xl font-bold text-red-400">Authorization Required</h2>
+                  <p class="text-xs text-slate-400 mt-1">Confirm before making irreversible payment</p>
+                </div>
+              </div>
+
+              <!-- Payment Details -->
+              <div class="bg-red-950/30 rounded-lg p-4 mb-4 border border-red-900/40">
+                <p class="text-xs text-red-300 uppercase tracking-wider font-semibold mb-3">Payment Details</p>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">Amount:</span>
+                    <span class="font-mono font-semibold text-red-300">{{ budget.toFixed(6) }} USDC</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">Network:</span>
+                    <span class="font-mono font-semibold text-cyan-400">Arc Testnet</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">Settlement:</span>
+                    <span class="font-mono font-semibold text-emerald-400">&lt; 2 seconds</span>
+                  </div>
+                  <div class="flex justify-between pt-2 border-t border-red-900/30">
+                    <span class="text-slate-400">Status:</span>
+                    <span class="font-mono font-bold text-red-400">🔴 FINAL & IRREVERSIBLE</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Warning Message -->
+              <div class="bg-yellow-950/30 rounded-lg p-3 mb-4 border border-yellow-900/40">
+                <p class="text-xs text-yellow-300">
+                  <span class="font-bold block mb-1">⚡ Important:</span>
+                  This payment will be broadcast to the Arc blockchain. Once confirmed, it <strong>cannot be reversed or cancelled</strong>. Understand that this is a real on-chain transaction with real financial consequences.
+                </p>
+              </div>
+
+              <!-- Consent Checkbox -->
+              <label class="flex items-start gap-3 mb-6 cursor-pointer group">
+                <input
+                  v-model="consentAgreed"
+                  type="checkbox"
+                  class="w-5 h-5 rounded bg-slate-700 border-2 border-slate-600 cursor-pointer mt-0.5 accent-emerald-500 group-hover:border-emerald-500/50 transition"
+                />
+                <span class="text-sm text-slate-300 group-hover:text-slate-100 transition">
+                  I understand this payment is <strong>final and cannot be reversed</strong>. I authorize this {{ budget.toFixed(6) }} USDC transaction on Arc blockchain.
+                </span>
+              </label>
+
+              <!-- Action Buttons -->
+              <div class="flex gap-3">
+                <button
+                  @click="closeConfirmModal"
+                  class="flex-1 px-4 py-2.5 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-300 font-semibold transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  @click="confirmAndSubmit"
+                  :disabled="!consentAgreed || isLoading"
+                  class="flex-1 px-4 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold transition-colors"
+                >
+                  <span v-if="!isLoading">Authorize Payment</span>
+                  <span v-else class="flex items-center justify-center gap-2">
+                    <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    Processing…
+                  </span>
+                </button>
+              </div>
+
+              <!-- Disclosure -->
+              <p class="text-xs text-slate-500 mt-4 text-center">
+                Axon Layer will never ask for your private key. Do not share it with anyone.
+              </p>
+            </div>
+          </div>
+        </Transition>
+      </Teleport>
     </div>
   </div>
 </template>
@@ -124,6 +211,8 @@ const estimatedCost = ref(0.0005); // Base estimated cost
 watch(budget, (v) => emit('budget-change', Number(v) || 0), { immediate: true });
 
 const presets = [0.005, 0.01, 0.05];
+const showConfirmModal = ref(false);
+const consentAgreed = ref(false);
 
 const strategyFor = {
   balanced: 'score_price',
@@ -147,6 +236,22 @@ const insufficientBudget = computed(() => {
   return budget.value > 0 && estimatedCost.value > budget.value;
 });
 
+function openConfirmModal() {
+  consentAgreed.value = false; // Reset checkbox each time
+  showConfirmModal.value = true;
+}
+
+function closeConfirmModal() {
+  showConfirmModal.value = false;
+  consentAgreed.value = false;
+}
+
+function confirmAndSubmit() {
+  if (!consentAgreed.value) return;
+  handleSubmit();
+  closeConfirmModal();
+}
+
 function handleSubmit() {
   if (!goal.value.trim() || !(budget.value > 0) || insufficientBudget.value) return;
   isLoading.value = true;
@@ -163,3 +268,55 @@ function clearForm() { goal.value = ''; }
 
 defineExpose({ setLoading, clearForm });
 </script>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+
+/* Tailwind transition classes */
+.animate-in {
+  animation: animateIn 0.2s ease-out;
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in-50 {
+  animation: fadeIn50 0.2s ease-out;
+}
+
+@keyframes fadeIn50 {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.zoom-in-95 {
+  animation: zoomIn95 0.2s ease-out;
+}
+
+@keyframes zoomIn95 {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+</style>
