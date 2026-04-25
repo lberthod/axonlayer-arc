@@ -164,15 +164,15 @@ class TaskEngine {
     }
 
     console.log(`[fundMission] User found: ${user.email}`);
-    console.log(`[fundMission] User has wallet: ${!!user.wallet}`);
-    console.log(`[fundMission] User wallet address from store: ${user.wallet?.address || 'MISSING'}`);
-    console.log(`[fundMission] User wallet has privateKey: ${!!user.wallet?.privateKey}`);
-    console.log(`[fundMission] User wallet privateKey length: ${user.wallet?.privateKey?.length || 0}`);
+    console.log(`[fundMission] User has Treasury Wallet: ${!!user.treasuryWallet}`);
+    console.log(`[fundMission] User Treasury Wallet address from store: ${user.treasuryWallet?.address || 'MISSING'}`);
+    console.log(`[fundMission] User Treasury Wallet has privateKey: ${!!user.treasuryWallet?.privateKey}`);
+    console.log(`[fundMission] User Treasury Wallet privateKey length: ${user.treasuryWallet?.privateKey?.length || 0}`);
 
-    // Verify user has Mission Wallet (the one with USDC to send)
-    if (!user.wallet || !user.wallet.address) {
-      console.error(`[fundMission] ERROR: User Mission Wallet not found`);
-      throw new Error(`User Mission Wallet not found for ${userUid}. Check user profile to ensure wallet exists.`);
+    // Verify user has Treasury Wallet (the one with USDC to send)
+    if (!user.treasuryWallet || !user.treasuryWallet.address) {
+      console.error(`[fundMission] ERROR: User Treasury Wallet not found`);
+      throw new Error(`User Treasury Wallet not found for ${userUid}. Check user profile to ensure wallet exists.`);
     }
 
     // Use mission wallet directly from user data (bypass walletManager to avoid sync issues)
@@ -186,20 +186,20 @@ class TaskEngine {
     const ethers = await walletManager.ensureEthers();
     const provider = await walletManager.getProvider();
 
-    console.log(`[fundMission] Creating signer from private key...`);
-    const missionSigner = new ethers.Wallet(user.wallet.privateKey, provider);
+    console.log(`[fundMission] Creating signer from Treasury Wallet private key...`);
+    const treasurySigner = new ethers.Wallet(user.treasuryWallet.privateKey, provider);
 
-    console.log(`[fundMission] Signer address derived from privateKey: ${missionSigner.address}`);
-    console.log(`[fundMission] Expected address from store: ${user.wallet.address}`);
-    console.log(`[fundMission] Addresses match: ${missionSigner.address.toLowerCase() === user.wallet.address.toLowerCase()}`);
-    console.log(`[fundMission] Will send FROM: ${missionSigner.address}`);
-    console.log(`[fundMission] Will send TO: ${orchestratorAddr}`);
+    console.log(`[fundMission] Signer address derived from privateKey: ${treasurySigner.address}`);
+    console.log(`[fundMission] Expected address from store: ${user.treasuryWallet.address}`);
+    console.log(`[fundMission] Addresses match: ${treasurySigner.address.toLowerCase() === user.treasuryWallet.address.toLowerCase()}`);
+    console.log(`[fundMission] Will send FROM (Treasury Wallet): ${treasurySigner.address}`);
+    console.log(`[fundMission] Will send TO (Orchestrator): ${orchestratorAddr}`);
     console.log(`[fundMission] Amount to send: ${amount} USDC`);
 
     try {
-      // Send transaction directly using mission wallet signer (Arc native USDC)
+      // Send transaction directly using Treasury Wallet signer (Arc native USDC)
       const value = ethers.parseUnits(String(amount), 6);
-      const tx = await missionSigner.sendTransaction({
+      const tx = await treasurySigner.sendTransaction({
         to: orchestratorAddr,
         value
       });
@@ -209,12 +209,12 @@ class TaskEngine {
       const chainTxHash = tx.hash;
 
       // Add to treasury balance (for tracking)
-      await treasuryStore.addFunds(amount, 'Mission funding from Mission Wallet', taskId, chainTxHash);
+      await treasuryStore.addFunds(amount, 'Mission funding from Treasury Wallet', taskId, chainTxHash);
 
       return {
         status: 'funded',
         amount,
-        from: user.wallet.address, // ICI LOIC LOIC LOIC
+        from: user.treasuryWallet.address,
         to: orchestratorAddr,
         chainTxHash,
         settlementType: 'onchain',
