@@ -163,13 +163,15 @@ class TaskEngine {
     // Ensure user's treasury wallet is registered in walletManager
     const walletManager = (await import('./walletManager.js')).default;
     await walletManager.load();
-    const walletId = `treasury_${userUid}`;
+    const walletId = `user_${userUid}`;
+
+    // Register/update with treasury wallet (not arc wallet)
     if (!walletManager.has(walletId)) {
       walletManager.registerUserWallet(userUid, user.treasuryWallet);
     }
 
     // Create on-chain transaction: user's treasury wallet → orchestrator wallet
-    const orchestratorAddr = (await import('./walletManager.js')).default.getAddress('orchestrator_wallet');
+    const orchestratorAddr = walletManager.getAddress('orchestrator_wallet');
 
     try {
       const txResult = await walletProvider.transfer(
