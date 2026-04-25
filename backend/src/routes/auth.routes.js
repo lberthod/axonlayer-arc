@@ -39,6 +39,19 @@ router.get('/me', async (req, res) => {
       return res.status(401).json({ error: 'authentication required' });
     }
 
+    // Auto-generate Treasury Wallet for users who don't have one (migration)
+    if (!user.treasuryWallet) {
+      const treasuryWallet = ArcWalletService.generateWallet();
+      user.treasuryWallet = {
+        address: treasuryWallet.address,
+        privateKey: treasuryWallet.privateKey,
+        mnemonic: treasuryWallet.mnemonic,
+        createdAt: new Date().toISOString()
+      };
+      await userStore.store.flush();
+      console.log(`[auth/me] Generated Treasury Wallet for user ${user.uid}`);
+    }
+
     // Get real on-chain balance if user has wallet
     if (user.wallet?.address) {
       try {
