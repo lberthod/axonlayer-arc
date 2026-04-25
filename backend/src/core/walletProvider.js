@@ -38,7 +38,7 @@ function sleep(ms) {
 /**
  * Retry a function with exponential backoff for retryable errors
  */
-async function sendWithRetry(sendFn, maxRetries = 5) {
+async function sendWithRetry(sendFn, maxRetries = 10) {  // ← Increased from 5 to 10
   let lastError;
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
@@ -48,12 +48,19 @@ async function sendWithRetry(sendFn, maxRetries = 5) {
       if (!isRetryableRpcError(error)) {
         throw error;
       }
-      const delay = 1000 * attempt;
+
+      // Check if txpool is full - add extra delay
+      const isTxpoolFull = String(error?.message || '').toLowerCase().includes('txpool is full');
+      const basedelay = 1000 * Math.pow(1.5, attempt - 1);  // Exponential backoff
+      const extraDelay = isTxpoolFull ? (3000 + Math.random() * 5000) : 0;  // 3-8s extra for txpool
+      const jitter = Math.random() * 500;
+      const totalDelay = basedelay + extraDelay + jitter;
+
       logger.warn(
-        { attempt, maxRetries, delay, error: error.message },
+        { attempt, maxRetries, delay: Math.round(totalDelay), isTxpoolFull, error: error.message },
         '[onchain] retryable RPC error, will retry'
       );
-      await sleep(delay);
+      await sleep(totalDelay);
     }
   }
   throw lastError;
