@@ -4,6 +4,7 @@ import LandingView from './views/LandingView.vue';
 import AboutView from './views/AboutView.vue';
 import PrivacyView from './views/PrivacyView.vue';
 import TermsView from './views/TermsView.vue';
+import SlideView from './views/SlideView.vue';
 import MissionControlView from './views/MissionControlView.vue';
 import LoginView from './views/LoginView.vue';
 import UserDashboardView from './views/UserDashboardView.vue';
@@ -17,6 +18,7 @@ const routes = [
   { path: '/about', component: AboutView, meta: { public: true, layout: 'marketing' } },
   { path: '/privacy', component: PrivacyView, meta: { public: true, layout: 'marketing' } },
   { path: '/terms', component: TermsView, meta: { public: true, layout: 'marketing' } },
+  { path: '/slides', component: SlideView, meta: { public: true, layout: 'marketing' } },
 
   // Auth
   { path: '/login', component: LoginView, meta: { public: true } },
