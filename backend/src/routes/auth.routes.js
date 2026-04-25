@@ -18,6 +18,7 @@ function sanitize(user) {
     usage: user.usage,
     createdAt: user.createdAt,
     wallet: user.wallet,
+    treasuryWallet: user.treasuryWallet,
     balance: user.balance || 0
   };
 }
