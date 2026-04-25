@@ -377,7 +377,7 @@ curl http://localhost:3001/api/balances
 
 ## ✅ Summary
 
-**Arc Agent Hub is production-ready for real on-chain settlement on Circle Arc testnet.**
+**Axon Layeris production-ready for real on-chain settlement on Circle Arc testnet.**
 
 All critical security issues have been resolved:
 - Private keys are encrypted

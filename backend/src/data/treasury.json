@@ -1,6 +1,6 @@
 {
   "address": "0xA89044f1d22e8CD292B3Db092C8De28eB1728d74",
-  "balance": 99.9955,
+  "balance": 99.998,
   "feeRate": 0.2,
   "reserved": -0.002,
   "history": [
@@ -10,9 +10,9 @@
       "fee": 0.00024,
       "netAmount": 0.00096,
       "reason": "Payment for worker_fast",
-      "taskId": "task_644a3e82-4c2e-48c7-b111-24e0d95a9663",
+      "taskId": "task_4583d77e-e8c2-4132-9328-ed46c107f19e",
       "balanceAfter": 99.9988,
-      "timestamp": "2026-04-24T09:05:52.742Z"
+      "timestamp": "2026-04-25T03:49:47.173Z"
     },
     {
       "type": "agent_payment",
@@ -20,49 +20,9 @@
       "fee": 0.00016,
       "netAmount": 0.00064,
       "reason": "Payment for validator_default",
-      "taskId": "task_644a3e82-4c2e-48c7-b111-24e0d95a9663",
+      "taskId": "task_4583d77e-e8c2-4132-9328-ed46c107f19e",
       "balanceAfter": 99.998,
-      "timestamp": "2026-04-24T09:05:52.742Z"
-    },
-    {
-      "type": "refund",
-      "amount": 0.0005,
-      "reason": "Mission refund to Arc wallet",
-      "taskId": "task_93254858-a57f-4eda-9531-b2535061bebc",
-      "balanceAfter": 99.9975,
-      "timestamp": "2026-04-24T09:15:56.493Z"
-    },
-    {
-      "type": "refund",
-      "amount": 0.0005,
-      "reason": "Mission refund to Arc wallet",
-      "taskId": "task_04b9f8c5-d2ca-4f0b-9187-47db859017fc",
-      "balanceAfter": 99.997,
-      "timestamp": "2026-04-24T09:22:33.701Z"
-    },
-    {
-      "type": "refund",
-      "amount": 0.0005,
-      "reason": "Mission refund to Arc wallet",
-      "taskId": "task_490d9973-be7e-431d-b4d0-307f458488a1",
-      "balanceAfter": 99.9965,
-      "timestamp": "2026-04-24T09:22:46.532Z"
-    },
-    {
-      "type": "refund",
-      "amount": 0.0005,
-      "reason": "Mission refund to Arc wallet",
-      "taskId": "task_aa215691-a628-4691-b1f0-204dc91409a4",
-      "balanceAfter": 99.996,
-      "timestamp": "2026-04-24T09:24:27.527Z"
-    },
-    {
-      "type": "refund",
-      "amount": 0.0005,
-      "reason": "Mission refund to Arc wallet",
-      "taskId": "task_42b60002-e2cb-4c74-be73-bc351dfa7dc5",
-      "balanceAfter": 99.9955,
-      "timestamp": "2026-04-24T09:24:49.622Z"
+      "timestamp": "2026-04-25T03:49:47.173Z"
     }
   ]
 }

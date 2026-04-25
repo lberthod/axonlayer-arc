@@ -150,7 +150,7 @@
       <!-- Security Warning -->
       <div class="p-4 bg-red-50 rounded-lg border border-red-200">
         <p class="text-sm text-red-800">
-          <span class="font-bold">⚠️ Security Warning:</span> Never share your private key or mnemonic with anyone. Store them in a secure location (password manager, hardware wallet, etc.). Arc Agent Hub will never ask for your private key.
+          <span class="font-bold">⚠️ Security Warning:</span> Never share your private key or mnemonic with anyone. Store them in a secure location (password manager, hardware wallet, etc.). Axon Layerwill never ask for your private key.
         </p>
       </div>
     </div>

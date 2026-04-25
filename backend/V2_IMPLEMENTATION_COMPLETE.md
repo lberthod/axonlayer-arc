@@ -1,4 +1,4 @@
-# 🚀 Arc Agent Hub V2 - Complete Implementation
+# 🚀 Axon LayerV2 - Complete Implementation
 
 **Status:** ✅ PRODUCTION READY  
 **Date Completed:** April 21, 2026  
@@ -12,7 +12,7 @@
 
 ### What's Been Delivered
 
-Arc Agent Hub V2 is a complete intelligent orchestration system that transforms the simple V1 into an enterprise-grade multi-agent coordination platform.
+Axon LayerV2 is a complete intelligent orchestration system that transforms the simple V1 into an enterprise-grade multi-agent coordination platform.
 
 **Key Achievement:** From basic agent selection → Intelligent multi-dimensional optimization with strategy-based planning, dynamic budget allocation, and adaptive execution.
 
@@ -343,7 +343,7 @@ await wallet.executePayment({
 
 ### Status: ✅ FULLY IMPLEMENTED & WORKING
 
-Arc Agent Hub now operates entirely on-chain using **Circle Arc blockchain** with real USDC transactions:
+Axon Layernow operates entirely on-chain using **Circle Arc blockchain** with real USDC transactions:
 
 #### Treasury Wallet
 - **Address:** `0xA89044f1d22e8CD292B3Db092C8De28eB1728d74` (real blockchain address)
@@ -409,7 +409,7 @@ Users access testnet USDC via:
 
 ## 🏆 Conclusion
 
-Arc Agent Hub is **production-ready for Arc testnet** with complete on-chain infrastructure: It transforms a working MVP into an enterprise-grade orchestration engine with:
+Axon Layeris **production-ready for Arc testnet** with complete on-chain infrastructure: It transforms a working MVP into an enterprise-grade orchestration engine with:
 
 - ✅ Intelligent agent selection
 - ✅ Multi-strategy optimization  

@@ -22,7 +22,7 @@
         </h1>
 
         <p class="text-xl md:text-2xl text-slate-300 mt-8 max-w-3xl mx-auto leading-relaxed font-light">
-          Arc Agent Hub connects your tasks to specialized autonomous agents. Every action settles in real USDC on-chain.
+          Axon Layerconnects your tasks to specialized autonomous agents. Every action settles in real USDC on-chain.
           <span class="block text-emerald-400 font-semibold mt-2">No markup. No hidden costs.</span>
         </p>
 
@@ -53,7 +53,7 @@
           <span class="text-violet-400">Decentralized routing.</span><br class="hidden md:block"/>Not a marketplace.
         </h2>
         <p class="text-lg md:text-xl text-slate-300 text-center mt-6 max-w-2xl mx-auto leading-relaxed">
-          Independent developers deploy autonomous agents. Arc Agent Hub intelligently routes your tasks to the best agents. Every action settles in USDC on-chain.
+          Independent developers deploy autonomous agents. Axon Layerintelligently routes your tasks to the best agents. Every action settles in USDC on-chain.
         </p>
 
         <!-- THREE PLAYERS DIAGRAM -->
@@ -258,7 +258,7 @@
         <div class="mt-16 bg-slate-800/60 rounded-xl border border-emerald-500/40 p-8 max-w-2xl mx-auto hover:border-emerald-400/60 transition-all">
           <h3 class="font-bold text-slate-100 mb-3 text-lg">Why testnet USDC?</h3>
           <p class="text-sm text-slate-300 leading-relaxed">
-            Arc Agent Hub runs on Arc testnet with real blockchain transactions. You use free testnet USDC to launch missions, pay agents, and validate quality—all on-chain. When you're ready for mainnet, the same flow works with real USDC.
+            Axon Layerruns on Arc testnet with real blockchain transactions. You use free testnet USDC to launch missions, pay agents, and validate quality—all on-chain. When you're ready for mainnet, the same flow works with real USDC.
           </p>
         </div>
       </div>

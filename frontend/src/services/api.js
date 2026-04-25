@@ -35,6 +35,7 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     }),
+    getMe: () => apiCall('/api/auth/me'),
     walletCreate: () => apiCall('/api/auth/wallet/create', { method: 'POST' }),
     walletBalance: (address) => apiCall(`/api/balances/${address}`),
   },

@@ -9,7 +9,7 @@
 ## 📊 Positioning Statement
 
 **What It Was:**
-"Arc Agent Hub is a platform that orchestrates autonomous agents..."
+"Axon Layeris a platform that orchestrates autonomous agents..."
 
 **What It Is Now:**
 "Axon Layer is the economic execution layer for the agent economy."
