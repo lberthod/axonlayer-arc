@@ -690,11 +690,12 @@ onMounted(async () => {
       };
     });
 
-    // Refresh wallet balance from blockchain every 30 seconds
+    // Refresh wallet balance from blockchain every 60 seconds (reduced from 30s to minimize API calls)
+    // Note: /api/auth/me response is cached for 30s in the frontend to prevent rate limiting
     walletRefreshInterval = setInterval(() => {
       refreshWallet(true); // silent refresh (includes treasury balance)
       loadTreasuryBalance();
-    }, 30000);
+    }, 60000);
   } catch (err) {
     toastError(err, 'Failed to load Mission Control');
   }

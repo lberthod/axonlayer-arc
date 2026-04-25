@@ -1,48 +1,165 @@
 {
   "network": "arc-testnet",
-  "chainId": 6699,
-  "label": "Circle Arc Testnet",
-  "generatedAt": "2026-04-19T06:30:02.745Z",
+  "chainId": 5042002,
   "wallets": {
     "client_wallet": {
-      "address": "0x4bDC63a6ad211481f7Ff5B32238D0742D83c7BE8",
-      "privateKey": "0xc4dcbb218de12ecc746e4ea2ab1441e3262aea410d248a66a5b60545c6c4fb88"
+      "address": "0x3AA9fcd712cc1eC684F720B4845Ab26C410bF793",
+      "privateKeyEncrypted": {
+        "encrypted": "+xdB1UmkWE38ypTv0uHa9XQOBnqxfTAN6TGxQJhKmIXu5Hu7Na+RqN7u4Tzzja9gQwh5beUkadIGK4GlpdTZTzwZ",
+        "iv": "o5awe9aqK6vo0G7eHYSrKg==",
+        "tag": "iPo2WomppfKBGXHc7w0ZqQ==",
+        "algorithm": "aes-256-gcm"
+      },
+      "mnemonicEncrypted": null
     },
     "orchestrator_wallet": {
-      "address": "0xA89044f1d22e8CD292B3Db092C8De28eB1728d74",
-      "privateKey": "0x128e11b83b4c9f95a0a284966672f5b6377c670e6d02a4789044d0f9945bebfd"
+      "address": "0x3E7bA4A7faCF6d9F103B8582b49329F41E6373BC",
+      "privateKeyEncrypted": {
+        "encrypted": "UVyi4vLur0GkHoWLKO7946MM44qvAg5aM20QrHk66O2SVRGaDLVieF+G5M5TEwXLJwLMUDTZouH/ZNksIYmJ7nRe",
+        "iv": "9oj8uVNTOkChzFQuEG3d+A==",
+        "tag": "n4HTT9YVMNiegbGqGVIJZg==",
+        "algorithm": "aes-256-gcm"
+      },
+      "mnemonicEncrypted": null
     },
     "worker_wallet": {
-      "address": "0xe6D508d289061B67224A5c14632a92d8C8d6d914",
-      "privateKey": "0x15ce589a6535dd27ebaced7582c04e4b746d3e6b86c0a387ce3c83ec8e5883fd"
+      "address": "0x8D37ba4D7Bc99B569B98AB76735a664Ad6381E97",
+      "privateKeyEncrypted": {
+        "encrypted": "95h92aDUCkbZtv1QuluciLsM6E8/WGertYn6kUKR7GcXGhGgmhif8T1cdAsVCJxdo5vKhYoCFCMEv5fDu5uz3PC2",
+        "iv": "kkAHmkdH6VSvT0IBx3lssA==",
+        "tag": "4AGocCwuHTQMrxE6TLs2RQ==",
+        "algorithm": "aes-256-gcm"
+      },
+      "mnemonicEncrypted": null
     },
     "validator_wallet": {
-      "address": "0x3862ebD4fd40bCc9f6B9f6b14c5C5AAd21357627",
-      "privateKey": "0x51d5f292a5135cfac0906e8581f07d5b83329ee3315933341cbf599a9bc9d281"
+      "address": "0x89F362C9a9880dF056265b45328C7d3B3A9786B9",
+      "privateKeyEncrypted": {
+        "encrypted": "9H/gJnvWowo2LyC8grAoAuJ6lgAyccYlP01fgNhThbMbT/qbBWPWnPMDCQm7HiFzshke82HDmfrB8gXDIuao5Cmh",
+        "iv": "aU40O4U8fwvUYtoIkRLMQw==",
+        "tag": "ZrvuGflTELOmIzSJVWaBOw==",
+        "algorithm": "aes-256-gcm"
+      },
+      "mnemonicEncrypted": null
     },
     "worker_fast_wallet": {
-      "address": "0x46CDDeBCeeA5278972157DeEa3816c25d4002000",
-      "privateKey": "0xdcf7fa9f4b1e4ce130b6ea43b7d84ab513ae1a1dcc9dc84e8fab572208769a31"
+      "address": "0x2885E00C80E8950213a5eBdC7BaeC68c6535e91a",
+      "privateKeyEncrypted": {
+        "encrypted": "Vus7MUBcsZbRSWTQrqEdkqRVbLk+qF5X5W/7LIs584wefr/ejzMfxlUvXsgTCTigVavl1IgyqG2TTOP403jEIMeZ",
+        "iv": "BYnm+tA49rj85Y9jyfeVZQ==",
+        "tag": "KA0wMQzibgyHUz0yj+YGlg==",
+        "algorithm": "aes-256-gcm"
+      },
+      "mnemonicEncrypted": null
     },
     "worker_premium_wallet": {
-      "address": "0xcDcccb668Fac82e2349172042461fD22C995CA99",
-      "privateKey": "0xba0bbf12e6c0d480bc893f1838864abb90177b2749fb158136e0d99d28f6809e"
+      "address": "0xEE65632DdbBbC217Ad2c72067F0EB3375B434519",
+      "privateKeyEncrypted": {
+        "encrypted": "oSzmGBtNgdzYJBlAS0IEQmoylwiybQVuvQzQaohCwzstLV7+1fiOVo2JUO6qdcEHVp/GxXUkjpU2Fj9J8rDoHoQ4",
+        "iv": "ZY+Y8KKwle0nz+q2aAVs9Q==",
+        "tag": "bocmDKXAZG1ai0pZy23HLA==",
+        "algorithm": "aes-256-gcm"
+      },
+      "mnemonicEncrypted": null
     },
     "validator_strict_wallet": {
-      "address": "0xA94034cb500CD3B706c9154FCb0147155a3eB9E8",
-      "privateKey": "0x0971e432c44e349197e983fd77716d8879d659f9d3265489f13164d87096fd48"
+      "address": "0x68159a5D9B424fa34eC6027d569F8891c1f74141",
+      "privateKeyEncrypted": {
+        "encrypted": "vpa62sSWy5XARZCk4h5/W/SoeWXMo4hJdORw8uvs0eb1SD6YxpRlhTs0tguZAjKXPDFsUgzvLs+diIVFoQ3ZuhAs",
+        "iv": "aRfTu1QO5oqriZOhTIUzDA==",
+        "tag": "XWdvsVkjj7sLTjNnLVFhXg==",
+        "algorithm": "aes-256-gcm"
+      },
+      "mnemonicEncrypted": null
     },
     "translator_wallet": {
-      "address": "0x3eB6d685eCe6DD99b9b791f4f57390dc943a7BdC",
-      "privateKey": "0x194240d2a61d80a90fb5f8f3a720f1667b41c18fc60b7d8970915c47742cc31b"
+      "address": "0x009049721dad906eac5A84b2853BCc13F1d320B5",
+      "privateKeyEncrypted": {
+        "encrypted": "DASJkO+eG5OS+dJNhr2E7HIy/3WzXpBIfnFmL3ehyJIrZF46LIz7AX4AyHJClIRn+GpHsDcv7rW67/xGewpyuzxA",
+        "iv": "WSKdzIXXYRwfX56Rp+OTZA==",
+        "tag": "yzTYbXs76gFbRU4JoWP0sQ==",
+        "algorithm": "aes-256-gcm"
+      },
+      "mnemonicEncrypted": null
     },
     "classifier_wallet": {
-      "address": "0xAcDBA977038f2471C376Fdf76e3e66A0a6cb38b2",
-      "privateKey": "0x54d742cf6d2a8e3f9e2b9ebb42937dc8739465cf5ef29e0bab20c93caab50b66"
+      "address": "0x17c980897ac95bc4855C7870264F5C34Cc67a00D",
+      "privateKeyEncrypted": {
+        "encrypted": "Pfn1+qSnyEkeHzw0bzoMRGFGC8EeOPiNNPvYplL4NqcSA0WnV9feffR4UGIrgbRx4J7/LANHhc6yjjOHKfmtTxnA",
+        "iv": "7w6k5tqNLBxjIpwzhLicXA==",
+        "tag": "e0J7gcOKTLezMNSIWgoSZw==",
+        "algorithm": "aes-256-gcm"
+      },
+      "mnemonicEncrypted": null
     },
     "sentiment_wallet": {
-      "address": "0xb90FFa29942FB38Bb83cfacAAAD693E295D8C996",
-      "privateKey": "0x8431669665a726cbd5e87f18d0a9c551a46fe07d033dae94be883d525808e7e8"
+      "address": "0x91d495414F1f77dfc2cF11AB057Bbf2b66500D0C",
+      "privateKeyEncrypted": {
+        "encrypted": "xCFmp4FP+crCj3Ate5I3n6s6OB7WxWKbrJTayk+YTTTYNnF7hfiYRC8n3sOtdSP9Kj8thNkUGnPWFSONehl8nHbk",
+        "iv": "HorI/qLeFrp92I8pmdChxQ==",
+        "tag": "qgLO73aT3Iv6mQZNiEqr2A==",
+        "algorithm": "aes-256-gcm"
+      },
+      "mnemonicEncrypted": null
+    },
+    "user_FBL1A76M9lNRSftKFsrTPUgZwfB2": {
+      "address": "0x0258bf807a523a75a2dc4dd0f1d1091c084bbc17",
+      "privateKeyEncrypted": {
+        "encrypted": "W2Jw5d5umpTtcKpYr2lL11jWnqxFkouFvziyobTHwmy5/RWdT4u4LhfELSTXl4R2vBjbztbWH3v5bjaXZb5i7w==",
+        "iv": "5iAcOfJhiGRfjug4mSF7EQ==",
+        "tag": "5WQt5AYWbJyrA/okCc/kUg==",
+        "algorithm": "aes-256-gcm"
+      },
+      "publicKey": "0x0258bf807a523a75a2dc4dd0f1d1091c084bbc17dc67eba737be9c1716264c8f",
+      "mnemonicEncrypted": {
+        "encrypted": "rdof4pCsXN4G48QhQMnwXrTF0X2JbPEOy0nDM/jZ65CR/Tn/qEbwe6qR+KW5y6RvOzxq3jpDMdJ0r+W01lxYToYOg0SoPzin2I7iLSlMLh8=",
+        "iv": "mXp0EEzKAyNwtS3arA3uvA==",
+        "tag": "dv293uHnOoNfARccja6K2g==",
+        "algorithm": "aes-256-gcm"
+      },
+      "chain": "arc",
+      "token": "USDC",
+      "createdAt": "2026-04-25T07:55:14.854Z"
+    },
+    "user_9ofvVGx9W9c8iZPQZGE7N4OtOAD2": {
+      "address": "0x16939836729e9da139424471582ad707887a4ada",
+      "privateKeyEncrypted": {
+        "encrypted": "4DvJJCVgfma1I3ZdsYNrVVVS5APzJdDC0MuPoxQLuTfjyHVHxyMyTG2zjs2HklCUeVBiwcSkl97EMGEJtI8jTQ==",
+        "iv": "Oq+Y+VzbwfLPcsF4Wq8XHw==",
+        "tag": "IdjVxIVj+pzZ2RrIc4ckWg==",
+        "algorithm": "aes-256-gcm"
+      },
+      "publicKey": "0x16939836729e9da139424471582ad707887a4ada6790a3097af3095f79b5e58c",
+      "mnemonicEncrypted": {
+        "encrypted": "IEquw4rjIJBu6DM/CsG6LuaUwBmgSbPxq/F16M96dHFl/mqiQgRIXT2YU/YBc0SZXTAykJ8O0pbzTsrLdqIG5k7DCPSTz30r2iePc45mvziElJF3",
+        "iv": "Fciqyo6nDsleWxlnC5fBsg==",
+        "tag": "j9wmYb0+7uOO/fIeAbpSsQ==",
+        "algorithm": "aes-256-gcm"
+      },
+      "chain": "arc",
+      "token": "USDC",
+      "createdAt": "2026-04-25T15:04:34.611Z"
+    },
+    "user_zvPKFRvVsMdAM1XzIbk3U7O7Kr12": {
+      "address": "0xe2208f97fff14eeb8f4822152e2b02c1a46ecb1a",
+      "privateKeyEncrypted": {
+        "encrypted": "TXi2EVZRJi0PfuicYeudo+UWUmH0ElrPjWn/JvjPKTw0cOvOmCN7uQZhC/uQ5oD4FY2jKQVZCbp9JzfFDw5f7A==",
+        "iv": "whP4OU0Ke68ZB2L+p/kd7g==",
+        "tag": "ZRcBwmlsa8oeOIxaCDSVZg==",
+        "algorithm": "aes-256-gcm"
+      },
+      "publicKey": "0xe2208f97fff14eeb8f4822152e2b02c1a46ecb1a",
+      "mnemonicEncrypted": {
+        "encrypted": "M9x04CqkcVbpEZQCbKcSMSyyH0zsRx96phglmceDlwVQdXrDcHmHQFqb7+8SylxHJ+SBfzUQmXbEVLzWPGyQhleTmO6E+rvqByAogUSsCIw=",
+        "iv": "KRC6Y8pHSD8SvNGcGWM9fw==",
+        "tag": "Wv4405dKpPMZek5K8GYOGA==",
+        "algorithm": "aes-256-gcm"
+      },
+      "chain": "arc",
+      "token": "USDC",
+      "createdAt": "2026-04-25T16:26:03.989Z"
     }
-  }
+  },
+  "encrypted": true,
+  "encryptedAt": "2026-04-25T07:00:37.668Z"
 }

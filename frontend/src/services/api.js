@@ -2,6 +2,23 @@ import { getIdToken } from './firebase.js';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 
+// Cache for /api/auth/me to prevent rate limiting
+// Multiple components call this endpoint; caching prevents 429 errors
+const getMeCache = {
+  data: null,
+  timestamp: null,
+  ttl: 30000 // 30 seconds
+};
+
+function isCacheValid() {
+  return getMeCache.data && getMeCache.timestamp && (Date.now() - getMeCache.timestamp) < getMeCache.ttl;
+}
+
+function clearMeCache() {
+  getMeCache.data = null;
+  getMeCache.timestamp = null;
+}
+
 export const apiCall = async (endpoint, options = {}) => {
   const headers = {
     'Content-Type': 'application/json',
@@ -72,7 +89,18 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     }),
-    getMe: () => apiCallWithAuth('/api/auth/me'),
+    getMe: async () => {
+      // Return cached result if valid
+      if (isCacheValid()) {
+        return getMeCache.data;
+      }
+      // Fetch fresh data
+      const data = await apiCallWithAuth('/api/auth/me');
+      // Cache it
+      getMeCache.data = data;
+      getMeCache.timestamp = Date.now();
+      return data;
+    },
     walletCreate: () => apiCallWithAuth('/api/auth/wallet/create', { method: 'POST' }),
     walletBalance: (address) => apiCall(`/api/auth/wallet/balance/${address}`),
     becomeProvider: () => apiCallWithAuth('/api/auth/role/provider', { method: 'POST' }),
@@ -187,5 +215,8 @@ api.executeTreasuryFlowTask = async (input, taskType, options = {}) => {
 // Add wallet methods
 api.createWallet = () => api.auth.walletCreate();
 api.getWalletBalance = (address) => api.auth.walletBalance(address);
+
+// Export cache clear function for use in other modules
+export { clearMeCache };
 
 export default api;

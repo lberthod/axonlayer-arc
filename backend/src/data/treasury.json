@@ -1,138 +1,136 @@
 {
   "address": "0xA89044f1d22e8CD292B3Db092C8De28eB1728d74",
-  "balance": 0.996174,
+  "balance": 0.992,
   "feeRate": 0.2,
-  "reserved": -0.003826,
+  "reserved": 0,
   "history": [
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000284,
-      "fee": 0.000057,
-      "netAmount": 0.000227,
-      "reason": "Payment for worker_fast",
-      "taskId": "task_ff48e861-8541-45ad-8de5-56143fe026f3",
-      "balanceAfter": 0.999716,
-      "timestamp": "2026-04-25T14:39:04.451Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_a0e51312-a114-4696-abc2-33bc5f03ce34",
+      "balanceAfter": 0.9995,
+      "timestamp": "2026-04-25T15:53:22.876Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000268,
-      "fee": 0.000054,
-      "netAmount": 0.000214,
-      "reason": "Payment for worker_fast",
-      "taskId": "task_90a8d46d-6fb1-4f0c-b78c-686c5a9dbfbd",
-      "balanceAfter": 0.999448,
-      "timestamp": "2026-04-25T14:39:04.454Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_ca101612-33a2-4cdd-8acd-57ebae38355c",
+      "balanceAfter": 0.999,
+      "timestamp": "2026-04-25T15:53:53.327Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000314,
-      "fee": 0.000063,
-      "netAmount": 0.000251,
-      "reason": "Payment for worker_default",
-      "taskId": "task_b1febb69-fade-4291-b4f3-05d50dd10c0a",
-      "balanceAfter": 0.999134,
-      "timestamp": "2026-04-25T14:39:04.456Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_47fe9cee-a0e0-4995-9386-9eae526601a9",
+      "balanceAfter": 0.9985,
+      "timestamp": "2026-04-25T15:54:18.957Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000325,
-      "fee": 0.000065,
-      "netAmount": 0.00026,
-      "reason": "Payment for worker_default",
-      "taskId": "task_e534a8f7-8371-4169-b757-4dfa26c50ccc",
-      "balanceAfter": 0.998809,
-      "timestamp": "2026-04-25T14:39:04.457Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_ddf24de1-cfff-4064-ba8c-cc98fe43a795",
+      "balanceAfter": 0.998,
+      "timestamp": "2026-04-25T15:57:44.511Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000289,
-      "fee": 0.000058,
-      "netAmount": 0.000231,
-      "reason": "Payment for classifier_default",
-      "taskId": "task_f17a504f-797e-4971-aab1-69fb515aa657",
-      "balanceAfter": 0.99852,
-      "timestamp": "2026-04-25T14:39:04.458Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_0e4ca4bd-0aff-43c7-bf29-69a2d4ff28ec",
+      "balanceAfter": 0.9975,
+      "timestamp": "2026-04-25T16:04:28.962Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000284,
-      "fee": 0.000057,
-      "netAmount": 0.000227,
-      "reason": "Payment for worker_fast",
-      "taskId": "task_4f83ce6b-99dc-46a5-ac0e-637e30df3dc7",
-      "balanceAfter": 0.998236,
-      "timestamp": "2026-04-25T14:39:17.500Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_6bd85fe3-341d-48d1-a20a-30c2f6b03726",
+      "balanceAfter": 0.997,
+      "timestamp": "2026-04-25T16:09:04.707Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000268,
-      "fee": 0.000054,
-      "netAmount": 0.000214,
-      "reason": "Payment for worker_fast",
-      "taskId": "task_900e355d-05c1-4b0c-8395-cdfb4d9cb479",
-      "balanceAfter": 0.997968,
-      "timestamp": "2026-04-25T14:39:17.503Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_ce3cd414-7a61-4ae6-bf15-f62f5aca781f",
+      "balanceAfter": 0.9965,
+      "timestamp": "2026-04-25T16:13:11.439Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000314,
-      "fee": 0.000063,
-      "netAmount": 0.000251,
-      "reason": "Payment for worker_default",
-      "taskId": "task_1340d8ef-316a-425c-9fe2-202eb1aba90e",
-      "balanceAfter": 0.997654,
-      "timestamp": "2026-04-25T14:39:17.504Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_cef3087b-7a4d-448d-8bb9-39b5515240ba",
+      "balanceAfter": 0.996,
+      "timestamp": "2026-04-25T16:14:23.764Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000325,
-      "fee": 0.000065,
-      "netAmount": 0.00026,
-      "reason": "Payment for worker_default",
-      "taskId": "task_abd6fe79-90cf-4458-9a31-ff582f176654",
-      "balanceAfter": 0.997329,
-      "timestamp": "2026-04-25T14:39:17.505Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_327fc673-6bd4-4a74-97f9-9bb7625aa566",
+      "balanceAfter": 0.9955,
+      "timestamp": "2026-04-25T16:22:23.793Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000289,
-      "fee": 0.000058,
-      "netAmount": 0.000231,
-      "reason": "Payment for classifier_default",
-      "taskId": "task_889220a5-faa7-41f1-b809-2b98ac8b4b90",
-      "balanceAfter": 0.99704,
-      "timestamp": "2026-04-25T14:39:17.509Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_f8ecb3fa-0d91-43b8-854a-45a0c545b424",
+      "balanceAfter": 0.995,
+      "timestamp": "2026-04-25T16:25:15.335Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000284,
-      "fee": 0.000057,
-      "netAmount": 0.000227,
-      "reason": "Payment for worker_fast",
-      "taskId": "task_c0d49a44-72e8-4965-867e-01182eab6911",
-      "balanceAfter": 0.996756,
-      "timestamp": "2026-04-25T14:49:48.284Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_ce1713dd-c15d-4c8d-a114-033d25e36430",
+      "balanceAfter": 0.9945,
+      "timestamp": "2026-04-25T16:25:59.482Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000268,
-      "fee": 0.000054,
-      "netAmount": 0.000214,
-      "reason": "Payment for worker_fast",
-      "taskId": "task_8c880c2f-cdd8-4483-82b5-6a24c82e0328",
-      "balanceAfter": 0.996488,
-      "timestamp": "2026-04-25T14:49:48.289Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_78fea6ad-f34a-48cb-af1f-24d03728feac",
+      "balanceAfter": 0.994,
+      "timestamp": "2026-04-25T16:26:00.927Z"
     },
     {
-      "type": "agent_payment",
-      "grossAmount": 0.000314,
-      "fee": 0.000063,
-      "netAmount": 0.000251,
-      "reason": "Payment for worker_default",
-      "taskId": "task_984fc2f4-d13a-4e0c-8eb4-a9e09f2e5c46",
-      "balanceAfter": 0.996174,
-      "timestamp": "2026-04-25T14:49:48.291Z"
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_821c942a-0652-4004-ad17-dffc3c007649",
+      "balanceAfter": 0.9935,
+      "timestamp": "2026-04-25T16:26:02.126Z"
+    },
+    {
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_f25dee1a-09c2-4720-844d-d6524bd2c27f",
+      "balanceAfter": 0.993,
+      "timestamp": "2026-04-25T16:26:03.105Z"
+    },
+    {
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_1cffa7f0-6583-4c08-a022-6455bfa13ec5",
+      "balanceAfter": 0.9925,
+      "timestamp": "2026-04-25T16:26:04.091Z"
+    },
+    {
+      "type": "refund",
+      "amount": 0.0005,
+      "reason": "Mission refund to Arc wallet",
+      "taskId": "task_d7ec11af-b928-44f1-8622-e895429545cd",
+      "balanceAfter": 0.992,
+      "timestamp": "2026-04-25T16:30:02.885Z"
     }
   ]
 }

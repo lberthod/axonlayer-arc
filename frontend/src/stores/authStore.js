@@ -2,6 +2,9 @@ import { reactive, readonly } from 'vue';
 import { firebaseAuth, onAuthChange, loginWithGoogle, loginWithEmail, signupWithEmail, logout, getIdToken } from '../services/firebase.js';
 import { api } from '../services/api.js';
 
+// Import cache clear function for auth-related changes
+import { clearMeCache } from '../services/api.js';
+
 const state = reactive({
   initialized: false,
   loading: true,
@@ -73,17 +76,20 @@ export async function signupWithEmailPassword(email, password) {
 }
 
 export async function doLogout() {
+  clearMeCache(); // Clear cache on logout
   await logout();
   state.user = null;
   state.role = 'anonymous';
 }
 
 export async function becomeProvider() {
+  clearMeCache(); // Clear cache before fetching updated data
   await api.auth.becomeProvider();
   await refreshBackendUser();
 }
 
 export async function rotateApiKey() {
+  clearMeCache(); // Clear cache before fetching updated data
   state.user = await api.auth.rotateApiKey();
 }
 

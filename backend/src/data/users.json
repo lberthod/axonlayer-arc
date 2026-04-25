@@ -8,14 +8,14 @@
       "apiKey": "sk_583fcd6db2fcf4d7f966ae53620c4301485165d1d0ade138",
       "walletAddress": null,
       "createdAt": "2026-04-19T07:38:00.679Z",
-      "lastLoginAt": "2026-04-25T04:21:16.999Z",
+      "lastLoginAt": "2026-04-25T15:50:03.593Z",
       "usage": {
-        "tasks": 59,
-        "totalSpent": 0.131532,
+        "tasks": 80,
+        "totalSpent": 0.157014,
         "today": {
-          "date": "2026-04-24",
-          "tasks": 3,
-          "spent": 0.001549
+          "date": "2026-04-25",
+          "tasks": 21,
+          "spent": 0.025482
         }
       },
       "missionWallet": {
@@ -23,19 +23,96 @@
         "balance": 19.981384
       },
       "wallet": {
-        "address": "0xc9a9f36bbe8757f8b884e8fcb8e6d59fad53396a",
-        "privateKey": "00023db92c4bf34c36695b539f58510e172445e1b5aed5dedb6d6822a7fa7d0c",
-        "publicKey": "0xc9a9f36bbe8757f8b884e8fcb8e6d59fad53396a4c677c0a979c5a4bde218a49",
+        "address": "0x0258bf807a523a75a2dc4dd0f1d1091c084bbc17",
+        "privateKey": "0efd3d34774f7476d5ade53ec76b722e122f29d05c230741914a1a169cd34695",
+        "publicKey": "0x0258bf807a523a75a2dc4dd0f1d1091c084bbc17dc67eba737be9c1716264c8f",
+        "mnemonic": "actor acuity acute adapt abandon ability able about above absent absorb abstract",
+        "chain": "arc",
+        "token": "USDC",
+        "createdAt": "2026-04-25T07:46:09.863Z"
+      },
+      "balance": 20,
+      "treasuryWallet": {
+        "address": "0x7a0ef749a85fcf7091534aa535e7e0cbf070f45e",
+        "privateKey": "aa316475741283549bc2ac92dd9aed4851de34455753d883769af3a9e044a7bf",
+        "mnemonic": "achieve acid acoustic acquire across act action actor acuity acute adapt abandon",
+        "createdAt": "2026-04-25T15:33:36.455Z"
+      }
+    },
+    "9ofvVGx9W9c8iZPQZGE7N4OtOAD2": {
+      "uid": "9ofvVGx9W9c8iZPQZGE7N4OtOAD2",
+      "email": "khn791511@gmail.com",
+      "displayName": "Khn",
+      "role": "admin",
+      "apiKey": "sk_9846e0679afa0e38f604be8ae4d986a3e976837ab8a1ef30",
+      "walletAddress": null,
+      "wallet": {
+        "address": "0x16939836729e9da139424471582ad707887a4ada",
+        "privateKey": "027a6f8138ca1e376715544ce7d3843b7183d1685954839818619e15da4a54c9",
+        "publicKey": "0x16939836729e9da139424471582ad707887a4ada6790a3097af3095f79b5e58c",
+        "mnemonic": "ability able about above absent absorb abstract abuse access accident account accuse",
+        "chain": "arc",
+        "token": "USDC",
+        "createdAt": "2026-04-25T15:04:34.610Z"
+      },
+      "balance": 20,
+      "createdAt": "2026-04-25T07:38:58.504Z",
+      "lastLoginAt": "2026-04-25T15:45:46.088Z",
+      "usage": {
+        "tasks": 0,
+        "totalSpent": 0,
+        "today": {
+          "date": null,
+          "tasks": 0,
+          "spent": 0
+        }
+      },
+      "treasuryWallet": {
+        "address": "0x5c023219ffdc13956cebacf9a5c0f12670a34e11",
+        "privateKey": "e50056f987b17b1b75da0b9d8b0f0c99c90408009b8c87e6cd6fd9191ec984c1",
+        "mnemonic": "access accident account accuse achieve acid acoustic acquire across act action actor",
+        "createdAt": "2026-04-25T15:35:18.923Z"
+      }
+    },
+    "zvPKFRvVsMdAM1XzIbk3U7O7Kr12": {
+      "uid": "zvPKFRvVsMdAM1XzIbk3U7O7Kr12",
+      "email": "test@test.com",
+      "displayName": null,
+      "role": "admin",
+      "apiKey": "sk_21bfecd55be290246d665927406ad8f38ba4f18a4562f8b3",
+      "walletAddress": null,
+      "wallet": {
+        "address": "0xdc14e5df9ccea096911cc8083130577bb1ece21d",
+        "privateKey": "34b4a8193149b682fbd6bbc803b4c6e68035e3b6fb3d03a12c4a7ba1f2bc144d",
+        "publicKey": "0xdc14e5df9ccea096911cc8083130577bb1ece21d214fda2b6a92097f5959d724",
         "mnemonic": "across act action actor acuity acute adapt abandon ability able about above",
         "chain": "arc",
         "token": "USDC",
-        "createdAt": "2026-04-24T08:24:18.808Z",
-        "balance": 0
+        "createdAt": "2026-04-25T15:20:27.247Z"
       },
-      "balance": 20
+      "balance": 20,
+      "createdAt": "2026-04-25T15:20:16.941Z",
+      "lastLoginAt": "2026-04-25T16:30:48.420Z",
+      "usage": {
+        "tasks": 0,
+        "totalSpent": 0,
+        "today": {
+          "date": null,
+          "tasks": 0,
+          "spent": 0
+        }
+      },
+      "treasuryWallet": {
+        "address": "0xe2208f97fff14eeb8f4822152e2b02c1a46ecb1a",
+        "privateKey": "75fd95edafdf7b902921a089ccfa8735d368c82f2488e6d395e7177d02bac564",
+        "mnemonic": "acuity acute adapt abandon ability able about above absent absorb abstract abuse",
+        "createdAt": "2026-04-25T15:50:34.458Z"
+      }
     }
   },
   "byApiKey": {
-    "sk_583fcd6db2fcf4d7f966ae53620c4301485165d1d0ade138": "FBL1A76M9lNRSftKFsrTPUgZwfB2"
+    "sk_583fcd6db2fcf4d7f966ae53620c4301485165d1d0ade138": "FBL1A76M9lNRSftKFsrTPUgZwfB2",
+    "sk_9846e0679afa0e38f604be8ae4d986a3e976837ab8a1ef30": "9ofvVGx9W9c8iZPQZGE7N4OtOAD2",
+    "sk_21bfecd55be290246d665927406ad8f38ba4f18a4562f8b3": "zvPKFRvVsMdAM1XzIbk3U7O7Kr12"
   }
 }
