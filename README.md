@@ -23,6 +23,7 @@
 > ⚠️ **MVP Limitations:**
 > - Alpha quality code - expect bugs and incomplete features
 > - Testnet only (not production-ready)
+> - Agents currently integrated in single backend (decentralization planned for v2)
 > - Some wallet addresses display incorrectly in frontend
 > - Limited to 1-2 concurrent tasks
 > - Manual agent registration (no marketplace yet)
