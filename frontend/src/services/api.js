@@ -61,46 +61,46 @@ const buildUrl = (endpoint) => {
 
 export const api = {
   tasks: {
-    create: (data) => apiCall('/tasks', { method: 'POST', body: JSON.stringify(data) }),
-    list: () => apiCall('/tasks'),
-    get: (id) => apiCall(`/tasks/${id}`),
-    execute: (id) => apiCall(`/tasks/${id}/execute`, { method: 'POST' }),
+    create: (data) => apiCall('/api/tasks', { method: 'POST', body: JSON.stringify(data) }),
+    list: () => apiCall('/api/tasks'),
+    get: (id) => apiCall(`/api/tasks/${id}`),
+    execute: (id) => apiCall(`/api/tasks/${id}/execute`, { method: 'POST' }),
   },
 
   auth: {
-    login: (email, password) => apiCall('/auth/login', {
+    login: (email, password) => apiCall('/api/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     }),
-    getMe: () => apiCallWithAuth('/auth/me'),
-    walletCreate: () => apiCallWithAuth('/auth/wallet/create', { method: 'POST' }),
-    walletBalance: (address) => apiCall(`/auth/wallet/balance/${address}`),
-    becomeProvider: () => apiCallWithAuth('/auth/role/provider', { method: 'POST' }),
-    rotateApiKey: () => apiCallWithAuth('/auth/apikey/rotate', { method: 'POST' }),
+    getMe: () => apiCallWithAuth('/api/auth/me'),
+    walletCreate: () => apiCallWithAuth('/api/auth/wallet/create', { method: 'POST' }),
+    walletBalance: (address) => apiCall(`/api/auth/wallet/balance/${address}`),
+    becomeProvider: () => apiCallWithAuth('/api/auth/role/provider', { method: 'POST' }),
+    rotateApiKey: () => apiCallWithAuth('/api/auth/apikey/rotate', { method: 'POST' }),
   },
 
   balances: {
-    getBalances: () => apiCallWithAuth('/balances'),
-    getBalance: (address) => apiCall(`/balances/${address}`),
+    getBalances: () => apiCallWithAuth('/api/balances'),
+    getBalance: (address) => apiCall(`/api/balances/${address}`),
   },
 
   transactions: {
-    list: (userId) => apiCall(`/transactions?userId=${userId}`),
-    get: (txId) => apiCall(`/transactions/${txId}`),
+    list: (userId) => apiCall(`/api/transactions?userId=${userId}`),
+    get: (txId) => apiCall(`/api/transactions/${txId}`),
   },
 
   metrics: {
-    getMetrics: (windowMs) => apiCallWithAuth(`/metrics${windowMs ? `?windowMs=${windowMs}` : ''}`),
+    getMetrics: (windowMs) => apiCallWithAuth(`/api/metrics${windowMs ? `?windowMs=${windowMs}` : ''}`),
   },
 
   config: {
-    getConfig: () => apiCall('/config'),
-    getHealth: () => apiCall('/health'),
+    getConfig: () => apiCall('/api/config'),
+    getHealth: () => apiCall('/api/health'),
   },
 
   agents: {
-    list: () => apiCall('/agents'),
-    quote: (data) => apiCall('/agents/quote', { method: 'POST', body: JSON.stringify(data) }),
+    list: () => apiCall('/api/agents'),
+    quote: (data) => apiCall('/api/agents/quote', { method: 'POST', body: JSON.stringify(data) }),
   },
 
   blockchain: {
@@ -118,6 +118,6 @@ api.getHealth = api.config.getHealth;
 api.getBlockchainBalance = api.blockchain.getBalance;
 api.getAgents = api.agents.list;
 api.getTask = api.tasks.get;
-api.getTransactions = () => apiCall('/transactions');
+api.getTransactions = () => apiCall('/api/transactions');
 
 export default api;

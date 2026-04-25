@@ -42,27 +42,18 @@ app.use(helmet());
 app.use(httpLogger());
 app.use(httpMetricsMiddleware());
 
-// Force CORS headers on all responses
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.header('Access-Control-Max-Age', '86400');
-
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-  next();
-});
-
-// CORS allowlist — '*' allows any origin (dev only).
-const corsOrigins = config.security.corsOrigins;
+// CORS configuration - allow all origins in development
 app.use(
   cors({
     origin: true,
-    credentials: false
+    credentials: false,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
   })
 );
+
+// Handle preflight requests
+app.options('*', cors());
 
 app.use(express.json({ limit: '256kb' }));
 app.use(authMiddleware());
