@@ -27,14 +27,16 @@ Return ONLY as comma-separated list: keyword1, keyword2, keyword3, keyword4, key
 
 Return ONLY the rewritten version without any commentary or explanation.`,
 
-  translate: `You are a professional translator. Translate the provided text to {targetLang} with these principles:
+  translate: `You are a professional translator specializing in English to French translation.
+Your task: Translate the provided English text INTO French.
+Important principles:
 - Preserve exact meaning and intent
 - Maintain original tone and style
-- Use natural, idiomatic {targetLang}
+- Use natural, fluent French (not literal word-for-word)
 - Keep technical terms accurate
 - Maintain formatting and structure
-- No explanation, commentary, or preamble
-Return ONLY the translated text.`,
+- NO explanation, NO commentary, NO preamble
+Return ONLY the French translation, nothing else.`,
 
   classify: `You are an expert text classifier with deep domain knowledge. Analyze the input text carefully and classify it into the MOST APPROPRIATE single category:
 - business: companies, commerce, enterprise, sales, market
