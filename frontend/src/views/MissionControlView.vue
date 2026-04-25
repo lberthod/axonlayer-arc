@@ -114,23 +114,23 @@
           <div class="bg-slate-800 rounded-xl shadow-md p-6 border border-slate-700">
             <div class="flex items-center justify-between mb-3">
               <div>
-                <h2 class="text-lg font-bold text-slate-100">Scale proof</h2>
-                <p class="text-xs text-slate-500">Batch 50+ missions to show microeconomic viability.</p>
+                <h2 class="text-lg font-bold text-slate-100">Batch Simulation</h2>
+                <p class="text-xs text-slate-500">Run multiple missions with real-time tracking & detailed reports.</p>
               </div>
               <span class="text-[10px] uppercase tracking-wider text-violet-700 bg-indigo-950 px-2 py-1 rounded-full font-semibold">
-                Scalability
+                Testing
               </span>
             </div>
             <div class="flex items-center gap-2 mb-3">
               <button
-                v-for="n in [25, 50, 100]"
+                v-for="n in [5, 10, 25]"
                 :key="n"
                 @click="runBatch(n)"
                 :disabled="batchRunning"
                 class="flex-1 px-3 py-2 rounded-md text-sm font-semibold transition"
-                :class="[batchSize === n && batchRunning ? 'bg-gray-900 text-white opacity-60' : 'bg-gray-900 text-white hover:bg-gray-800 disabled:opacity-50']"
+                :class="[batchSize === n && batchRunning ? 'bg-violet-600 text-white opacity-70' : 'bg-slate-700 text-white hover:bg-slate-600 disabled:opacity-50']"
               >
-                {{ batchRunning && batchSize === n ? 'Running…' : `Batch ${n}` }}
+                {{ batchRunning && batchSize === n ? '⟳ Running…' : `Batch ${n}` }}
               </button>
             </div>
             <div
@@ -178,6 +178,23 @@
       </div>
     </div>
   </div>
+
+  <!-- Batch Progress Overlay -->
+  <BatchProgressOverlay
+    :isVisible="batchRunning"
+    :totalCount="batchSize"
+    :completedCount="batchProgressCount"
+    :failedCount="batchFailedCount"
+    :missions="batchProgressMissions"
+    :elapsedSeconds="batchElapsedSeconds"
+  />
+
+  <!-- Batch Report Modal -->
+  <BatchReportModal
+    :isVisible="showBatchReport"
+    :results="batchResult"
+    @close="showBatchReport = false"
+  />
 </template>
 
 <script setup>
@@ -197,6 +214,8 @@ import MetricsPanel from '../components/MetricsPanel.vue';
 import MetricsCharts from '../components/MetricsCharts.vue';
 import AgentsPanel from '../components/AgentsPanel.vue';
 import WalletSetup from '../components/WalletSetup.vue';
+import BatchProgressOverlay from '../components/BatchProgressOverlay.vue';
+import BatchReportModal from '../components/BatchReportModal.vue';
 import { api } from '../services/api.js';
 import { toastError, toastSuccess, toastInfo } from '../stores/toastStore.js';
 import { walletStore } from '../stores/walletStore.js';
@@ -218,6 +237,13 @@ const providers = ref([]);
 const batchResult = ref(null);
 const batchRunning = ref(false);
 const batchSize = ref(0);
+const showBatchReport = ref(false);
+const batchProgressCount = ref(0);
+const batchFailedCount = ref(0);
+const batchProgressMissions = ref([]);
+const batchElapsedSeconds = ref(0);
+const batchStartTime = ref(null);
+let batchProgressInterval = null;
 
 const displayBudget = computed(() => currentBudget.value || liveBudget.value || 0);
 
@@ -412,16 +438,47 @@ async function handleMissionSubmit({ input, taskType, selectionStrategy, budget 
 async function runBatch(n) {
   batchRunning.value = true;
   batchSize.value = n;
+  batchProgressCount.value = 0;
+  batchFailedCount.value = 0;
+  batchProgressMissions.value = [];
+  batchStartTime.value = Date.now();
+
+  // Start elapsed time counter
+  if (batchProgressInterval) clearInterval(batchProgressInterval);
+  batchProgressInterval = setInterval(() => {
+    batchElapsedSeconds.value = (Date.now() - batchStartTime.value) / 1000;
+  }, 100);
+
   try {
     const result = await api.runSimulation(n);
     batchResult.value = result;
-    toastSuccess(`Batch of ${result.executed} missions · ${result.summary?.grossVolume} USDC moved`);
+
+    // Animate missions appearing one by one
+    if (Array.isArray(result.missions)) {
+      for (let i = 0; i < result.missions.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, 200)); // Stagger reveal
+        const mission = result.missions[i];
+        batchProgressMissions.value.push(mission);
+
+        if (mission.status === 'completed') {
+          batchProgressCount.value = Math.min(i + 1, n);
+        } else {
+          batchFailedCount.value += 1;
+        }
+      }
+    }
+
+    // Show report after all missions shown
+    showBatchReport.value = true;
+    toastSuccess(`✅ Batch of ${result.executed} missions completed · $${result.summary?.grossVolume.toFixed(4)} USDC moved`);
+
     await loadData();
     refreshPanels();
   } catch (err) {
-    toastError(err, 'Batch failed');
+    toastError(err, 'Batch simulation failed');
   } finally {
     batchRunning.value = false;
+    if (batchProgressInterval) clearInterval(batchProgressInterval);
   }
 }
 

@@ -35,16 +35,20 @@ class SimulationEngine {
         validatorRevenue: 0,
         orchestratorMargin: 0
       },
-      perTaskType: {}
+      perTaskType: {},
+      missions: []  // NEW: Collect per-mission details
     };
 
     for (let i = 0; i < count; i++) {
       const text = sampleTexts[i % sampleTexts.length];
       const taskType = options.taskType || TASK_TYPES[i % TASK_TYPES.length];
+      const executionStart = Date.now();
 
       const task = await this.orchestrator.executeTask(text, taskType, {
         selectionStrategy: options.selectionStrategy
       });
+
+      const executionTime = Date.now() - executionStart;
 
       if (task?.status === 'completed') {
         results.executed += 1;
@@ -74,8 +78,37 @@ class SimulationEngine {
         bucket.count += 1;
         bucket.volume = this.normalizeAmount(bucket.volume + pricing.clientPayment);
         results.perTaskType[taskType] = bucket;
+
+        // NEW: Collect per-mission details for report
+        results.missions.push({
+          id: task.id,
+          index: i + 1,
+          status: task.status,
+          taskType,
+          input: text,
+          transactions: task.transactions || [],
+          pricing,
+          executionTime,
+          agents: {
+            worker: task.workerUid || 'unknown',
+            validator: task.validatorUid || 'unknown'
+          }
+        });
       } else {
         results.failed += 1;
+        // Still collect failed missions
+        results.missions.push({
+          id: task?.id || `failed_${i}`,
+          index: i + 1,
+          status: 'failed',
+          taskType,
+          input: text,
+          transactions: [],
+          pricing: { clientPayment: 0, workerPayment: 0, validatorPayment: 0, orchestratorMargin: 0 },
+          executionTime,
+          agents: { worker: 'none', validator: 'none' },
+          error: task?.error || 'Unknown error'
+        });
       }
     }
 
