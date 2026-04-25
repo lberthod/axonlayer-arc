@@ -39,7 +39,6 @@
             <option value="summarize">Summarize content</option>
             <option value="keywords">Extract keywords</option>
             <option value="rewrite">Rewrite text</option>
-            <option value="translate">Translate (EN→FR)</option>
             <option value="classify">Classify topic</option>
             <option value="sentiment">Sentiment analysis</option>
           </select>
