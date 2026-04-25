@@ -42,13 +42,19 @@ app.use(helmet());
 app.use(httpLogger());
 app.use(httpMetricsMiddleware());
 
-// CORS configuration - allow all origins in development
+// CORS configuration with explicit allowlist
 app.use(
   cors({
-    origin: true,
-    credentials: false,
+    origin: [
+      'https://axonlayer.web.app',
+      'https://axonlayer.firebaseapp.com',
+      'http://localhost:3100',
+      'http://localhost:5173',
+      'https://2ca5-2a02-4780-28-1285-00-1.ngrok-free.app'
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+    credentials: true
   })
 );
 
