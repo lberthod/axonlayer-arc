@@ -223,8 +223,9 @@ export const config = {
       // Simulation: 20 / min / user (allows batch testing of 25/50 missions)
       simulationMax: Number(env.RATE_LIMIT_SIM || 20),
       simulationWindowMs: Number(env.RATE_LIMIT_SIM_WINDOW_MS || 60 * 1000),
-      // Auth: 10 / min / IP
-      authMax: Number(env.RATE_LIMIT_AUTH || 10),
+      // Auth: 60 / min / user (increased from 10 for /api/auth/me which is critical for app)
+      // /api/auth/me is called by multiple frontend components; 60 req/min = 1 per second average
+      authMax: Number(env.RATE_LIMIT_AUTH || 60),
       authWindowMs: Number(env.RATE_LIMIT_AUTH_WINDOW_MS || 60 * 1000)
     },
     idempotencyTtlMs: Number(env.IDEMPOTENCY_TTL_MS || 10 * 60 * 1000),

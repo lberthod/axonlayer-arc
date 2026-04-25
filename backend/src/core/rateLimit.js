@@ -41,5 +41,8 @@ export const authLimiter = rateLimit({
   ...base,
   windowMs: config.security.rateLimit.authWindowMs,
   max: config.security.rateLimit.authMax,
-  handler: json('too many auth attempts')
+  handler: json('too many auth attempts'),
+  // Favor authenticated users: key by uid when available, fall back to IP
+  // This prevents /api/auth/me calls from one user blocking others on same IP
+  keyGenerator: (req) => req.user?.uid || req.ip
 });
