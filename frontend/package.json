@@ -1,6 +1,6 @@
 {
   "name": "agent-usdc-task-network-frontend",
-  "version": "0.0.38",
+  "version": "0.0.44",
   "type": "module",
   "scripts": {
     "dev": "vite",
