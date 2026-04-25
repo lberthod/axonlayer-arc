@@ -1,156 +1,46 @@
-import { getIdToken } from './firebase.js';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
+export const apiCall = async (endpoint, options = {}) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    ...options.headers,
+  };
 
-/**
- * Custom error type carrying the backend's structured error envelope:
- *   { error: { code, message, requestId, details? } }
- */
-export class ApiError extends Error {
-  constructor({ status, code, message, requestId, details }) {
-    super(message || `HTTP ${status}`);
-    this.status = status;
-    this.code = code || 'unknown';
-    this.requestId = requestId || null;
-    this.details = details || null;
-  }
-}
+  const url = `${API_BASE}${endpoint}`;
+  
+  const config = {
+    ...options,
+    headers,
+  };
 
-async function authHeaders(extra = {}) {
-  const token = await getIdToken().catch(() => null);
-  const headers = { ...extra };
-  if (token) headers.Authorization = `Bearer ${token}`;
-  return headers;
-}
-
-async function parseResponse(response) {
-  const data = await response.json().catch(() => null);
-
+  const response = await fetch(url, config);
+  
   if (!response.ok) {
-    // New shape: { error: { code, message, requestId } }
-    const env = data?.error;
-    if (env && typeof env === 'object') {
-      throw new ApiError({
-        status: response.status,
-        code: env.code,
-        message: env.message,
-        requestId: env.requestId || response.headers.get('x-request-id'),
-        details: env.details
-      });
-    }
-    // Legacy shape: { error: "string" } or empty
-    throw new ApiError({
-      status: response.status,
-      code: 'unknown',
-      message: typeof data?.error === 'string' ? data.error : `HTTP ${response.status}`,
-      requestId: response.headers.get('x-request-id')
-    });
+    throw new Error(`API Error: ${response.status}`);
   }
+  
+  return response.json();
+};
 
-  return data;
-}
-
-// Simple cache for frequently-called endpoints (auth especially)
-const responseCache = new Map();
-const CACHE_TTL_MS = 30000; // 30 seconds for auth endpoints
-
-async function request(path, { method = 'GET', body, headers, idempotencyKey, skipCache = false } = {}) {
-  // Use cache for GET requests on auth endpoints (avoid rate limits)
-  const cacheKey = method === 'GET' ? path : null;
-  if (cacheKey && !skipCache && responseCache.has(cacheKey)) {
-    const { data, timestamp } = responseCache.get(cacheKey);
-    if (Date.now() - timestamp < CACHE_TTL_MS) {
-      return data;
-    }
-    responseCache.delete(cacheKey);
-  }
-
-  const finalHeaders = await authHeaders({
-    ...(body ? { 'Content-Type': 'application/json' } : {}),
-    ...(idempotencyKey ? { 'Idempotency-Key': idempotencyKey } : {}),
-    ...headers
-  });
-  const response = await fetch(`${API_BASE}${path}`, {
-    method,
-    headers: finalHeaders,
-    body: body ? JSON.stringify(body) : undefined
-  });
-  const data = await parseResponse(response);
-
-  // Cache GET responses
-  if (cacheKey && !skipCache) {
-    responseCache.set(cacheKey, { data, timestamp: Date.now() });
-  }
-
-  return data;
-}
-
-export const api = {
-  createTask: (input, taskType = 'summarize', options = {}) => {
-    const { idempotencyKey, ...rest } = options;
-    return request('/tasks', {
+export default {
+  tasks: {
+    create: (data) => apiCall('/api/tasks', { method: 'POST', body: JSON.stringify(data) }),
+    list: () => apiCall('/api/tasks'),
+    get: (id) => apiCall(`/api/tasks/${id}`),
+    execute: (id) => apiCall(`/api/tasks/${id}/execute`, { method: 'POST' }),
+  },
+  
+  auth: {
+    login: (email, password) => apiCall('/api/auth/login', {
       method: 'POST',
-      body: { input, taskType, ...rest },
-      idempotencyKey
-    });
+      body: JSON.stringify({ email, password }),
+    }),
+    walletCreate: () => apiCall('/api/auth/wallet/create', { method: 'POST' }),
+    walletBalance: (address) => apiCall(`/api/balances/${address}`),
   },
-
-  getTask: (taskId) => request(`/tasks/${taskId}`, { skipCache: true }),
-
-  getMyTasks: () => request('/tasks/mine'),
-
-  getAgents: () => request('/agents'),
-
-  quoteTask: (input, taskType, strategy) =>
-    request('/agents/quote', { method: 'POST', body: { input, taskType, strategy } }),
-
-  getMetrics: (windowMs) => request(windowMs ? `/metrics?windowMs=${windowMs}` : '/metrics'),
-
-  getBalances: () => request('/balances'),
-
-  getTransactions: (filters = {}) => {
-    const params = new URLSearchParams(filters);
-    return request(`/transactions?${params.toString()}`);
+  
+  transactions: {
+    list: (userId) => apiCall(`/api/transactions?userId=${userId}`),
+    get: (txId) => apiCall(`/api/transactions/${txId}`),
   },
-
-  runSimulation: (count = 50, options = {}) =>
-    request('/simulate', { method: 'POST', body: { count, ...options } }),
-
-  getHealth: () => request('/health'),
-  getReady: () => request('/ready'),
-  getConfig: () => request('/config'),
-
-  // auth
-  getMe: () => request('/auth/me', { skipCache: true }),
-  rotateApiKey: () => request('/auth/apikey/rotate', { method: 'POST' }),
-  setWalletAddress: (address) => request('/auth/wallet', { method: 'POST', body: { address } }),
-  becomeProvider: () => request('/auth/role/provider', { method: 'POST' }),
-
-  // wallet management
-  createWallet: () => request('/auth/wallet/create', { method: 'POST' }),
-  fundWallet: (payload) => request('/auth/wallet/fund', { method: 'POST', body: payload }),
-
-  // blockchain balance checking
-  getBlockchainBalance: (address) => request(`/auth/wallet/balance/${address}`),
-  getBlockchainStatus: () => request('/auth/blockchain/status'),
-
-  // agent operators (private execution fabric)
-  listProviders: (status) => request(status ? `/providers?status=${status}` : '/providers'),
-  listMyProviders: () => request('/providers/mine'),
-  registerProvider: (payload) => request('/providers', { method: 'POST', body: payload }),
-  updateProvider: (id, patch) => request(`/providers/${id}`, { method: 'PATCH', body: patch }),
-  stakeProvider: (id, amount) =>
-    request(`/providers/${id}/stake`, { method: 'POST', body: { amount } }),
-  approveProvider: (id) => request(`/providers/${id}/approve`, { method: 'POST' }),
-  rejectProvider: (id) => request(`/providers/${id}/reject`, { method: 'POST' }),
-  slashProvider: (id, amount, reason) =>
-    request(`/providers/${id}/slash`, { method: 'POST', body: { amount, reason } }),
-
-  // admin
-  adminOverview: () => request('/admin/overview'),
-  adminUsers: () => request('/admin/users'),
-  adminProviders: (status) =>
-    request(status ? `/admin/providers?status=${status}` : '/admin/providers'),
-  adminSetRole: (uid, role) =>
-    request(`/admin/users/${uid}/role`, { method: 'POST', body: { role } })
 };
