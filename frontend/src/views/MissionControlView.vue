@@ -27,7 +27,8 @@
           <div class="flex items-center justify-between mb-2">
             <div>
               <h3 class="text-sm font-semibold text-slate-300">Mission Wallet (Arc USDC)</h3>
-              <p class="text-xs text-slate-500">Your account on Arc blockchain - executes & pays agents</p>
+              <p class="text-xs text-slate-500">Le wallet qui envoie l'argent aux agents</p>
+              <p class="text-xs text-slate-400 mt-1">Your account on Arc blockchain - executes & pays agents</p>
             </div>
             <button
               @click="refreshWallet(false)"
