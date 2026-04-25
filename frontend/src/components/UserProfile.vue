@@ -240,19 +240,18 @@ async function loadUser() {
 
 async function loadTreasuryInfo() {
   try {
-    // Fetch all balances to get treasury info
-    const balances = await api.balances.getBalances();
+    const treasuryAddress = '0xA89044f1d22e8CD292B3Db092C8De28eB1728d74'; // Arc hub treasury
 
-    // Treasury wallet is usually under 'orchestrator_wallet' or 'arc_treasury_wallet'
-    const treasuryAddress = '0xA89044f1d22e8CD292B3Db092C8De28eB1728d74'; // Default Arc hub treasury
-    const treasuryBalance = balances['orchestrator_wallet'] || balances['arc_treasury_wallet'] || 0;
+    // Fetch REAL balance from Arc testnet blockchain
+    const result = await api.getBlockchainBalance(treasuryAddress);
+    const treasuryBalance = result.balance || 0;
 
     treasuryInfo.value = {
       address: treasuryAddress,
       balance: treasuryBalance
     };
   } catch (err) {
-    console.warn('Failed to load treasury info:', err.message);
+    console.warn('Failed to load treasury balance from blockchain:', err.message);
     // Set default if unable to fetch
     treasuryInfo.value = {
       address: '0xA89044f1d22e8CD292B3Db092C8De28eB1728d74',
