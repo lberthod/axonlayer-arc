@@ -129,6 +129,28 @@ api.runSimulation = (count, taskType = 'summarize', selectionStrategy = 'score_p
     body: JSON.stringify({ count, taskType, selectionStrategy })
   });
 
+// Execute a single task (creates and runs in one call)
+api.executeSingleTask = async (input, taskType, options = {}) => {
+  const { selectionStrategy = 'score_price', budget = 0.01 } = options;
+
+  try {
+    // Create and execute task in one call
+    const result = await apiCallWithAuth('/api/tasks', {
+      method: 'POST',
+      body: JSON.stringify({
+        input,
+        taskType,
+        selectionStrategy,
+        budget
+      })
+    });
+    return result;
+  } catch (err) {
+    console.error('[executeSingleTask error]', err.message);
+    throw err;
+  }
+};
+
 // Add wallet methods
 api.createWallet = () => api.auth.walletCreate();
 api.getWalletBalance = (address) => api.auth.walletBalance(address);

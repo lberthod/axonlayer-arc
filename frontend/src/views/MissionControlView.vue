@@ -443,6 +443,14 @@ async function runBatch(n) {
   batchProgressMissions.value = [];
   batchStartTime.value = Date.now();
 
+  const sampleTexts = [
+    'Artificial intelligence is transforming industries across the globe, from healthcare to finance.',
+    'Blockchain technology enables decentralized transactions without intermediaries.',
+    'Climate change requires immediate global cooperation and sustainable solutions.',
+    'The future of work involves remote collaboration and digital transformation.',
+    'Machine learning algorithms can process vast amounts of data efficiently.',
+  ];
+
   // Start elapsed time counter
   if (batchProgressInterval) clearInterval(batchProgressInterval);
   batchProgressInterval = setInterval(() => {
@@ -450,59 +458,106 @@ async function runBatch(n) {
   }, 100);
 
   try {
-    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-    const response = await fetch(`${baseUrl}/api/simulate/stream`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ count: n, selectionStrategy: 'score_price' })
-    });
+    let totalExecuted = 0;
+    let totalFailed = 0;
+    let grossVolume = 0;
+    let totalTransactions = 0;
+    const allMissions = [];
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
+    // Run N missions sequentially with the same logic as single mission
+    for (let i = 0; i < n; i++) {
+      const text = sampleTexts[i % sampleTexts.length];
+      const taskType = ['summarize', 'keywords', 'rewrite', 'translate', 'classify'][i % 5];
+      const missionStartTime = Date.now();
 
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = '';
+      try {
+        const result = await api.executeSingleTask(text, taskType, {
+          budget: 0.01,
+          selectionStrategy: 'score_price'
+        });
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
+        const executionTime = Date.now() - missionStartTime;
+        const pricing = result.pricing || {
+          clientPayment: 0,
+          workerPayment: 0,
+          validatorPayment: 0,
+          orchestratorMargin: 0
+        };
 
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split('\n\n');
-      buffer = lines.pop(); // Keep incomplete message in buffer
-
-      for (const line of lines) {
-        if (line.startsWith('data: ')) {
-          const jsonStr = line.slice(6).trim();
-          if (!jsonStr) continue;
-
-          try {
-            const data = JSON.parse(jsonStr);
-
-            if (data.type === 'mission_complete') {
-              const mission = data.mission;
-              batchProgressMissions.value.push(mission);
-              batchProgressCount.value = data.progress.executed;
-              batchFailedCount.value = data.progress.failed;
-            } else if (data.type === 'batch_complete') {
-              batchResult.value = data.results;
-              showBatchReport.value = true;
-              toastSuccess(`✅ Batch of ${data.results.executed} missions completed · $${data.results.summary?.grossVolume.toFixed(4)} USDC moved`);
-              await loadData();
-              refreshPanels();
-            } else if (data.type === 'error') {
-              throw new Error(data.error);
-            }
-          } catch (parseErr) {
-            console.error('[batch stream parse error]', parseErr.message);
+        const missionData = {
+          id: result.taskId,
+          index: i + 1,
+          status: result.status,
+          taskType,
+          input: text,
+          transactions: result.transactions || [],
+          pricing,
+          executionTime,
+          agents: {
+            worker: result.selectedAgents?.worker?.id || 'unknown',
+            validator: result.selectedAgents?.validator?.id || 'unknown'
           }
+        };
+
+        allMissions.push(missionData);
+        batchProgressMissions.value.push(missionData);
+
+        if (result.status === 'completed') {
+          totalExecuted++;
+          totalTransactions += (result.transactions || []).length;
+          grossVolume += pricing.clientPayment;
+        } else {
+          totalFailed++;
         }
+
+        batchProgressCount.value = totalExecuted;
+        batchFailedCount.value = totalFailed;
+      } catch (err) {
+        totalFailed++;
+        batchFailedCount.value = totalFailed;
+        batchProgressMissions.value.push({
+          id: `failed_${i}`,
+          index: i + 1,
+          status: 'failed',
+          taskType,
+          input: text,
+          transactions: [],
+          pricing: { clientPayment: 0, workerPayment: 0, validatorPayment: 0, orchestratorMargin: 0 },
+          executionTime: Date.now() - missionStartTime,
+          agents: { worker: 'none', validator: 'none' },
+          error: err.message
+        });
+      }
+
+      // Small delay between missions to avoid overwhelming the server
+      if (i < n - 1) {
+        await new Promise(resolve => setTimeout(resolve, 500));
       }
     }
+
+    // Compile final results
+    batchResult.value = {
+      executed: totalExecuted,
+      failed: totalFailed,
+      transactionsCreated: totalTransactions,
+      summary: {
+        grossVolume: parseFloat(grossVolume.toFixed(6)),
+        workerRevenue: 0,
+        validatorRevenue: 0,
+        orchestratorMargin: 0
+      },
+      missions: allMissions,
+      perTaskType: {}
+    };
+
+    // Show report
+    showBatchReport.value = true;
+    toastSuccess(`✅ Batch of ${totalExecuted} missions completed · $${grossVolume.toFixed(4)} USDC moved`);
+
+    await loadData();
+    refreshPanels();
   } catch (err) {
-    toastError(err, 'Batch simulation failed');
+    toastError(err, 'Batch failed');
   } finally {
     batchRunning.value = false;
     if (batchProgressInterval) clearInterval(batchProgressInterval);
