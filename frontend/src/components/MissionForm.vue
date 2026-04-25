@@ -139,6 +139,21 @@
                 </div>
               </div>
 
+              <!-- Wallet Details -->
+              <div class="bg-indigo-950/30 rounded-lg p-4 mb-4 border border-indigo-900/40">
+                <p class="text-xs text-indigo-300 uppercase tracking-wider font-semibold mb-3">Wallet Details</p>
+                <div class="space-y-2 text-xs">
+                  <div>
+                    <p class="text-slate-400 mb-1">From (Your Treasury Wallet):</p>
+                    <p class="font-mono text-indigo-400 break-all bg-slate-900/50 p-2 rounded">{{ treasuryWalletAddress }}</p>
+                  </div>
+                  <div>
+                    <p class="text-slate-400 mb-1">To (Orchestrator Wallet):</p>
+                    <p class="font-mono text-amber-400 break-all bg-slate-900/50 p-2 rounded">{{ orchestratorWalletAddress }}</p>
+                  </div>
+                </div>
+              </div>
+
               <!-- Warning Message -->
               <div class="bg-yellow-950/30 rounded-lg p-3 mb-4 border border-yellow-900/40">
                 <p class="text-xs text-yellow-300">
@@ -195,6 +210,14 @@ const props = defineProps({
   availableBalance: {
     type: Number,
     default: 0
+  },
+  treasuryWalletAddress: {
+    type: String,
+    default: 'Not available'
+  },
+  orchestratorWalletAddress: {
+    type: String,
+    default: 'Not available'
   }
 });
 

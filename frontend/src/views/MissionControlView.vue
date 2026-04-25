@@ -20,6 +20,8 @@
           <MissionForm
             ref="missionFormRef"
             :available-balance="availableBalance"
+            :treasury-wallet-address="treasuryWalletAddress"
+            :orchestrator-wallet-address="orchestratorWalletAddress"
             @submit="handleMissionSubmit"
             @budget-change="(v) => liveBudget = v"
           />
