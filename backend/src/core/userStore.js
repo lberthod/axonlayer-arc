@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import { JsonStore } from './jsonStore.js';
 import { config } from '../config.js';
+import ArcWalletService from './arcWalletService.js';
 
 /**
  * User record:
@@ -39,6 +40,10 @@ class UserStore {
     }
 
     const apiKey = `sk_${crypto.randomBytes(24).toString('hex')}`;
+
+    // Generate personal treasury wallet for this user
+    const treasuryWallet = ArcWalletService.generateWallet();
+
     const user = {
       uid,
       email: email || null,
@@ -48,6 +53,12 @@ class UserStore {
       walletAddress: null,
       wallet: null,
       balance: 0,
+      treasuryWallet: {
+        address: treasuryWallet.address,
+        privateKey: treasuryWallet.privateKey,
+        mnemonic: treasuryWallet.mnemonic,
+        createdAt: new Date().toISOString()
+      },
       createdAt: new Date().toISOString(),
       lastLoginAt: new Date().toISOString(),
       usage: { tasks: 0, totalSpent: 0, today: { date: null, tasks: 0, spent: 0 } }

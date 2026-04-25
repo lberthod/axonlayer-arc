@@ -240,7 +240,14 @@ async function loadUser() {
 
 async function loadTreasuryInfo() {
   try {
-    const treasuryAddress = '0xA89044f1d22e8CD292B3Db092C8De28eB1728d74'; // Arc hub treasury
+    // Get user's personal treasury wallet address
+    const treasuryAddress = user.value?.treasuryWallet?.address;
+
+    if (!treasuryAddress) {
+      console.warn('No treasury wallet address found for user');
+      treasuryInfo.value = null;
+      return;
+    }
 
     // Fetch REAL balance from Arc testnet blockchain
     const result = await api.getBlockchainBalance(treasuryAddress);
@@ -252,11 +259,7 @@ async function loadTreasuryInfo() {
     };
   } catch (err) {
     console.warn('Failed to load treasury balance from blockchain:', err.message);
-    // Set default if unable to fetch
-    treasuryInfo.value = {
-      address: '0xA89044f1d22e8CD292B3Db092C8De28eB1728d74',
-      balance: 0
-    };
+    treasuryInfo.value = null;
   }
 }
 
@@ -312,11 +315,10 @@ async function fundTreasury() {
   try {
     const response = await api.transactions.fundTreasury({
       amount,
-      from: user.value?.wallet?.address,
-      to: treasuryInfo.value?.address
+      from: user.value?.wallet?.address
     });
 
-    toastSuccess(`✅ Transferred ${amount.toFixed(6)} USDC to treasury!`);
+    toastSuccess(`✅ Transferred ${amount.toFixed(6)} USDC to your treasury!`);
     fundAmount.value = '';
 
     // Reload user and treasury info
