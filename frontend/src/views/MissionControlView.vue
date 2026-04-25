@@ -39,15 +39,32 @@
           </div>
 
           <div class="bg-slate-800 rounded-lg border border-indigo-500/20 p-4 mb-3">
-            <p class="text-xs text-slate-500 uppercase tracking-wider mb-2">Wallet Address</p>
-            <p class="text-xs font-mono text-slate-300 break-all">{{ missionWalletAddress }}</p>
+            <p class="text-xs text-slate-500 uppercase tracking-wider mb-2">Treasury Wallet Address</p>
+            <a
+              :href="`https://testnet.arcscan.app/address/${treasuryWalletAddress}`"
+              target="_blank"
+              class="text-xs font-mono text-indigo-400 hover:text-indigo-300 break-all underline transition"
+            >
+              {{ treasuryWalletAddress }}
+            </a>
           </div>
 
-          <MissionWallet
-            :balance="missionWalletBalance"
-            :reserved="reservedBalance"
-            :remaining="availableBalance"
-          />
+          <!-- Treasury Wallet Balance Display -->
+          <div class="bg-slate-800 rounded-lg border border-indigo-500/20 p-4 mb-3 space-y-3">
+            <div>
+              <p class="text-xs text-slate-500 uppercase tracking-wider mb-2">Balance</p>
+              <p class="text-2xl font-bold text-slate-100">{{ treasuryWalletBalance.toFixed(6) }} USDC</p>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 uppercase tracking-wider mb-2">Reserved</p>
+              <p class="text-lg text-slate-300">0.000000 USDC</p>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 uppercase tracking-wider mb-2">Remaining</p>
+              <p class="text-lg text-slate-300">{{ treasuryWalletBalance.toFixed(6) }} USDC</p>
+            </div>
+            <p class="text-xs text-slate-400">0.0% of balance reserved for active missions.</p>
+          </div>
 
           <p v-if="lastWalletRefresh" class="text-xs text-gray-400 mt-2">
             Last synced: {{ lastWalletRefresh }}
@@ -319,11 +336,33 @@ const hasBalance = computed(() => {
 
 const isRefreshingWallet = ref(false);
 const lastWalletRefresh = ref(null);
+const treasuryWalletBalance = ref(0);
+
+// Treasury Wallet computed properties
+const treasuryWalletAddress = computed(() => {
+  return user.value?.treasuryWallet?.address || 'Not created';
+});
+
+async function loadTreasuryBalance() {
+  try {
+    const address = user.value?.treasuryWallet?.address;
+    if (!address) {
+      treasuryWalletBalance.value = 0;
+      return;
+    }
+    const result = await api.getBlockchainBalance(address);
+    treasuryWalletBalance.value = result.balance || 0;
+  } catch (err) {
+    console.warn('Failed to load treasury balance:', err.message);
+    treasuryWalletBalance.value = 0;
+  }
+}
 
 async function refreshWallet(silent = false) {
   try {
     isRefreshingWallet.value = true;
     user.value = await api.auth.getMe();
+    await loadTreasuryBalance();
     lastWalletRefresh.value = new Date().toLocaleTimeString();
     if (user.value?.wallet && !silent) {
       toastSuccess('Wallet setup complete!');
@@ -584,7 +623,8 @@ onMounted(async () => {
 
     // Refresh wallet balance from blockchain every 30 seconds
     walletRefreshInterval = setInterval(() => {
-      refreshWallet(true); // silent refresh
+      refreshWallet(true); // silent refresh (includes treasury balance)
+      loadTreasuryBalance();
     }, 30000);
   } catch (err) {
     toastError(err, 'Failed to load Mission Control');
