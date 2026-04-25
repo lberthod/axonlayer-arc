@@ -98,7 +98,8 @@
       "Bash(chmod +x start-on-vps-port3002.sh)",
       "Bash(./start-on-vps-port3002.sh)",
       "Bash(curl -k https://72.61.108.21:3002/api/health)",
-      "Bash(git tag *)"
+      "Bash(git tag *)",
+      "Bash(ssh root@72.61.108.21 \"cd /root/arcagenthub/backend && echo 'SECRETS_MASTER_KEY=71d24ffd51933c8c1cf0f783427d825ab821e1d4f1582b00a586f9359bb321d7' >> .env && pm2 restart arc-backend --update-env && sleep 2 && pm2 logs arc-backend --lines 30\")"
     ]
   }
 }

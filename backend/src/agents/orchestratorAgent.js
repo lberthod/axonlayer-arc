@@ -28,9 +28,9 @@ class OrchestratorAgent extends BaseAgent {
     // Pay agent through treasury store
     const result = await treasuryStore.payAgent(amount, reason, taskId);
 
-    // Record the payment in ledger
+    // Record the payment in ledger using wallet ID instead of address
     await paymentAdapter.transfer(
-      treasuryStore.getAddress(),
+      'orchestrator_wallet',
       agentWalletId,
       result.netAmount,
       config.asset,
@@ -43,7 +43,7 @@ class OrchestratorAgent extends BaseAgent {
       amount: result.grossAmount,
       fee: result.fee,
       netAmount: result.netAmount,
-      from: treasuryStore.getAddress(),
+      from: 'orchestrator_wallet',
       to: agentWalletId
     };
   }
