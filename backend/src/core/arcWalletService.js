@@ -1,31 +1,32 @@
 import crypto from 'crypto';
+import { ethers } from 'ethers';
 
 /**
  * Arc USDC Wallet Service
  * Generates real wallets with private keys for Arc blockchain
+ * Uses ethers.js for proper ECDSA address derivation
  */
 class ArcWalletService {
   /**
    * Generate a new Arc USDC wallet
    * Returns { address, privateKey, publicKey, mnemonic }
+   * Uses ethers.Wallet for proper Ethereum-compatible address generation
    */
   static generateWallet() {
     // Generate random private key (32 bytes = 64 hex chars)
     const privateKeyBuffer = crypto.randomBytes(32);
-    const privateKey = privateKeyBuffer.toString('hex');
+    const privateKeyHex = '0x' + privateKeyBuffer.toString('hex');
 
-    // Generate deterministic Arc address from private key
-    // Arc uses Ethereum-compatible addresses (0x prefix + 40 hex chars)
-    const hash = crypto.createHash('sha256').update(privateKey).digest();
-    const address = '0x' + hash.slice(0, 20).toString('hex');
+    // Use ethers.Wallet to derive address correctly (ECDSA + Keccak256)
+    const wallet = new ethers.Wallet(privateKeyHex);
 
     // Generate mnemonic-like representation
-    const mnemonic = this.generateMnemonic(privateKey);
+    const mnemonic = this.generateMnemonic(wallet.privateKey);
 
     return {
-      address,
-      privateKey,
-      publicKey: this.derivePublicKey(privateKey),
+      address: wallet.address,
+      privateKey: wallet.privateKey.startsWith('0x') ? wallet.privateKey.slice(2) : wallet.privateKey,
+      publicKey: wallet.publicKey,
       mnemonic,
       chain: 'arc',
       token: 'USDC',
