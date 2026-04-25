@@ -163,7 +163,11 @@
             </div>
             <span class="text-sm text-sky-600 bg-sky-100 px-2 py-1 rounded-full font-semibold">On-Chain</span>
           </div>
-          <p class="text-3xl font-bold text-sky-700">{{ treasuryInfo ? (treasuryInfo.balance || 0).toFixed(6) : '⏳ Loading...' }} USDC</p>
+          <p class="text-3xl font-bold text-sky-700 mb-2">{{ treasuryInfo ? (treasuryInfo.balance || 0).toFixed(6) : '⏳ Loading...' }} USDC</p>
+          <button @click="refreshTreasuryBalance" :disabled="checkingTreasuryBalance"
+            class="text-sm text-sky-600 hover:text-sky-700 font-semibold transition disabled:opacity-50 flex items-center gap-1">
+            {{ checkingTreasuryBalance ? '⏳ Checking blockchain...' : '🔄 Refresh Balance' }}
+          </button>
         </div>
 
         <!-- Fund Treasury -->
@@ -228,6 +232,7 @@ const privKeyCopied = ref(false);
 const mnemonicCopied = ref(false);
 const checkingBalance = ref(false);
 const creatingWallet = ref(false);
+const checkingTreasuryBalance = ref(false);
 
 async function loadUser() {
   try {
@@ -285,6 +290,28 @@ async function refreshBalance() {
     toastError(err, 'Failed to refresh balance from blockchain');
   } finally {
     checkingBalance.value = false;
+  }
+}
+
+async function refreshTreasuryBalance() {
+  checkingTreasuryBalance.value = true;
+  try {
+    const treasuryAddress = user.value?.treasuryWallet?.address;
+    if (!treasuryAddress) {
+      toastError(new Error('No treasury address'), 'Cannot refresh treasury balance');
+      return;
+    }
+
+    // Get real on-chain balance from Arc testnet
+    const result = await api.getBlockchainBalance(treasuryAddress);
+    if (treasuryInfo.value) {
+      treasuryInfo.value.balance = result.balance || 0;
+    }
+    toastSuccess(`✅ Updated: ${(result.balance || 0).toFixed(6)} USDC in treasury`);
+  } catch (err) {
+    toastError(err, 'Failed to refresh treasury balance from blockchain');
+  } finally {
+    checkingTreasuryBalance.value = false;
   }
 }
 
