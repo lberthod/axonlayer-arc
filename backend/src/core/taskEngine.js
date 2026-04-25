@@ -155,50 +155,41 @@ class TaskEngine {
       throw new Error('User not found');
     }
 
-    // Use Arc blockchain wallet (not simulated missionWallet)
-    if (!user.wallet || !user.wallet.address) {
-      throw new Error('User Arc wallet not found');
+    // Use user's Treasury Wallet (personal wallet for agent payments)
+    if (!user.treasuryWallet || !user.treasuryWallet.address) {
+      throw new Error('User Treasury Wallet not found');
     }
 
-    // Check real blockchain balance
-    if (user.balance < amount) {
-      throw new Error(`Insufficient Arc wallet balance: ${user.balance} < ${amount}`);
-    }
-
-    // Ensure user wallet is registered in walletManager (re-register on each use since it's memory-only)
+    // Ensure user's treasury wallet is registered in walletManager
     const walletManager = (await import('./walletManager.js')).default;
     await walletManager.load();
-    const walletId = `user_${userUid}`;
+    const walletId = `treasury_${userUid}`;
     if (!walletManager.has(walletId)) {
-      walletManager.registerUserWallet(userUid, user.wallet);
+      walletManager.registerUserWallet(userUid, user.treasuryWallet);
     }
 
-    // Create on-chain transaction: user wallet → treasury wallet
-    const treasuryAddr = treasuryStore.getAddress();
+    // Create on-chain transaction: user's treasury wallet → orchestrator wallet
+    const orchestratorAddr = (await import('./walletManager.js')).default.getAddress('orchestrator_wallet');
 
     try {
       const txResult = await walletProvider.transfer(
         walletId,
-        treasuryAddr,
+        orchestratorAddr,
         amount,
         config.asset,
-        'Mission funding from Arc wallet',
+        'Mission funding from Treasury Wallet',
         taskId,
         'fund'
       );
 
-      // Deduct from Arc blockchain wallet balance AFTER transaction succeeds
-      user.balance = this.normalizeAmount(user.balance - amount);
-      await userStore.store.flush();
-
-      // Add to treasury balance
-      await treasuryStore.addFunds(amount, 'Mission funding from Arc wallet', taskId, txResult.chainTxHash);
+      // Add to treasury balance (for tracking)
+      await treasuryStore.addFunds(amount, 'Mission funding from Treasury Wallet', taskId, txResult.chainTxHash);
 
       return {
         status: 'funded',
         amount,
-        from: user.wallet.address,
-        to: treasuryAddr,
+        from: user.treasuryWallet.address,
+        to: orchestratorAddr,
         chainTxHash: txResult.chainTxHash,
         settlementType: txResult.settlementType,
         retryable: false
