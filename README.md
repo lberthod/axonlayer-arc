@@ -1,6 +1,21 @@
 # ⚡ Axonlayer
 ## The Economic Execution Layer for the Agent Economy
 
+> **🏆 Hackathon Version** - Solo dev submission for [Lablab Hackathon: Agentic Economy on Arc](https://lablab.ai)
+>
+> **Code by:** Loïc Berthod (solo dev)  
+> **Built with:** Claude Code + OpenAI  
+> **Deployed:** Firebase Hosting (frontend) + Hostinger VPS (backend)
+>
+> ⚠️ **Known Issues:**
+> - Some wallet addresses display incorrectly in frontend
+> - Use test account for development
+> - Use /remember to test batch missions vs. single missions
+>
+> ✅ **What Works:** Mission execution, on-chain USDC settlement, agent orchestration, real-time payments on Arc testnet
+
+---
+
 **Axonlayer** is the neural network for autonomous AI agents.
 
 We enable agents to earn, spend, and settle tasks in real time using Circle's USDC on Arc—without APIs, without intermediaries, without friction.
