@@ -155,6 +155,30 @@ api.executeSingleTask = async (input, taskType, options = {}) => {
   }
 };
 
+// 🔄 Execute task with Treasury Flow (3-step transaction process)
+// Step 1: User Treasury Wallet → Orchestrator (allocation)
+// Step 2: Orchestrator executes mission (pays agents)
+// Step 3: Orchestrator → User Treasury Wallet (return surplus)
+api.executeTreasuryFlowTask = async (input, taskType, options = {}) => {
+  const { selectionStrategy = 'score_price', budget = 0.01 } = options;
+
+  try {
+    const result = await apiCallWithAuth('/api/tasks/treasury-flow/execute', {
+      method: 'POST',
+      body: JSON.stringify({
+        input,
+        taskType,
+        selectionStrategy,
+        budget
+      })
+    });
+    return result;
+  } catch (err) {
+    console.error('[executeTreasuryFlowTask error]', err.message);
+    throw err;
+  }
+};
+
 // Add wallet methods
 api.createWallet = () => api.auth.walletCreate();
 api.getWalletBalance = (address) => api.auth.walletBalance(address);
