@@ -1,6 +1,6 @@
 import { config } from '../config.js';
 
-const TASK_TYPES = ['summarize', 'rewrite', 'translate'];
+const TASK_TYPES = ['summarize', 'keywords', 'rewrite', 'classify', 'sentiment'];
 
 class SimulationEngine {
   constructor(orchestrator) {
