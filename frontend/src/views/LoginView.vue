@@ -4,29 +4,24 @@
       <h1 class="text-3xl font-extrabold text-slate-100 mb-2">Axonlayer</h1>
       <p class="text-slate-500 mb-8">Fund a mission. A private network of agents executes it. Settlement in USDC on Arc.
       </p>
+      <p>Test User : test@test.com / password : test@test.com</p>
 
       <!-- Tabs: Google vs Email -->
       <div class="flex gap-2 mb-6">
-        <button
-          @click="loginMode = 'google'"
-          :class="[
-            'flex-1 py-2 px-3 rounded-lg font-semibold text-sm transition',
-            loginMode === 'google'
-              ? 'bg-blue-600 text-white'
-              : 'bg-slate-700 text-slate-400 hover:bg-slate-600'
-          ]"
-        >
+        <button @click="loginMode = 'google'" :class="[
+          'flex-1 py-2 px-3 rounded-lg font-semibold text-sm transition',
+          loginMode === 'google'
+            ? 'bg-blue-600 text-white'
+            : 'bg-slate-700 text-slate-400 hover:bg-slate-600'
+        ]">
           🔵 Google
         </button>
-        <button
-          @click="loginMode = 'email'"
-          :class="[
-            'flex-1 py-2 px-3 rounded-lg font-semibold text-sm transition',
-            loginMode === 'email'
-              ? 'bg-blue-600 text-white'
-              : 'bg-slate-700 text-slate-400 hover:bg-slate-600'
-          ]"
-        >
+        <button @click="loginMode = 'email'" :class="[
+          'flex-1 py-2 px-3 rounded-lg font-semibold text-sm transition',
+          loginMode === 'email'
+            ? 'bg-blue-600 text-white'
+            : 'bg-slate-700 text-slate-400 hover:bg-slate-600'
+        ]">
           ✉️ Email
         </button>
       </div>
@@ -43,18 +38,10 @@
 
       <!-- Email Login/Signup -->
       <div v-if="loginMode === 'email'" class="space-y-3">
-        <input
-          v-model="email"
-          type="email"
-          placeholder="Email"
-          class="w-full px-4 py-2 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 placeholder-slate-400 focus:outline-none focus:border-blue-500"
-        />
-        <input
-          v-model="password"
-          type="password"
-          placeholder="Password"
-          class="w-full px-4 py-2 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 placeholder-slate-400 focus:outline-none focus:border-blue-500"
-        />
+        <input v-model="email" type="email" placeholder="Email"
+          class="w-full px-4 py-2 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+        <input v-model="password" type="password" placeholder="Password"
+          class="w-full px-4 py-2 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 placeholder-slate-400 focus:outline-none focus:border-blue-500" />
 
         <button @click="handleEmailLogin" :disabled="busy || !email || !password"
           class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition disabled:opacity-60">
