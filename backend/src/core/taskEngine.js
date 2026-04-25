@@ -157,28 +157,28 @@ class TaskEngine {
       throw new Error('User not found');
     }
 
-    // Verify user has correct Treasury Wallet from profile
-    if (!user.treasuryWallet || !user.treasuryWallet.address) {
-      throw new Error(`User Treasury Wallet not found for ${userUid}. Check user profile to ensure wallet exists.`);
+    // Verify user has Mission Wallet (the one with USDC to send)
+    if (!user.wallet || !user.wallet.address) {
+      throw new Error(`User Mission Wallet not found for ${userUid}. Check user profile to ensure wallet exists.`);
     }
 
     // Log the wallet being used for debugging
-    console.log(`[fundMission] Using Treasury Wallet for user ${userUid}: ${user.treasuryWallet.address}`)
+    console.log(`[fundMission] Using Mission Wallet for user ${userUid}: ${user.wallet.address} to send ${amount} USDC`)
 
-    // Use treasury wallet directly from user data (bypass walletManager to avoid sync issues)
+    // Use mission wallet directly from user data (bypass walletManager to avoid sync issues)
     const walletManager = (await import('./walletManager.js')).default;
     await walletManager.load();
     const orchestratorAddr = walletManager.getAddress('orchestrator_wallet');
 
-    // Create ethers signer directly from treasury wallet private key
+    // Create ethers signer directly from mission wallet private key
     const ethers = await walletManager.ensureEthers();
     const provider = await walletManager.getProvider();
-    const treasurySigner = new ethers.Wallet(user.treasuryWallet.privateKey, provider);
+    const missionSigner = new ethers.Wallet(user.wallet.privateKey, provider);
 
     try {
-      // Send transaction directly using treasury wallet signer (Arc native USDC)
+      // Send transaction directly using mission wallet signer (Arc native USDC)
       const value = ethers.parseUnits(String(amount), 6);
-      const tx = await treasurySigner.sendTransaction({
+      const tx = await missionSigner.sendTransaction({
         to: orchestratorAddr,
         value
       });
@@ -188,12 +188,12 @@ class TaskEngine {
       const chainTxHash = tx.hash;
 
       // Add to treasury balance (for tracking)
-      await treasuryStore.addFunds(amount, 'Mission funding from Treasury Wallet', taskId, chainTxHash);
+      await treasuryStore.addFunds(amount, 'Mission funding from Mission Wallet', taskId, chainTxHash);
 
       return {
         status: 'funded',
         amount,
-        from: user.treasuryWallet.address,
+        from: user.wallet.address,
         to: orchestratorAddr,
         chainTxHash,
         settlementType: 'onchain',
