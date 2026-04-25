@@ -148,9 +148,16 @@ class AgentRegistry {
    *  - `score_price` : weighted combination (default)
    *
    * taskType filters capable workers; validators are always capable.
+   * Special handling: translate tasks always use TranslatorAgent for quality.
    */
   selectWorker(taskType, strategy = config.registry.selectionStrategy) {
     this.seedDefaults();
+
+    // Force translate tasks to use specialized TranslatorAgent
+    if (taskType === 'translate') {
+      const translator = this.workers.find((w) => w.id === 'translator_default');
+      if (translator) return translator;
+    }
 
     const capable = this.workers.filter((w) =>
       w.taskTypes.includes(taskType) || w.taskTypes.includes('*')
