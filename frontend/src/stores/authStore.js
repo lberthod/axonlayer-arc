@@ -1,5 +1,5 @@
 import { reactive, readonly } from 'vue';
-import { firebaseAuth, onAuthChange, loginWithGoogle, logout, getIdToken } from '../services/firebase.js';
+import { firebaseAuth, onAuthChange, loginWithGoogle, loginWithEmail, signupWithEmail, logout, getIdToken } from '../services/firebase.js';
 import { api } from '../services/api.js';
 
 const state = reactive({
@@ -48,6 +48,26 @@ export async function login() {
     await loginWithGoogle();
   } catch (err) {
     state.error = err.message || 'login failed';
+    throw err;
+  }
+}
+
+export async function loginWithEmailPassword(email, password) {
+  state.error = null;
+  try {
+    await loginWithEmail(email, password);
+  } catch (err) {
+    state.error = err.message || 'login failed';
+    throw err;
+  }
+}
+
+export async function signupWithEmailPassword(email, password) {
+  state.error = null;
+  try {
+    await signupWithEmail(email, password);
+  } catch (err) {
+    state.error = err.message || 'signup failed';
     throw err;
   }
 }
