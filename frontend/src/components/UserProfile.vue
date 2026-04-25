@@ -155,7 +155,7 @@
         </div>
 
         <!-- Treasury Balance -->
-        <div class="p-4 bg-sky-50 rounded-lg border-2 border-sky-200">
+        <div class="p-4 bg-sky-50 rounded-lg border-2 border-sky-200 mb-4">
           <div class="flex items-center justify-between mb-2">
             <div>
               <p class="text-xs text-sky-700 uppercase mb-1 font-bold">💵 Treasury Balance</p>
@@ -164,6 +164,37 @@
             <span class="text-sm text-sky-600 bg-sky-100 px-2 py-1 rounded-full font-semibold">Internal</span>
           </div>
           <p class="text-3xl font-bold text-sky-700">{{ (treasuryInfo.balance || 0).toFixed(6) }} USDC</p>
+        </div>
+
+        <!-- Fund Treasury -->
+        <div class="p-4 bg-emerald-50 rounded-lg border-2 border-emerald-200">
+          <div class="mb-4">
+            <p class="text-xs text-emerald-700 uppercase mb-2 font-bold">💸 Fund Treasury</p>
+            <p class="text-xs text-emerald-600">Transfer USDC from your wallet to treasury for agent payments</p>
+          </div>
+
+          <div class="space-y-3">
+            <div>
+              <label class="text-xs text-emerald-700 font-semibold mb-1 block">Amount (USDC)</label>
+              <input
+                v-model="fundAmount"
+                type="number"
+                placeholder="0.0001"
+                step="0.000001"
+                min="0"
+                class="w-full px-3 py-2 rounded-lg bg-white border border-emerald-300 text-emerald-900 placeholder-emerald-400 focus:outline-none focus:border-emerald-500"
+              />
+              <p class="text-xs text-emerald-600 mt-1">Available: {{ (user?.balance || 0).toFixed(4) }} USDC</p>
+            </div>
+
+            <button
+              @click="fundTreasury"
+              :disabled="fundingTreasury || !fundAmount || Number(fundAmount) <= 0 || Number(fundAmount) > (user?.balance || 0)"
+              class="w-full px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {{ fundingTreasury ? '⏳ Funding...' : '💰 Fund Treasury' }}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -187,6 +218,8 @@ import { walletStore } from '../stores/walletStore.js';
 
 const user = ref(null);
 const treasuryInfo = ref(null);
+const fundAmount = ref('');
+const fundingTreasury = ref(false);
 const showWalletDetails = ref(false);
 const showPrivateKey = ref(false);
 const addressCopied = ref(false);
@@ -260,6 +293,39 @@ function copyTreasuryAddress() {
     navigator.clipboard.writeText(treasuryInfo.value.address);
     treasuryAddressCopied.value = true;
     setTimeout(() => { treasuryAddressCopied.value = false; }, 2000);
+  }
+}
+
+async function fundTreasury() {
+  const amount = Number(fundAmount.value);
+
+  if (!amount || amount <= 0) {
+    toastError(new Error('Enter a valid amount'), 'Invalid amount');
+    return;
+  }
+
+  if (amount > (user.value?.balance || 0)) {
+    toastError(new Error('Insufficient balance'), 'Not enough USDC');
+    return;
+  }
+
+  fundingTreasury.value = true;
+  try {
+    const response = await api.transactions.fundTreasury({
+      amount,
+      from: user.value?.wallet?.address,
+      to: treasuryInfo.value?.address
+    });
+
+    toastSuccess(`✅ Transferred ${amount.toFixed(6)} USDC to treasury!`);
+    fundAmount.value = '';
+
+    // Reload user and treasury info
+    await loadUser();
+  } catch (err) {
+    toastError(err, 'Failed to fund treasury');
+  } finally {
+    fundingTreasury.value = false;
   }
 }
 

@@ -1,37 +1,6 @@
 <template>
   <div class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        Neural network for the agent economy
-      </div>
-
-      <h1 class="hero-title">
-        <span class="line line-1">You don't call APIs.</span>
-        <span class="line line-2">You <span class="highlight">fund a mission.</span></span>
-      </h1>
-
-      <p class="hero-subtitle">
-        Axonlayer privately orchestrates autonomous agents to execute your mission.
-        <br />
-        <span class="text-xs text-slate-400">Real USDC settlement in &lt;2 seconds.</span>
-      </p>
-
-      <div class="hero-features">
-        <div class="feature">
-          <span class="feature-icon">⚡</span>
-          <span>$0.0005 per task</span>
-        </div>
-        <div class="feature">
-          <span class="feature-icon">🔒</span>
-          <span>Private execution</span>
-        </div>
-        <div class="feature">
-          <span class="feature-icon">🔗</span>
-          <span>On-chain settlement</span>
-        </div>
-      </div>
-    </div>
+    <!-- Empty hero - content removed -->
   </div>
 </template>
 

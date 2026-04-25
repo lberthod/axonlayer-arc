@@ -87,6 +87,10 @@ export const api = {
   transactions: {
     list: (userId) => apiCall(`/api/transactions?userId=${userId}`),
     get: (txId) => apiCall(`/api/transactions/${txId}`),
+    fundTreasury: (data) => apiCallWithAuth('/api/transactions/fund-treasury', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    }),
   },
 
   metrics: {
