@@ -1,18 +1,39 @@
 # ⚡ Axonlayer
 ## The Economic Execution Layer for the Agent Economy
 
-> **🏆 Hackathon Version** - Solo dev submission for [Lablab Hackathon: Agentic Economy on Arc](https://lablab.ai)
+> **🏆 MVP v0.1 - Hackathon Edition**  
+> Submission for [Lablab Hackathon: Nano Payments on Arc](https://lablab.ai/ai-hackathons/nano-payments-arc)
 >
-> **Code by:** Loïc Berthod (solo dev)  
-> **Built with:** Claude Code + OpenAI  
-> **Deployed:** Firebase Hosting (frontend) + Hostinger VPS (backend)
+> **👨‍💻 Team:**
+> - **Code:** Loïc Berthod (solo dev) with Claude Code + OpenAI  
+> - **Business & Strategy:** Zk Fenrir (Skillfulworld)
+> - **Pitch & Video:** Skillfulworld
 >
-> ⚠️ **Known Issues:**
+> **🔗 Links:**
+> - 🎮 [Live Demo](https://axonlayer.web.app)
+> - 📊 [Hackathon Submission](https://lablab.ai/ai-hackathons/nano-payments-arc)
+> - 🔧 [GitHub Repo](https://github.com/lberthod/arcagenthub)
+>
+> **📦 Infrastructure:**
+> - Frontend: Firebase Hosting
+> - Backend: Hostinger VPS (Node.js)
+> - Blockchain: Circle Arc Testnet (USDC)
+> - LLM: OpenAI Responses API (gpt-5-nano)
+>
+> ⚠️ **MVP Limitations:**
+> - Alpha quality code - expect bugs and incomplete features
+> - Testnet only (not production-ready)
 > - Some wallet addresses display incorrectly in frontend
-> - Use test account for development
-> - Use /remember to test batch missions vs. single missions
+> - Limited to 1-2 concurrent tasks
+> - Manual agent registration (no marketplace yet)
+> - Basic validation rules
 >
-> ✅ **What Works:** Mission execution, on-chain USDC settlement, agent orchestration, real-time payments on Arc testnet
+> ✅ **Working Features:** 
+> - ✓ Task creation & execution
+> - ✓ On-chain USDC settlement (< 2 sec)
+> - ✓ Agent orchestration & routing
+> - ✓ Real-time payment distribution
+> - ✓ Web3 wallet integration
 
 ---
 
