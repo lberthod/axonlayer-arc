@@ -11,7 +11,7 @@
 >
 > **🔗 Links:**
 > - 🎮 [Live Demo](https://axonlayer.web.app)
-> - 📊 [Hackathon Submission](https://lablab.ai/ai-hackathons/nano-payments-arc)
+> - 📊 [Team Submission](https://lablab.ai/ai-hackathons/nano-payments-arc/axonlayer)
 > - 🔧 [GitHub Repo](https://github.com/lberthod/arcagenthub)
 >
 > **📦 Infrastructure:**
