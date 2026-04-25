@@ -132,7 +132,7 @@
       </div>
 
       <!-- Treasury Wallet Info (Handles agent payments) -->
-      <div v-if="treasuryInfo" class="bg-slate-800 rounded-lg p-6 mb-6 border-2 border-blue-200">
+      <div v-if="user?.treasuryWallet" class="bg-slate-800 rounded-lg p-6 mb-6 border-2 border-blue-200">
         <div class="flex items-center justify-between mb-4">
           <div>
             <h2 class="text-xl font-bold text-slate-100">Treasury Wallet</h2>
@@ -146,7 +146,7 @@
           <p class="text-xs text-blue-400 uppercase mb-2 font-semibold">🔗 Treasury Address (Arc Testnet)</p>
           <p class="text-xs text-blue-400 mb-2">Receives mission funds and pays agents automatically</p>
           <div class="flex items-center gap-2">
-            <code class="flex-1 text-sm font-mono bg-slate-800 p-2 rounded break-all">{{ treasuryInfo.address }}</code>
+            <code class="flex-1 text-sm font-mono bg-slate-800 p-2 rounded break-all">{{ user?.treasuryWallet?.address }}</code>
             <button @click="copyTreasuryAddress"
               class="px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm font-semibold transition">
               {{ treasuryAddressCopied ? '✓ Copied' : 'Copy' }}
@@ -161,9 +161,9 @@
               <p class="text-xs text-sky-700 uppercase mb-1 font-bold">💵 Treasury Balance</p>
               <p class="text-xs text-sky-600">Available for agent payments</p>
             </div>
-            <span class="text-sm text-sky-600 bg-sky-100 px-2 py-1 rounded-full font-semibold">Internal</span>
+            <span class="text-sm text-sky-600 bg-sky-100 px-2 py-1 rounded-full font-semibold">On-Chain</span>
           </div>
-          <p class="text-3xl font-bold text-sky-700">{{ (treasuryInfo.balance || 0).toFixed(6) }} USDC</p>
+          <p class="text-3xl font-bold text-sky-700">{{ treasuryInfo ? (treasuryInfo.balance || 0).toFixed(6) : '⏳ Loading...' }} USDC</p>
         </div>
 
         <!-- Fund Treasury -->
@@ -245,21 +245,27 @@ async function loadTreasuryInfo() {
 
     if (!treasuryAddress) {
       console.warn('No treasury wallet address found for user');
-      treasuryInfo.value = null;
+      treasuryInfo.value = { address: null, balance: 0 };
       return;
     }
 
-    // Fetch REAL balance from Arc testnet blockchain
-    const result = await api.getBlockchainBalance(treasuryAddress);
-    const treasuryBalance = result.balance || 0;
+    // Try to fetch REAL balance from Arc testnet blockchain
+    let treasuryBalance = 0;
+    try {
+      const result = await api.getBlockchainBalance(treasuryAddress);
+      treasuryBalance = result.balance || 0;
+    } catch (balanceErr) {
+      console.warn('Failed to load treasury balance from blockchain:', balanceErr.message);
+      treasuryBalance = 0;
+    }
 
     treasuryInfo.value = {
       address: treasuryAddress,
       balance: treasuryBalance
     };
   } catch (err) {
-    console.warn('Failed to load treasury balance from blockchain:', err.message);
-    treasuryInfo.value = null;
+    console.warn('Failed to load treasury info:', err.message);
+    treasuryInfo.value = { address: user.value?.treasuryWallet?.address || null, balance: 0 };
   }
 }
 
@@ -291,8 +297,9 @@ function copyWalletAddress() {
 }
 
 function copyTreasuryAddress() {
-  if (treasuryInfo.value?.address) {
-    navigator.clipboard.writeText(treasuryInfo.value.address);
+  const address = user.value?.treasuryWallet?.address;
+  if (address) {
+    navigator.clipboard.writeText(address);
     treasuryAddressCopied.value = true;
     setTimeout(() => { treasuryAddressCopied.value = false; }, 2000);
   }
