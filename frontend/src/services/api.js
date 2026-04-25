@@ -106,10 +106,6 @@ export const api = {
   blockchain: {
     getBalance: (address) => apiCall(`/auth/wallet/balance/${address}`),
   },
-
-  tasks: {
-    get: (id) => apiCall(`/tasks/${id}`),
-  },
 };
 
 // Add convenience methods at top level for backward compatibility
@@ -119,5 +115,15 @@ api.getBlockchainBalance = api.blockchain.getBalance;
 api.getAgents = api.agents.list;
 api.getTask = api.tasks.get;
 api.getTransactions = () => apiCall('/api/transactions');
+
+// Add missing methods for MissionControlView
+api.createTask = (input, taskType, options = {}) =>
+  api.tasks.create({ input, taskType, ...options });
+
+api.quoteTask = (input, taskType, selectionStrategy) =>
+  api.agents.quote({ input, taskType, selectionStrategy });
+
+api.runSimulation = (batchSize) =>
+  apiCallWithAuth('/api/tasks/simulate', { method: 'POST', body: JSON.stringify({ batchSize }) });
 
 export default api;
