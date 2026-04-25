@@ -165,10 +165,8 @@ class TaskEngine {
     await walletManager.load();
     const walletId = `user_${userUid}`;
 
-    // Register/update with treasury wallet (not arc wallet)
-    if (!walletManager.has(walletId)) {
-      walletManager.registerUserWallet(userUid, user.treasuryWallet);
-    }
+    // Always register/update with TREASURY wallet (replaces old Arc wallet if exists)
+    await walletManager.registerUserWallet(userUid, user.treasuryWallet);
 
     // Create on-chain transaction: user's treasury wallet → orchestrator wallet
     const orchestratorAddr = walletManager.getAddress('orchestrator_wallet');
