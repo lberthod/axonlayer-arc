@@ -119,8 +119,8 @@ class SimulatedWalletProvider {
   }
 
   async transfer(from, to, amount, asset, reason, taskId, type = 'payment') {
-    const tx = await ledger.createTransaction(from, to, amount, asset, reason, taskId, type);
-    return { ...tx, settlementType: 'simulated' };
+    const tx = await ledger.createTransaction(from, to, amount, asset, reason, taskId, type, null, 'simulated');
+    return tx;
   }
 
   async getBalance(walletId) {
@@ -167,7 +167,6 @@ class OnChainWalletProvider {
     this.dryRun = options.dryRun !== false;
     this.ethers = null;
     this.ready = false;
-    this.txHashMap = new Map(); // Store on-chain metadata keyed by ledger tx ID
   }
 
   async ensureReady() {
@@ -326,25 +325,21 @@ class OnChainWalletProvider {
       }
     }
 
-    // 3️⃣ LEDGER PHASE: Mirror into the local ledger ONLY AFTER broadcast success
+    // 3️⃣ LEDGER PHASE: Mirror into the local ledger with on-chain metadata
     //    In dryRun mode this is the only side-effect.
     //    In live mode the ledger entry is written only AFTER the chain tx was
     //    broadcast successfully (confirmations pending or complete).
-    const tx = await ledger.createTransaction(from, to, amount, asset, reason, taskId, type);
-
-    // Store on-chain metadata so getTransactions() can enrich the ledger tx
-    const enrichedData = {
-      settlementType,
-      chainTxHash,
-      confirmations,
-      onChainStatus: settlementType === 'onchain' ? 'confirmed' : 'pending',
-      retryableError
-    };
-    this.txHashMap.set(tx.id, enrichedData);
+    const tx = await ledger.createTransaction(
+      from, to, amount, asset, reason, taskId, type,
+      chainTxHash,  // Pass the on-chain hash
+      settlementType  // Pass the settlement type
+    );
 
     return {
       ...tx,
-      ...enrichedData
+      confirmations,
+      onChainStatus: settlementType === 'onchain' ? 'confirmed' : 'pending',
+      retryableError
     };
   }
 
@@ -357,12 +352,8 @@ class OnChainWalletProvider {
   }
 
   async getTransactions(filters = {}) {
-    const transactions = ledger.getTransactions(filters);
-    // Enrich with on-chain data (chainTxHash, settlementType, etc.) from txHashMap
-    return transactions.map(tx => {
-      const onchainData = this.txHashMap.get(tx.id);
-      return onchainData ? { ...tx, ...onchainData } : tx;
-    });
+    // Transactions are already enriched with chainTxHash and settlementType in the ledger
+    return ledger.getTransactions(filters);
   }
 
   async setInitialBalances(initialBalances) {

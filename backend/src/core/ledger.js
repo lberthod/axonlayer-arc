@@ -100,7 +100,7 @@ class Ledger {
    * stale balance and over-spend it. All transactional work goes through the
    * opChain (promise chain = mutex).
    */
-  async createTransaction(from, to, amount, asset, reason, taskId, type = 'payment') {
+  async createTransaction(from, to, amount, asset, reason, taskId, type = 'payment', chainTxHash = null, settlementType = 'simulated') {
     const parsedAmount = Number(amount);
 
     if (!Number.isFinite(parsedAmount) || parsedAmount <= 0) {
@@ -135,7 +135,8 @@ class Ledger {
           type,
           timestamp: new Date().toISOString(),
           status: 'completed',
-          settlementType: 'simulated',
+          settlementType,
+          chainTxHash,
           valid: true
         };
 

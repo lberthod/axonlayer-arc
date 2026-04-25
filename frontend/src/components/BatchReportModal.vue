@@ -130,57 +130,73 @@
         <!-- All Transactions -->
         <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
           <h3 class="text-lg font-bold text-slate-100 mb-4">All Transactions ({{ allTransactions.length }})</h3>
-          <div class="space-y-2 max-h-96 overflow-y-auto">
+          <div v-if="allTransactions.length === 0" class="text-center py-8 text-slate-400">
+            <p>No transactions recorded for this batch</p>
+          </div>
+          <div v-else class="space-y-3 max-h-screen overflow-y-auto">
             <div
-              v-for="(tx, idx) in allTransactions.slice(0, 50)"
-              :key="`${tx.taskId}-${idx}`"
-              class="bg-slate-900 rounded-lg p-3 border border-slate-700 text-sm"
+              v-for="(tx, idx) in allTransactions"
+              :key="`${tx.id}-${idx}`"
+              class="bg-slate-900 rounded-lg p-4 border border-slate-700"
             >
-              <div class="flex items-start gap-2 mb-2">
-                <span
+              <div class="flex items-start gap-3">
+                <!-- Transaction Type Icon -->
+                <div
                   :class="{
                     'text-purple-400': tx.type === 'payment',
                     'text-emerald-400': tx.type === 'fund',
                     'text-orange-400': tx.type === 'refund',
                     'text-blue-400': tx.type === 'agent_payment'
                   }"
+                  class="text-lg flex-shrink-0"
                 >
                   {{ tx.type === 'payment' ? '💳' : tx.type === 'fund' ? '📥' : tx.type === 'refund' ? '↩️' : '👤' }}
-                </span>
+                </div>
+
+                <!-- Main Content -->
                 <div class="flex-1 min-w-0">
-                  <div class="flex items-center gap-2 mb-1">
-                    <span class="font-mono text-xs text-slate-400">{{ tx.from }} → {{ tx.to }}</span>
+                  <!-- From/To -->
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="font-mono text-xs text-slate-300">{{ tx.from }}</span>
+                    <span class="text-slate-500">→</span>
+                    <span class="font-mono text-xs text-slate-300">{{ tx.to }}</span>
                   </div>
-                  <p class="text-xs text-slate-500 mb-1">{{ tx.reason }}</p>
-                  <!-- On-chain transaction link -->
-                  <div v-if="tx.chainTxHash && tx.settlementType === 'onchain'" class="flex items-center gap-2 text-xs">
-                    <span class="text-emerald-400">✓ On-chain</span>
+
+                  <!-- Reason & Amount -->
+                  <div class="flex justify-between items-start mb-2">
+                    <p class="text-xs text-slate-400">{{ tx.reason }}</p>
+                    <p class="font-semibold text-slate-100 text-sm">${{ tx.amount.toFixed(6) }}</p>
+                  </div>
+
+                  <!-- On-chain Link or Status -->
+                  <div class="flex items-center gap-2 flex-wrap text-xs">
+                    <span v-if="tx.chainTxHash && tx.settlementType === 'onchain'" class="text-emerald-400 font-semibold">
+                      ✓ On-chain
+                    </span>
                     <a
+                      v-if="tx.chainTxHash"
                       :href="`https://testnet.arcscan.app/tx/${tx.chainTxHash}`"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="text-blue-400 hover:text-blue-300 underline font-mono truncate"
+                      class="text-blue-400 hover:text-blue-300 hover:underline font-mono bg-slate-800 px-2 py-1 rounded"
                       :title="tx.chainTxHash"
                     >
-                      {{ tx.chainTxHash.slice(0, 10) }}...{{ tx.chainTxHash.slice(-8) }}
+                      🔗 {{ tx.chainTxHash.slice(0, 12) }}...{{ tx.chainTxHash.slice(-10) }}
                     </a>
-                  </div>
-                  <div v-else-if="tx.settlementType === 'onchain-pending'" class="text-xs text-yellow-400">
-                    ⏳ Pending on-chain...
-                  </div>
-                  <div v-else-if="tx.settlementType === 'simulated'" class="text-xs text-slate-500">
-                    💾 Simulated (ledger only)
+                    <span v-else-if="tx.settlementType === 'onchain-pending'" class="text-yellow-400">
+                      ⏳ Pending confirmation...
+                    </span>
+                    <span v-else-if="tx.settlementType === 'simulated'" class="text-slate-500">
+                      💾 Simulated
+                    </span>
                   </div>
                 </div>
-              </div>
-              <div class="text-right">
-                <p class="font-semibold text-slate-100">${{ tx.amount.toFixed(6) }}</p>
               </div>
             </div>
 
             <div v-if="allTransactions.length > 50" class="text-center py-4">
               <p class="text-sm text-slate-400">
-                ... and {{ allTransactions.length - 50 }} more transactions
+                Showing {{ allTransactions.slice(0, 50).length }} of {{ allTransactions.length }} transactions
               </p>
             </div>
           </div>

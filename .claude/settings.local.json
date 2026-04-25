@@ -105,7 +105,11 @@
       "Bash(grep -E \"\\\\.\\(js|vue|ts\\)$\")",
       "Bash(rm -f src/data/store.json)",
       "Bash(curl -s -X POST http://localhost:3001/api/simulate -H 'Content-Type: application/json' -d '{ *)",
-      "Bash(WALLET_PROVIDER=simulated npm run dev)"
+      "Bash(WALLET_PROVIDER=simulated npm run dev)",
+      "Bash(pkill -f \"vite\\\\|npm run dev\")",
+      "Bash(VITE_PORT=5173 npm run dev)",
+      "Bash(curl -s http://localhost:5173/ -I)",
+      "Bash(pkill -f \"vite\\\\|node.*server\")"
     ]
   }
 }
