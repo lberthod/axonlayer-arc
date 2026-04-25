@@ -18,6 +18,13 @@ async function startServer() {
   try {
     await ledger.load();
     await treasuryStore.load();
+
+    // Initialize treasury with sufficient balance for batch simulations
+    if (treasuryStore.getBalance() === 0) {
+      await treasuryStore.setBalance(1.0);
+      console.log('[Treasury] Initialized with 1.0 USDC for batch simulations');
+    }
+
     await paymentAdapter.initializeWallets();
     await providerStore.load();
     await taskEngine.load();

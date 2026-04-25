@@ -99,6 +99,12 @@ class TreasuryStore {
     return this.address;
   }
 
+  async setBalance(amount) {
+    this.balance = this.normalizeAmount(amount);
+    await this.save();
+    return this.balance;
+  }
+
   /**
    * Add funds to treasury (mission funding)
    */
