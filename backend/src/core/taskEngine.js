@@ -150,30 +150,51 @@ class TaskEngine {
   }
 
   async fundMission(userUid, amount, taskId) {
+    console.log(`\n[fundMission] ===== FUND MISSION START =====`);
+    console.log(`[fundMission] userUid: ${userUid}`);
+    console.log(`[fundMission] amount: ${amount} USDC`);
+    console.log(`[fundMission] taskId: ${taskId}`);
+
     // Always get fresh user data from store to ensure wallet info is current
     // (user may have regenerated wallets since last fetch)
     const user = userStore.getByUid(userUid);
     if (!user) {
+      console.error(`[fundMission] ERROR: User not found for uid=${userUid}`);
       throw new Error('User not found');
     }
 
+    console.log(`[fundMission] User found: ${user.email}`);
+    console.log(`[fundMission] User has wallet: ${!!user.wallet}`);
+    console.log(`[fundMission] User wallet address from store: ${user.wallet?.address || 'MISSING'}`);
+    console.log(`[fundMission] User wallet has privateKey: ${!!user.wallet?.privateKey}`);
+    console.log(`[fundMission] User wallet privateKey length: ${user.wallet?.privateKey?.length || 0}`);
+
     // Verify user has Mission Wallet (the one with USDC to send)
     if (!user.wallet || !user.wallet.address) {
+      console.error(`[fundMission] ERROR: User Mission Wallet not found`);
       throw new Error(`User Mission Wallet not found for ${userUid}. Check user profile to ensure wallet exists.`);
     }
-
-    // Log the wallet being used for debugging
-    console.log(`[fundMission] Using Mission Wallet for user ${userUid}: ${user.wallet.address} to send ${amount} USDC`)
 
     // Use mission wallet directly from user data (bypass walletManager to avoid sync issues)
     const walletManager = (await import('./walletManager.js')).default;
     await walletManager.load();
     const orchestratorAddr = walletManager.getAddress('orchestrator_wallet');
 
+    console.log(`[fundMission] Orchestrator wallet address: ${orchestratorAddr}`);
+
     // Create ethers signer directly from mission wallet private key
     const ethers = await walletManager.ensureEthers();
     const provider = await walletManager.getProvider();
+
+    console.log(`[fundMission] Creating signer from private key...`);
     const missionSigner = new ethers.Wallet(user.wallet.privateKey, provider);
+
+    console.log(`[fundMission] Signer address derived from privateKey: ${missionSigner.address}`);
+    console.log(`[fundMission] Expected address from store: ${user.wallet.address}`);
+    console.log(`[fundMission] Addresses match: ${missionSigner.address.toLowerCase() === user.wallet.address.toLowerCase()}`);
+    console.log(`[fundMission] Will send FROM: ${missionSigner.address}`);
+    console.log(`[fundMission] Will send TO: ${orchestratorAddr}`);
+    console.log(`[fundMission] Amount to send: ${amount} USDC`);
 
     try {
       // Send transaction directly using mission wallet signer (Arc native USDC)
@@ -193,7 +214,7 @@ class TaskEngine {
       return {
         status: 'funded',
         amount,
-        from: user.wallet.address,
+        from: user.wallet.address, // ICI LOIC LOIC LOIC
         to: orchestratorAddr,
         chainTxHash,
         settlementType: 'onchain',
