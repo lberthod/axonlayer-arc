@@ -126,4 +126,8 @@ api.quoteTask = (input, taskType, selectionStrategy) =>
 api.runSimulation = (batchSize) =>
   apiCallWithAuth('/api/tasks/simulate', { method: 'POST', body: JSON.stringify({ batchSize }) });
 
+// Add wallet methods
+api.createWallet = () => api.auth.walletCreate();
+api.getWalletBalance = (address) => api.auth.walletBalance(address);
+
 export default api;
