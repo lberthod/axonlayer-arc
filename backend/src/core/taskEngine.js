@@ -186,12 +186,15 @@ class TaskEngine {
     const ethers = await walletManager.ensureEthers();
     const provider = await walletManager.getProvider();
 
+    // Get Treasury Wallet address
+    const treasuryAddress = user.treasuryWallet.address;
+
     console.log(`[fundMission] Creating signer from Treasury Wallet private key...`);
     const treasurySigner = new ethers.Wallet(user.treasuryWallet.privateKey, provider);
 
     console.log(`[fundMission] Signer address derived from privateKey: ${treasurySigner.address}`);
-    console.log(`[fundMission] Expected address from store: ${user.treasuryWallet.address}`);
-    console.log(`[fundMission] Addresses match: ${treasurySigner.address.toLowerCase() === user.treasuryWallet.address.toLowerCase()}`);
+    console.log(`[fundMission] Expected address from store: ${treasuryAddress}`);
+    console.log(`[fundMission] Addresses match: ${treasurySigner.address.toLowerCase() === treasuryAddress.toLowerCase()}`);
     console.log(`[fundMission] Will send FROM (Treasury Wallet): ${treasurySigner.address}`);
     console.log(`[fundMission] Will send TO (Orchestrator): ${orchestratorAddr}`);
     console.log(`[fundMission] Amount to send: ${amount} USDC`);
@@ -214,7 +217,7 @@ class TaskEngine {
       return {
         status: 'funded',
         amount,
-        from: user.treasuryWallet.address,
+        from: treasuryAddress,
         to: orchestratorAddr,
         chainTxHash,
         settlementType: 'onchain',
